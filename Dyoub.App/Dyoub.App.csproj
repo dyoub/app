@@ -125,6 +125,8 @@
     <Content Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\Portfolio\Soon.cshtml" />
+    <None Include="Properties\PublishProfiles\LocalRelease.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalDebug.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
