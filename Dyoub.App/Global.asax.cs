@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Configuration;
 using System.Web;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace Dyoub.App
@@ -10,7 +12,8 @@ namespace Dyoub.App
     {
         protected void Application_Start()
         {
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteConfiguration.RegisterRoutes(RouteTable.Routes);
+            BundleConfiguration.Register(BundleTable.Bundles);
         }
     }
 }

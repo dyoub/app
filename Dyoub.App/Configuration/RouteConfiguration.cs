@@ -4,9 +4,9 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Dyoub.App
+namespace Dyoub.App.Configuration
 {
-    public class RouteConfig
+    public class RouteConfiguration
     {
         public static void RegisterRoutes(RouteCollection routes)
         {

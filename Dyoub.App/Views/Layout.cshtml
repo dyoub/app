@@ -3,10 +3,13 @@
  *  Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
  *@
 
+@using System.Web.Optimization;
+
 <!DOCTYPE html>
-<html>
+<html data-ng-app="dyoub.app">
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="https://dyoub.s3.amazonaws.com/cdn/img/dyoub.ico" />
     <link type="text/css" rel="stylesheet" href="https://dyoub.s3.amazonaws.com/cdn/css/normalize-5.0.0.min.css" />
     <link type="text/css" rel="stylesheet" href="https://dyoub.s3.amazonaws.com/cdn/css/font-awesome-4.7.0.min.css" />
     <link type="text/css" rel="stylesheet" href="https://dyoub.s3.amazonaws.com/cdn/css/dyoub-theme-1.0.0.min.css" />
@@ -17,5 +20,7 @@
     <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/angular-1.6.3.min.js"></script>
     <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/dyoub-theme-1.0.0.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/app/locale/pt-br.js")"></script>
+    @Scripts.Render("~/Scripts/Bundle")
 </body>
 </html>
