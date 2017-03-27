@@ -43,7 +43,7 @@
                 'Anytime you want.': 'A <strong>qualquer momento</strong>.',
                 'Anywhere you like.': 'De <strong>qualquer lugar</strong>.',
                 'Commercial': 'Comercial',
-                'Create an account': 'Crie uma conta',
+                'Create an account': 'Criar uma conta',
                 'Developing your business.': 'Desenvolvendo seu negócio.',
                 'Do everything online.': 'Faça tudo <strong>online</strong>.',
                 'Evaluate your cash flow in real time.': 'Avalie seu fluxo de caixa em tempo real.',
