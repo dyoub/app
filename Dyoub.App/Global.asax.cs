@@ -2,6 +2,10 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Configuration;
+using Dyoub.App.Data;
+using Dyoub.App.Models.DataModel;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
