@@ -1,7 +1,7 @@
 ﻿@*
- *  Copyright (c) Dyoub Applications. All rights reserved.
- *  Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
- *@
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
 
 @using System.Web.Optimization;
 
@@ -16,11 +16,12 @@
     <title>dyoub</title>
 </head>
 <body>
+    <div data-dialog></div>
     @RenderBody()
     <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/angular-1.6.3.min.js"></script>
     <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/dyoub-theme-1.0.0.min.js"></script>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/app/locale/pt-br.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/locale/pt-br.js")"></script>
     @Scripts.Render("~/Scripts/Bundle")
 </body>
 </html>

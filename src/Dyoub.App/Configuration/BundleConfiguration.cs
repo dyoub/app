@@ -10,7 +10,8 @@ namespace Dyoub.App.Configuration
         public static void Register(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Scripts/Bundle")
-                .IncludeDirectory("~/Scripts/app/modules", "*.js", true));
+                .IncludeDirectory("~/Scripts/modules", "*.js", true)
+                .IncludeDirectory("~/Scripts/controllers", "*.js", true));
 
             BundleTable.EnableOptimizations = true;
         }

@@ -75,7 +75,7 @@ namespace Dyoub.App.Controllers.Account
         [Route("signup")]
         public ActionResult Signup()
         {
-            return View("~/Views/Account/Users/Signup.cshtml");
+            return View("~/Views/Account/Users/SignupSoon.cshtml");
         }
 
         [HttpPost]

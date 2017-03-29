@@ -15,9 +15,9 @@ namespace Dyoub.App.Models.ServiceModel.Mail
             switch (WebConfigurationManager.AppSettings["Mailer"])
             {
                 case "Local": mailer = new LocalMailer(); break;
+                case "Google": mailer = new GoogleMailer(); break;
+                default: throw new ArgumentOutOfRangeException("Unkown mailer. Please check your 'Settings/Dyoub.config'.");
             }
-
-            throw new ArgumentOutOfRangeException("Unkown mailer. Please check your 'Settings/Dyoub.config'.");
         }
 
         public override void Send()

@@ -13,12 +13,5 @@ namespace Dyoub.App.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        [Route("soon")]
-        public ActionResult Soon()
-        {
-            return View();
-        }
     }
 }

@@ -1,0 +1,42 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SignupController as controller">
+    <div class="text-center">
+        <img alt="dyoub" src="https://dyoub.s3.amazon.com/cdn/img/dyoub-silver.png" />
+    </div>
+
+    <form name="controller.signupForm" class="sign" data-ng-submit="controller.signup()">
+        <div class="box" data-has-error="controller.signupForm.name.$invalid">
+            <input type="text" name="name" data-ng-model="controller.user.name" placeholder="Full name"
+                   data-ng-maxlength="80" required />
+        </div>
+        <div class="box" data-has-error="controller.signupForm.email.$invalid">
+            <input type="text" name="email" data-ng-model="controller.user.email" placeholder="Email"
+                   data-ng-maxlength="80" data-type-email required />
+        </div>
+        <div class="box" data-has-error="controller.signupForm.password.$invalid">
+            <input type="password" name="password" data-ng-model="controller.user.password" placeholder="Password"
+                   data-ng-minlength="8" data-ng-maxlength="20" required />
+        </div>
+        <div class="box">
+            <button type="submit" class="success block large" data-ng-disabled="controller.working" data-translate="Create account"></button>
+        </div>
+        <div class="box text-center font-11">
+            <span data-translate="Read carefully our"></span>
+            <a href="/terms-of-use" data-translate="Terms of use"></a>
+        </div>
+    </form>
+
+    <div class="box text-center">
+        <span class="text-muted font-10" data-translate="Already have an account?"></span>
+        &nbsp;
+        <a href="/signin" class="as-button success outline" data-translate="Access account"></a>
+    </div>
+</div>

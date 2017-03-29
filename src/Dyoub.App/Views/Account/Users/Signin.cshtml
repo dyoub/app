@@ -1,0 +1,37 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SigninController as controller">
+    <div class="text-center">
+        <img alt="dyoub" src="https://dyoub.s3.amazonaws.com/cdn/img/dyoub-silver.png" />
+    </div>
+
+    <form name="controller.signinForm" class="sign" data-ng-submit="controller.signin()">
+        <div class="box">
+            <input type="text" name="email" data-ng-model="controller.user.email" placeholder="Email"
+                   data-ng-maxlength="80" data-type-email required />
+        </div>
+        <div class="box">
+            <input type="password" name="password" data-ng-model="controller.user.password" placeholder="Password"
+                   data-ng-maxlength="20" required />
+        </div>
+        <div class="box">
+            <button type="submit" class="success block large" data-ng-disabled="controller.working" data-translate="Access account"></button>
+        </div>
+        <div class="box text-center font-11">
+            <a href="/reset-password" data-translate="I forgot my password"></a>
+        </div>
+    </form>
+
+    <div class="box text-center">
+        <span class="text-muted font-10" data-translate="Don't have an account?"></span>
+        &nbsp;
+        <a href="/signup" class="as-button success outline" data-translate="Create account"></a>
+    </div>
+</div>

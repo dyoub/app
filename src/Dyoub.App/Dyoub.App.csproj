@@ -122,8 +122,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\locale\pt-br.js" />
-    <Content Include="Scripts\app\modules\dyoub-app.module.js" />
+    <Content Include="Scripts\controllers\account\users\signin.controller.js" />
+    <Content Include="Scripts\controllers\account\users\signup.controller.js" />
+    <Content Include="Scripts\locale\pt-br.js" />
+    <Content Include="Scripts\modules\dyoub-app.module.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +164,7 @@
     <Compile Include="Models\ServiceModel\Account\Users\UserAuthentication.cs" />
     <Compile Include="Models\ServiceModel\Account\Users\UserSignup.cs" />
     <Compile Include="Models\ServiceModel\Mail\DetectedMailer.cs" />
+    <Compile Include="Models\ServiceModel\Mail\GoogleMailer.cs" />
     <Compile Include="Models\ServiceModel\Mail\LocalMailer.cs" />
     <Compile Include="Models\ServiceModel\Mail\Mailer.cs" />
     <Compile Include="Models\ServiceModel\Security\AccessToken.cs" />
@@ -183,10 +186,12 @@
     <Content Include="packages.config" />
     <Content Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Views\Layout.cshtml" />
-    <Content Include="Views\Portfolio\Soon.cshtml" />
+    <Content Include="Views\Account\Users\SignupSoon.cshtml" />
     <None Include="Properties\PublishProfiles\LocalRelease.pubxml" />
     <None Include="Properties\PublishProfiles\LocalDebug.pubxml" />
     <Content Include="Views\Emails\pt-BR\SignupEmail.cshtml" />
+    <Content Include="Views\Account\Users\Signin.cshtml" />
+    <Content Include="Views\Account\Users\Signup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,8 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Seed\" />
-    <Folder Include="Scripts\spec\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Migrations\201703280220123_CreateTenant.resx">
