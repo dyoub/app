@@ -2,8 +2,9 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using System;
+using System.Collections.Generic;
 
-namespace Dyoub.App.Models.DomainModel.Account
+namespace Dyoub.App.Models.EntityModel.Account
 {
     public class Tenant
     {
@@ -11,5 +12,7 @@ namespace Dyoub.App.Models.DomainModel.Account
         public string Owner { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? DeactivatedAt { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }

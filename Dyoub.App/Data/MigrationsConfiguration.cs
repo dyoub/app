@@ -3,7 +3,7 @@
 
 namespace Dyoub.App.Data
 {
-    using Models.DataModel;
+    using Models.EntityModel;
     using MySql.Data.Entity;
     using System.Data.Entity.Migrations;
 

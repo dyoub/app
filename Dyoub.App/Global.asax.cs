@@ -3,7 +3,7 @@
 
 using Dyoub.App.Configuration;
 using Dyoub.App.Data;
-using Dyoub.App.Models.DataModel;
+using Dyoub.App.Models.EntityModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Web;

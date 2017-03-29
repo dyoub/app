@@ -1,17 +1,19 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
-using Dyoub.App.Models.DomainModel.Account;
+using Dyoub.App.Models.EntityModel.Account;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Web.Configuration;
 
-namespace Dyoub.App.Models.DataModel
+namespace Dyoub.App.Models.EntityModel
 {
     public class ApplicationContext : DbContext
     {
+        public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ApplicationContext() : this(DefaultConnection()) { }
 
