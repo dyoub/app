@@ -12,7 +12,7 @@ namespace Dyoub.Test.Models.ServiceModel.Account
     public class UserSignupTest
     {
         [TestMethod]
-        public async Task ShouldNotSignupWithEmailAlreadyTaken()
+        public async Task SignupWithEmailAlreadyTaken()
         {
             SignupEmailAlreadyTakenContext context = new SignupEmailAlreadyTakenContext();
 
@@ -24,7 +24,7 @@ namespace Dyoub.Test.Models.ServiceModel.Account
         }
 
         [TestMethod]
-        public async Task ShouldCreateUserDataAfterSignup()
+        public async Task SignupSuccessfully()
         {
             SignupCorrectlyContext context = new SignupCorrectlyContext();
 

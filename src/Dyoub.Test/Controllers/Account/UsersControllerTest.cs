@@ -16,7 +16,7 @@ namespace Dyoub.Test.Controllers.Account
     public class UsersControllerTest
     {
         [TestMethod]
-        public async Task SigninWithWrongPasswordReturnsUnauthorized()
+        public async Task SigninWithWrongPassword()
         {
             SigninWrongPasswordContext context = new SigninWrongPasswordContext();
             
@@ -33,7 +33,7 @@ namespace Dyoub.Test.Controllers.Account
         }
 
         [TestMethod]
-        public async Task ShouldSigninCorrectly()
+        public async Task SigninCorrectly()
         {
             SigninCorrectlyContext context = new SigninCorrectlyContext();
 
@@ -50,7 +50,7 @@ namespace Dyoub.Test.Controllers.Account
         }
 
         [TestMethod]
-        public async Task ShouldSignupCorrectly()
+        public async Task SignupCorrectly()
         {
             SignupCorrectlyContext context = new SignupCorrectlyContext();
             MailerFake mailer = new MailerFake();
@@ -70,7 +70,7 @@ namespace Dyoub.Test.Controllers.Account
         }
 
         [TestMethod]
-        public async Task SignupWithAnEmailAlreadyTakenReturnsError()
+        public async Task SignupWithAnEmailAlreadyTaken()
         {
             SignupEmailAlreadyTakenContext context = new SignupEmailAlreadyTakenContext();
             MailerFake mailer = new MailerFake();
