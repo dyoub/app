@@ -1,4 +1,7 @@
-﻿using Dyoub.App.Models.EntityModel.Account;
+﻿// Copyright (c) Dyoub Applications. All rights reserved.
+// Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+
+using Dyoub.App.Models.EntityModel.Account;
 using Dyoub.Test.Factories.Account;
 using System.Linq;
 
