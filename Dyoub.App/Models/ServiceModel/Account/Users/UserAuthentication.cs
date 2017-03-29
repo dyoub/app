@@ -39,7 +39,7 @@ namespace Dyoub.App.Models.ServiceModel.Account.Users
                 }
             }
 
-            return User.Token != null;
+            return User != null && User.Token != null;
         }
 
         public async Task<bool> SignoutAsync(string token)
