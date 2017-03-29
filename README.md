@@ -1,5 +1,8 @@
 # Dyoub App
+
 Online application for commercial business.
+
+[![Build status](https://ci.appveyor.com/api/projects/status/5hjvkkjw2ec3sm1m?svg=true)](https://ci.appveyor.com/project/marxjmoura/app)
 
 ## Before you start
 
