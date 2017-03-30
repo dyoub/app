@@ -2,6 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Manage
 {
@@ -12,5 +13,6 @@ namespace Dyoub.App.Models.EntityModel.Manage
         public string Name { get; set; }
 
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<TeamRole> TeamRoles { get; set; }
     }
 }
