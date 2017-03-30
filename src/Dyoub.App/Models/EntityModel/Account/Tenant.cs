@@ -15,6 +15,7 @@ namespace Dyoub.App.Models.EntityModel.Account
         public DateTime? DeactivatedAt { get; set; }
 
         public virtual ICollection<Store> Stores { get; set; }
+        public virtual ICollection<Tenant> Tenants { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }
