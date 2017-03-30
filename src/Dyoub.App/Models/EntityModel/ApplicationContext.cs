@@ -15,6 +15,9 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<TeamRole> TeamRoles { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<User> Users { get; set; }
 

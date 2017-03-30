@@ -135,6 +135,9 @@
     <EmbeddedResource Include="Data\Migrations\201703312008595_CreateTeamRole.resx">
       <DependentUpon>201703312008595_CreateTeamRole.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201703312045023_CreateTeamMember.resx">
+      <DependentUpon>201703312045023_CreateTeamMember.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
@@ -180,6 +183,10 @@
     <Compile Include="Data\Migrations\201703312008595_CreateTeamRole.Designer.cs">
       <DependentUpon>201703312008595_CreateTeamRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201703312045023_CreateTeamMember.cs" />
+    <Compile Include="Data\Migrations\201703312045023_CreateTeamMember.Designer.cs">
+      <DependentUpon>201703312045023_CreateTeamMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
@@ -206,6 +213,7 @@
     <Compile Include="Models\EntityModel\Account\User.cs" />
     <Compile Include="Models\EntityModel\Manage\Store.cs" />
     <Compile Include="Models\EntityModel\Manage\Team.cs" />
+    <Compile Include="Models\EntityModel\Manage\TeamMember.cs" />
     <Compile Include="Models\EntityModel\Manage\TeamRole.cs" />
     <Compile Include="Models\EntityModel\TenantContext.cs" />
     <Compile Include="Models\ServiceModel\Account\AccountRecovery.cs" />

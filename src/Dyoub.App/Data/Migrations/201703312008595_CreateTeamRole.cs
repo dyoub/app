@@ -17,7 +17,7 @@ namespace Dyoub.App.Data
                 CanEdit = t.Boolean(nullable: false)
             })
             .PrimaryKey(t => new { t.TeamId, t.TenantId, t.Role }, "PK_TeamRole")
-            .Index(t => t.TeamId, "IX_TeamRole_TeamId");
+            .ForeignKey("Tenant", t => t.TenantId, false, "FK_TeamRole_Tenant");
             
             AddForeignKey(
                 dependentTable: "TeamRole",

@@ -17,7 +17,7 @@ namespace Dyoub.App.Data
                 Active = t.Boolean(nullable: false)
             })
             .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_Team")
-            .ForeignKey("Tenant", t => new { t.TenantId }, false, "FK_Team_Tenant");
+            .ForeignKey("Tenant", t => t.TenantId, false, "FK_Team_Tenant");
         }
 
         public override void Down()

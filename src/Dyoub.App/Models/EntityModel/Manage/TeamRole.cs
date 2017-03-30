@@ -8,16 +8,13 @@ namespace Dyoub.App.Models.EntityModel.Manage
 {
     public class TeamRole
     {
-        [Key]
-        [Column(Order = 1)]
+        [Key, Column(Order = 1)]
         public int TeamId { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Key, Column(Order = 2)]
         public int TenantId { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
+        [Key, Column(Order = 3)]
         public string Role { get; set; }
 
         public bool CanEdit { get; set; }

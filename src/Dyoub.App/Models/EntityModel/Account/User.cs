@@ -2,14 +2,19 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dyoub.App.Models.EntityModel.Account
 {
     public class User
     {
+        [Key, Column(Order = 1)]
         public int Id { get; set; }
+
+        [Key, Column(Order = 2)]
         public int TenantId { get; set; }
+        
         public string Name { get; set; }
         public string Email { get; set; }
         public string Salt { get; set; }
@@ -17,8 +22,7 @@ namespace Dyoub.App.Models.EntityModel.Account
         public string Token { get; set; }
         public DateTime LastLogin { get; set; }
         public DateTime LastChangePassword { get; set; }
-
-        [ForeignKey("TenantId")]
+        
         public virtual Tenant Tenant { get; set; }
     }
 }
