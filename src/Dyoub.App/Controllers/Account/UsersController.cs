@@ -6,7 +6,7 @@ using Dyoub.App.Infrastructure;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Account;
 using Dyoub.App.Models.Results.Account.Users;
-using Dyoub.App.Models.ServiceModel.Account.Users;
+using Dyoub.App.Models.ServiceModel.Account;
 using Dyoub.App.Models.ServiceModel.Mail;
 using Dyoub.App.Models.ViewModel.Account.Users;
 using System.Data.Entity;

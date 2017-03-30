@@ -122,6 +122,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Models\ServiceModel\Mail\LocalMail.html" />
+    <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
     <Content Include="Scripts\locale\pt-br.js" />
@@ -131,6 +133,7 @@
   <ItemGroup>
     <Compile Include="Configuration\BundleConfiguration.cs" />
     <Compile Include="Configuration\RouteConfiguration.cs" />
+    <Compile Include="Controllers\Account\RecoveryController.cs" />
     <Compile Include="Controllers\Account\UsersController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Data\MigrationsConfiguration.cs" />
@@ -146,6 +149,10 @@
     <Compile Include="Data\Migrations\201703291154322_CreateClosureRequest.Designer.cs">
       <DependentUpon>201703291154322_CreateClosureRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201703301714266_CreatePasswordRecovery.cs" />
+    <Compile Include="Data\Migrations\201703301714266_CreatePasswordRecovery.Designer.cs">
+      <DependentUpon>201703301714266_CreatePasswordRecovery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
@@ -156,13 +163,16 @@
     <Compile Include="Infrastructure\BackgroundTask.cs" />
     <Compile Include="Models\EntityModel\Account\ClosureRequest.cs" />
     <Compile Include="Models\EntityModel\Account\ClosureRequestQuery.cs" />
+    <Compile Include="Models\EntityModel\Account\PasswordRecovery.cs" />
+    <Compile Include="Models\EntityModel\Account\PasswordRecoveryQuery.cs" />
     <Compile Include="Models\EntityModel\Account\TenantQuery.cs" />
     <Compile Include="Models\EntityModel\Account\UserQuery.cs" />
     <Compile Include="Models\EntityModel\ApplicationContext.cs" />
     <Compile Include="Models\EntityModel\Account\Tenant.cs" />
     <Compile Include="Models\EntityModel\Account\User.cs" />
-    <Compile Include="Models\ServiceModel\Account\Users\UserAuthentication.cs" />
-    <Compile Include="Models\ServiceModel\Account\Users\UserSignup.cs" />
+    <Compile Include="Models\ServiceModel\Account\AccountRecovery.cs" />
+    <Compile Include="Models\ServiceModel\Account\UserAuthentication.cs" />
+    <Compile Include="Models\ServiceModel\Account\UserSignup.cs" />
     <Compile Include="Models\ServiceModel\Mail\DetectedMailer.cs" />
     <Compile Include="Models\ServiceModel\Mail\GoogleMailer.cs" />
     <Compile Include="Models\ServiceModel\Mail\LocalMailer.cs" />
@@ -170,6 +180,8 @@
     <Compile Include="Models\ServiceModel\Security\AccessToken.cs" />
     <Compile Include="Models\ServiceModel\Security\Sha256Hash.cs" />
     <Compile Include="Models\ServiceModel\Security\UserIdentity.cs" />
+    <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
+    <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SigninViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SignupViewModel.cs" />
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
@@ -192,6 +204,9 @@
     <Content Include="Views\Emails\pt-BR\SignupEmail.cshtml" />
     <Content Include="Views\Account\Users\Signin.cshtml" />
     <Content Include="Views\Account\Users\Signup.cshtml" />
+    <Content Include="Views\Emails\pt-BR\PasswordRecoveryEmail.cshtml" />
+    <Content Include="Views\Account\PasswordRecoveries\NewPasswordRecovery.cshtml" />
+    <Content Include="Views\Account\PasswordRecoveries\EditPasswordRecovery.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -211,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Data\Migrations\201703291154322_CreateClosureRequest.resx">
       <DependentUpon>201703291154322_CreateClosureRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201703301714266_CreatePasswordRecovery.resx">
+      <DependentUpon>201703301714266_CreatePasswordRecovery.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

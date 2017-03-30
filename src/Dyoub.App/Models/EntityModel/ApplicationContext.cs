@@ -12,6 +12,7 @@ namespace Dyoub.App.Models.EntityModel
     public class ApplicationContext : DbContext
     {
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
+        public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<User> Users { get; set; }
 

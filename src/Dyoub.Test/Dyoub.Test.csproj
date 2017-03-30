@@ -106,18 +106,23 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Contexts\Account\PasswordRecoveries\RecoveryValidEmailContext.cs" />
+    <Compile Include="Contexts\Account\PasswordRecoveries\RecoveryInexistentEmailContext.cs" />
+    <Compile Include="Contexts\Account\PasswordRecoveries\ResetPasswordWithExpiredTokenContext.cs" />
+    <Compile Include="Contexts\Account\PasswordRecoveries\ResetPasswordWithValidTokenContext.cs" />
     <Compile Include="Contexts\Account\Users\SigninCorrectlyContext.cs" />
     <Compile Include="Contexts\Account\Users\SigninWrongPasswordContext.cs" />
     <Compile Include="Contexts\Account\Users\SignupEmailAlreadyTakenContext.cs" />
     <Compile Include="Contexts\Account\Users\SignupCorrectlyContext.cs" />
     <Compile Include="Contexts\InMemoryContext.cs" />
+    <Compile Include="Controllers\Account\RecoveryControllerTest.cs" />
     <Compile Include="Controllers\Account\UsersControllerTest.cs" />
+    <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
     <Compile Include="Factories\Account\TenantFactory.cs" />
     <Compile Include="Factories\Account\UserFactory.cs" />
     <Compile Include="Fakes\BackgroundTaskFake.cs" />
     <Compile Include="Fakes\ControllerContextFake.cs" />
     <Compile Include="Fakes\MailerFake.cs" />
-    <Compile Include="Models\ServiceModel\Account\UserSignupTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

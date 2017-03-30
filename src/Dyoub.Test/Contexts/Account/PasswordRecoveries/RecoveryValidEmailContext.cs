@@ -5,24 +5,23 @@ using Dyoub.App.Models.EntityModel.Account;
 using Dyoub.Test.Factories.Account;
 using System.Linq;
 
-namespace Dyoub.Test.Contexts.Account.Users
+namespace Dyoub.Test.Contexts.Account.PasswordRecoveries
 {
-    public class SigninCorrectlyContext : InMemoryContext
+    public class RecoveryValidEmailContext : InMemoryContext
     {
         public User User { get; private set; }
 
-        public SigninCorrectlyContext()
+        public RecoveryValidEmailContext()
         {
-            User = UserFactory.User();
-
             Tenant tenant = Tenants.Add(TenantFactory.Tenant());
-            Users.Add(UserFactory.User(tenant));
+            User = Users.Add(UserFactory.User(tenant));
+
             SaveChanges();
         }
 
-        public bool UserIsSiginedIn()
+        public bool RecoveryTokenForUserWasCreated()
         {
-            return Users.WhereEmail(User.Email).First().Token != null;
+            return PasswordRecoveries.AsNoTracking().WhereEmail(User.Email).Any();
         }
     }
 }

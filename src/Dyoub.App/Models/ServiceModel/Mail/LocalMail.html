@@ -1,0 +1,61 @@
+﻿<!--
+  Copyright (c) Dyoub Applications. All rights reserved.
+  Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+  -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Mail</title>
+    <style type="text/css">
+        .mailbox {
+            font-family: Arial;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mail-header,
+        .mail-body {
+            padding: 10px;
+        }
+
+        .mail-header {
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .mail-header table .label {
+            text-align: right;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body class="mailbox">
+    <div class="mail-header">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="label">From:</td>
+                    <td>{{From}}</td>
+                </tr>
+                <tr>
+                    <td class="label">To:</td>
+                    <td>{{To}}</td>
+                </tr>
+                <tr>
+                    <td class="label">Date:</td>
+                    <td>{{Date}}</td>
+                </tr>
+                <tr>
+                    <td class="label">Subject:</td>
+                    <td>{{Subject}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mail-body">
+        {{Content}}
+    </div>
+</body>
+</html>

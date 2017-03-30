@@ -30,6 +30,7 @@ namespace Dyoub.Test.Controllers.Account
             ActionResult result = await controller.Signin(viewModel);
 
             Assert.IsTrue(result is UnauthorizedStatusCode);
+            Assert.IsTrue(context.UserIsNotSiginedIn());
         }
 
         [TestMethod]
@@ -47,6 +48,7 @@ namespace Dyoub.Test.Controllers.Account
             ActionResult result = await controller.Signin(viewModel);
             
             Assert.IsTrue(result is SuccessStatusCode);
+            Assert.IsTrue(context.UserIsSiginedIn());
         }
 
         [TestMethod]
@@ -67,6 +69,9 @@ namespace Dyoub.Test.Controllers.Account
 
             Assert.IsTrue(mailer.EmailSent);
             Assert.IsTrue(result is SuccessStatusCode);
+            Assert.IsTrue(context.TheUserWasCreated());
+            Assert.IsTrue(context.ATenantWasCreatedForTheUser());
+            Assert.IsTrue(context.AClosureRequestWasCreatedForTheUser());
         }
 
         [TestMethod]
@@ -87,6 +92,7 @@ namespace Dyoub.Test.Controllers.Account
             
             Assert.IsTrue(mailer.EmailNotSent);
             Assert.IsTrue(result is ModelErrorsJson);
+            Assert.IsTrue(context.HasOnlyOneUserWithThisEmail());
         }
     }
 }

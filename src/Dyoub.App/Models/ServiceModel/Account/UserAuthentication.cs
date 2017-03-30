@@ -8,7 +8,7 @@ using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace Dyoub.App.Models.ServiceModel.Account.Users
+namespace Dyoub.App.Models.ServiceModel.Account
 {
     public class UserAuthentication
     {

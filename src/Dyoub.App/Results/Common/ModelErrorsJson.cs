@@ -18,10 +18,7 @@ namespace Dyoub.App.Results.Common
         {
             context.HttpContext.Response.StatusCode = 422;
 
-            Data = new
-            {
-                errors = Errors
-            };
+            Data = Errors;
 
             base.ExecuteResult(context);
         }
