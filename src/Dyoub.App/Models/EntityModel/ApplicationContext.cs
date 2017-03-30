@@ -2,6 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account;
+using Dyoub.App.Models.EntityModel.Manage;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -13,6 +14,7 @@ namespace Dyoub.App.Models.EntityModel
     {
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
+        public DbSet<Store> Stores { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<User> Users { get; set; }
 

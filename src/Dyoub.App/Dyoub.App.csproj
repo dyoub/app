@@ -126,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Data\Migrations\201703311516246_CreateStore.resx">
+      <DependentUpon>201703311516246_CreateStore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
@@ -159,6 +162,10 @@
     <Compile Include="Data\Migrations\201703301714266_CreatePasswordRecovery.Designer.cs">
       <DependentUpon>201703301714266_CreatePasswordRecovery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201703311516246_CreateStore.cs" />
+    <Compile Include="Data\Migrations\201703311516246_CreateStore.Designer.cs">
+      <DependentUpon>201703311516246_CreateStore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
@@ -183,6 +190,7 @@
     <Compile Include="Models\EntityModel\ApplicationContext.cs" />
     <Compile Include="Models\EntityModel\Account\Tenant.cs" />
     <Compile Include="Models\EntityModel\Account\User.cs" />
+    <Compile Include="Models\EntityModel\Manage\Store.cs" />
     <Compile Include="Models\EntityModel\TenantContext.cs" />
     <Compile Include="Models\ServiceModel\Account\AccountRecovery.cs" />
     <Compile Include="Models\ServiceModel\Account\UserAuthentication.cs" />
@@ -234,7 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Seed\" />
-    <Folder Include="Models\EntityModel\Manage\" />
     <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
