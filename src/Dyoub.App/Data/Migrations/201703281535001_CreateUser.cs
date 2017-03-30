@@ -22,8 +22,8 @@ namespace Dyoub.App.Data
                 LastLogin = t.DateTime(nullable: false),
                 LastChangePassword = t.DateTime(nullable: false)
             })
-            .PrimaryKey(t => t.Id, name: "PK_User")
-            .ForeignKey("Tenant", t => new { t.TenantId })
+            .PrimaryKey(t => new { t.Id, t.TenantId }, name: "PK_User")
+            .ForeignKey("Tenant", t => new { t.TenantId }, false, "FK_User_Tenant")
             .Index(t => t.Email, name: "IX_User_Email", unique: true)
             .Index(t => t.Salt, name: "IX_User_Salt", unique: true);
         }

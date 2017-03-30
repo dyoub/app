@@ -16,7 +16,7 @@ namespace Dyoub.App.Data
                 Name = t.String(nullable: false, maxLength: 80),
                 Active = t.Boolean(nullable: false)
             })
-            .PrimaryKey(t => t.Id, "PK_Store")
+            .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_Store")
             .ForeignKey("Tenant", t => new { t.TenantId }, false, "FK_Store_Tenant");
         }
         
