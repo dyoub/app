@@ -20,7 +20,7 @@ namespace Dyoub.Test.Controllers.Account
         {
             SigninWrongPasswordContext context = new SigninWrongPasswordContext();
             
-            UsersController controller = new UsersController(context, new BackgroundTaskFake(), new MailerFake());
+            UsersController controller = new UsersController(context, new MailerFake());
             controller.ControllerContext = new ControllerContextFake(controller);
 
             SigninViewModel viewModel = new SigninViewModel();
@@ -38,7 +38,7 @@ namespace Dyoub.Test.Controllers.Account
         {
             SigninCorrectlyContext context = new SigninCorrectlyContext();
 
-            UsersController controller = new UsersController(context, new BackgroundTaskFake(), new MailerFake());
+            UsersController controller = new UsersController(context, new MailerFake());
             controller.ControllerContext = new ControllerContextFake(controller);
 
             SigninViewModel viewModel = new SigninViewModel();
@@ -57,7 +57,7 @@ namespace Dyoub.Test.Controllers.Account
             SignupCorrectlyContext context = new SignupCorrectlyContext();
             MailerFake mailer = new MailerFake();
 
-            UsersController controller = new UsersController(context, new BackgroundTaskFake(), mailer);
+            UsersController controller = new UsersController(context, mailer);
             controller.ControllerContext = new ControllerContextFake(controller);
 
             SignupViewModel viewModel = new SignupViewModel();
@@ -80,7 +80,7 @@ namespace Dyoub.Test.Controllers.Account
             SignupEmailAlreadyTakenContext context = new SignupEmailAlreadyTakenContext();
             MailerFake mailer = new MailerFake();
 
-            UsersController controller = new UsersController(context, new BackgroundTaskFake(), mailer);
+            UsersController controller = new UsersController(context, mailer);
             controller.ControllerContext = new ControllerContextFake(controller);
 
             SignupViewModel viewModel = new SignupViewModel();

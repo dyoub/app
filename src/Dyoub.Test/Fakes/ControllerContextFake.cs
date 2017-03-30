@@ -11,7 +11,7 @@ namespace Dyoub.Test.Fakes
 {
     public class ControllerContextFake : ControllerContext
     {
-        public ControllerContextFake(Controller controller)
+        public ControllerContextFake(ControllerBase controller)
             : base(HttpContextBaseFake(), RouteDataFake(), controller)
         {
             SetupViewEngine();

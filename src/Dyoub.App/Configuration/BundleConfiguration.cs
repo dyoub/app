@@ -7,7 +7,7 @@ namespace Dyoub.App.Configuration
 {
     public class BundleConfiguration
     {
-        public static void Register(BundleCollection bundles)
+        public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Scripts/Bundle")
                 .IncludeDirectory("~/Scripts/modules", "*.js", true)

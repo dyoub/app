@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dyoub.App.Models.ServiceModel.Security
+namespace Dyoub.App.Infrastructure.Security
 {
     public class UserIdentity
     {

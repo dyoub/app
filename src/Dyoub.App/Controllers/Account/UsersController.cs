@@ -2,12 +2,11 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Extensions;
-using Dyoub.App.Infrastructure;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Account;
 using Dyoub.App.Models.Results.Account.Users;
 using Dyoub.App.Models.ServiceModel.Account;
-using Dyoub.App.Models.ServiceModel.Mail;
+using Dyoub.App.Infrastructure.Mail;
 using Dyoub.App.Models.ViewModel.Account.Users;
 using System.Data.Entity;
 using System.Threading.Tasks;
@@ -18,15 +17,13 @@ namespace Dyoub.App.Controllers.Account
     public class UsersController : Controller
     {
         private ApplicationContext context;
-        private BackgroundTask backgroundTask;
         private Mailer mailer;
 
-        public UsersController() : this(new ApplicationContext(), new BackgroundTask(), new DetectedMailer()) { }
+        public UsersController() : this(new ApplicationContext(), new BackgroundMailer()) { }
 
-        public UsersController(ApplicationContext context, BackgroundTask backgroundTask, Mailer mailer)
+        public UsersController(ApplicationContext context, Mailer mailer)
         {
             this.context = context;
-            this.backgroundTask = backgroundTask;
             this.mailer = mailer;
         }
         
@@ -93,8 +90,7 @@ namespace Dyoub.App.Controllers.Account
             mailer.Recipients.Add(userSignup.User.Email);
             mailer.Content = this.ViewToString("~/Views/Emails/pt-BR/SignupEmail.cshtml",
                 new SignupEmail(userSignup.User, userSignup.ClosureRequest));
-
-            backgroundTask.Execute(cancellationToken => mailer.Send());
+            mailer.Send();
     
             Response.SetAccessToken(userSignup.User.Token);
 

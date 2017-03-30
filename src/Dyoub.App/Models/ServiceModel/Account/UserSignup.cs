@@ -3,7 +3,7 @@
 
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Account;
-using Dyoub.App.Models.ServiceModel.Security;
+using Dyoub.App.Infrastructure.Security;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;

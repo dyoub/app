@@ -72,6 +72,10 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SharpRaven, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpRaven.2.2.0\lib\net45\SharpRaven.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,7 +126,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <EmbeddedResource Include="Models\ServiceModel\Mail\LocalMail.html" />
+    <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
+    <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
@@ -132,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\BundleConfiguration.cs" />
+    <Compile Include="Configuration\GlobalFilterConfiguration.cs" />
     <Compile Include="Configuration\RouteConfiguration.cs" />
     <Compile Include="Controllers\Account\RecoveryController.cs" />
     <Compile Include="Controllers\Account\UsersController.cs" />
@@ -157,12 +163,19 @@
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="Extensions\HttpResponseBaseExtensions.cs" />
+    <Compile Include="Filters\AuthorizationAttribute.cs" />
+    <Compile Include="Filters\ErrorHandlerAttribute.cs" />
+    <Compile Include="Filters\ModelStateAttribute.cs" />
+    <Compile Include="Filters\ValidIfAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\BackgroundTask.cs" />
+    <Compile Include="Infrastructure\EntityFramework\FilteredDbSet.cs" />
+    <Compile Include="Infrastructure\EntityFramework\PropertyFilterExpression.cs" />
+    <Compile Include="Infrastructure\IO\EmbeddedResource.cs" />
     <Compile Include="Models\EntityModel\Account\ClosureRequest.cs" />
     <Compile Include="Models\EntityModel\Account\ClosureRequestQuery.cs" />
+    <Compile Include="Models\EntityModel\Account\ITenantData.cs" />
     <Compile Include="Models\EntityModel\Account\PasswordRecovery.cs" />
     <Compile Include="Models\EntityModel\Account\PasswordRecoveryQuery.cs" />
     <Compile Include="Models\EntityModel\Account\TenantQuery.cs" />
@@ -170,16 +183,21 @@
     <Compile Include="Models\EntityModel\ApplicationContext.cs" />
     <Compile Include="Models\EntityModel\Account\Tenant.cs" />
     <Compile Include="Models\EntityModel\Account\User.cs" />
+    <Compile Include="Models\EntityModel\TenantContext.cs" />
     <Compile Include="Models\ServiceModel\Account\AccountRecovery.cs" />
     <Compile Include="Models\ServiceModel\Account\UserAuthentication.cs" />
     <Compile Include="Models\ServiceModel\Account\UserSignup.cs" />
-    <Compile Include="Models\ServiceModel\Mail\DetectedMailer.cs" />
-    <Compile Include="Models\ServiceModel\Mail\GoogleMailer.cs" />
-    <Compile Include="Models\ServiceModel\Mail\LocalMailer.cs" />
-    <Compile Include="Models\ServiceModel\Mail\Mailer.cs" />
-    <Compile Include="Models\ServiceModel\Security\AccessToken.cs" />
-    <Compile Include="Models\ServiceModel\Security\Sha256Hash.cs" />
-    <Compile Include="Models\ServiceModel\Security\UserIdentity.cs" />
+    <Compile Include="Infrastructure\Logging\BackgroundLogger.cs" />
+    <Compile Include="Infrastructure\Logging\LocalLogger.cs" />
+    <Compile Include="Infrastructure\Logging\Logger.cs" />
+    <Compile Include="Infrastructure\Logging\SentryLogger.cs" />
+    <Compile Include="Infrastructure\Mail\BackgroundMailer.cs" />
+    <Compile Include="Infrastructure\Mail\GoogleMailer.cs" />
+    <Compile Include="Infrastructure\Mail\LocalMailer.cs" />
+    <Compile Include="Infrastructure\Mail\Mailer.cs" />
+    <Compile Include="Infrastructure\Security\AccessToken.cs" />
+    <Compile Include="Infrastructure\Security\Sha256Hash.cs" />
+    <Compile Include="Infrastructure\Security\UserIdentity.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SigninViewModel.cs" />
@@ -216,6 +234,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Seed\" />
+    <Folder Include="Models\EntityModel\Manage\" />
+    <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Migrations\201703280220123_CreateTenant.resx">

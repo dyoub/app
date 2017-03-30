@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
-using Dyoub.App.Models.ServiceModel.Mail;
+using Dyoub.App.Infrastructure.Mail;
 using System;
 
 namespace Dyoub.Test.Fakes

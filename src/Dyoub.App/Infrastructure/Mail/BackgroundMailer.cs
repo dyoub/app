@@ -3,14 +3,15 @@
 
 using System;
 using System.Web.Configuration;
+using System.Web.Hosting;
 
-namespace Dyoub.App.Models.ServiceModel.Mail
+namespace Dyoub.App.Infrastructure.Mail
 {
-    public class DetectedMailer : Mailer
+    public class BackgroundMailer : Mailer
     {
         private Mailer mailer;
         
-        public DetectedMailer()
+        public BackgroundMailer()
         {
             switch (WebConfigurationManager.AppSettings["Mailer"])
             {
@@ -26,7 +27,8 @@ namespace Dyoub.App.Models.ServiceModel.Mail
             mailer.Recipients = Recipients;
             mailer.Subject = Subject;
             mailer.Content = Content;
-            mailer.Send();
+
+            HostingEnvironment.QueueBackgroundWorkItem(cancellationToken => mailer.Send());
         }
     }
 }

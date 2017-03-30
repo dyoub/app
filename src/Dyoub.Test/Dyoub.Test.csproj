@@ -120,9 +120,13 @@
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
     <Compile Include="Factories\Account\TenantFactory.cs" />
     <Compile Include="Factories\Account\UserFactory.cs" />
-    <Compile Include="Fakes\BackgroundTaskFake.cs" />
     <Compile Include="Fakes\ControllerContextFake.cs" />
+    <Compile Include="Fakes\HttpContextWrapperFake.cs" />
+    <Compile Include="Fakes\LoggerFake.cs" />
     <Compile Include="Fakes\MailerFake.cs" />
+    <Compile Include="Filters\AuthorizationAttributeTest.cs" />
+    <Compile Include="Filters\ErrorHandlerAttributeTest.cs" />
+    <Compile Include="Filters\ModelStateAttributeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,10 +2,9 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Extensions;
-using Dyoub.App.Infrastructure;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.ServiceModel.Account;
-using Dyoub.App.Models.ServiceModel.Mail;
+using Dyoub.App.Infrastructure.Mail;
 using Dyoub.App.Models.ViewModel.Account.PasswordRecoveries;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -15,15 +14,13 @@ namespace Dyoub.App.Controllers.Account
     public class RecoveryController : Controller
     {
         private ApplicationContext context;
-        private BackgroundTask backgroundTask;
         private Mailer mailer;
 
-        public RecoveryController() : this(new ApplicationContext(), new BackgroundTask(), new DetectedMailer()) { }
+        public RecoveryController() : this(new ApplicationContext(), new BackgroundMailer()) { }
 
-        public RecoveryController(ApplicationContext context, BackgroundTask backgroundTask, Mailer mailer)
+        public RecoveryController(ApplicationContext context, Mailer mailer)
         {
             this.context = context;
-            this.backgroundTask = backgroundTask;
             this.mailer = mailer;
         }
 
@@ -55,8 +52,7 @@ namespace Dyoub.App.Controllers.Account
             mailer.Recipients.Add(viewModel.Email);
             mailer.Content = this.ViewToString("~/Views/EmailTemplates/pt-BR/PasswordRecoveryEmail.cshtml",
                 accountRecovery.PasswordRecovery);
-
-            backgroundTask.Execute(cancellationToken => mailer.Send());
+            mailer.Send();
 
             return this.Success();
         }

@@ -2,7 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account;
-using Dyoub.App.Models.ServiceModel.Security;
+using Dyoub.App.Infrastructure.Security;
 using System.Linq;
 
 namespace Dyoub.App.Models.EntityModel.Account
@@ -19,7 +19,7 @@ namespace Dyoub.App.Models.EntityModel.Account
                     Email = u.Email,
                     Name = u.Name,
                     HasFullAccess = u.Email == u.Tenant.Owner
-                    //Roles = 
+                    //Roles = TODO
                 });
         }
 

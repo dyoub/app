@@ -25,7 +25,7 @@
             password: controller.user.password
         })
         .then(function () {
-            controller.path.redirectTo('/');
+            controller.path.redirectTo('/dashboard');
         })
         ['catch'](function (response) {
             controller.handleError(response);

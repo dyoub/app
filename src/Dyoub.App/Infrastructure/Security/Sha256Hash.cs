@@ -5,7 +5,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Dyoub.App.Models.ServiceModel.Security
+namespace Dyoub.App.Infrastructure.Security
 {
     public class Sha256Hash
     {

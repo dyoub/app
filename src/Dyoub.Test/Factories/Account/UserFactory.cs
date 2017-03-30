@@ -2,7 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account;
-using Dyoub.App.Models.ServiceModel.Security;
+using Dyoub.App.Infrastructure.Security;
 using System;
 
 namespace Dyoub.Test.Factories.Account

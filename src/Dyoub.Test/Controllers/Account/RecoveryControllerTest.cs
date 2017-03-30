@@ -24,7 +24,7 @@ namespace Dyoub.Test.Controllers.Account
             CreatePasswordRecoveryViewModel viewModel = new CreatePasswordRecoveryViewModel();
             viewModel.Email = context.UnregisteredUser.Email;
 
-            RecoveryController controller = new RecoveryController(context, new BackgroundTaskFake(), mailer);
+            RecoveryController controller = new RecoveryController(context, mailer);
             controller.ControllerContext = new ControllerContextFake(controller);
 
             ActionResult result = await controller.Create(viewModel);
@@ -43,7 +43,7 @@ namespace Dyoub.Test.Controllers.Account
             CreatePasswordRecoveryViewModel viewModel = new CreatePasswordRecoveryViewModel();
             viewModel.Email = context.User.Email;
 
-            RecoveryController controller = new RecoveryController(context, new BackgroundTaskFake(), mailer);
+            RecoveryController controller = new RecoveryController(context, mailer);
             controller.ControllerContext = new ControllerContextFake(controller);
 
             ActionResult result = await controller.Create(viewModel);
@@ -62,7 +62,7 @@ namespace Dyoub.Test.Controllers.Account
             viewModel.Token = context.PasswordRecovery.Token;
             viewModel.NewPassword = "NewPassword";
 
-            RecoveryController controller = new RecoveryController(context, new BackgroundTaskFake(), new MailerFake());
+            RecoveryController controller = new RecoveryController(context, new MailerFake());
             controller.ControllerContext = new ControllerContextFake(controller);
 
             ActionResult result = await controller.Update(viewModel);
@@ -80,7 +80,7 @@ namespace Dyoub.Test.Controllers.Account
             viewModel.Token = context.PasswordRecovery.Token;
             viewModel.NewPassword = "NewPassword";
 
-            RecoveryController controller = new RecoveryController(context, new BackgroundTaskFake(), new MailerFake());
+            RecoveryController controller = new RecoveryController(context, new MailerFake());
             controller.ControllerContext = new ControllerContextFake(controller);
 
             ActionResult result = await controller.Update(viewModel);

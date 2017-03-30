@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Dyoub.App.Models.ServiceModel.Mail
+namespace Dyoub.App.Infrastructure.Mail
 {
     public class LocalMailer : Mailer
     {

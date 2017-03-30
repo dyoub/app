@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Dyoub.App.Models.ServiceModel.Mail
+namespace Dyoub.App.Infrastructure.Mail
 {
     public abstract class Mailer
     {

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Error Log</title>
+    <style type="text/css">
+        .log {
+            font-family: Arial;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+        }
+
+        .log-header,
+        .log-body {
+            padding: 10px;
+        }
+
+        .log-header {
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #f2f2f2;
+            color: #c0392b;
+            font-size: 12pt;
+        }
+
+        .log-body {
+            font-family: 'Courier New';
+        }
+    </style>
+</head>
+<body class="log">
+    <div class="log-header">
+        {{Message}}
+    </div>
+    <div class="log-body">
+        {{StackTrace}}
+    </div>
+</body>
+</html>
