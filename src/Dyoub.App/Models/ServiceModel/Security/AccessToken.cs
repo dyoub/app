@@ -19,7 +19,7 @@ namespace Dyoub.App.Models.ServiceModel.Security
 
         public override string ToString()
         {
-            return BitConverter.ToString(time.Concat(key).ToArray()).Replace("-", string.Empty);
+            return BitConverter.ToString(key.Concat(time).ToArray()).Replace("-", string.Empty);
         }
     }
 }

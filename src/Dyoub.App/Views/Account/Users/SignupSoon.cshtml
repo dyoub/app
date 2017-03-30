@@ -1,44 +1,26 @@
-﻿<!DOCTYPE html>
-<html data-ng-app="dyoub.theme">
-<head>
-    <title>dyoub</title>
-    <link rel="icon" href="https://dyoub.s3.amazonaws.com/cdn/img/dyoub.ico" />
-    <meta charset="utf-8" />
-    <link rel="icon" href="https://dyoub.s3.amazonaws.com/cdn/img/dyoub.ico" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://dyoub.s3.amazonaws.com/cdn/css/dyoub-theme-1.0.0.min.css" />
-    <style type="text/css">
-        html, body {
-            height: 100%;
-        }
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
 
-        .header {
-            height: 100%;
-        }
-    </style>
-</head>
-<body class="portfolio">
-    <div class="navbar fixed text-center">
-        <img class="dyoub" alt="dyoub" />
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container">
+    <div class="text-center">
+        <a href="/">
+            <img alt="dyoub" src="https://dyoub.s3.amazonaws.com/cdn/img/dyoub-silver.png" />
+        </a>
     </div>
-    <div class="header">
-        <div class="slogan">
-            Desenvolvento seu negócio.
-            <span class="highlight">Simples.</span>
-        </div>
-        <img class="devices" alt="All devices" />
+
+    <div class="sign text-center font-14">
+        <p>Você poderá criar uma conta em breve.</p>
     </div>
-    <div class="signup">
-        <p>
-            Você poderá criar uma conta em breve!
-        </p>
-        <p>
-            Voltar para <a href="/">dyoub.com</a>.
-        </p>
+
+    <div class="box text-center">
+        <span class="text-muted font-10" data-translate="Already have an account?"></span>
+        &nbsp;
+        <a href="/signin" class="as-button success outline" data-translate="Access account"></a>
     </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-    <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/dyoub-theme-1.0.0.min.js"></script>
-</body>
-</html>
+</div>
