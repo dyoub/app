@@ -59,6 +59,7 @@
                 "Fixed expenses, receipt of credit card, etc.": "Despesas fixas, vendas com cartão de crédito, etc.",
                 "Full name": "Nome completo",
                 "Go back to signin": "Voltar para o login",
+                "Go back to dashboard": "Voltar para o dashboard",
                 "I forgot my password": "Esqueci minha senha",
                 "Incoming, outcoming and transfer orders.": "Ordens de entrada, saída e transferência.",
                 "Incomes and expenses": "Receitas e despesas",
