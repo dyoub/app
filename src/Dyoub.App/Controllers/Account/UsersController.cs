@@ -27,20 +27,21 @@ namespace Dyoub.App.Controllers.Account
             this.mailer = mailer;
         }
         
-        [HttpGet]
-        [Route("signin")]
+        [HttpGet, Route("signin")]
         public async Task<ActionResult> Signin()
         {
-            if (await context.Users.WhereToken(Request.AccessToken()).AnyAsync())
+            if (Request.AccessToken() != null)
             {
-                return RedirectToRoute("dashboard");
+                if (await context.Users.WhereToken(Request.AccessToken()).AnyAsync())
+                {
+                    return Redirect("/dashboard");
+                }
             }
 
             return View("~/Views/Account/Users/Signin.cshtml");
         }
 
-        [HttpPost]
-        [Route("signin")]
+        [HttpPost, Route("signin")]
         public async Task<ActionResult> Signin(SigninViewModel viewModel)
         {
             UserAuthentication authentication = new UserAuthentication(context);
@@ -54,8 +55,7 @@ namespace Dyoub.App.Controllers.Account
             return this.Unauthorized();
         }
 
-        [HttpGet]
-        [Route("signout")]
+        [HttpGet, Route("signout")]
         public async Task<ActionResult> Signout()
         {
             UserAuthentication authentication = new UserAuthentication(context);
@@ -65,18 +65,16 @@ namespace Dyoub.App.Controllers.Account
                 Response.ClearAccessToken();
             }
 
-            return RedirectToRoute("signin");
+            return Redirect("/signin");
         }
 
-        [HttpGet]
-        [Route("signup")]
+        [HttpGet, Route("signup")]
         public ActionResult Signup()
         {
             return View("~/Views/Account/Users/SignupSoon.cshtml");
         }
 
-        [HttpPost]
-        [Route("signup")]
+        [HttpPost, Route("signup")]
         public async Task<ActionResult> Signup(SignupViewModel viewModel)
         {
             UserSignup userSignup = new UserSignup(context, viewModel.MapToUser());

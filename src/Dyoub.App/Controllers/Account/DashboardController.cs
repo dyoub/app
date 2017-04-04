@@ -11,17 +11,13 @@ namespace Dyoub.App.Controllers.Account
 {
     public class DashboardController : Controller
     {
-        [HttpGet]
-        [Route("dashboard")]
-        [Authorization]
+        [HttpGet, Route("dashboard"), Authorization]
         public ActionResult Overview()
         {
             return View("~/Views/Account/Dashboard/Overview.cshtml");
         }
 
-        [HttpPost]
-        [Route("dashboard/load")]
-        [Authorization]
+        [HttpPost, Route("dashboard/load"), Authorization]
         public async Task<ActionResult> Load()
         {
             // TODO
