@@ -7,13 +7,10 @@ namespace Dyoub.App.Models.ViewModel.Account.Users
 {
     public class SigninViewModel
     {
-        [Required]
-        [EmailAddress]
-        [MaxLength(80)]
+        [Required, EmailAddress, MaxLength(80)]
         public string Email { get; set; }
 
-        [Required]
-        [MaxLength(20)]
+        [Required, MaxLength(20)]
         public string Password { get; set; }
     }
 }

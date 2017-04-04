@@ -140,6 +140,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
+    <Content Include="Scripts\controllers\account\dashboard\overview.controller.js" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
@@ -151,6 +152,7 @@
     <Compile Include="Configuration\BundleConfiguration.cs" />
     <Compile Include="Configuration\GlobalFilterConfiguration.cs" />
     <Compile Include="Configuration\RouteConfiguration.cs" />
+    <Compile Include="Controllers\Account\DashboardController.cs" />
     <Compile Include="Controllers\Account\RecoveryController.cs" />
     <Compile Include="Controllers\Account\UsersController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="Extensions\HttpResponseBaseExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Filters\AuthorizationAttribute.cs" />
     <Compile Include="Filters\ErrorHandlerAttribute.cs" />
     <Compile Include="Filters\ModelStateAttribute.cs" />
@@ -243,6 +246,7 @@
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SigninViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SignupViewModel.cs" />
+    <Compile Include="Results\Account\Dashboard\OverviewJson.cs" />
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
     <Compile Include="Results\Common\AccessDeniedStatusCode.cs" />
     <Compile Include="Results\Common\ModelErrorsJson.cs" />
@@ -268,6 +272,7 @@
     <Content Include="Views\Account\PasswordRecoveries\EditPasswordRecovery.cshtml" />
     <Content Include="Views\Errors\AccessDenied.cshtml" />
     <Content Include="Views\Errors\InternalError.cshtml" />
+    <Content Include="Views\Account\Dashboard\Overview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

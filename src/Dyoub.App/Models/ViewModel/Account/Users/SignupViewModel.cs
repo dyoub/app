@@ -8,18 +8,13 @@ namespace Dyoub.App.Models.ViewModel.Account.Users
 {
     public class SignupViewModel
     {
-        [Required]
-        [MaxLength(80)]
+        [Required, MaxLength(80)]
         public string Name { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [MaxLength(80)]
+        [Required, EmailAddress, MaxLength(80)]
         public string Email { get; set; }
 
-        [Required]
-        [MinLength(8)]
-        [MaxLength(20)]
+        [Required, MinLength(8), MaxLength(20)]
         public string Password { get; set; }
 
         public User MapToUser()

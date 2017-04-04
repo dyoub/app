@@ -3,6 +3,7 @@
     Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 *@
 
+@using Dyoub.App.Extensions;
 @using System.Web.Optimization;
 
 <!DOCTYPE html>
@@ -16,6 +17,18 @@
     <title>dyoub</title>
 </head>
 <body>
+    @if (Context.UserIdentity() != null)
+    {
+        <div class="navbar">
+            <a href="/" class="navbar-header">
+                <i class="fa fa-th"></i>
+                @Context.UserIdentity().Name
+            </a>
+            <a href="/signout" class="logout">
+                <i class="fa fa-power-off"></i>
+            </a>
+        </div>
+    }
     <div data-dialog></div>
     @RenderBody()
     <script type="text/javascript" src="https://dyoub.s3.amazonaws.com/cdn/js/jquery-3.2.0.min.js"></script>
