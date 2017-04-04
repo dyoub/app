@@ -132,11 +132,11 @@
     <EmbeddedResource Include="Data\Migrations\201703311528075_CreateTeam.resx">
       <DependentUpon>201703311528075_CreateTeam.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\201703312008595_CreateTeamRole.resx">
-      <DependentUpon>201703312008595_CreateTeamRole.cs</DependentUpon>
+    <EmbeddedResource Include="Data\Migrations\201704021343057_CreateTeamRule.resx">
+      <DependentUpon>201704021343057_CreateTeamRule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\201703312045023_CreateTeamMember.resx">
-      <DependentUpon>201703312045023_CreateTeamMember.cs</DependentUpon>
+    <EmbeddedResource Include="Data\Migrations\201704032013232_CreateTeamMember.resx">
+      <DependentUpon>201704032013232_CreateTeamMember.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
@@ -179,13 +179,13 @@
     <Compile Include="Data\Migrations\201703311528075_CreateTeam.Designer.cs">
       <DependentUpon>201703311528075_CreateTeam.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\Migrations\201703312008595_CreateTeamRole.cs" />
-    <Compile Include="Data\Migrations\201703312008595_CreateTeamRole.Designer.cs">
-      <DependentUpon>201703312008595_CreateTeamRole.cs</DependentUpon>
+    <Compile Include="Data\Migrations\201704021343057_CreateTeamRule.cs" />
+    <Compile Include="Data\Migrations\201704021343057_CreateTeamRule.Designer.cs">
+      <DependentUpon>201704021343057_CreateTeamRule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\Migrations\201703312045023_CreateTeamMember.cs" />
-    <Compile Include="Data\Migrations\201703312045023_CreateTeamMember.Designer.cs">
-      <DependentUpon>201703312045023_CreateTeamMember.cs</DependentUpon>
+    <Compile Include="Data\Migrations\201704032013232_CreateTeamMember.cs" />
+    <Compile Include="Data\Migrations\201704032013232_CreateTeamMember.Designer.cs">
+      <DependentUpon>201704032013232_CreateTeamMember.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -198,23 +198,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AuthorizationHelper.cs" />
     <Compile Include="Infrastructure\EntityFramework\FilteredDbSet.cs" />
     <Compile Include="Infrastructure\EntityFramework\PropertyFilterExpression.cs" />
     <Compile Include="Infrastructure\IO\EmbeddedResource.cs" />
     <Compile Include="Models\EntityModel\Account\ClosureRequest.cs" />
+    <Compile Include="Models\EntityModel\Account\ClosureRequestMapping.cs" />
     <Compile Include="Models\EntityModel\Account\ClosureRequestQuery.cs" />
     <Compile Include="Models\EntityModel\Account\ITenantData.cs" />
     <Compile Include="Models\EntityModel\Account\PasswordRecovery.cs" />
+    <Compile Include="Models\EntityModel\Account\PasswordRecoveryMapping.cs" />
     <Compile Include="Models\EntityModel\Account\PasswordRecoveryQuery.cs" />
+    <Compile Include="Models\EntityModel\Account\TenantMapping.cs" />
     <Compile Include="Models\EntityModel\Account\TenantQuery.cs" />
+    <Compile Include="Models\EntityModel\Account\UserMapping.cs" />
     <Compile Include="Models\EntityModel\Account\UserQuery.cs" />
     <Compile Include="Models\EntityModel\ApplicationContext.cs" />
     <Compile Include="Models\EntityModel\Account\Tenant.cs" />
     <Compile Include="Models\EntityModel\Account\User.cs" />
     <Compile Include="Models\EntityModel\Manage\Store.cs" />
+    <Compile Include="Models\EntityModel\Manage\StoreMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\Team.cs" />
+    <Compile Include="Models\EntityModel\Manage\TeamMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\TeamMember.cs" />
-    <Compile Include="Models\EntityModel\Manage\TeamRole.cs" />
+    <Compile Include="Models\EntityModel\Manage\TeamMemberMapping.cs" />
+    <Compile Include="Models\EntityModel\Manage\TeamRule.cs" />
+    <Compile Include="Models\EntityModel\Manage\TeamRuleMapping.cs" />
     <Compile Include="Models\EntityModel\TenantContext.cs" />
     <Compile Include="Models\ServiceModel\Account\AccountRecovery.cs" />
     <Compile Include="Models\ServiceModel\Account\UserAuthentication.cs" />
@@ -257,6 +266,8 @@
     <Content Include="Views\Emails\pt-BR\PasswordRecoveryEmail.cshtml" />
     <Content Include="Views\Account\PasswordRecoveries\NewPasswordRecovery.cshtml" />
     <Content Include="Views\Account\PasswordRecoveries\EditPasswordRecovery.cshtml" />
+    <Content Include="Views\Errors\AccessDenied.cshtml" />
+    <Content Include="Views\Errors\InternalError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -266,7 +277,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Seed\" />
-    <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Migrations\201703280220123_CreateTenant.resx">

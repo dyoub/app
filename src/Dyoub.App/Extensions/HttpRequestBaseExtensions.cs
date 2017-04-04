@@ -20,7 +20,7 @@ namespace Dyoub.App.Extensions
 
             string token = cookie.Value;
 
-            if (!Regex.IsMatch(token, "^[0-9A-F]$"))
+            if (!Regex.IsMatch(token, "^[0-9A-F]+$"))
             {
                 return null;
             }

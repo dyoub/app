@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
-using Dyoub.App.Models.EntityModel.Account;
 using Dyoub.App.Infrastructure.Security;
 using System.Linq;
 
@@ -12,14 +11,14 @@ namespace Dyoub.App.Models.EntityModel.Account
         public static IQueryable<UserIdentity> AsUserIdentity(this IQueryable<User> users, string token)
         {
             return users.Where(user => user.Token == token)
-                .Select(u => new UserIdentity
+                .Select(user => new UserIdentity
                 {
-                    UserId = u.Id,
-                    TenantId = u.TenantId,
-                    Email = u.Email,
-                    Name = u.Name,
-                    HasFullAccess = u.Email == u.Tenant.Owner
-                    //Roles = TODO
+                    UserId = user.Id,
+                    TenantId = user.TenantId,
+                    Email = user.Email,
+                    Name = user.Name,
+                    IsOwner = user.Email == user.Tenant.Owner,
+                    TeamRules = user.TeamMember.Team.TeamRules
                 });
         }
 

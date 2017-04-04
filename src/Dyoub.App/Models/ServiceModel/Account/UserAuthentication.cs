@@ -44,17 +44,17 @@ namespace Dyoub.App.Models.ServiceModel.Account
 
         public async Task<bool> SignoutAsync(string token)
         {
-            User user = await Context.Users
+            User = await Context.Users
                 .WhereToken(token)
                 .SingleOrDefaultAsync();
 
-            if (user != null)
+            if (User != null)
             {
-                user.Token = null;
+                User.Token = null;
                 await Context.SaveChangesAsync();
             }
 
-            return user != null;
+            return User != null;
         }
     }
 }

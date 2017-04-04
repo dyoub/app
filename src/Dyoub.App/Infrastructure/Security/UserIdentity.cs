@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Models.EntityModel.Manage;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,17 +13,18 @@ namespace Dyoub.App.Infrastructure.Security
         public int TenantId { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
-        public bool HasFullAccess { get; set; }
-        public IEnumerable<string> Roles { get; set; }
+        public bool IsOwner { get; set; }
+        public IEnumerable<TeamRule> TeamRules { get; set; }
 
-        public bool HasRole(string role)
+        public bool HasPermission(string scope)
         {
-            if (HasFullAccess)
+            if (IsOwner || string.IsNullOrEmpty(scope))
             {
                 return true;
             }
 
-            return Roles != null && Roles.Contains(role);
+            return TeamRules != null &&
+                TeamRules.Any(teamRule => teamRule.Scope == scope);
         }
     }
 }

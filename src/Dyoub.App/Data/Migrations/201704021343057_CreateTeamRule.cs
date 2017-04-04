@@ -5,33 +5,40 @@ namespace Dyoub.App.Data
 {
     using System.Data.Entity.Migrations;
 
-    public partial class CreateTeamRole : DbMigration
+    public partial class CreateTeamRule : DbMigration
     {
         public override void Up()
         {
-            CreateTable("TeamRole", t => new
+            CreateTable("TeamRule", t => new
             {
                 TeamId = t.Int(nullable: false),
                 TenantId = t.Int(nullable: false),
-                Role = t.String(nullable: false, maxLength: 50),
-                CanEdit = t.Boolean(nullable: false)
+                Scope = t.String(nullable: false, maxLength: 50)
             })
-            .PrimaryKey(t => new { t.TeamId, t.TenantId, t.Role }, "PK_TeamRole")
-            .ForeignKey("Tenant", t => t.TenantId, false, "FK_TeamRole_Tenant");
-            
+            .PrimaryKey(t => new { t.TeamId, t.TenantId, t.Scope }, "PK_TeamRule");
+
             AddForeignKey(
-                dependentTable: "TeamRole",
+                dependentTable: "TeamRule",
+                dependentColumn: "TenantId",
+                principalTable: "Tenant",
+                principalColumn: "Id",
+                cascadeDelete: false,
+                name: "FK_TeamRule_Tenant"
+            );
+
+            AddForeignKey(
+                dependentTable: "TeamRule",
                 dependentColumns: new string[] { "TeamId", "TenantId" },
                 principalTable: "Team",
                 principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: false,
-                name: "FK_TeamRole_Team"
+                name: "FK_TeamRule_Team"
             );
         }
-
+        
         public override void Down()
         {
-            DropTable("TeamRole");
+            DropTable("TeamRule");
         }
     }
 }

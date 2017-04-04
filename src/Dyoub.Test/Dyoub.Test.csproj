@@ -106,6 +106,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Contexts\Account\Autorization\AccessWithScopePermissionContext.cs" />
+    <Compile Include="Contexts\Account\Autorization\AccessWithoutScopePermissionContext.cs" />
+    <Compile Include="Contexts\Account\Autorization\ValidateValidTokenContext.cs" />
     <Compile Include="Contexts\Account\PasswordRecoveries\RecoveryValidEmailContext.cs" />
     <Compile Include="Contexts\Account\PasswordRecoveries\RecoveryInexistentEmailContext.cs" />
     <Compile Include="Contexts\Account\PasswordRecoveries\ResetPasswordWithExpiredTokenContext.cs" />
@@ -120,6 +123,10 @@
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
     <Compile Include="Factories\Account\TenantFactory.cs" />
     <Compile Include="Factories\Account\UserFactory.cs" />
+    <Compile Include="Factories\Manage\StoreFactory.cs" />
+    <Compile Include="Factories\Manage\TeamFactory.cs" />
+    <Compile Include="Factories\Manage\TeamMemberFactory.cs" />
+    <Compile Include="Factories\Manage\TeamRuleFactory.cs" />
     <Compile Include="Fakes\ControllerContextFake.cs" />
     <Compile Include="Fakes\HttpContextWrapperFake.cs" />
     <Compile Include="Fakes\LoggerFake.cs" />

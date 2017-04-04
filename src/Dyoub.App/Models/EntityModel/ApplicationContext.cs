@@ -17,7 +17,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<Store> Stores { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
-        public DbSet<TeamRole> TeamRoles { get; set; }
+        public DbSet<TeamRule> TeamRules { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<User> Users { get; set; }
 
@@ -36,9 +36,16 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Configurations.Add(new ClosureRequestMapping());
+            modelBuilder.Configurations.Add(new PasswordRecoveryMapping());
+            modelBuilder.Configurations.Add(new StoreMapping());
+            modelBuilder.Configurations.Add(new TeamMapping());
+            modelBuilder.Configurations.Add(new TeamMemberMapping());
+            modelBuilder.Configurations.Add(new TeamRuleMapping());
+            modelBuilder.Configurations.Add(new TenantMapping());
+            modelBuilder.Configurations.Add(new UserMapping());
         }
-
+        
         private static DbConnection DefaultConnection()
         {
             string providerName = WebConfigurationManager.AppSettings["Database:Provider"];

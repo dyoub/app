@@ -29,5 +29,13 @@ namespace Dyoub.Test.Factories.Account
 
             return user;
         }
+
+        public static User AuthenticatedUser(Tenant tenant)
+        {
+            User user = User(tenant);
+            user.Token = new AccessToken().ToString();
+
+            return user;
+        }
     }
 }

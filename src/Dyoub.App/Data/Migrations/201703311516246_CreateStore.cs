@@ -16,8 +16,16 @@ namespace Dyoub.App.Data
                 Name = t.String(nullable: false, maxLength: 80),
                 Active = t.Boolean(nullable: false)
             })
-            .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_Store")
-            .ForeignKey("Tenant", t => t.TenantId, false, "FK_Store_Tenant");
+            .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_Store");
+
+            AddForeignKey(
+                dependentTable: "Store",
+                dependentColumn: "TenantId",
+                principalTable: "Tenant",
+                principalColumn: "Id",
+                cascadeDelete: false,
+                name: "FK_Store_Tenant"
+            );
         }
         
         public override void Down()

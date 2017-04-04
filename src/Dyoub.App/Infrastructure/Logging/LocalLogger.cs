@@ -15,7 +15,7 @@ namespace Dyoub.App.Infrastructure.Logging
         {
             EmbeddedResource html = new EmbeddedResource(
                 assembly: GetType().Assembly,
-                resourceName: string.Format("{0}.ErrorLogTemplate.html", GetType().Namespace)
+                resourceName: string.Format("{0}.LocalLog.html", GetType().Namespace)
             );
 
             return html.ReadAllText();

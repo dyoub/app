@@ -12,14 +12,21 @@ namespace Dyoub.App.Data
             CreateTable("TeamMember", t => new
             {
                 UserId = t.Int(nullable: false),
+                TenantId = t.Int(nullable: false),
                 TeamId = t.Int(nullable: false),
-                TenantId = t.Int(nullable: false)
+                StoreId = t.Int(nullable: false)
             })
-            .PrimaryKey(t => new { t.UserId, t.TeamId, t.TenantId }, "PK_TeamMember")
-            .ForeignKey("Tenant", t => t.TenantId, false, "FK_TeamMember_Tenant")
-            .Index(t => t.UserId, "IX_TeamMember_UserId")
-            .Index(t => t.TeamId, "IX_TeamMember_TeamId");
+            .PrimaryKey(t => new { t.UserId, t.TenantId }, "PK_TeamMember");
             
+            AddForeignKey(
+                dependentTable: "TeamMember",
+                dependentColumn: "TenantId",
+                principalTable: "Tenant",
+                principalColumn: "Id",
+                cascadeDelete: false,
+                name: "FK_TeamMember_Tenant"
+            );
+
             AddForeignKey(
                 dependentTable: "TeamMember",
                 dependentColumns: new string[] { "UserId", "TenantId" },
@@ -36,6 +43,15 @@ namespace Dyoub.App.Data
                 principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: false,
                 name: "FK_TeamMember_Team"
+            );
+
+            AddForeignKey(
+                dependentTable: "TeamMember",
+                dependentColumns: new string[] { "TeamId", "TenantId" },
+                principalTable: "Store",
+                principalColumns: new string[] { "Id", "TenantId" },
+                cascadeDelete: false,
+                name: "FK_TeamMember_Store"
             );
         }
 

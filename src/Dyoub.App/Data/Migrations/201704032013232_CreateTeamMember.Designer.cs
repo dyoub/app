@@ -7,13 +7,13 @@ namespace Dyoub.App.Data
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateTeamRole : IMigrationMetadata
+    public sealed partial class CreateTeamMember : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateTeamRole));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateTeamMember));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703312008595_CreateTeamRole"; }
+            get { return "201704032013232_CreateTeamMember"; }
         }
         
         string IMigrationMetadata.Source
