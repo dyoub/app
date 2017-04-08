@@ -36,7 +36,7 @@ namespace Dyoub.Test.Filters
         {
             filterContext.HttpContext.Request.Cookies.Add(new HttpCookie("token", null));
 
-            attribute = new AuthorizationAttribute(new InMemoryContext());
+            attribute = new AuthorizationAttribute(new EmptyContext());
             attribute.OnAuthorization(filterContext);
 
             Assert.IsNull(filterContext.HttpContext.UserIdentity());
@@ -47,7 +47,7 @@ namespace Dyoub.Test.Filters
         {
             filterContext.HttpContext.Request.Cookies.Add(new HttpCookie("token", "TokenThatDoesNotExistInDatabase"));
 
-            attribute = new AuthorizationAttribute(new InMemoryContext());
+            attribute = new AuthorizationAttribute(new EmptyContext());
             attribute.OnAuthorization(filterContext);
 
             Assert.IsNull(filterContext.HttpContext.UserIdentity());

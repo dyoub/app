@@ -13,7 +13,8 @@ namespace Dyoub.Test.Factories.Manage
             return new Store
             {
                 Name = "Store Test",
-                Tenant = tenant
+                Active = true,
+                Tenant = tenant,
             };
         }
     }

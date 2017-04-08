@@ -117,9 +117,15 @@
     <Compile Include="Contexts\Account\Users\SigninWrongPasswordContext.cs" />
     <Compile Include="Contexts\Account\Users\SignupEmailAlreadyTakenContext.cs" />
     <Compile Include="Contexts\Account\Users\SignupCorrectlyContext.cs" />
-    <Compile Include="Contexts\InMemoryContext.cs" />
+    <Compile Include="Contexts\EmptyContext.cs" />
+    <Compile Include="Contexts\Manage\Stores\CreateStoreContext.cs" />
+    <Compile Include="Contexts\Manage\Stores\DeleteStoreContext.cs" />
+    <Compile Include="Contexts\Manage\Stores\FindStoreContext.cs" />
+    <Compile Include="Contexts\Manage\Stores\ListStoreContext.cs" />
+    <Compile Include="Contexts\Manage\Stores\UpdateStoreContext.cs" />
     <Compile Include="Controllers\Account\RecoveryControllerTest.cs" />
     <Compile Include="Controllers\Account\UsersControllerTest.cs" />
+    <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
     <Compile Include="Factories\Account\TenantFactory.cs" />
     <Compile Include="Factories\Account\UserFactory.cs" />

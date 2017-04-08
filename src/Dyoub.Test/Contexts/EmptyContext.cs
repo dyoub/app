@@ -6,8 +6,8 @@ using Effort;
 
 namespace Dyoub.Test.Contexts
 {
-    public class InMemoryContext : ApplicationContext
+    public class EmptyContext : ApplicationContext
     {
-        public InMemoryContext() : base(DbConnectionFactory.CreateTransient()) { }
+        public EmptyContext() : base(DbConnectionFactory.CreateTransient()) { }
     }
 }

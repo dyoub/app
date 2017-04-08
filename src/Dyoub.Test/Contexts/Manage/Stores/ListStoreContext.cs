@@ -4,18 +4,19 @@
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Account;
 using Dyoub.Test.Factories.Account;
+using Dyoub.Test.Factories.Manage;
 using Effort;
 
-namespace Dyoub.Test.Contexts.Account.Autorization
+namespace Dyoub.Test.Contexts.Manage.Stores
 {
-    public class ValidateValidTokenContext : ApplicationContext
+    public class ListStoreContext : TenantContext
     {
-        public User User { get; private set; }
-
-        public ValidateValidTokenContext() : base(DbConnectionFactory.CreateTransient())
+        public ListStoreContext() : base(1, DbConnectionFactory.CreateTransient())
         {
             Tenant tenant = Tenants.Add(TenantFactory.Tenant());
-            User = Users.Add(UserFactory.AuthenticatedUser(tenant));
+
+            Stores.Add(StoreFactory.Store(tenant));
+            Stores.Add(StoreFactory.Store(tenant));
 
             SaveChanges();
         }

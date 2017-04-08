@@ -150,12 +150,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\BundleConfiguration.cs" />
-    <Compile Include="Configuration\GlobalFilterConfiguration.cs" />
+    <Compile Include="Configuration\GlobalFiltersConfiguration.cs" />
     <Compile Include="Configuration\RouteConfiguration.cs" />
     <Compile Include="Controllers\Account\DashboardController.cs" />
     <Compile Include="Controllers\Account\RecoveryController.cs" />
     <Compile Include="Controllers\Account\UsersController.cs" />
+    <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\TenantController.cs" />
     <Compile Include="Data\MigrationsConfiguration.cs" />
     <Compile Include="Data\Migrations\201703280220123_CreateTenant.cs" />
     <Compile Include="Data\Migrations\201703280220123_CreateTenant.Designer.cs">
@@ -193,11 +195,13 @@
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="Extensions\HttpResponseBaseExtensions.cs" />
+    <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Filters\AuthorizationAttribute.cs" />
     <Compile Include="Filters\ErrorHandlerAttribute.cs" />
     <Compile Include="Filters\ModelStateAttribute.cs" />
     <Compile Include="Filters\ValidIfAttribute.cs" />
+    <Compile Include="Filters\ViewOutputCacheAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,6 +225,7 @@
     <Compile Include="Models\EntityModel\Account\User.cs" />
     <Compile Include="Models\EntityModel\Manage\Store.cs" />
     <Compile Include="Models\EntityModel\Manage\StoreMapping.cs" />
+    <Compile Include="Models\EntityModel\Manage\StoreQuery.cs" />
     <Compile Include="Models\EntityModel\Manage\Team.cs" />
     <Compile Include="Models\EntityModel\Manage\TeamMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\TeamMember.cs" />
@@ -246,6 +251,10 @@
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SigninViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SignupViewModel.cs" />
+    <Compile Include="Models\ViewModel\Manage\Stores\CreateStoreViewModel.cs" />
+    <Compile Include="Models\ViewModel\Manage\Stores\ListStoresViewModel.cs" />
+    <Compile Include="Models\ViewModel\Manage\Stores\StoreIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Manage\Stores\UpdateStoreViewModel.cs" />
     <Compile Include="Results\Account\Dashboard\OverviewJson.cs" />
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
     <Compile Include="Results\Common\AccessDeniedStatusCode.cs" />
@@ -255,6 +264,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\Common\SuccessStatusCode.cs" />
     <Compile Include="Results\Common\UnauthorizedStatusCode.cs" />
+    <Compile Include="Results\Manage\Stores\StoreJson.cs" />
+    <Compile Include="Results\Manage\Stores\StoreListJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
