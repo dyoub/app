@@ -8,6 +8,11 @@ namespace Dyoub.App.Extensions
 {
     public static class HttpContextBaseExtension
     {
+        public static int TenantId(this HttpContextBase httpContext)
+        {
+            return httpContext.UserIdentity().TenantId;
+        }
+
         public static UserIdentity UserIdentity(this HttpContextBase httpContext)
         {
             return httpContext.Items["UserIdentity"] as UserIdentity;

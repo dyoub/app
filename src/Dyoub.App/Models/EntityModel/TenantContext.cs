@@ -23,22 +23,35 @@ namespace Dyoub.App.Models.EntityModel
             }
         }
 
-        public TenantContext(DbConnection connection, int tenantId) : base(connection)
+        public TenantContext(int tenantId)
+        {
+            CurrentId = tenantId;
+        }
+
+        public TenantContext(int tenantId, DbConnection connection) : base(connection)
         {
             CurrentId = tenantId;
         }
 
         public override DbSet<TEntity> Set<TEntity>()
         {
-            return new FilteredDbSet<TEntity>(base.Set<TEntity>(),
-                new PropertyFilterExpression<TEntity>("TenantId", CurrentId));
+            if (typeof(TEntity) is ITenantData)
+            {
+                return new FilteredDbSet<TEntity>(base.Set<TEntity>(),
+                    new PropertyFilterExpression<TEntity>("TenantId", CurrentId));
+            }
+
+            return base.Set<TEntity>();
         }
 
         public override async Task<int> SaveChangesAsync()
         {
             foreach (DbEntityEntry entry in ChangeTracker.Entries())
             {
-                ((ITenantData)entry.Entity).TenantId = CurrentId;
+                if (entry.Entity is ITenantData)
+                {
+                    ((ITenantData)entry.Entity).TenantId = CurrentId;
+                }
             }
 
             return await base.SaveChangesAsync();
