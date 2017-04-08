@@ -1,0 +1,56 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container">
+    <div class="menu-header" data-translate="Account"></div>
+
+    <div class="grid-row">
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" data-href="/profile" class="card concrete" disabled>
+                <div class="card-info">
+                    <div data-ng-bind="controller.overview.user.email"></div>
+                    <div class="value" data-ng-bind="controller.overview.user.name"></div>
+                    <i class="fa fa-user-circle-o"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="My profile"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" data-href="/renewals" class="card concrete" disabled>
+                <div class="card-info">
+                    <div data-translate="Days for renewal"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.daysForRenewal"></div>
+                    <i class="fa fa-clock-o"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Renewals"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" data-href="/tickets" class="as-button card concrete" disabled>
+                <div class="card-info">
+                    <div data-translate="New messages"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.ticketMessages"></div>
+                    <i class="fa fa-comment"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Technical support"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

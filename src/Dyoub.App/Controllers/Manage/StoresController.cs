@@ -21,7 +21,7 @@ namespace Dyoub.App.Controllers.Manage
         public StoresController(TenantContext context) : base(context) { }
 
         [HttpGet, Route("stores/new"), Authorization(Scope = "stores.edit")]
-        public ActionResult Add()
+        public ActionResult New()
         {
             return View("~/Views/Manage/Stores/StoreEdit.cshtml");
         }
@@ -47,8 +47,8 @@ namespace Dyoub.App.Controllers.Manage
         [HttpPost, Route("stores/create"), Authorization(Scope = "stores.edit")]
         public async Task<ActionResult> Create(CreateStoreViewModel viewModel)
         {
-            Context.Stores.Add(viewModel.MapTo(new Store()));
-            await Context.SaveChangesAsync();
+            Tenant.Stores.Add(viewModel.MapTo(new Store()));
+            await Tenant.SaveChangesAsync();
 
             return this.Success();
         }
@@ -56,7 +56,7 @@ namespace Dyoub.App.Controllers.Manage
         [HttpPost, Route("stores/delete"), Authorization(Scope = "stores.edit")]
         public async Task<ActionResult> Delete(StoreIdViewModel viewModel)
         {
-            Store store = await Context.Stores
+            Store store = await Tenant.Stores
                 .WhereId(viewModel.Id.Value)
                 .SingleOrDefaultAsync();
 
@@ -65,8 +65,8 @@ namespace Dyoub.App.Controllers.Manage
                 return this.Error("Store not found.");
             }
 
-            Context.Stores.Remove(store);
-            await Context.SaveChangesAsync();
+            Tenant.Stores.Remove(store);
+            await Tenant.SaveChangesAsync();
 
             return this.Success();
         }
@@ -74,7 +74,7 @@ namespace Dyoub.App.Controllers.Manage
         [HttpPost, Route("stores/find"), Authorization(Scope = "stores.read")]
         public async Task<ActionResult> Find(StoreIdViewModel viewModel)
         {
-            Store store = await Context.Stores
+            Store store = await Tenant.Stores
                 .WhereId(viewModel.Id.Value)
                 .SingleOrDefaultAsync();
 
@@ -84,7 +84,7 @@ namespace Dyoub.App.Controllers.Manage
         [HttpPost, Route("stores"), Authorization(Scope = "stores.read")]
         public async Task<ActionResult> List(ListStoresViewModel viewModel)
         {
-            ICollection<Store> stores = await Context.Stores
+            ICollection<Store> stores = await Tenant.Stores
                 .WhereNameContains(viewModel.Name.Words())
                 .OrderByName()
                 .Paginate(viewModel.Index)
@@ -96,7 +96,7 @@ namespace Dyoub.App.Controllers.Manage
         [HttpPost, Route("stores/update"), Authorization(Scope = "stores.edit")]
         public async Task<ActionResult> Update(UpdateStoreViewModel viewModel)
         {
-            Store store = await Context.Stores
+            Store store = await Tenant.Stores
                 .WhereId(viewModel.Id.Value)
                 .SingleOrDefaultAsync();
 
@@ -106,7 +106,7 @@ namespace Dyoub.App.Controllers.Manage
             }
 
             viewModel.MapTo(store);
-            await Context.SaveChangesAsync();
+            await Tenant.SaveChangesAsync();
 
             return this.Success();
         }

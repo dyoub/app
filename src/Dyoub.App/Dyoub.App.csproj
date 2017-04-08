@@ -144,8 +144,11 @@
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
+    <Content Include="Scripts\controllers\manage\stores\store-edit.controller.js" />
+    <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
     <Content Include="Scripts\locale\pt-br.js" />
     <Content Include="Scripts\modules\dyoub-app.module.js" />
+    <Content Include="Scripts\services\manage\store.service.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +235,7 @@
     <Compile Include="Models\EntityModel\Manage\TeamMemberMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\TeamRule.cs" />
     <Compile Include="Models\EntityModel\Manage\TeamRuleMapping.cs" />
+    <Compile Include="Models\EntityModel\Overview\ManagementCount.cs" />
     <Compile Include="Models\EntityModel\TenantContext.cs" />
     <Compile Include="Models\ServiceModel\Account\AccountRecovery.cs" />
     <Compile Include="Models\ServiceModel\Account\UserAuthentication.cs" />
@@ -255,7 +259,8 @@
     <Compile Include="Models\ViewModel\Manage\Stores\ListStoresViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\StoreIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\UpdateStoreViewModel.cs" />
-    <Compile Include="Results\Account\Dashboard\OverviewJson.cs" />
+    <Compile Include="Results\Account\Dashboard\GeneralOverviewJson.cs" />
+    <Compile Include="Results\Account\Dashboard\ManagementOverviewJson.cs" />
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
     <Compile Include="Results\Common\AccessDeniedStatusCode.cs" />
     <Compile Include="Results\Common\ModelErrorsJson.cs" />
@@ -283,7 +288,18 @@
     <Content Include="Views\Account\PasswordRecoveries\EditPasswordRecovery.cshtml" />
     <Content Include="Views\Errors\AccessDenied.cshtml" />
     <Content Include="Views\Errors\InternalError.cshtml" />
-    <Content Include="Views\Account\Dashboard\Overview.cshtml" />
+    <Content Include="Views\Account\Dashboard\General.cshtml" />
+    <Content Include="Scripts\controllers\manage\stores\store-details.controller.js" />
+    <Content Include="Views\Manage\Stores\StoreDetails.cshtml" />
+    <Content Include="Views\Manage\Stores\StoreEdit.cshtml" />
+    <Content Include="Views\Manage\Stores\StoreList.cshtml" />
+    <Content Include="Views\Manage\Stores\_RemoveStore.cshtml" />
+    <Content Include="Views\Account\Dashboard\Management.cshtml" />
+    <Content Include="Views\Account\Dashboard\Account.cshtml" />
+    <Content Include="Views\Account\Dashboard\Catalog.cshtml" />
+    <Content Include="Views\Account\Dashboard\Commercial.cshtml" />
+    <Content Include="Views\Account\Dashboard\Financial.cshtml" />
+    <Content Include="Views\Account\Dashboard\Stock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

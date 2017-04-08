@@ -1,0 +1,55 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="StoreDetailsController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Store details"></div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Store not found"></p>
+            <a href="/stores" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            <div class="box">
+                <a href="/stores" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                @using (Html.Authorize("stores.edit"))
+                {
+                    <a href="/stores/edit/{{controller.store.id}}" class="as-button" data-translate="Edit"></a>
+                    <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"></button>
+                }
+            </div>
+
+            <div class="card">
+                <div class="box">
+                    <label data-translate="Name"></label>
+                    <strong data-ng-bind="controller.store.name"></strong>
+                </div>
+
+                <div class="box">
+                    <label data-translate="Active"></label>
+                    <strong data-ng-bind="controller.store.active | translate"></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.Authorize("stores.edit"))
+    {
+        @Html.Partial("~/Views/Manage/Stores/_RemoveStore.cshtml")
+    }
+</div>

@@ -1,0 +1,52 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container">
+    <div class="menu-header" data-translate="Catalog"></div>
+
+    <div class="grid-row">
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" data-href="/products" class="as-button card primary" disabled>
+                <div class="card-info">
+                    <div data-translate="Records"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.products"></div>
+                    <i class="fa fa-tags"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Products"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" href="/services" class="as-button card primary" disabled>
+                <div class="card-info">
+                    <div data-translate="Records"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.services"></div>
+                    <i class="fa fa-cogs"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Services"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" href="/pricing-tables" class="as-button card primary" disabled>
+                <div class="card-info">
+                    <i class="fa fa-list-alt"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Pricing tables"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

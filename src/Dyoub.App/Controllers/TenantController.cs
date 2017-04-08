@@ -9,19 +9,19 @@ namespace Dyoub.App.Controllers
 {
     public class TenantController : Controller
     {
-        public TenantContext Context { get; private set; }
+        public TenantContext Tenant { get; private set; }
 
         public TenantController() { }
 
-        public TenantController(TenantContext context)
+        public TenantController(TenantContext tenant)
         {
-            Context = context;
+            Tenant = tenant;
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            Context = new TenantContext(filterContext.HttpContext.TenantId());
+            Tenant = new TenantContext(filterContext.HttpContext.TenantId());
         }
     }
 }

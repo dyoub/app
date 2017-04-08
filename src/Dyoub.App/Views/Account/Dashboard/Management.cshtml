@@ -1,0 +1,56 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container">
+    <div class="menu-header" data-translate="Management"></div>
+
+    <div class="grid-row">
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <a href="/stores" class="as-button card amethyst">
+                <div class="card-info">
+                    <div data-translate="Records"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.stores"></div>
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Stores"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </a>
+        </div>
+
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" data-href="/sales-team" class="card amethyst" disabled>
+                <div class="card-info">
+                    <div data-translate="Users"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.professionals"></div>
+                    <i class="fa fa-user-plus"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Collaborators"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+
+        <div class="grid-column compact-6 small-4 medium-4 large-3">
+            <button type="button" data-href="/jobs" class="card amethyst" disabled>
+                <div class="card-info">
+                    <div data-translate="Records"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.jobs"></div>
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="card-title">
+                    <span data-translate="Teams"></span>
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

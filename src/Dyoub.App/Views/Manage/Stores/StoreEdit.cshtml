@@ -1,0 +1,51 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="StoreEditController as controller" data-ng-init="controller.init()">
+    <div class="page-header">
+        <span data-translate="{{controller.pageHeader}}"></span>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="StoreNotFound"></p>
+            <a href="/stores" class="as-button" data-translate="GoBack"></a>
+        </div>
+
+        <form name="controller.storeForm" data-ng-submit="controller.save()" data-ng-hide="controller.notFound">
+            <div class="box">
+                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"></button>
+            </div>
+
+            <div class="card">
+                <div class="box" data-has-error="controller.storeForm.name.$invalid">
+                    <label>
+                        <span data-translate="Name"></span>
+                        <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" name="name" data-ng-model="controller.store.name" data-ng-maxlength="80" required />
+                </div>
+
+                <div class="box">
+                    <label data-translate="Active"></label>
+                    <button type="button" data-ng-click="controller.store.active = !controller.store.active"
+                            data-ng-class="{ 'success': controller.store.active, 'danger': !controller.store.active }"
+                            data-translate="{{controller.store.active}}"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
