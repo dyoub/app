@@ -6,12 +6,13 @@ using System.Web.Mvc;
 
 namespace Dyoub.App.Configuration
 {
-    public class GlobalFilterConfiguration
+    public class GlobalFiltersConfiguration
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new ErrorHandlerAttribute());
             filters.Add(new ModelStateAttribute());
+            filters.Add(new ViewOutputCacheAttribute());
         }
     }
 }

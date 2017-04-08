@@ -15,7 +15,7 @@ namespace Dyoub.App
         {
             RouteConfiguration.RegisterRoutes(RouteTable.Routes);
             BundleConfiguration.RegisterBundles(BundleTable.Bundles);
-            GlobalFilterConfiguration.RegisterGlobalFilters(GlobalFilters.Filters);
+            GlobalFiltersConfiguration.RegisterGlobalFilters(GlobalFilters.Filters);
         }
     }
 }
