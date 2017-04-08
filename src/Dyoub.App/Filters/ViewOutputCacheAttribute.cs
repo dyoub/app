@@ -16,7 +16,10 @@ namespace Dyoub.App.Filters
         {
             if (filterContext.Result is ViewResult)
             {
-                base.OnActionExecuting(filterContext);
+                if (filterContext.RequestContext.HttpContext.Response.StatusCode != 500)
+                {
+                    base.OnActionExecuting(filterContext);
+                }
             }
         }
 
@@ -24,7 +27,10 @@ namespace Dyoub.App.Filters
         {
             if (filterContext.Result is ViewResult)
             {
-                base.OnActionExecuted(filterContext);
+                if (filterContext.RequestContext.HttpContext.Response.StatusCode != 500)
+                {
+                    base.OnActionExecuted(filterContext);
+                }
             }
         }
 
@@ -32,7 +38,10 @@ namespace Dyoub.App.Filters
         {
             if (filterContext.Result is ViewResult)
             {
-                base.OnResultExecuting(filterContext);
+                if (filterContext.RequestContext.HttpContext.Response.StatusCode != 500)
+                {
+                    base.OnResultExecuting(filterContext);
+                }
             }
         }
 
@@ -40,7 +49,10 @@ namespace Dyoub.App.Filters
         {
             if (filterContext.Result is ViewResult)
             {
-                base.OnResultExecuted(filterContext);
+                if (filterContext.RequestContext.HttpContext.Response.StatusCode != 500)
+                {
+                    base.OnResultExecuted(filterContext);
+                }
             }
         }
     }
