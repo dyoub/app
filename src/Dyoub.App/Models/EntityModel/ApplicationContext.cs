@@ -2,6 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account;
+using Dyoub.App.Models.EntityModel.Catalog;
 using Dyoub.App.Models.EntityModel.Manage;
 using System.Data.Common;
 using System.Data.Entity;
@@ -14,6 +15,7 @@ namespace Dyoub.App.Models.EntityModel
     {
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
@@ -38,6 +40,7 @@ namespace Dyoub.App.Models.EntityModel
 
             modelBuilder.Configurations.Add(new ClosureRequestMapping());
             modelBuilder.Configurations.Add(new PasswordRecoveryMapping());
+            modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new StoreMapping());
             modelBuilder.Configurations.Add(new TeamMapping());
             modelBuilder.Configurations.Add(new TeamMemberMapping());

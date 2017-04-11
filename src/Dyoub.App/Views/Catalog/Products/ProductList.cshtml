@@ -1,0 +1,82 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="ProductListController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Products"></div>
+
+    @using (Html.Authorize("products.edit"))
+    {
+        <div class="box">
+            <a href="/dashboard/catalog" class="as-button">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a href="/products/new" class="as-button success" data-translate="Add"></a>
+        </div>
+    }
+
+    <form name="productsFilter" data-ng-submit="controller.newSearch()">
+        <label>
+            <i class="fa fa-search"></i>
+            <span data-translate="Search filter"></span>
+        </label>
+        <div class="card">
+            <div class="grid-row">
+                <div class="grid-column small-8 medium-8 large-8">
+                    <div class="box">
+                        <label data-translate="Name"></label>
+                        <input type="text" data-ng-model="controller.filter.name" data-ng-maxlength="80" />
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Code"></label>
+                        <input type="text" data-ng-model="controller.filter.code" data-ng-maxlength="50" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box text-center">
+            <button type="submit" class="primary" data-ng-disabled="controller.searching">
+                <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                <em data-ng-show="controller.searching" data-translate="Searching"></em>
+            </button>
+            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+        </div>
+    </form>
+
+    <div class="card list">
+        <div class="list-item" data-ng-repeat="product in controller.productList">
+            <p>
+                <a class="font-14" href="/products/details/{{product.id}}" data-ng-bind="product.name"></a>
+                <span class="text-muted font-11" data-ng-show="product.code">
+                    <i class="fa fa-barcode"></i>
+                    <span data-ng-bind="product.code"></span>
+                </span>
+            </p>
+            <p data-ng-bind="product.additionalInformation"></p>
+            <p data-ng-hide="product.marketed">
+                <span class="hint danger" data-translate="Not marketed"></span>
+            </p>
+        </div>
+    </div>
+
+    <div class="card text-center text-primary" data-translate="No records found"
+         data-ng-show="controller.productList.isEmpty()"></div>
+
+    <div class="box text-center" data-ng-hide="controller.productList.isEmpty()"
+         data-ng-disabled="controller.searching">
+        <button type="button" class="primary" data-ng-click="controller.search()">
+            <span data-ng-hide="controller.searching" data-translate="More results"></span>
+            <em data-ng-show="controller.searching" data-translate="Searching"></em>
+        </button>
+    </div>
+</div>

@@ -60,10 +60,26 @@ namespace Dyoub.App.Controllers.Account
             return View("~/Views/Account/Dashboard/Stock.cshtml");
         }
 
+        [HttpPost, Route("dashboard/catalog"), Authorization]
+        public async Task<ActionResult> CatalogCount()
+        {
+            CatalogCount counter = await Tenant.Current
+                .Select(tenant => new CatalogCount
+                {
+                    Products = tenant.Products.Count()
+                })
+                .SingleOrDefaultAsync();
+
+            return new CatalogOverviewJson
+            {
+                Counter = counter
+            };
+        }
+
         [HttpPost, Route("dashboard/management"), Authorization]
         public async Task<ActionResult> ManagementCount()
         {
-            ManagementCount managementCount = await Tenant.Current
+            ManagementCount counter = await Tenant.Current
                 .Select(tenant => new ManagementCount
                 {
                     Stores = tenant.Stores.Count()
@@ -72,7 +88,7 @@ namespace Dyoub.App.Controllers.Account
 
             return new ManagementOverviewJson
             {
-                ManagementCount = managementCount
+                Counter = counter
             };
         }
     }

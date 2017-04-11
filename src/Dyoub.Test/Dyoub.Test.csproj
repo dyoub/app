@@ -117,6 +117,11 @@
     <Compile Include="Contexts\Account\Users\SigninWrongPasswordContext.cs" />
     <Compile Include="Contexts\Account\Users\SignupEmailAlreadyTakenContext.cs" />
     <Compile Include="Contexts\Account\Users\SignupCorrectlyContext.cs" />
+    <Compile Include="Contexts\Catalog\Products\CreateProductContext.cs" />
+    <Compile Include="Contexts\Catalog\Products\DeleteProductContext.cs" />
+    <Compile Include="Contexts\Catalog\Products\FindProductContext.cs" />
+    <Compile Include="Contexts\Catalog\Products\ListProductContext.cs" />
+    <Compile Include="Contexts\Catalog\Products\UpdateProductContext.cs" />
     <Compile Include="Contexts\EmptyContext.cs" />
     <Compile Include="Contexts\Manage\Stores\CreateStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreContext.cs" />
@@ -125,6 +130,7 @@
     <Compile Include="Contexts\Manage\Stores\UpdateStoreContext.cs" />
     <Compile Include="Controllers\Account\RecoveryControllerTest.cs" />
     <Compile Include="Controllers\Account\UsersControllerTest.cs" />
+    <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
     <Compile Include="Factories\Account\TenantFactory.cs" />
@@ -133,6 +139,7 @@
     <Compile Include="Factories\Manage\TeamFactory.cs" />
     <Compile Include="Factories\Manage\TeamMemberFactory.cs" />
     <Compile Include="Factories\Manage\TeamRuleFactory.cs" />
+    <Compile Include="Factories\Catalog\ProductFactory.cs" />
     <Compile Include="Fakes\ControllerContextFake.cs" />
     <Compile Include="Fakes\HttpContextWrapperFake.cs" />
     <Compile Include="Fakes\LoggerFake.cs" />

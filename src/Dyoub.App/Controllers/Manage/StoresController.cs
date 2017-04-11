@@ -18,7 +18,7 @@ namespace Dyoub.App.Controllers.Manage
     {
         public StoresController() { }
 
-        public StoresController(TenantContext context) : base(context) { }
+        public StoresController(TenantContext tenant) : base(tenant) { }
 
         [HttpGet, Route("stores/new"), Authorization(Scope = "stores.edit")]
         public ActionResult New()

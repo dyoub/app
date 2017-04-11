@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace Dyoub.App.Results.Account.Dashboard
 {
-    public class ManagementOverviewJson : JsonResult
+    public class CatalogOverviewJson : JsonResult
     {
-        public ManagementCount Counter { get; set; }
+        public CatalogCount Counter { get; set; }
 
         public override void ExecuteResult(ControllerContext context)
         {
@@ -16,7 +16,7 @@ namespace Dyoub.App.Results.Account.Dashboard
             {
                 counter = new
                 {
-                    stores = Counter.Stores
+                    products = Counter.Products
                 }
             };
 
