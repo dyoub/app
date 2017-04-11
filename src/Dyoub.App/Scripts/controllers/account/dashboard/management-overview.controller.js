@@ -8,10 +8,10 @@
         this.handleError = handleError;
     }
 
-    Controller.prototype.load = function () {
+    Controller.prototype.init = function () {
         var controller = this;
 
-        controller.$http.post('/dashboard/load')
+        controller.$http.post('/dashboard/management')
             .then(function (response) {
                 controller.overview = response.data;
             })
@@ -20,7 +20,7 @@
             });
     };
 
-    angular.module('dyoub.app').controller('OverviewController', [
+    angular.module('dyoub.app').controller('ManagementOverviewController', [
         '$http',
         'HandleError',
         Controller

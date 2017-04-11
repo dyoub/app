@@ -143,12 +143,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
-    <Content Include="Scripts\controllers\account\dashboard\overview.controller.js" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
     <Content Include="Scripts\controllers\catalog\products\product-edit.controller.js" />
     <Content Include="Scripts\controllers\catalog\products\product-list.controller.js" />
+    <Content Include="Scripts\controllers\account\dashboard\catalog-overview.controller.js" />
+    <Content Include="Scripts\controllers\account\dashboard\management-overview.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-edit.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
     <Content Include="Scripts\locale\pt-br.js" />
