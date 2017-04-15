@@ -19,8 +19,7 @@ namespace Dyoub.App.Data
                 Marketed = t.Boolean(nullable: false),
                 IsManufactured = t.Boolean(nullable: false),
                 StockMovement = t.Boolean(nullable: false),
-                CanFraction = t.Boolean(nullable: false),
-                Active = t.Boolean(nullable: false)
+                CanFraction = t.Boolean(nullable: false)
             })
             .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_Product");
             
