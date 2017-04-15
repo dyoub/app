@@ -4,7 +4,7 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
-using Dyoub.App.Models.EntityModel.Catalog;
+using Dyoub.App.Models.EntityModel.Catalog.Products;
 using Dyoub.App.Models.ViewModel.Catalog.Products;
 using System.Threading.Tasks;
 using System.Data.Entity;

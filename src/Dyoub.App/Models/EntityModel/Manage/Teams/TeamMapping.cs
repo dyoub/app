@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
-using Dyoub.App.Models.EntityModel.Manage;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Manage
+namespace Dyoub.App.Models.EntityModel.Manage.Teams
 {
     public class TeamMapping : EntityTypeConfiguration<Team>
     {

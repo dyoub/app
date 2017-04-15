@@ -4,7 +4,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Account.Tenants
 {
     public class TenantMapping : EntityTypeConfiguration<Tenant>
     {

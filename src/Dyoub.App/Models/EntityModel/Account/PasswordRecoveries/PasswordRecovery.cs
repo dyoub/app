@@ -3,9 +3,9 @@
 
 using System;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Account.PasswordRecoveries
 {
-    public class ClosureRequest
+    public class PasswordRecovery
     {
         public const int TokenExpiryTime = 48;
         

@@ -4,7 +4,7 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
-using Dyoub.App.Models.EntityModel.Manage;
+using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.ViewModel.Manage.Stores;
 using Dyoub.App.Results.Manage.Stores;
 using System.Collections.Generic;

@@ -3,7 +3,7 @@
 
 using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel;
-using Dyoub.App.Models.EntityModel.Account;
+using Dyoub.App.Models.EntityModel.Account.Users;
 using Dyoub.App.Infrastructure.Security;
 using System;
 using System.Linq;

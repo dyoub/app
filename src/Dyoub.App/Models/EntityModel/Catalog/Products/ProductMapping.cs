@@ -4,21 +4,18 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Catalog.Products
 {
-    public class UserMapping : EntityTypeConfiguration<User>
+    public class ProductMapping : EntityTypeConfiguration<Product>
     {
-        public UserMapping()
+        public ProductMapping()
         {
             HasKey(p => new { p.Id, p.TenantId });
 
             Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            HasOptional(p => p.TeamMember)
-                .WithRequired(p => p.User);
-
             HasRequired(p => p.Tenant)
-                .WithMany(p => p.Users)
+                .WithMany(p => p.Products)
                 .HasForeignKey(p => p.TenantId);
         }
     }

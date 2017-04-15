@@ -1,10 +1,12 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
-using Dyoub.App.Models.EntityModel.Account;
+using Dyoub.App.Models.EntityModel.Account.Tenants;
+using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
+using Dyoub.App.Models.EntityModel.Manage.TeamRules;
 using System.Collections.Generic;
 
-namespace Dyoub.App.Models.EntityModel.Manage
+namespace Dyoub.App.Models.EntityModel.Manage.Teams
 {
     public class Team : ITenantData
     {

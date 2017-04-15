@@ -3,7 +3,7 @@
 
 using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel;
-using Dyoub.App.Models.EntityModel.Account;
+using Dyoub.App.Models.EntityModel.Account.Users;
 using Dyoub.App.Models.Results.Account.Users;
 using Dyoub.App.Models.ServiceModel.Account;
 using Dyoub.App.Infrastructure.Mail;

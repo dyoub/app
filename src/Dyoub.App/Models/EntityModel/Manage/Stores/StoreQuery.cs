@@ -3,7 +3,7 @@
 
 using System.Linq;
 
-namespace Dyoub.App.Models.EntityModel.Manage
+namespace Dyoub.App.Models.EntityModel.Manage.Stores
 {
     public static class StoreQuery
     {

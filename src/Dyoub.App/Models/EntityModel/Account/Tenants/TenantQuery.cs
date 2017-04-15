@@ -3,7 +3,7 @@
 
 using System.Linq;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Account.Tenants
 {
     public static class TenantQuery
     {

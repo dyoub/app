@@ -3,7 +3,7 @@
 
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Manage
+namespace Dyoub.App.Models.EntityModel.Manage.TeamMembers
 {
     public class TeamMemberMapping : EntityTypeConfiguration<TeamMember>
     {

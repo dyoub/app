@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Account.PasswordRecoveries
 {
     public static class PasswordRecoveryQuery
     {

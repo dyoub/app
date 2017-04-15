@@ -2,7 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Infrastructure.EntityFramework;
-using Dyoub.App.Models.EntityModel.Account;
+using Dyoub.App.Models.EntityModel.Account.Tenants;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;

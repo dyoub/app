@@ -4,23 +4,22 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Manage
+namespace Dyoub.App.Models.EntityModel.Account.Users
 {
-    public class StoreMapping : EntityTypeConfiguration<Store>
+    public class UserMapping : EntityTypeConfiguration<User>
     {
-        public StoreMapping()
+        public UserMapping()
         {
             HasKey(p => new { p.Id, p.TenantId });
 
             Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            HasRequired(p => p.Tenant)
-                .WithMany(p => p.Stores)
-                .HasForeignKey(p => p.TenantId);
+            HasOptional(p => p.TeamMember)
+                .WithRequired(p => p.User);
 
-            HasMany(p => p.TeamMembers)
-                .WithRequired(p => p.Store)
-                .HasForeignKey(p => new { p.StoreId, p.TenantId });
+            HasRequired(p => p.Tenant)
+                .WithMany(p => p.Users)
+                .HasForeignKey(p => p.TenantId);
         }
     }
 }

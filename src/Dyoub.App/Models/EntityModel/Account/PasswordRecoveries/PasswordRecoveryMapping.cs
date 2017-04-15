@@ -3,7 +3,7 @@
 
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Account.PasswordRecoveries
 {
     public class PasswordRecoveryMapping : EntityTypeConfiguration<PasswordRecovery>
     {

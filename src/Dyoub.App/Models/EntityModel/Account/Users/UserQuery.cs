@@ -4,7 +4,7 @@
 using Dyoub.App.Infrastructure.Security;
 using System.Linq;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Account.Users
 {
     public static class UserQuery
     {

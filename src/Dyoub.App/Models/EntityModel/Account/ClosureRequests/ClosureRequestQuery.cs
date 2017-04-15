@@ -3,7 +3,7 @@
 
 using System.Linq;
 
-namespace Dyoub.App.Models.EntityModel.Account
+namespace Dyoub.App.Models.EntityModel.Account.ClosureRequests
 {
     public static class ClosureRequestQuery
     {

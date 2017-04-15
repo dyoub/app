@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
-using Dyoub.App.Models.EntityModel.Account;
+using Dyoub.App.Models.EntityModel.Account.Tenants;
 
-namespace Dyoub.App.Models.EntityModel.Catalog
+namespace Dyoub.App.Models.EntityModel.Catalog.Products
 {
     public class Product : ITenantData
     {
