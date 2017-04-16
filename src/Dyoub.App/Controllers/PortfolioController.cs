@@ -7,8 +7,7 @@ namespace Dyoub.App.Controllers
 {
     public class PortfolioController : Controller
     {
-        [HttpGet]
-        [Route]
+        [HttpGet, Route]
         public ActionResult Index()
         {
             return View();

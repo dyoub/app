@@ -24,22 +24,19 @@ namespace Dyoub.App.Controllers.Account
             this.mailer = mailer;
         }
 
-        [HttpGet]
-        [Route("reset-password")]
+        [HttpGet, Route("reset-password")]
         public ActionResult New()
         {
             return View("~/Views/Account/PasswordRecoveries/NewPasswordRecovery.cshtml");
         }
 
-        [HttpGet]
-        [Route("reset-password/{token}")]
+        [HttpGet, Route("reset-password/{token}")]
         public ActionResult Edit(string token)
         {
             return View("~/Views/Account/PasswordRecoveries/EditPasswordRecovery.cshtml");
         }
 
-        [HttpPost]
-        [Route("reset-password/confirmation")]
+        [HttpPost, Route("reset-password/confirmation")]
         public async Task<ActionResult> Create(CreatePasswordRecoveryViewModel viewModel)
         {
             AccountRecovery accountRecovery = new AccountRecovery(context);
@@ -57,8 +54,7 @@ namespace Dyoub.App.Controllers.Account
             return this.Success();
         }
 
-        [HttpPost]
-        [Route("reset-password")]
+        [HttpPost, Route("reset-password")]
         public async Task<ActionResult> Update(UpdatePasswordRecoveryViewModel viewModel)
         {
             AccountRecovery accountRecovery = new AccountRecovery(context);

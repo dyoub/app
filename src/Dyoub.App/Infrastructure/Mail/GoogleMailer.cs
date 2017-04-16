@@ -7,7 +7,7 @@ namespace Dyoub.App.Infrastructure.Mail
     {
         public override void Send()
         {
-            // Nothing for now.
+            // TODO
         }
     }
 }

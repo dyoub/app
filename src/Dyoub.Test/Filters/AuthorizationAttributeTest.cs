@@ -3,7 +3,6 @@
 
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
-using Dyoub.App.Infrastructure.Security;
 using Dyoub.Test.Contexts;
 using Dyoub.Test.Contexts.Account.Autorization;
 using Dyoub.Test.Fakes;
@@ -62,10 +61,8 @@ namespace Dyoub.Test.Filters
 
             attribute = new AuthorizationAttribute(context);
             attribute.OnAuthorization(filterContext);
-
-            UserIdentity userIdentity = filterContext.HttpContext.UserIdentity();
-
-            Assert.IsNotNull(userIdentity);
+            
+            Assert.IsNotNull(filterContext.HttpContext.UserIdentity());
         }
 
         [TestMethod]
@@ -78,10 +75,8 @@ namespace Dyoub.Test.Filters
             attribute = new AuthorizationAttribute(context);
             attribute.Scope = context.TeamRule.Scope;
             attribute.OnAuthorization(filterContext);
-
-            UserIdentity userIdentity = filterContext.HttpContext.UserIdentity();
-
-            Assert.IsNotNull(userIdentity);
+            
+            Assert.IsNotNull(filterContext.HttpContext.UserIdentity());
         }
 
         [TestMethod]
@@ -94,10 +89,8 @@ namespace Dyoub.Test.Filters
             attribute = new AuthorizationAttribute(context);
             attribute.Scope = "required.scope";
             attribute.OnAuthorization(filterContext);
-
-            UserIdentity userIdentity = filterContext.HttpContext.UserIdentity();
-
-            Assert.IsNull(userIdentity);
+            
+            Assert.IsNull(filterContext.HttpContext.UserIdentity());
         }
     }
 }
