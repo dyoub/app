@@ -44,6 +44,7 @@
                 "404": "Não foi possível estabelecer uma comunicação com o servidor.",
                 "500": "Ocorreu um problema. Por favor tente novamente.",
                 "Access account": "Acessar conta",
+                "Accessing": "Acessando",
                 "Account": "Conta",
                 "Active": "Ativo",
                 "Add": "Adicionar",

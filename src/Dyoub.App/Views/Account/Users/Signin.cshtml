@@ -22,7 +22,10 @@
                    data-ng-maxlength="20" required />
         </div>
         <div class="box">
-            <button type="submit" class="success block large" data-ng-disabled="controller.working" data-translate="Access account"></button>
+            <button type="submit" class="success block large" data-ng-disabled="controller.working">
+                <span data-ng-hide="controller.working" data-translate="Access account"></span>
+                <span data-ng-show="controller.working" data-translate="Accessing"></span>
+            </button>
         </div>
         <div class="box text-center font-11">
             <a href="/reset-password" data-translate="I forgot my password"></a>
