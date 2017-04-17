@@ -1,0 +1,40 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PricingTableCopyController as controller" data-ng-init="controller.init()">
+    <div class="page-header">
+        <span data-translate="Copy to pricing table"></span>
+        <span>-</span>
+        <span data-ng-bind="controller.store.name"></span>
+    </div>
+
+    <form name="controller.formCopyPricingTable" data-ng-submit="controller.copyPrices()">
+        <div class="box">
+            <button type="submit" class="success" data-ng-disabled="controller.copyPricesBlocked()">
+                <span data-ng-hide="controller.copying" data-translate="Copy"></span>
+                <span data-ng-show="controller.copying" data-translate="Copying"></span>
+            </button>
+            <a href="/pricing-tables/details/{{controller.routeParams.storeId}}" class="as-button" data-translate="Cancel"></a>
+        </div>
+
+        <div class="card">
+            <div class="box" data-has-error="controller.formCopyPricingTable.store.$invalid">
+                <label>
+                    <span data-translate="Store"></span>
+                    <span class="text-danger">*</span>
+                </label>
+                <select name="store" class="text-center" data-ng-model="controller.storeToCopy" required
+                        data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                        data-ng-disabled="controller.searchingStores"></select>
+            </div>
+            <div class="text-danger" data-translate="Cannot copy from the same store."
+                 data-ng-show="controller.selectedSameStore()"></div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,132 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PricingTableDetailsController as controller" data-ng-init="controller.init()">
+    <div class="page-header">
+        <span data-translate="Pricing table"></span>
+        <strong data-ng-bind="controller.store.name"></strong>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.finding"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.findComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Pricing table not found"></p>
+            <a href="/pricing-tables" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            @using (Html.Authorize("pricing-tables.edit"))
+            {
+                <div class="box">
+                    <a href="/pricing-tables" class="as-button"><i class="fa fa-arrow-left"></i></a>
+                    <a href="/pricing-tables/edit/{{controller.store.id}}" class="as-button" data-translate="Edit"></a>
+                    <a href="/pricing-tables/copy-to/{{controller.store.id}}" class="as-button" data-translate="Copy from pricing table"></a>
+                    <button type="button" class="danger" data-translate="Erase prices" data-ng-click="controller.showClearDialog()"></button>
+                </div>
+            }
+
+            <form data-ng-submit="controller.newSearchOfItems()">
+                <label>
+                    <i class="fa fa-search"></i>
+                    <span data-translate="Search filter"></span>
+                </label>
+
+                <div class="card">
+                    <div class="grid-row">
+                        <div class="grid-column medium-6 large-6">
+                            <div class="box">
+                                <label data-translate="Item name"></label>
+                                <input type="text" data-ng-model="controller.filter.name" data-ng-maxlength="80" />
+                            </div>
+                        </div>
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Item code"></label>
+                                        <input type="text" data-ng-model="controller.filter.code" data-ng-maxlength="80" />
+                                    </div>
+                                </div>
+
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Item type"></label>
+                                        <select data-ng-model="controller.filter.searchFor">
+                                            <option value="All" data-translate="All items"></option>
+                                            <option value="Products" data-translate="Only products"></option>
+                                            <option value="Services" data-translate="Only services"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box text-center">
+                    <button type="submit" class="primary" data-ng-disabled="controller.searchingItems">
+                        <span data-ng-hide="controller.searchingItems" data-translate="Search"></span>
+                        <em data-ng-show="controller.searchingItems" data-translate="Searching"></em>
+                    </button>
+                    <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+                </div>
+            </form>
+
+            <div class="loading box" data-ng-show="controller.searchingItems"></div>
+
+            <div data-ng-show="controller.searchItemsComplete()">
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="item in controller.itemList">
+                        <div class="grid-row">
+                            <div class="grid-column compact-7 small-8 medium-9 large-10">
+                                <label data-ng-show="item.isProduct" data-translate="Product"></label>
+                                <label data-ng-show="item.isService" data-translate="Service"></label>
+                                <p class="font-14" data-ng-bind="item.name"></p>
+                                <p class="text-muted font-11" data-ng-show="item.code">
+                                    <i class="fa fa-barcode"></i>
+                                    <span data-ng-bind="item.code"></span>
+                                </p>
+                                <p data-ng-hide="item.marketed">
+                                    <span class="hint danger" data-translate="Not marketed"></span>
+                                </p>
+                            </div>
+                            <div class="grid-column compact-5 small-4 medium-3 large-2">
+                                <div class="box">
+                                    <label data-translate="Unit price"></label>
+                                    <strong data-ng-show="item.unitPrice"
+                                            data-ng-bind="item.unitPrice | currency"></strong>
+                                    <strong data-ng-hide="item.unitPrice" data-translate="Not defined"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card text-center text-primary" data-translate="No records found"
+                     data-ng-show="controller.itemList.isEmpty()"></div>
+
+                <div class="box text-center" data-ng-hide="controller.itemList.isEmpty()">
+                    <button type="button" class="primary" data-ng-click="controller.searchItems()">
+                        <span data-ng-hide="controller.searchingItems" data-translate="More results"></span>
+                        <em data-ng-show="controller.searchingItems" data-translate="Searching"></em>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @using (Html.Authorize("pricing-tables.edit"))
+    {
+        @Html.Partial("~/Views/Catalog/PricingTables/_ClearPricingTable.cshtml")
+    }
+</div>

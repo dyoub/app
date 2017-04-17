@@ -144,11 +144,17 @@
     <EmbeddedResource Include="Data\Migrations\201704151909296_CreateService.resx">
       <DependentUpon>201704151909296_CreateService.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201704171416112_CreatePrices.resx">
+      <DependentUpon>201704171416112_CreatePrices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
+    <Content Include="Scripts\controllers\catalog\pricing-tables\pricing-table-details.controller.js" />
+    <Content Include="Scripts\controllers\catalog\pricing-tables\pricing-table-edit.controller.js" />
+    <Content Include="Scripts\controllers\catalog\pricing-tables\pricing-table-list.controller.js" />
     <Content Include="Scripts\controllers\catalog\products\product-edit.controller.js" />
     <Content Include="Scripts\controllers\catalog\products\product-list.controller.js" />
     <Content Include="Scripts\controllers\account\dashboard\catalog-overview.controller.js" />
@@ -160,6 +166,7 @@
     <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
     <Content Include="Scripts\locale\pt-br.js" />
     <Content Include="Scripts\modules\dyoub-app.module.js" />
+    <Content Include="Scripts\services\catalog\pricing-table.service.js" />
     <Content Include="Scripts\services\catalog\product.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
     <Content Include="Web.config" />
@@ -171,6 +178,7 @@
     <Compile Include="Controllers\Account\DashboardController.cs" />
     <Compile Include="Controllers\Account\RecoveryController.cs" />
     <Compile Include="Controllers\Account\UsersController.cs" />
+    <Compile Include="Controllers\Catalog\PricingTablesController.cs" />
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
@@ -217,6 +225,10 @@
     <Compile Include="Data\Migrations\201704151909296_CreateService.Designer.cs">
       <DependentUpon>201704151909296_CreateService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201704171416112_CreatePrices.cs" />
+    <Compile Include="Data\Migrations\201704171416112_CreatePrices.Designer.cs">
+      <DependentUpon>201704171416112_CreatePrices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
@@ -249,9 +261,17 @@
     <Compile Include="Models\EntityModel\ApplicationContext.cs" />
     <Compile Include="Models\EntityModel\Account\Tenants\Tenant.cs" />
     <Compile Include="Models\EntityModel\Account\Users\User.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ItemPrices\ItemPrice.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ItemPrices\ItemPriceQuery.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ProductPrices\ProductPrice.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ProductPrices\ProductPriceMapping.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ProductPrices\ProductPriceQuery.cs" />
     <Compile Include="Models\EntityModel\Catalog\Products\Product.cs" />
     <Compile Include="Models\EntityModel\Catalog\Products\ProductMapping.cs" />
     <Compile Include="Models\EntityModel\Catalog\Products\ProductQuery.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ServicePrices\ServicePrice.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ServicePrices\ServicePriceMapping.cs" />
+    <Compile Include="Models\EntityModel\Catalog\ServicePrices\ServicePriceQuery.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\Service.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceMapping.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceQuery.cs" />
@@ -281,10 +301,18 @@
     <Compile Include="Infrastructure\Security\AccessToken.cs" />
     <Compile Include="Infrastructure\Security\Sha256Hash.cs" />
     <Compile Include="Infrastructure\Security\UserIdentity.cs" />
+    <Compile Include="Models\ServiceModel\Catalog\PricingTable.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SigninViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SignupViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\CopyPricesViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\ItemPriceViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\ListItemsForSaleViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\ListItemsViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\ListPricingTablesViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\PricingTableIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\UpdatePricesViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Products\CreateProductViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Products\ListProductsViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Services\ListServicesViewModel.cs" />
@@ -301,6 +329,9 @@
     <Compile Include="Results\Account\Dashboard\GeneralOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\ManagementOverviewJson.cs" />
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
+    <Compile Include="Results\Catalog\PricingTables\ItemPriceListJson.cs" />
+    <Compile Include="Results\Catalog\PricingTables\PricingTableJson.cs" />
+    <Compile Include="Results\Catalog\PricingTables\PricingTableListJson.cs" />
     <Compile Include="Results\Catalog\Products\ProductJson.cs" />
     <Compile Include="Results\Catalog\Products\ProductListJson.cs" />
     <Compile Include="Results\Catalog\Services\ServiceJson.cs" />
@@ -353,6 +384,13 @@
     <Content Include="Views\Catalog\Services\ServiceDetails.cshtml" />
     <Content Include="Views\Catalog\Services\ServiceEdit.cshtml" />
     <Content Include="Views\Catalog\Services\ServiceList.cshtml" />
+    <Content Include="Scripts\controllers\catalog\pricing-tables\pricing-table-copy.controller.js" />
+    <Content Include="Views\Catalog\PricingTables\CopyToPricingTable.cshtml" />
+    <Content Include="Views\Catalog\PricingTables\PricingTableDetails.cshtml" />
+    <Content Include="Views\Catalog\PricingTables\PricingTableEdit.cshtml" />
+    <Content Include="Views\Catalog\PricingTables\PricingTableList.cshtml" />
+    <Content Include="Views\Catalog\PricingTables\_ClearPricingTable.cshtml" />
+    <Content Include="Views\Catalog\PricingTables\_UndoPricingTableChanges.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

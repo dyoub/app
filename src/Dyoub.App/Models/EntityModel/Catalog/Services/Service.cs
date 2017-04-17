@@ -2,6 +2,8 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
+using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Catalog.Services
 {
@@ -16,5 +18,6 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Services
         public bool CanFraction { get; set; }
 
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<ServicePrice> ServicePrices { get; set; }
     }
 }

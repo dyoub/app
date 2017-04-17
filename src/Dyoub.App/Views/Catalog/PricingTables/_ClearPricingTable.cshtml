@@ -1,0 +1,16 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+<div class="modal" data-modal-open="controller.clearDialogOpened">
+    <div class="modal-content">
+        <div class="box" data-translate="Are you sure you want erase all prices?"></div>
+        <button type="button" class="danger" data-ng-click="controller.erasePrices()" data-ng-disabled="controller.erasing">
+            <span data-ng-hide="controller.erasing" data-translate="Yes"></span>
+            <span data-ng-show="controller.erasing" data-translate="Erasing"></span>
+        </button>
+        <button type="button" data-translate="No" data-ng-click="controller.hideClearDialog()"
+                data-ng-disabled="controller.erasing"></button>
+    </div>
+</div>

@@ -5,7 +5,9 @@ using Dyoub.App.Models.EntityModel.Account.ClosureRequests;
 using Dyoub.App.Models.EntityModel.Account.PasswordRecoveries;
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Account.Users;
+using Dyoub.App.Models.EntityModel.Catalog.ProductPrices;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
+using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
 using Dyoub.App.Models.EntityModel.Catalog.Services;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
@@ -23,7 +25,9 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductPrice> ProductPrices { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServicePrice> ServicePrices { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
@@ -49,6 +53,9 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new ClosureRequestMapping());
             modelBuilder.Configurations.Add(new PasswordRecoveryMapping());
             modelBuilder.Configurations.Add(new ProductMapping());
+            modelBuilder.Configurations.Add(new ProductPriceMapping());
+            modelBuilder.Configurations.Add(new ServiceMapping());
+            modelBuilder.Configurations.Add(new ServicePriceMapping());
             modelBuilder.Configurations.Add(new StoreMapping());
             modelBuilder.Configurations.Add(new TeamMapping());
             modelBuilder.Configurations.Add(new TeamMemberMapping());

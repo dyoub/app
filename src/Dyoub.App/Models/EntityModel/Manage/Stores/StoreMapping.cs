@@ -18,6 +18,14 @@ namespace Dyoub.App.Models.EntityModel.Manage.Stores
                 .WithMany(p => p.Stores)
                 .HasForeignKey(p => p.TenantId);
 
+            HasMany(p => p.ProductPrices)
+                .WithRequired(p => p.Store)
+                .HasForeignKey(p => new { p.StoreId, p.TenantId });
+
+            HasMany(p => p.ServicePrices)
+                .WithRequired(p => p.Store)
+                .HasForeignKey(p => new { p.StoreId, p.TenantId });
+
             HasMany(p => p.TeamMembers)
                 .WithRequired(p => p.Store)
                 .HasForeignKey(p => new { p.StoreId, p.TenantId });

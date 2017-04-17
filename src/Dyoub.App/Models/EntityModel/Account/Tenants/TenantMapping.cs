@@ -14,6 +14,14 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
 
             Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+            HasMany(p => p.ProductPrices)
+                .WithRequired(p => p.Tenant)
+                .HasForeignKey(p => p.TenantId);
+
+            HasMany(p => p.ServicePrices)
+                .WithRequired(p => p.Tenant)
+                .HasForeignKey(p => p.TenantId);
+
             HasMany(p => p.Stores)
                 .WithRequired(p => p.Tenant)
                 .HasForeignKey(p => p.TenantId);

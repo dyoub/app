@@ -1,12 +1,32 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
 using System.Linq;
 
 namespace Dyoub.App.Models.EntityModel.Catalog.Services
 {
     public static class ServiceQuery
     {
+        public static IQueryable<ItemPrice> AsItemPrice(this IQueryable<Service> services, int storeId)
+        {
+            return services.Select(service => new ItemPrice
+            {
+                TenantId = service.TenantId,
+                StoreId = storeId,
+                ProductId = null,
+                ServiceId = service.Id,
+                Name = service.Name,
+                Code = service.Code,
+                Marketed = service.Marketed,
+                CanFraction = service.CanFraction,
+                UnitPrice = service.ServicePrices
+                    .Where(servicePrice => servicePrice.StoreId == storeId)
+                    .Select(servicePrice => (decimal?)servicePrice.UnitPrice)
+                    .FirstOrDefault()
+            });
+        }
+
         public static IQueryable<Service> OrderByName(this IQueryable<Service> products)
         {
             return products.OrderBy(product => product.Name);
