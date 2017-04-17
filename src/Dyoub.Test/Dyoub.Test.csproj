@@ -122,6 +122,11 @@
     <Compile Include="Contexts\Catalog\Products\FindProductContext.cs" />
     <Compile Include="Contexts\Catalog\Products\ListProductContext.cs" />
     <Compile Include="Contexts\Catalog\Products\UpdateProductContext.cs" />
+    <Compile Include="Contexts\Catalog\Services\CreateServiceContext.cs" />
+    <Compile Include="Contexts\Catalog\Services\DeleteServiceContext.cs" />
+    <Compile Include="Contexts\Catalog\Services\FindServiceContext.cs" />
+    <Compile Include="Contexts\Catalog\Services\ListServicesContext.cs" />
+    <Compile Include="Contexts\Catalog\Services\UpdateServiceContext.cs" />
     <Compile Include="Contexts\EmptyContext.cs" />
     <Compile Include="Contexts\Manage\Stores\CreateStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreContext.cs" />
@@ -131,10 +136,12 @@
     <Compile Include="Controllers\Account\RecoveryControllerTest.cs" />
     <Compile Include="Controllers\Account\UsersControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
+    <Compile Include="Controllers\Catalog\ServicesControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
     <Compile Include="Factories\Account\TenantFactory.cs" />
     <Compile Include="Factories\Account\UserFactory.cs" />
+    <Compile Include="Factories\Catalog\ServiceFactory.cs" />
     <Compile Include="Factories\Manage\StoreFactory.cs" />
     <Compile Include="Factories\Manage\TeamFactory.cs" />
     <Compile Include="Factories\Manage\TeamMemberFactory.cs" />

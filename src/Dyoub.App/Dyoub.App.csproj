@@ -141,6 +141,9 @@
     <EmbeddedResource Include="Data\Migrations\201704091729579_CreateProduct.resx">
       <DependentUpon>201704091729579_CreateProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201704151909296_CreateService.resx">
+      <DependentUpon>201704151909296_CreateService.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
@@ -150,6 +153,9 @@
     <Content Include="Scripts\controllers\catalog\products\product-list.controller.js" />
     <Content Include="Scripts\controllers\account\dashboard\catalog-overview.controller.js" />
     <Content Include="Scripts\controllers\account\dashboard\management-overview.controller.js" />
+    <Content Include="Scripts\controllers\catalog\services\service-details.controller.js" />
+    <Content Include="Scripts\controllers\catalog\services\service-edit.controller.js" />
+    <Content Include="Scripts\controllers\catalog\services\service-list.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-edit.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
     <Content Include="Scripts\locale\pt-br.js" />
@@ -166,6 +172,7 @@
     <Compile Include="Controllers\Account\RecoveryController.cs" />
     <Compile Include="Controllers\Account\UsersController.cs" />
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
+    <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\TenantController.cs" />
@@ -206,6 +213,10 @@
     <Compile Include="Data\Migrations\201704091729579_CreateProduct.Designer.cs">
       <DependentUpon>201704091729579_CreateProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201704151909296_CreateService.cs" />
+    <Compile Include="Data\Migrations\201704151909296_CreateService.Designer.cs">
+      <DependentUpon>201704151909296_CreateService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
@@ -241,6 +252,9 @@
     <Compile Include="Models\EntityModel\Catalog\Products\Product.cs" />
     <Compile Include="Models\EntityModel\Catalog\Products\ProductMapping.cs" />
     <Compile Include="Models\EntityModel\Catalog\Products\ProductQuery.cs" />
+    <Compile Include="Models\EntityModel\Catalog\Services\Service.cs" />
+    <Compile Include="Models\EntityModel\Catalog\Services\ServiceMapping.cs" />
+    <Compile Include="Models\EntityModel\Catalog\Services\ServiceQuery.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\Store.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreQuery.cs" />
@@ -273,8 +287,12 @@
     <Compile Include="Models\ViewModel\Account\Users\SignupViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Products\CreateProductViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Products\ListProductsViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\Services\ListServicesViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Products\ProductIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Products\UpdateProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\Services\CreateServiceViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\Services\ServiceIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\Services\UpdateServiceViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\CreateStoreViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\ListStoresViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\StoreIdViewModel.cs" />
@@ -285,6 +303,8 @@
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
     <Compile Include="Results\Catalog\Products\ProductJson.cs" />
     <Compile Include="Results\Catalog\Products\ProductListJson.cs" />
+    <Compile Include="Results\Catalog\Services\ServiceJson.cs" />
+    <Compile Include="Results\Catalog\Services\ServiceListJson.cs" />
     <Compile Include="Results\Common\AccessDeniedStatusCode.cs" />
     <Compile Include="Results\Common\ModelErrorsJson.cs" />
     <Compile Include="Results\Common\NotFoundStatusCode.cs" />
@@ -328,6 +348,11 @@
     <Content Include="Views\Catalog\Products\ProductEdit.cshtml" />
     <Content Include="Views\Catalog\Products\ProductList.cshtml" />
     <Content Include="Views\Catalog\Products\_RemoveProduct.cshtml" />
+    <Content Include="Scripts\services\catalog\service.service.js" />
+    <Content Include="Views\Catalog\Services\_RemoveService.cshtml" />
+    <Content Include="Views\Catalog\Services\ServiceDetails.cshtml" />
+    <Content Include="Views\Catalog\Services\ServiceEdit.cshtml" />
+    <Content Include="Views\Catalog\Services\ServiceList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -12,7 +12,7 @@
             marketed: true,
             isManufactured: false,
             stockMovement: false,
-            canSellFraction: false
+            canFraction: false
         };
     };
 
@@ -40,7 +40,7 @@
             marketed: product.marketed,
             isManufactured: product.isManufactured,
             stockMovement: product.stockMovement,
-            canSellFraction: product.canSellFraction
+            canFraction: product.canFraction
         });
     };
 

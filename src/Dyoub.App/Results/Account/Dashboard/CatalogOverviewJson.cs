@@ -16,7 +16,8 @@ namespace Dyoub.App.Results.Account.Dashboard
             {
                 counter = new
                 {
-                    products = Counter.Products
+                    products = Counter.Products,
+                    services = Counter.Services
                 }
             };
 

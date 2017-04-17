@@ -6,5 +6,6 @@ namespace Dyoub.App.Models.EntityModel.Overview
     public class CatalogCount
     {
         public int Products { get; set; }
+        public int Services { get; set; }
     }
 }

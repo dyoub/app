@@ -6,6 +6,7 @@ using Dyoub.App.Models.EntityModel.Account.PasswordRecoveries;
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Account.Users;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
+using Dyoub.App.Models.EntityModel.Catalog.Services;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using Dyoub.App.Models.EntityModel.Manage.TeamRules;
@@ -22,6 +23,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Service> Services { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }

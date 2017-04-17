@@ -66,14 +66,12 @@ namespace Dyoub.App.Controllers.Account
             CatalogCount counter = await Tenant.Current
                 .Select(tenant => new CatalogCount
                 {
-                    Products = tenant.Products.Count()
+                    Products = tenant.Products.Count(),
+                    Services = tenant.Services.Count()
                 })
                 .SingleOrDefaultAsync();
 
-            return new CatalogOverviewJson
-            {
-                Counter = counter
-            };
+            return new CatalogOverviewJson { Counter = counter };
         }
 
         [HttpPost, Route("dashboard/management"), Authorization]
@@ -86,10 +84,7 @@ namespace Dyoub.App.Controllers.Account
                 })
                 .SingleOrDefaultAsync();
 
-            return new ManagementOverviewJson
-            {
-                Counter = counter
-            };
+            return new ManagementOverviewJson { Counter = counter };
         }
     }
 }

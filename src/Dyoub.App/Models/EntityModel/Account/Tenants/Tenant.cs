@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Account.Users;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
+using Dyoub.App.Models.EntityModel.Catalog.Services;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using Dyoub.App.Models.EntityModel.Manage.TeamRules;
@@ -20,6 +21,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public DateTime? DeactivatedAt { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Service> Services { get; set; }
         public virtual ICollection<Store> Stores { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
         public virtual ICollection<TeamMember> TeamMembers { get; set; }
