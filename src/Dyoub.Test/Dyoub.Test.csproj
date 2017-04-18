@@ -140,12 +140,18 @@
     <Compile Include="Contexts\Manage\Stores\FindStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\ListStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\UpdateStoreContext.cs" />
+    <Compile Include="Contexts\Commercial\Customers\CreateCustomerContext.cs" />
+    <Compile Include="Contexts\Commercial\Customers\DeleteCustomerContext.cs" />
+    <Compile Include="Contexts\Commercial\Customers\FindCustomerContext.cs" />
+    <Compile Include="Contexts\Commercial\Customers\ListCustomerContext.cs" />
+    <Compile Include="Contexts\Commercial\Customers\UpdateCustomerContext.cs" />
     <Compile Include="Controllers\Account\RecoveryControllerTest.cs" />
     <Compile Include="Controllers\Account\UsersControllerTest.cs" />
     <Compile Include="Controllers\Catalog\PricingTablesControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ServicesControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\CustomersControllerTest.cs" />
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
     <Compile Include="Factories\Account\TenantFactory.cs" />
     <Compile Include="Factories\Account\UserFactory.cs" />
@@ -157,6 +163,7 @@
     <Compile Include="Factories\Manage\TeamMemberFactory.cs" />
     <Compile Include="Factories\Manage\TeamRuleFactory.cs" />
     <Compile Include="Factories\Catalog\ProductFactory.cs" />
+    <Compile Include="Factories\Commercial\CustomerFactory.cs" />
     <Compile Include="Fakes\ControllerContextFake.cs" />
     <Compile Include="Fakes\HttpContextWrapperFake.cs" />
     <Compile Include="Fakes\LoggerFake.cs" />

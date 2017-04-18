@@ -13,6 +13,7 @@ using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using Dyoub.App.Models.EntityModel.Manage.TeamRules;
 using Dyoub.App.Models.EntityModel.Manage.Teams;
+using Dyoub.App.Models.EntityModel.Commercial.Customers;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -23,6 +24,7 @@ namespace Dyoub.App.Models.EntityModel
     public class ApplicationContext : DbContext
     {
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductPrice> ProductPrices { get; set; }
@@ -50,6 +52,7 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
+            modelBuilder.Configurations.Add(new CustomerMapping());
             modelBuilder.Configurations.Add(new ClosureRequestMapping());
             modelBuilder.Configurations.Add(new PasswordRecoveryMapping());
             modelBuilder.Configurations.Add(new ProductMapping());

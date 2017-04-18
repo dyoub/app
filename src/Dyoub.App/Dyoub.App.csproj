@@ -147,8 +147,12 @@
     <EmbeddedResource Include="Data\Migrations\201704171416112_CreatePrices.resx">
       <DependentUpon>201704171416112_CreatePrices.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201704181202082_CreateCustomer.resx">
+      <DependentUpon>201704181202082_CreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
+    <Content Include="Scripts\controllers\account\dashboard\commercial-overview.controller.js" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
@@ -164,11 +168,16 @@
     <Content Include="Scripts\controllers\catalog\services\service-list.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-edit.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\customer-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\customer-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\customer-list.controller.js" />
+    <Content Include="Scripts\locale\en-us.js" />
     <Content Include="Scripts\locale\pt-br.js" />
     <Content Include="Scripts\modules\dyoub-app.module.js" />
     <Content Include="Scripts\services\catalog\pricing-table.service.js" />
     <Content Include="Scripts\services\catalog\product.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
+    <Content Include="Scripts\services\sales\customer.service.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +192,7 @@
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\Commercial\CustomersController.cs" />
     <Compile Include="Controllers\TenantController.cs" />
     <Compile Include="Data\MigrationsConfiguration.cs" />
     <Compile Include="Data\Migrations\201703280220123_CreateTenant.cs" />
@@ -228,6 +238,10 @@
     <Compile Include="Data\Migrations\201704171416112_CreatePrices.cs" />
     <Compile Include="Data\Migrations\201704171416112_CreatePrices.Designer.cs">
       <DependentUpon>201704171416112_CreatePrices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\201704181202082_CreateCustomer.cs" />
+    <Compile Include="Data\Migrations\201704181202082_CreateCustomer.Designer.cs">
+      <DependentUpon>201704181202082_CreateCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -286,6 +300,10 @@
     <Compile Include="Models\EntityModel\Manage\TeamRules\TeamRuleMapping.cs" />
     <Compile Include="Models\EntityModel\Overview\CatalogCount.cs" />
     <Compile Include="Models\EntityModel\Overview\ManagementCount.cs" />
+    <Compile Include="Models\EntityModel\Overview\CommercialCount.cs" />
+    <Compile Include="Models\EntityModel\Commercial\Customers\Customer.cs" />
+    <Compile Include="Models\EntityModel\Commercial\Customers\CustomerMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\Customers\CustomerQuery.cs" />
     <Compile Include="Models\EntityModel\TenantContext.cs" />
     <Compile Include="Models\ServiceModel\Account\AccountRecovery.cs" />
     <Compile Include="Models\ServiceModel\Account\UserAuthentication.cs" />
@@ -325,9 +343,14 @@
     <Compile Include="Models\ViewModel\Manage\Stores\ListStoresViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\StoreIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\UpdateStoreViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Customers\CreateCustomerViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Customers\CustomerIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Customers\ListCustomersViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Customers\UpdateCustomerViewModel.cs" />
     <Compile Include="Results\Account\Dashboard\CatalogOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\GeneralOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\ManagementOverviewJson.cs" />
+    <Compile Include="Results\Account\Dashboard\CommercialOverviewJson.cs" />
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
     <Compile Include="Results\Catalog\PricingTables\ItemPriceListJson.cs" />
     <Compile Include="Results\Catalog\PricingTables\PricingTableJson.cs" />
@@ -345,6 +368,8 @@
     <Compile Include="Results\Common\UnauthorizedStatusCode.cs" />
     <Compile Include="Results\Manage\Stores\StoreJson.cs" />
     <Compile Include="Results\Manage\Stores\StoreListJson.cs" />
+    <Compile Include="Results\Commercial\Customers\CustomerJson.cs" />
+    <Compile Include="Results\Commercial\Customers\CustomerListJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -391,6 +416,10 @@
     <Content Include="Views\Catalog\PricingTables\PricingTableList.cshtml" />
     <Content Include="Views\Catalog\PricingTables\_ClearPricingTable.cshtml" />
     <Content Include="Views\Catalog\PricingTables\_UndoPricingTableChanges.cshtml" />
+    <Content Include="Views\Commercial\Customers\CustomerDetails.cshtml" />
+    <Content Include="Views\Commercial\Customers\CustomerEdit.cshtml" />
+    <Content Include="Views\Commercial\Customers\CustomerList.cshtml" />
+    <Content Include="Views\Commercial\Customers\_RemoveCustomer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

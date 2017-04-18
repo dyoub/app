@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace Dyoub.App.Results.Account.Dashboard
 {
-    public class ManagementOverviewJson : JsonResult
+    public class CommercialOverviewJson : JsonResult
     {
-        public ManagementCount Counter { get; private set; }
+        public CommercialCount Counter { get; private set; }
 
-        public ManagementOverviewJson(ManagementCount counter)
+        public CommercialOverviewJson(CommercialCount counter)
         {
             Counter = counter;
         }
@@ -21,7 +21,7 @@ namespace Dyoub.App.Results.Account.Dashboard
             {
                 counter = new
                 {
-                    stores = Counter.Stores
+                    customers = Counter.Customers
                 }
             };
 

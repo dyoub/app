@@ -71,7 +71,20 @@ namespace Dyoub.App.Controllers.Account
                 })
                 .SingleOrDefaultAsync();
 
-            return new CatalogOverviewJson { Counter = counter };
+            return new CatalogOverviewJson(counter);
+        }
+
+        [HttpPost, Route("dashboard/commercial"), Authorization]
+        public async Task<ActionResult> CommercialCount()
+        {
+            CommercialCount counter = await Tenant.Current
+                .Select(tenant => new CommercialCount
+                {
+                    Customers = tenant.Customers.Count()
+                })
+                .SingleOrDefaultAsync();
+
+            return new CommercialOverviewJson(counter);
         }
 
         [HttpPost, Route("dashboard/management"), Authorization]
@@ -84,7 +97,7 @@ namespace Dyoub.App.Controllers.Account
                 })
                 .SingleOrDefaultAsync();
 
-            return new ManagementOverviewJson { Counter = counter };
+            return new ManagementOverviewJson(counter);
         }
     }
 }

@@ -1,0 +1,87 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="CustomerDetailsController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Customer details"></div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Customer not found"></p>
+            <a href="/customers" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            <div class="box">
+                <a href="/customers" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                @using (Html.Authorize("customers.edit"))
+                {
+                    <a href="/customers/edit/{{controller.customer.id}}" class="as-button" data-translate="Edit"></a>
+                    <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"></button>
+                }
+            </div>
+
+            <div class="card">
+                <div class="grid-row">
+                    <div class="grid-column small-8 medium-8 large-8">
+                        <div class="box">
+                            <label data-translate="Name"></label>
+                            <strong data-ng-bind="controller.customer.name"></strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="National ID"></label>
+                            <strong data-ng-bind="controller.customer.nationalId"></strong>
+                            <strong data-ng-hide="controller.customer.nationalId">-</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Email"></label>
+                            <strong data-ng-bind="controller.customer.email"></strong>
+                            <strong data-ng-hide="controller.customer.email">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Phone number"></label>
+                            <strong data-ng-bind="controller.customer.phoneNumber"></strong>
+                            <strong data-ng-hide="controller.customer.phoneNumber">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Alternative phone number"></label>
+                            <strong data-ng-bind="controller.customer.alternativePhoneNumber"></strong>
+                            <strong data-ng-hide="controller.customer.alternativePhoneNumber">-</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.Authorize("customers.edit"))
+    {
+        @Html.Partial("~/Views/Commercial/Customers/_RemoveCustomer.cshtml")
+    }
+</div>

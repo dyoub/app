@@ -1,0 +1,74 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="CustomerEditController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="{{controller.pageHeader}}"></div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Customer not found"></p>
+            <a href="/customers" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <form name="controller.customerForm" data-ng-submit="controller.save()" data-ng-hide="controller.notFound">
+            <div class="box">
+                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"></button>
+            </div>
+
+            <div class="card">
+                <div class="grid-row">
+                    <div class="grid-column small-8 medium-8 large-8">
+                        <div class="box" data-has-error="controller.customerForm.name.$invalid">
+                            <label>
+                                <span data-translate="Customer name"></span>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="name" data-ng-model="controller.customer.name" data-ng-maxlength="80" required />
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.customerForm.nationalId.$invalid">
+                            <label data-translate="National ID"></label>
+                            <input type="text" name="nationalId" data-ng-model="controller.customer.nationalId" data-ng-maxlength="50" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.customerForm.email.$invalid">
+                            <label data-translate="Email"></label>
+                            <input type="text" name="email" data-ng-model="controller.customer.email" data-type-email data-ng-maxlength="80" />
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.customerForm.phoneNumber.$invalid">
+                            <label data-translate="Phone number"></label>
+                            <input type="text" name="phoneNumber" data-ng-model="controller.customer.phoneNumber" data-ng-maxlength="50" />
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.customerForm.alternativePhoneNumber.$invalid">
+                            <label data-translate="Alternative phone number"></label>
+                            <input type="text" name="alternativePhoneNumber" data-ng-model="controller.customer.alternativePhoneNumber"
+                                   data-ng-maxlength="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

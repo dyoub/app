@@ -8,7 +8,12 @@ namespace Dyoub.App.Results.Account.Dashboard
 {
     public class CatalogOverviewJson : JsonResult
     {
-        public CatalogCount Counter { get; set; }
+        public CatalogCount Counter { get; private set; }
+
+        public CatalogOverviewJson(CatalogCount counter)
+        {
+            Counter = counter;
+        }
 
         public override void ExecuteResult(ControllerContext context)
         {
