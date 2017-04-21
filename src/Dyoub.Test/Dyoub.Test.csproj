@@ -134,6 +134,11 @@
     <Compile Include="Contexts\Catalog\Services\FindServiceContext.cs" />
     <Compile Include="Contexts\Catalog\Services\ListServicesContext.cs" />
     <Compile Include="Contexts\Catalog\Services\UpdateServiceContext.cs" />
+    <Compile Include="Contexts\Commercial\PaymentMethods\CreatePaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\PaymentMethods\DeletePaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\PaymentMethods\FindPaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\PaymentMethods\ListPaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\PaymentMethods\UpdatePaymentMethodContext.cs" />
     <Compile Include="Contexts\EmptyContext.cs" />
     <Compile Include="Contexts\Manage\Stores\CreateStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreContext.cs" />
@@ -150,6 +155,7 @@
     <Compile Include="Controllers\Catalog\PricingTablesControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ServicesControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\PaymentMethodsControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Controllers\Commercial\CustomersControllerTest.cs" />
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
@@ -158,6 +164,7 @@
     <Compile Include="Factories\Catalog\ProductPriceFactory.cs" />
     <Compile Include="Factories\Catalog\ServiceFactory.cs" />
     <Compile Include="Factories\Catalog\ServicePriceFactory.cs" />
+    <Compile Include="Factories\Commercial\PaymentMethodFactory.cs" />
     <Compile Include="Factories\Manage\StoreFactory.cs" />
     <Compile Include="Factories\Manage\TeamFactory.cs" />
     <Compile Include="Factories\Manage\TeamMemberFactory.cs" />

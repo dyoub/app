@@ -150,6 +150,9 @@
     <EmbeddedResource Include="Data\Migrations\201704181202082_CreateCustomer.resx">
       <DependentUpon>201704181202082_CreateCustomer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201704181625262_CreatePaymentMethod.resx">
+      <DependentUpon>201704181625262_CreatePaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\commercial-overview.controller.js" />
@@ -166,18 +169,28 @@
     <Content Include="Scripts\controllers\catalog\services\service-details.controller.js" />
     <Content Include="Scripts\controllers\catalog\services\service-edit.controller.js" />
     <Content Include="Scripts\controllers\catalog\services\service-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-detail.controller.js" />
+    <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-edit.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
-    <Content Include="Scripts\controllers\commercial\customer-details.controller.js" />
-    <Content Include="Scripts\controllers\commercial\customer-edit.controller.js" />
-    <Content Include="Scripts\controllers\commercial\customer-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\customers\customer-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\customers\customer-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\customers\customer-list.controller.js" />
+    <Content Include="Scripts\filters\installment-condition.filter.js" />
+    <Content Include="Scripts\filters\installment-limit-option.filter.js" />
+    <Content Include="Scripts\filters\installment-option.filter.js" />
+    <Content Include="Scripts\filters\received-date-option.filter.js" />
     <Content Include="Scripts\locale\en-us.js" />
     <Content Include="Scripts\locale\pt-br.js" />
     <Content Include="Scripts\modules\dyoub-app.module.js" />
     <Content Include="Scripts\services\catalog\pricing-table.service.js" />
     <Content Include="Scripts\services\catalog\product.service.js" />
+    <Content Include="Scripts\services\commercial\installment.service.js" />
+    <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
+    <Content Include="Scripts\services\commercial\payment-method.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
-    <Content Include="Scripts\services\sales\customer.service.js" />
+    <Content Include="Scripts\services\commercial\customer.service.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +203,7 @@
     <Compile Include="Controllers\Catalog\PricingTablesController.cs" />
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
+    <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\Commercial\CustomersController.cs" />
@@ -243,7 +257,12 @@
     <Compile Include="Data\Migrations\201704181202082_CreateCustomer.Designer.cs">
       <DependentUpon>201704181202082_CreateCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201704181625262_CreatePaymentMethod.cs" />
+    <Compile Include="Data\Migrations\201704181625262_CreatePaymentMethod.Designer.cs">
+      <DependentUpon>201704181625262_CreatePaymentMethod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
+    <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="Extensions\HttpResponseBaseExtensions.cs" />
@@ -289,6 +308,11 @@
     <Compile Include="Models\EntityModel\Catalog\Services\Service.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceMapping.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\PaymentMethodFees\PaymentMethodFee.cs" />
+    <Compile Include="Models\EntityModel\Commercial\PaymentMethodFees\PaymentMethodFeeMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethod.cs" />
+    <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodQuery.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\Store.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreQuery.cs" />
@@ -339,6 +363,11 @@
     <Compile Include="Models\ViewModel\Catalog\Services\CreateServiceViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Services\ServiceIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Services\UpdateServiceViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\PaymentMethods\CreatePaymentMethodViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\PaymentMethods\ListPaymentMethodsViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodFeeViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\PaymentMethods\UpdatePaymentMethodViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\CreateStoreViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\ListStoresViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\StoreIdViewModel.cs" />
@@ -359,6 +388,8 @@
     <Compile Include="Results\Catalog\Products\ProductListJson.cs" />
     <Compile Include="Results\Catalog\Services\ServiceJson.cs" />
     <Compile Include="Results\Catalog\Services\ServiceListJson.cs" />
+    <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodJson.cs" />
+    <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodListJson.cs" />
     <Compile Include="Results\Common\AccessDeniedStatusCode.cs" />
     <Compile Include="Results\Common\ModelErrorsJson.cs" />
     <Compile Include="Results\Common\NotFoundStatusCode.cs" />
@@ -420,6 +451,10 @@
     <Content Include="Views\Commercial\Customers\CustomerEdit.cshtml" />
     <Content Include="Views\Commercial\Customers\CustomerList.cshtml" />
     <Content Include="Views\Commercial\Customers\_RemoveCustomer.cshtml" />
+    <Content Include="Views\Commercial\PaymentMethods\PaymentMethodDetails.cshtml" />
+    <Content Include="Views\Commercial\PaymentMethods\PaymentMethodEdit.cshtml" />
+    <Content Include="Views\Commercial\PaymentMethods\PaymentMethodList.cshtml" />
+    <Content Include="Views\Commercial\PaymentMethods\_RemovePaymentMethod.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

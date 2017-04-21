@@ -18,6 +18,8 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Web.Configuration;
+using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
+using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -26,6 +28,8 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<PaymentMethodFee> PaymentMethodFees { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductPrice> ProductPrices { get; set; }
         public DbSet<Service> Services { get; set; }
@@ -54,6 +58,8 @@ namespace Dyoub.App.Models.EntityModel
 
             modelBuilder.Configurations.Add(new CustomerMapping());
             modelBuilder.Configurations.Add(new ClosureRequestMapping());
+            modelBuilder.Configurations.Add(new PaymentMethodMapping());
+            modelBuilder.Configurations.Add(new PaymentMethodFeeMapping());
             modelBuilder.Configurations.Add(new PasswordRecoveryMapping());
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new ProductPriceMapping());

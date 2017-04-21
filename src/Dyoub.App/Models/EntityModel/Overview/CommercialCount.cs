@@ -6,5 +6,6 @@ namespace Dyoub.App.Models.EntityModel.Overview
     public class CommercialCount
     {
         public int Customers { get; set; }
+        public int PaymentMethods { get; set; }
     }
 }

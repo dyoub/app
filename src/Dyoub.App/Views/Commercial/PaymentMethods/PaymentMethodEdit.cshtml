@@ -1,0 +1,147 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PaymentMethodEditController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="{{controller.pageHeader}}"></div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Payment method not found"></p>
+            <a href="/payment-methods" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <form name="controller.paymentMethodForm" data-ng-submit="controller.save()" data-ng-hide="controller.notFound">
+            <div class="box">
+                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"></button>
+            </div>
+
+            <div class="card">
+                <div class="grid-row">
+                    <div class="grid-column large-6">
+                        <div class="box" data-has-error="controller.paymentMethodForm.name.$invalid">
+                            <label>
+                                <span data-translate="Name"></span>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="name" data-ng-model="controller.paymentMethod.name" data-ng-maxlength="80" required />
+                        </div>
+                    </div>
+                    <div class="grid-column large-6">
+                        <div class="grid-row">
+                            <div class="grid-column small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.paymentMethodForm.installmentLimit.$invalid">
+                                    <label>
+                                        <span data-translate="Installment condition"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="installmentLimit" data-ng-model="controller.paymentMethod.installmentLimit" required
+                                            data-ng-options="c as (c|installmentLimitOption) for c in controller.installmentLimitOptions">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid-column small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Received date"></label>
+                                    <select name="daysToReceive" data-ng-model="controller.paymentMethod.daysToReceive"
+                                            data-ng-options="c as (c|receivedDateOption) for c in controller.receivedDateOptions">
+                                        <option value="" data-translate="Manually entered"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column compact-6 small-6 medium-6 large-6">
+                        <div class="box">
+                            <label>
+                                <span data-translate="Early receipt"></span>
+                                <span class="help" data-help="It indicates if all the installments are received in a single time (early receipt) or according to the installment payment (received per installment)."></span>
+                            </label>
+                            <button type="button" data-ng-click="controller.paymentMethod.earlyReceipt = !controller.paymentMethod.earlyReceipt"
+                                    data-ng-class="{ 'success': controller.paymentMethod.earlyReceipt, 'danger': !controller.paymentMethod.earlyReceipt }"
+                                    data-translate="{{controller.paymentMethod.earlyReceipt}}"></button>
+                        </div>
+                    </div>
+                    <div class="grid-column compact-6 small-6 medium-6 large-6">
+                        <div class="box">
+                            <label data-translate="Active"></label>
+                            <button type="button" data-ng-click="controller.paymentMethod.active = !controller.paymentMethod.active"
+                                    data-ng-class="{ 'success': controller.paymentMethod.active, 'danger': !controller.paymentMethod.active }"
+                                    data-translate="{{controller.paymentMethod.active}}"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-header" data-translate="Sale fees"></div>
+
+            <div class="card list">
+                <div class="list-item text-primary" data-translate="No sale fees"
+                     data-ng-show="controller.paymentMethod.paymentFees.isEmpty()"></div>
+
+                <div class="list-item" data-ng-repeat="paymentFee in controller.paymentMethod.paymentFees">
+                    <div class="grid-row" data-ng-form="paymentFeeForm">
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="box">
+                                <label data-translate="Installment condition"></label>
+                                <select name="minimumInstallment" data-ng-model="paymentFee.minimumInstallment"
+                                        data-ng-options="c as (c|installmentCondition) for c in controller.installmentConditions"></select>
+                            </div>
+                        </div>
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="paymentFeeForm.feePercentage.$invalid">
+                                        <label data-translate="Discounted percentage"></label>
+                                        <input type="text" name="feePercentage" data-ng-model="paymentFee.feePercentage"
+                                               data-type-number="5, 2" data-valid-number-min="0" data-valid-number-max="100"
+                                               data-ng-required="!controller.hasFixedValue(paymentFee)" />
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="paymentFeeForm.feeFixedValue.$invalid">
+                                        <label data-translate="Discounted value"></label>
+                                        <input type="text" name="feeFixedValue" data-ng-model="paymentFee.feeFixedValue" data-type-number="5, 2"
+                                               data-ng-required="!controller.hasPercentage(paymentFee)" />
+                                    </div>
+                                </div>
+
+                                <div class="grid-column">
+                                    <div class="box text-danger"
+                                         data-ng-hide="controller.hasPercentageOrFixedValue(paymentFee)"
+                                         data-translate="Fee percentage or fee fixed value must be informed."></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="danger" data-translate="Remove"
+                            data-ng-click="controller.removePaymentFee(paymentFee)"></button>
+                </div>
+
+                <div class="list-item">
+                    <div class="box text-danger" data-translate="Cannot have one or more fees with the same installment condition."
+                          data-ng-show="controller.hasDuplicatePaymentFee()"></div>
+
+                    <button type="button" class="primary" data-translate="Add sale fee"
+                            data-ng-click="controller.addPaymentFee()"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

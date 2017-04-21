@@ -21,7 +21,8 @@ namespace Dyoub.App.Results.Account.Dashboard
             {
                 counter = new
                 {
-                    customers = Counter.Customers
+                    customers = Counter.Customers,
+                    paymentMethods = Counter.PaymentMethods
                 }
             };
 

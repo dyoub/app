@@ -80,7 +80,8 @@ namespace Dyoub.App.Controllers.Account
             CommercialCount counter = await Tenant.Current
                 .Select(tenant => new CommercialCount
                 {
-                    Customers = tenant.Customers.Count()
+                    Customers = tenant.Customers.Count(),
+                    PaymentMethods = tenant.PaymentMethods.Count()
                 })
                 .SingleOrDefaultAsync();
 

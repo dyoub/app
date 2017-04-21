@@ -11,6 +11,7 @@ namespace Dyoub.App.Configuration
         {
             bundles.Add(new ScriptBundle("~/Scripts/Bundle")
                 .IncludeDirectory("~/Scripts/modules", "*.js", true)
+                .IncludeDirectory("~/Scripts/filters", "*.js", true)
                 .IncludeDirectory("~/Scripts/services", "*.js", true)
                 .IncludeDirectory("~/Scripts/controllers", "*.js", true));
 
