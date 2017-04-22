@@ -2,6 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.ServiceModel.Financial;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Dyoub.App.Results.Account.Dashboard
@@ -21,7 +22,8 @@ namespace Dyoub.App.Results.Account.Dashboard
             {
                 counter = new
                 {
-                    fixedExpenses = CashFlowAnalysis.TotalFixedExpenses().Amount
+                    fixedExpenses = CashFlowAnalysis.TotalFixedExpenses().Amount,
+                    otherCashActivities = CashFlowAnalysis.Others.Count()
                 }
             };
 

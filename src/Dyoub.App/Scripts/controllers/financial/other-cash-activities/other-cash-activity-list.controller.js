@@ -3,8 +3,8 @@
 
 (function () {
 
-    function Controller(FixedExpense, handleError, Store) {
-        this.FixedExpense = FixedExpense;
+    function Controller(OtherCashActivity, handleError, Store) {
+        this.OtherCashActivity = OtherCashActivity;
         this.handleError = handleError;
         this.Store = Store;
     }
@@ -28,25 +28,25 @@
 
     Controller.prototype.newSearch = function () {
         var controller = this;
-        controller.fixedExpenseList = [];
+        controller.otherCashActivityList = [];
         controller.filter.index = 0;
         controller.search();
     };
 
     Controller.prototype.noRecordsFound = function () {
         var controller = this;
-        return controller.fixedExpenseList.isEmpty() && !controller.searching;
+        return controller.otherCashActivityList.isEmpty() && !controller.searching;
     };
 
     Controller.prototype.search = function () {
         var controller = this;
         controller.searching = true;
 
-        controller.FixedExpense
+        controller.OtherCashActivity
             .list(controller.filter)
             .then(function (response) {
-                controller.fixedExpenseList.pushRange(response.data);
-                controller.filter.index = controller.fixedExpenseList.length
+                controller.otherCashActivityList.pushRange(response.data);
+                controller.filter.index = controller.otherCashActivityList.length
             })
             ['catch'](function (response) {
                 controller.handleError(response);
@@ -58,7 +58,7 @@
 
     Controller.prototype.searchBlocked = function () {
         var controller = this;
-        return controller.searching || controller.fixedExpensesFilter.$invalid;
+        return controller.searching || controller.otherCashActivitysFilter.$invalid;
     };
 
     Controller.prototype.searchComplete = function () {
@@ -83,8 +83,8 @@
             });
     };
 
-    angular.module('dyoub.app').controller('FixedExpenseListController', [
-        'FixedExpense',
+    angular.module('dyoub.app').controller('OtherCashActivityListController', [
+        'OtherCashActivity',
         'HandleError',
         'Store',
         Controller

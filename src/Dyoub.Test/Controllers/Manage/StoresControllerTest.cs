@@ -60,6 +60,20 @@ namespace Dyoub.Test.Controllers.Manage
         }
 
         [TestMethod]
+        public async Task DeleteStoreWithOtherCashActivities()
+        {
+            DeleteStoreWithOtherCashActivitiesContext context = new DeleteStoreWithOtherCashActivitiesContext();
+            StoresController controller = new StoresController(context);
+
+            StoreIdViewModel viewModel = new StoreIdViewModel();
+            viewModel.Id = context.Store.Id;
+
+            ActionResult result = await controller.Delete(viewModel);
+
+            Assert.IsTrue(result is ModelErrorsJson);
+        }
+
+        [TestMethod]
         public async Task FindStore()
         {
             FindStoreContext context = new FindStoreContext();

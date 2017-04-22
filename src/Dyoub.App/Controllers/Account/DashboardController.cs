@@ -5,6 +5,7 @@ using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Financial.CashActivities;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
+using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Overview;
 using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Results.Account.Dashboard;
@@ -95,7 +96,9 @@ namespace Dyoub.App.Controllers.Account
         public async Task<ActionResult> FinancialCount()
         {
             IQueryable<FixedExpense> fixedExpenses = Tenant.FixedExpenses.ToCurrentMonth();
-            IQueryable<CashActivity> cashActivities = fixedExpenses.AsCashActivity();
+            IQueryable<OtherCashActivity> otherCashActivities = Tenant.OtherCashActivities.ToCurrentMonth();
+            IQueryable<CashActivity> cashActivities = fixedExpenses.AsCashActivity()
+                .Concat(otherCashActivities.AsCashActivity());
 
             CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis();
             cashFlowAnalysis.CashActivities = await cashActivities.ToListAsync();

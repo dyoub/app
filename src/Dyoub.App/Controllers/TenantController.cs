@@ -21,7 +21,7 @@ namespace Dyoub.App.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            Tenant = new TenantContext(filterContext.HttpContext.TenantId());
+            Tenant = new TenantContext(filterContext.HttpContext.UserIdentity().TenantId);
         }
     }
 }

@@ -21,6 +21,7 @@ using System.Web.Configuration;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
+using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -29,6 +30,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<ClosureRequest> ClosureRequests { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<FixedExpense> FixedExpenses { get; set; }
+        public DbSet<OtherCashActivity> OtherCashActivities { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<PaymentMethodFee> PaymentMethodFees { get; set; }

@@ -1,0 +1,99 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="OtherCashActivityEditController as controller" data-ng-init="controller.init()">
+    <div class="page-header">
+        <span data-translate="{{controller.pageHeader}}"></span>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Cash activity not found"></p>
+            <a href="/other-cash-activities" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <form name="controller.otherCashActivityForm" data-ng-submit="controller.save()" data-ng-hide="controller.notFound">
+            <div class="box">
+                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"></button>
+            </div>
+
+            <div class="card">
+                <div class="box" data-has-error="controller.otherCashActivityForm.description.$invalid">
+                    <label>
+                        <span data-translate="Description"></span>
+                        <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" name="description" data-ng-model="controller.otherCashActivity.description" data-ng-maxlength="80" required />
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.otherCashActivityForm.store.$invalid">
+                                    <label>
+                                        <span data-translate="Store"></span>
+                                        <span class="text-danger">*</span>
+                                        <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                                    </label>
+                                    <select name="store" data-ng-model="controller.otherCashActivity.store" required
+                                            data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                            data-ng-disabled="controller.searchingStores"></select>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.otherCashActivityForm.date.$invalid">
+                                    <label>
+                                        <span data-translate="Date"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="date" data-ng-model="controller.otherCashActivity.date" data-type-date required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.otherCashActivityForm.value.$invalid">
+                                    <label>
+                                        <span data-translate="Value"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="value" data-ng-model="controller.otherCashActivity.value"
+                                           data-type-number="8,2" data-valid-number-min="0.01" required />
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.otherCashActivityForm.operation.$invalid">
+                                    <label>
+                                        <span data-translate="Operation"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="operation" data-ng-model="controller.otherCashActivity.operation" required>
+                                        <option value="Credit" data-translate="Credit"></option>
+                                        <option value="Debit" data-translate="Debit"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

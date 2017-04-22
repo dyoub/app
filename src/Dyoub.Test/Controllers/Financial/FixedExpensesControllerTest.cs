@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Dyoub.Test.Controllers.Manage
+namespace Dyoub.Test.Controllers.Financial
 {
     [TestClass]
     public class FixedExpensesControllerTest
@@ -24,7 +24,7 @@ namespace Dyoub.Test.Controllers.Manage
 
             CreateFixedExpenseViewModel viewModel = new CreateFixedExpenseViewModel();
             viewModel.StoreId = context.Store.Id;
-            viewModel.Description = "FixedExpense Test";
+            viewModel.Description = "Test";
             viewModel.StartDate = DateTime.Now;
             viewModel.Value = 10.50M;
 

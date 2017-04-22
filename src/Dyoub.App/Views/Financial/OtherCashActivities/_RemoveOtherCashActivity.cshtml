@@ -1,0 +1,17 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+<div class="modal" data-modal-open="controller.removeDialogOpened">
+    <div class="modal-content">
+        <div class="box" data-translate="Are you sure you want to permanently delete?"></div>
+        <button type="button" class="danger" data-ng-click="controller.remove()" data-ng-disabled="controller.removing">
+            <span data-ng-show="controller.removing" data-translate="Removing"></span>
+            <span data-ng-hide="controller.removing" data-translate="Yes"></span>
+        </button>
+        <button type="button" data-translate="No" data-ng-click="controller.hideRemoveDialog()"
+                data-ng-disabled="controller.removing"></button>
+    </div>
+</div>
+

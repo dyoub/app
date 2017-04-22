@@ -5,6 +5,7 @@ using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
+using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.ViewModel.Manage.Stores;
 using Dyoub.App.Results.Manage.Stores;
@@ -69,6 +70,11 @@ namespace Dyoub.App.Controllers.Manage
             if (await Tenant.FixedExpenses.WhereStoreId(store.Id).AnyAsync())
             {
                 return this.Error("This store has associated fixed expenses.");
+            }
+
+            if (await Tenant.OtherCashActivities.WhereStoreId(store.Id).AnyAsync())
+            {
+                return this.Error("This store has other associated cash activities.");
             }
 
             Tenant.Stores.Remove(store);

@@ -1,0 +1,87 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="OtherCashActivityDetailsController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Cash activity details"></div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Cash activity not found"></p>
+            <a href="/other-cash-activities" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            <div class="box">
+                <a href="/other-cash-activities" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                @using (Html.Authorize("other-cash-activities.edit"))
+                {
+                    <a href="/other-cash-activities/edit/{{controller.otherCashActivity.id}}" class="as-button" data-translate="Edit"></a>
+                    <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"></button>
+                }
+            </div>
+
+            <div class="card">
+                <div class="box">
+                    <label data-translate="Description"></label>
+                    <strong data-ng-bind="controller.otherCashActivity.description"></strong>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Store"></label>
+                                    <strong data-ng-bind="controller.otherCashActivity.store.name"></strong>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Value"></label>
+                                    <strong data-ng-bind="controller.otherCashActivity.value | currency"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Date"></label>
+                                    <strong data-ng-bind="controller.otherCashActivity.date | moment:'shortDate'"></strong>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Operation"></label>
+                                    <strong data-translate="{{controller.otherCashActivity.operation}}"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @using (Html.Authorize("other-cash-activities.edit"))
+    {
+        @Html.Partial("~/Views/Financial/OtherCashActivities/_RemoveOtherCashActivity.cshtml")
+    }
+</div>

@@ -6,16 +6,17 @@ using Dyoub.App.Models.EntityModel.Catalog.ProductPrices;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
 using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
 using Dyoub.App.Models.EntityModel.Catalog.Services;
+using Dyoub.App.Models.EntityModel.Commercial.Customers;
+using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
+using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
+using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
+using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using Dyoub.App.Models.EntityModel.Manage.TeamRules;
 using Dyoub.App.Models.EntityModel.Manage.Teams;
-using Dyoub.App.Models.EntityModel.Commercial.Customers;
 using System;
 using System.Collections.Generic;
-using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
-using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
-using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 
 namespace Dyoub.App.Models.EntityModel.Account.Tenants
 {
@@ -28,6 +29,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
 
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<FixedExpense> FixedExpenses { get; set; }
+        public virtual ICollection<OtherCashActivity> OtherCashActivities { get; set; }
         public virtual ICollection<PaymentMethod> PaymentMethods { get; set; }
         public virtual ICollection<PaymentMethodFee> PaymentMethodFees { get; set; }
         public virtual ICollection<Product> Products { get; set; }
