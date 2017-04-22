@@ -147,6 +147,7 @@
     <Compile Include="Contexts\Financial\FixedExpenses\UpdateFixedExpenseContext.cs" />
     <Compile Include="Contexts\Manage\Stores\CreateStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreContext.cs" />
+    <Compile Include="Contexts\Manage\Stores\DeleteStoreWithFixedExpensesContext.cs" />
     <Compile Include="Contexts\Manage\Stores\FindStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\ListStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\UpdateStoreContext.cs" />

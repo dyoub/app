@@ -218,6 +218,7 @@
                 "Store": "Loja",
                 "Stores": "Lojas",
                 "Suppliers": "Fornecedores",
+                "This store has associated fixed expenses.": "Essa loja possui despesas fixas associadas.",
                 "Teams": "Equipes",
                 "Team management": "Gerencie sua equipe",
                 "Technical support": "Suporte técnico",

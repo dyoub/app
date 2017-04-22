@@ -99,5 +99,10 @@ namespace Dyoub.App.Models.EntityModel.Financial.FixedExpenses
         {
             return fixedExpenses.Where(fixedExpense => fixedExpense.Id == id);
         }
+
+        public static IQueryable<FixedExpense> WhereStoreId(this IQueryable<FixedExpense> fixedExpenses, int storeId)
+        {
+            return fixedExpenses.Where(fixedExpense => fixedExpense.StoreId == storeId);
+        }
     }
 }
