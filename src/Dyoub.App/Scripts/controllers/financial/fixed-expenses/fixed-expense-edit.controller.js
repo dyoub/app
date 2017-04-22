@@ -23,6 +23,7 @@
             .find(controller.routeParams.fixedExpenseId)
             .then(function (response) {
                 controller.fixedExpense = response.data;
+                controller.notFound = !controller.fixedExpense;
             })
             ['catch'](function (response) {
                 controller.handleError(response);

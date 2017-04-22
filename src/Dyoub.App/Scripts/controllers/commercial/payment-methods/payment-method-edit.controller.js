@@ -23,6 +23,7 @@
             .find(controller.routeParams.paymentMethodId)
             .then(function (response) {
                 controller.paymentMethod = response.data;
+                controller.notFound = !controller.paymentMethod;
             })
             ['catch'](function (response) {
                 controller.handleError(response);

@@ -10,13 +10,15 @@
     }
 
     Controller.prototype.detailsFrom = function (paymentMethod) {
-        for (var i = 0; i < paymentMethod.paymentFees.length; i++) {
-            var paymentFee = paymentMethod.paymentFees[i],
-                nextPaymentFee = paymentMethod.paymentFees[i + 1];
+        if (paymentMethod) {
+            for (var i = 0; i < paymentMethod.paymentFees.length; i++) {
+                var paymentFee = paymentMethod.paymentFees[i],
+                    nextPaymentFee = paymentMethod.paymentFees[i + 1];
 
-            paymentFee.maximumInstallment = !!nextPaymentFee ?
-                nextPaymentFee.minimumInstallment - 1 :
-                paymentMethod.installmentLimit;
+                paymentFee.maximumInstallment = !!nextPaymentFee ?
+                    nextPaymentFee.minimumInstallment - 1 :
+                    paymentMethod.installmentLimit;
+            }
         }
 
         return paymentMethod;
@@ -30,6 +32,7 @@
             .find(controller.routeParams.paymentMethodId)
             .then(function (response) {
                 controller.paymentMethod = controller.detailsFrom(response.data);
+                controller.notFound = !controller.paymentMethod;
             })
             ['catch'](function (response) {
                 controller.handleError(response);
