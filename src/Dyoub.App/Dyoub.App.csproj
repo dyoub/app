@@ -153,9 +153,13 @@
     <EmbeddedResource Include="Data\Migrations\201704181625262_CreatePaymentMethod.resx">
       <DependentUpon>201704181625262_CreatePaymentMethod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201704211808536_CreateFixedExpense.resx">
+      <DependentUpon>201704211808536_CreateFixedExpense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\commercial-overview.controller.js" />
+    <Content Include="Scripts\controllers\account\dashboard\financial-overview.controller.js" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
@@ -172,6 +176,9 @@
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-detail.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
+    <Content Include="Scripts\controllers\financial\fixed-expenses\fixed-expense-details.controller.js" />
+    <Content Include="Scripts\controllers\financial\fixed-expenses\fixed-expense-edit.controller.js" />
+    <Content Include="Scripts\controllers\financial\fixed-expenses\fixed-expense-list.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-edit.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
     <Content Include="Scripts\controllers\commercial\customers\customer-details.controller.js" />
@@ -189,6 +196,7 @@
     <Content Include="Scripts\services\commercial\installment.service.js" />
     <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
+    <Content Include="Scripts\services\financial\fixed-expense.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
     <Content Include="Scripts\services\commercial\customer.service.js" />
     <Content Include="Web.config" />
@@ -204,6 +212,7 @@
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
+    <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\Commercial\CustomersController.cs" />
@@ -261,6 +270,10 @@
     <Compile Include="Data\Migrations\201704181625262_CreatePaymentMethod.Designer.cs">
       <DependentUpon>201704181625262_CreatePaymentMethod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201704211808536_CreateFixedExpense.cs" />
+    <Compile Include="Data\Migrations\201704211808536_CreateFixedExpense.Designer.cs">
+      <DependentUpon>201704211808536_CreateFixedExpense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -313,6 +326,14 @@
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethod.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodQuery.cs" />
+    <Compile Include="Models\EntityModel\Financial\CashActivities\CashActivity.cs" />
+    <Compile Include="Models\EntityModel\Financial\CashActivities\CashActivityType.cs" />
+    <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpense.cs" />
+    <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpenseMapping.cs" />
+    <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpenseQuery.cs" />
+    <Compile Include="Models\EntityModel\Financial\Money.cs" />
+    <Compile Include="Models\EntityModel\Financial\Period\DailyPeriod.cs" />
+    <Compile Include="Models\EntityModel\Financial\Period\MonthlyPeriod.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\Store.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreQuery.cs" />
@@ -344,6 +365,7 @@
     <Compile Include="Infrastructure\Security\Sha256Hash.cs" />
     <Compile Include="Infrastructure\Security\UserIdentity.cs" />
     <Compile Include="Models\ServiceModel\Catalog\PricingTable.cs" />
+    <Compile Include="Models\ServiceModel\Financial\CashFlowAnalysis.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SigninViewModel.cs" />
@@ -368,6 +390,10 @@
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodFeeViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\UpdatePaymentMethodViewModel.cs" />
+    <Compile Include="Models\ViewModel\Financial\FixedExpenses\CreateFixedExpenseViewModel.cs" />
+    <Compile Include="Models\ViewModel\Financial\FixedExpenses\FixedExpenseIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Financial\FixedExpenses\ListFixedExpensesViewModel.cs" />
+    <Compile Include="Models\ViewModel\Financial\FixedExpenses\UpdateFixedExpenseViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\CreateStoreViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\ListStoresViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\StoreIdViewModel.cs" />
@@ -377,6 +403,7 @@
     <Compile Include="Models\ViewModel\Commercial\Customers\ListCustomersViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\Customers\UpdateCustomerViewModel.cs" />
     <Compile Include="Results\Account\Dashboard\CatalogOverviewJson.cs" />
+    <Compile Include="Results\Account\Dashboard\FinancialOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\GeneralOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\ManagementOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\CommercialOverviewJson.cs" />
@@ -397,6 +424,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\Common\SuccessStatusCode.cs" />
     <Compile Include="Results\Common\UnauthorizedStatusCode.cs" />
+    <Compile Include="Results\Financial\FixedExpenses\FixedExpenseJson.cs" />
+    <Compile Include="Results\Financial\FixedExpenses\FixedExpenseListJson.cs" />
     <Compile Include="Results\Manage\Stores\StoreJson.cs" />
     <Compile Include="Results\Manage\Stores\StoreListJson.cs" />
     <Compile Include="Results\Commercial\Customers\CustomerJson.cs" />
@@ -455,6 +484,10 @@
     <Content Include="Views\Commercial\PaymentMethods\PaymentMethodEdit.cshtml" />
     <Content Include="Views\Commercial\PaymentMethods\PaymentMethodList.cshtml" />
     <Content Include="Views\Commercial\PaymentMethods\_RemovePaymentMethod.cshtml" />
+    <Content Include="Views\Financial\FixedExpenses\FixedExpenseDetails.cshtml" />
+    <Content Include="Views\Financial\FixedExpenses\FixedExpenseEdit.cshtml" />
+    <Content Include="Views\Financial\FixedExpenses\FixedExpenseList.cshtml" />
+    <Content Include="Views\Financial\FixedExpenses\_RemoveFixedExpense.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

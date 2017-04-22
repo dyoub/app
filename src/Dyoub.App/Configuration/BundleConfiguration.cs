@@ -15,6 +15,9 @@ namespace Dyoub.App.Configuration
                 .IncludeDirectory("~/Scripts/services", "*.js", true)
                 .IncludeDirectory("~/Scripts/controllers", "*.js", true));
 
+            bundles.Add(new ScriptBundle("~/Scripts/Language/pt-br")
+                .Include("~/Scripts/locale/pt-br.js"));
+
             BundleTable.EnableOptimizations = true;
         }
     }

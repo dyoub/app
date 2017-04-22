@@ -1,0 +1,88 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="FixedExpenseEditController as controller" data-ng-init="controller.init()">
+    <div class="page-header">
+        <span data-translate="{{controller.pageHeader}}"></span>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <form name="controller.fixedExpenseForm" data-ng-submit="controller.save()">
+            <div class="box">
+                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"></button>
+            </div>
+
+            <div class="card">
+                <div class="box" data-has-error="controller.fixedExpenseForm.description.$invalid">
+                    <label>
+                        <span data-translate="Description"></span>
+                        <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" name="description" data-ng-model="controller.fixedExpense.description" data-ng-maxlength="80" required />
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.fixedExpenseForm.store.$invalid">
+                                    <label>
+                                        <span data-translate="Store"></span>
+                                        <span class="text-danger">*</span>
+                                        <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                                    </label>
+                                    <select name="store" data-ng-model="controller.fixedExpense.store" required
+                                            data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                            data-ng-disabled="controller.searchingStores"></select>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.fixedExpenseForm.value.$invalid">
+                                    <label>
+                                        <span data-translate="Value"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="value" data-ng-model="controller.fixedExpense.value"
+                                           data-type-number="8,2" data-valid-number-min="0.01" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.fixedExpenseForm.startDate.$invalid">
+                                    <label>
+                                        <span data-translate="Start date"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="startDate" data-ng-model="controller.fixedExpense.startDate" data-type-date required
+                                           data-valid-date-before="controller.fixedExpense.endDate" />
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box" data-has-error="controller.fixedExpenseForm.endDate.$invalid">
+                                    <label data-translate="End date"></label>
+                                    <input type="text" name="endDate" data-ng-model="controller.fixedExpense.endDate" data-type-date
+                                           data-valid-date-after="controller.fixedExpense.startDate" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

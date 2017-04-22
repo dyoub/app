@@ -39,8 +39,8 @@ angular.module("ngLocale", [], ["$provide", function ($provide) {
             "medium": "MMM d, y h:mm:ss a",
             "mediumDate": "MMM d, y",
             "mediumTime": "h:mm:ss a",
-            "short": "M/d/yy h:mm a",
-            "shortDate": "M/d/yy",
+            "short": "MM/DD/yyyy h:mm a",
+            "shortDate": "MM/DD/YYYY",
             "shortTime": "h:mm a"
         },
         NUMBER_FORMATS: {

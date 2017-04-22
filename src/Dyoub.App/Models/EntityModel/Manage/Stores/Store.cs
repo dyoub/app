@@ -4,6 +4,7 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.ProductPrices;
 using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
+using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using System.Collections.Generic;
 
@@ -17,6 +18,7 @@ namespace Dyoub.App.Models.EntityModel.Manage.Stores
         public bool Active { get; set; }
         
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<FixedExpense> FixedExpenses { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual ICollection<ServicePrice> ServicePrices { get; set; }
         public virtual ICollection<TeamMember> TeamMembers { get; set; }

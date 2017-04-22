@@ -3,7 +3,10 @@
 
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
+using Dyoub.App.Models.EntityModel.Financial.CashActivities;
+using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Overview;
+using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Results.Account.Dashboard;
 using System.Data.Entity;
 using System.Linq;
@@ -86,6 +89,19 @@ namespace Dyoub.App.Controllers.Account
                 .SingleOrDefaultAsync();
 
             return new CommercialOverviewJson(counter);
+        }
+
+        [HttpPost, Route("dashboard/financial"), Authorization]
+        public async Task<ActionResult> FinancialCount()
+        {
+            IQueryable<FixedExpense> fixedExpenses = Tenant.FixedExpenses.ToCurrentMonth();
+            IQueryable<CashActivity> cashActivities = fixedExpenses.AsCashActivity();
+
+            CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis();
+            cashFlowAnalysis.CashActivities = await cashActivities.ToListAsync();
+            cashFlowAnalysis.ToCurrentMonth();
+            
+            return new FinancialOverviewJson(cashFlowAnalysis);
         }
 
         [HttpPost, Route("dashboard/management"), Authorization]
