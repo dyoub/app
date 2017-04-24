@@ -12,7 +12,7 @@ namespace Dyoub.App.Infrastructure.Logging
     {
         public override void Register(Exception ex)
         {
-            string dsn = WebConfigurationManager.AppSettings["Sentry:DSN"];
+            string dsn = WebConfigurationManager.AppSettings["Logger:Sentry:DSN"];
 
             RavenClient ravenClient = new RavenClient(dsn);
             ravenClient.Capture(new SentryEvent(ex));
