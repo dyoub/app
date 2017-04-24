@@ -27,23 +27,23 @@ namespace Dyoub.App.Models.EntityModel
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<ClosureRequest> ClosureRequests { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<FixedExpense> FixedExpenses { get; set; }
-        public DbSet<OtherCashActivity> OtherCashActivities { get; set; }
-        public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
-        public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<PaymentMethodFee> PaymentMethodFees { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductPrice> ProductPrices { get; set; }
-        public DbSet<Service> Services { get; set; }
-        public DbSet<ServicePrice> ServicePrices { get; set; }
-        public DbSet<Store> Stores { get; set; }
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamMember> TeamMembers { get; set; }
-        public DbSet<TeamRule> TeamRules { get; set; }
-        public DbSet<Tenant> Tenants { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<ClosureRequest> ClosureRequests { get { return Set<ClosureRequest>(); } }
+        public DbSet<Customer> Customers { get { return Set<Customer>(); } }
+        public DbSet<FixedExpense> FixedExpenses { get { return Set<FixedExpense>(); } }
+        public DbSet<OtherCashActivity> OtherCashActivities { get { return Set<OtherCashActivity>(); } }
+        public DbSet<PasswordRecovery> PasswordRecoveries { get { return Set<PasswordRecovery>(); } }
+        public DbSet<PaymentMethod> PaymentMethods { get { return Set<PaymentMethod>(); } }
+        public DbSet<PaymentMethodFee> PaymentMethodFees { get { return Set<PaymentMethodFee>(); } }
+        public DbSet<Product> Products { get { return Set<Product>(); } }
+        public DbSet<ProductPrice> ProductPrices { get { return Set<ProductPrice>(); } }
+        public DbSet<Service> Services { get { return Set<Service>(); } }
+        public DbSet<ServicePrice> ServicePrices { get { return Set<ServicePrice>(); } }
+        public DbSet<Store> Stores { get { return Set<Store>(); } }
+        public DbSet<Team> Teams { get { return Set<Team>(); } }
+        public DbSet<TeamMember> TeamMembers { get { return Set<TeamMember>(); } }
+        public DbSet<TeamRule> TeamRules { get { return Set<TeamRule>(); } }
+        public DbSet<Tenant> Tenants { get { return Set<Tenant>(); } }
+        public DbSet<User> Users { get { return Set<User>(); } }
 
         public ApplicationContext() : this(DefaultConnection()) { }
 

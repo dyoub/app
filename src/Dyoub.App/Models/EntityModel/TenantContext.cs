@@ -35,7 +35,7 @@ namespace Dyoub.App.Models.EntityModel
 
         public override DbSet<TEntity> Set<TEntity>()
         {
-            if (typeof(TEntity) is ITenantData)
+            if (typeof(ITenantData).IsAssignableFrom(typeof(TEntity)))
             {
                 return new FilteredDbSet<TEntity>(base.Set<TEntity>(),
                     new PropertyFilterExpression<TEntity>("TenantId", CurrentId));

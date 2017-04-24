@@ -100,6 +100,16 @@ namespace Dyoub.App.Infrastructure.EntityFramework
             return Set.Create();
         }
 
+        public override DbQuery<TEntity> Include(string path)
+        {
+            return Set.Include(path);
+        }
+
+        public override DbQuery<TEntity> AsNoTracking()
+        {
+            return Set.AsNoTracking();
+        }
+
         TDerivedEntity IDbSet<TEntity>.Create<TDerivedEntity>()
         {
             return Set.Create<TDerivedEntity>();
