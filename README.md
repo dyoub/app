@@ -13,7 +13,7 @@ Online application for commercial business.
 
 1. Copy `Settings.Sample` to `Settings` (do not remove `Settings.Sample`)
 
-2. Configure the connection string on `Settings/Dyoub.config` (if needed)
+2. Configure the connection string on `Settings/Dyoub.App.config` (if needed)
 
 3. Open Package Manager Console window from Visual Studio menubar:  
 `TOOLS > NuGet Package Manger > Package Manager Console`
