@@ -90,7 +90,7 @@ namespace Dyoub.App.Controllers.Financial
         public async Task<ActionResult> List(ListFixedExpensesViewModel viewModel)
         {
             ICollection<FixedExpense> fixedExpense = await Tenant.FixedExpenses
-                .ForStoreId(viewModel.StoreId)
+                .WhereStoreId(viewModel.StoreId)
                 .WhereDescriptionContains(viewModel.Description.Words())
                 .WhereEffectiveFrom(viewModel.StartDate)
                 .WhereEffectiveUntil(viewModel.EndDate)

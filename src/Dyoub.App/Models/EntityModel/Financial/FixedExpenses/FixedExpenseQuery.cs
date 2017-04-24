@@ -27,16 +27,6 @@ namespace Dyoub.App.Models.EntityModel.Financial.FixedExpenses
             return fixedExpenses.Include(fixedExpense => fixedExpense.Store);
         }
 
-        public static IQueryable<FixedExpense> ForStoreId(this IQueryable<FixedExpense> fixedExpenses, int? storeId)
-        {
-            if (storeId == null)
-            {
-                return fixedExpenses;
-            }
-
-            return fixedExpenses.Where(fixedExpense => fixedExpense.StoreId == storeId);
-        }
-
         public static IQueryable<FixedExpense> OrderByDescription(this IQueryable<FixedExpense> fixedExpenses)
         {
             return fixedExpenses.OrderBy(fixedExpense => fixedExpense.Description);
@@ -100,8 +90,13 @@ namespace Dyoub.App.Models.EntityModel.Financial.FixedExpenses
             return fixedExpenses.Where(fixedExpense => fixedExpense.Id == id);
         }
 
-        public static IQueryable<FixedExpense> WhereStoreId(this IQueryable<FixedExpense> fixedExpenses, int storeId)
+        public static IQueryable<FixedExpense> WhereStoreId(this IQueryable<FixedExpense> fixedExpenses, int? storeId)
         {
+            if (storeId == null)
+            {
+                return fixedExpenses;
+            }
+
             return fixedExpenses.Where(fixedExpense => fixedExpense.StoreId == storeId);
         }
     }
