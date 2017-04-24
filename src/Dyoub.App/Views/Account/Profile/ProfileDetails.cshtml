@@ -1,0 +1,59 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="ProfileDetailsController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Profile"></div>
+
+    <div class="ng-cloak">
+        <div class="box">
+            <a href="/dashboard/account" class="as-button">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="grid-row">
+                <div class="grid-column small-6 medium-6 large-6">
+                    <div class="box">
+                        <label data-translate="Name"></label>
+                        <strong data-ng-bind="controller.user.name"></strong>
+                    </div>
+                </div>
+                <div class="grid-column small-6 medium-6 large-6">
+                    <div class="box">
+                        <label data-translate="Email"></label>
+                        <strong data-ng-bind="controller.user.email"></strong>
+                    </div>
+                </div>
+            </div>
+            <a href="/profile/edit" data-translate="Edit"></a>
+        </div>
+
+        <div class="card list">
+            <div class="list-item">
+                <span data-translate="Last login:"></span>
+                <strong data-ng-bind="controller.user.lastLogin | moment:'short'"></strong>
+            </div>
+            <div class="list-item">
+                <p>
+                    <span data-translate="Last change password:"></span>
+                    <strong data-ng-bind="controller.user.lastChangePassword | moment:'short'"></strong>
+                </p>
+                <a href="/profile/change-password" data-translate="Change password"></a>
+            </div>
+        </div>
+
+        <div class="list-header" data-translate="Dangerous zone"></div>
+
+        <div class="card">
+            <p data-translate="Cancelling your account will permanently remove all your data and your access to the application."></p>
+            <button type="button" data-href="/cancel-account" class="as-button danger" data-translate="Cancel account" disabled></button>
+        </div>
+    </div>
+</div>

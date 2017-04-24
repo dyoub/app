@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Financial.CashActivities;
@@ -62,6 +63,12 @@ namespace Dyoub.App.Controllers.Account
         public ActionResult Stock()
         {
             return View("~/Views/Account/Dashboard/Stock.cshtml");
+        }
+
+        [HttpPost, Route("dashboard/account"), Authorization]
+        public ActionResult AccountCount()
+        {
+            return new AccountOverviewJson(HttpContext.UserIdentity());
         }
 
         [HttpPost, Route("dashboard/catalog"), Authorization]

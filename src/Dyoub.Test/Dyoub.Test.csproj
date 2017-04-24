@@ -113,6 +113,9 @@
     <Compile Include="Contexts\Account\PasswordRecoveries\RecoveryInexistentEmailContext.cs" />
     <Compile Include="Contexts\Account\PasswordRecoveries\ResetPasswordWithExpiredTokenContext.cs" />
     <Compile Include="Contexts\Account\PasswordRecoveries\ResetPasswordWithValidTokenContext.cs" />
+    <Compile Include="Contexts\Account\Profile\ChangePasswordContext.cs" />
+    <Compile Include="Contexts\Account\Profile\FindProfileContext.cs" />
+    <Compile Include="Contexts\Account\Profile\UpdateProfileContext.cs" />
     <Compile Include="Contexts\Account\Users\SigninCorrectlyContext.cs" />
     <Compile Include="Contexts\Account\Users\SigninWrongPasswordContext.cs" />
     <Compile Include="Contexts\Account\Users\SignupEmailAlreadyTakenContext.cs" />
@@ -162,6 +165,7 @@
     <Compile Include="Contexts\Commercial\Customers\FindCustomerContext.cs" />
     <Compile Include="Contexts\Commercial\Customers\ListCustomerContext.cs" />
     <Compile Include="Contexts\Commercial\Customers\UpdateCustomerContext.cs" />
+    <Compile Include="Controllers\Account\ProfileControllerTest.cs" />
     <Compile Include="Controllers\Account\RecoveryControllerTest.cs" />
     <Compile Include="Controllers\Account\UsersControllerTest.cs" />
     <Compile Include="Controllers\Catalog\PricingTablesControllerTest.cs" />

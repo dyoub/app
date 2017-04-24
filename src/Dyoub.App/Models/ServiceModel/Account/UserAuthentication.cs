@@ -20,6 +20,23 @@ namespace Dyoub.App.Models.ServiceModel.Account
             Context = context;
         }
 
+        public async Task<bool> ChangePasswordAsync(int userId, string oldPassword, string newPassword)
+        {
+            User = await Context.Users.WhereId(userId).SingleOrDefaultAsync();
+
+            Sha256Hash oldPasswordHash = new Sha256Hash(oldPassword, User.Salt);
+
+            if (User.Password != oldPasswordHash.ToString()) return false;
+
+            User.Salt = Guid.NewGuid().ToString("N");
+            User.Password = new Sha256Hash(newPassword, User.Salt).ToString();
+            User.LastChangePassword = DateTime.Now;
+
+            await Context.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> SigninAsync(string email, string password)
         {
             User = await Context.Users

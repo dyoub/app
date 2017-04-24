@@ -161,9 +161,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
+    <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
     <Content Include="Scripts\controllers\account\dashboard\commercial-overview.controller.js" />
     <Content Include="Scripts\controllers\account\dashboard\financial-overview.controller.js" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
+    <Content Include="Scripts\controllers\account\profile\profile-details.controller.js" />
+    <Content Include="Scripts\controllers\account\profile\profile-edit.controller.js" />
+    <Content Include="Scripts\controllers\account\profile\profile-password.controller.js" />
     <Content Include="Scripts\controllers\account\users\signin.controller.js" />
     <Content Include="Scripts\controllers\account\users\signup.controller.js" />
     <Content Include="Scripts\controllers\catalog\pricing-tables\pricing-table-details.controller.js" />
@@ -197,6 +201,7 @@
     <Content Include="Scripts\locale\en-us.js" />
     <Content Include="Scripts\locale\pt-br.js" />
     <Content Include="Scripts\modules\dyoub-app.module.js" />
+    <Content Include="Scripts\services\account\profile.service.js" />
     <Content Include="Scripts\services\catalog\pricing-table.service.js" />
     <Content Include="Scripts\services\catalog\product.service.js" />
     <Content Include="Scripts\services\commercial\installment.service.js" />
@@ -213,6 +218,7 @@
     <Compile Include="Configuration\GlobalFiltersConfiguration.cs" />
     <Compile Include="Configuration\RouteConfiguration.cs" />
     <Compile Include="Controllers\Account\DashboardController.cs" />
+    <Compile Include="Controllers\Account\ProfileController.cs" />
     <Compile Include="Controllers\Account\RecoveryController.cs" />
     <Compile Include="Controllers\Account\UsersController.cs" />
     <Compile Include="Controllers\Catalog\PricingTablesController.cs" />
@@ -383,6 +389,8 @@
     <Compile Include="Models\ServiceModel\Financial\CashFlowAnalysis.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
+    <Compile Include="Models\ViewModel\Account\Profile\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\ViewModel\Account\Profile\UpdateProfileViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SigninViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Users\SignupViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\PricingTables\CopyPricesViewModel.cs" />
@@ -421,11 +429,13 @@
     <Compile Include="Models\ViewModel\Commercial\Customers\CustomerIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\Customers\ListCustomersViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\Customers\UpdateCustomerViewModel.cs" />
+    <Compile Include="Results\Account\Dashboard\AccountOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\CatalogOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\FinancialOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\GeneralOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\ManagementOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\CommercialOverviewJson.cs" />
+    <Compile Include="Results\Account\Profile\ProfileDetailsJson.cs" />
     <Compile Include="Results\Account\Users\SignupEmail.cs" />
     <Compile Include="Results\Catalog\PricingTables\ItemPriceListJson.cs" />
     <Compile Include="Results\Catalog\PricingTables\PricingTableJson.cs" />
@@ -513,6 +523,9 @@
     <Content Include="Views\Financial\OtherCashActivities\OtherCashActivityDetails.cshtml" />
     <Content Include="Views\Financial\OtherCashActivities\OtherCashActivityEdit.cshtml" />
     <Content Include="Views\Financial\OtherCashActivities\OtherCashActivityList.cshtml" />
+    <Content Include="Views\Account\Profile\ProfileDetails.cshtml" />
+    <Content Include="Views\Account\Profile\ProfileEdit.cshtml" />
+    <Content Include="Views\Account\Profile\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
