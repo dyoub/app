@@ -2,6 +2,54 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 (function () {
+    // TODO: Improve
+
+    moment.defineLocale('pt-br', {
+        months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
+        monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
+        weekdays: 'Domingo_Segunda-feira_Terça-feira_Quarta-feira_Quinta-feira_Sexta-feira_Sábado'.split('_'),
+        weekdaysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
+        weekdaysMin: 'Do_2ª_3ª_4ª_5ª_6ª_Sá'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'DD/MM/YYYY',
+            LL: 'D [de] MMMM [de] YYYY',
+            LLL: 'D [de] MMMM [de] YYYY [às] HH:mm',
+            LLLL: 'dddd, D [de] MMMM [de] YYYY [às] HH:mm'
+        },
+        calendar: {
+            sameDay: '[Hoje às] LT',
+            nextDay: '[Amanhã às] LT',
+            nextWeek: 'dddd [às] LT',
+            lastDay: '[Ontem às] LT',
+            lastWeek: function () {
+                return (this.day() === 0 || this.day() === 6) ?
+                    '[Último] dddd [às] LT' : // Saturday + Sunday
+                    '[Última] dddd [às] LT'; // Monday - Friday
+            },
+            sameElse: 'L'
+        },
+        relativeTime: {
+            future: 'em %s',
+            past: '%s atrás',
+            s: 'poucos segundos',
+            m: 'um minuto',
+            mm: '%d minutos',
+            h: 'uma hora',
+            hh: '%d horas',
+            d: 'um dia',
+            dd: '%d dias',
+            M: 'um mês',
+            MM: '%d meses',
+            y: 'um ano',
+            yy: '%d anos'
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}º/,
+        ordinal: '%dº'
+    });
+
     function locale($provide) {
         var PLURAL_CATEGORY = { ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other" };
 
@@ -13,10 +61,10 @@
                 MONTH: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
                 SHORTDAY: ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"],
                 SHORTMONTH: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
-                fullDate: "EEEE, d 'de' MMMM 'de' y",
-                longDate: "d 'de' MMMM 'de' y",
-                medium: "d 'de' MMM 'de' y HH:mm:ss",
-                mediumDate: "d 'de' MMM 'de' y",
+                fullDate: "dddd, DD [de] MMMM [de] YYYY",
+                longDate: "DD [de] MMMM [de] YYYY",
+                medium: "D [de] MMM [de] YY HH:mm:ss",
+                mediumDate: "D [de] MMM [de] YY",
                 mediumTime: "HH:mm:ss",
                 short: "DD/MM/YYYY HH:mm",
                 shortDate: "DD/MM/YYYY",
@@ -59,6 +107,7 @@
                 "Are you sure you want erase all prices?": "Deseja realmente apagar todos os preços?",
                 "Are you sure you want to permanently delete?": "Deseja realmente remover permanentemente?",
                 "Are you sure you want undo the changes?": "Deseja realmente desfazer as alterações?",
+                "Billed amount": "Total faturado",
                 "Cancel": "Cancelar",
                 "Cancel account": "Cancelar conta",
                 "Cancelling your account will permanently remove all your data and your access to the application.":
@@ -83,7 +132,9 @@
                 "Copy to pricing table": "Copiar para tabela de preços",
                 "Create account": "Criar conta",
                 "Credit": "Crédito",
+                "Customer": "Cliente",
                 "Customer details": "Detalhes do cliente",
+                "Customer not identified": "Cliente não identificado",
                 "Customer not found.": "Cliente não encontrado",
                 "Customer name": "Nome do cliente",
                 "Customers": "Clientes",
@@ -99,6 +150,7 @@
                 "Discounted value": "Valor descontado",
                 "Don't have an account?": "Não possui uma conta?",
                 "Do everything online.": "Faça tudo <strong>online</strong>.",
+                "Draft": "Rascunho",
                 "Early receipt": "Recebimento antecipado",
                 "It indicates if all the installments are received in a single time (early receipt) or according to the installment payment (received per installment).":
                     "Indica se todas as parcelas são recebidas em uma única vez (recebimento antecipado) ou conforme o parcelamento (recebimento por parcela).",
@@ -109,6 +161,7 @@
                 "Edit fixed expense": "Editar despesa fixa",
                 "Edit payment method": "Editar método de pagamento",
                 "Edit product": "Editar produto",
+                "Edit sale order": "Editar ordem de venda",
                 "Edit service": "Editar serviço",
                 "Edit store": "Editar loja",
                 "Email": "E-mail",
@@ -124,6 +177,7 @@
                 "Fixed expenses, receipt of credit card, etc.": "Despesas fixas, vendas com cartão de crédito, etc.",
                 "From": "A partir de",
                 "Full name": "Nome completo",
+                "General": "Geral",
                 "Go back": "Voltar",
                 "Go back to signin": "Voltar para o login",
                 "Go back to dashboard": "Voltar para o dashboard",
@@ -135,9 +189,11 @@
                 "Inventory": "Estoque",
                 "Invite people to work with you.": "Convide pessoas para trabalhar com você.",
                 "Is manufactured": "É manufaturado",
+                "Issue date": "Data da emissão",
                 "Item code": "Código do item",
                 "Item name": "Nome do item",
                 "Item type": "Tipo do item",
+                "Items": "Itens",
                 "Installment condition": "Condição de parcelamento",
                 "Last change password:": "Última alteração de senha:",
                 "Last login:": "Último login:",
@@ -160,6 +216,7 @@
                 "New payment method": "Novo método de pagamento",
                 "New password": "Nova senha",
                 "New product": "Novo produto",
+                "New sale order": "Nova ordem de venda",
                 "New service": "Novo serviço",
                 "New store": "Nova loja",
                 "No": "Não",
@@ -176,6 +233,7 @@
                 "Organize your catalog and pricing table.": "Organize seu catálogo e tabela de preços.",
                 "Other cash activities": "Outros lançamentos",
                 "Other movements": "Outros movimentos",
+                "Payment": "Pagamento",
                 "Payment methods": "Métodos de pagamento",
                 "Payment method details": "Detalhes do método de pagamento",
                 "Payment method not found.": "Método de pagamento não encontrado",
@@ -208,7 +266,9 @@
                 "Rentals": "Aluguéis",
                 "Reset": "Resetar",
                 "Sale fees": "Taxas de venda",
+                "Sale order": "Ordem de venda",
                 "Sale orders": "Ordens de venda",
+                "Sale total": "Total da venda",
                 "Same payment date": "Mesma data do pagamento",
                 "Save": "Salvar",
                 "Saving": "Salvando",

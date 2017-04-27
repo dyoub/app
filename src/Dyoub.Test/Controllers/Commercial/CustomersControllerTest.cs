@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Mvc;
+using Dyoub.App.Results.Common;
 
 namespace Dyoub.Test.Controllers.Commercial
 {
@@ -41,6 +42,20 @@ namespace Dyoub.Test.Controllers.Commercial
             await controller.Delete(viewModel);
 
             Assert.IsTrue(context.CustomerWasDeleted());
+        }
+
+        [TestMethod]
+        public async Task DeleteCustomerWithSaleOrders()
+        {
+            DeleteCustomerWithSaleOrdersContext context = new DeleteCustomerWithSaleOrdersContext();
+            CustomersController controller = new CustomersController(context);
+
+            CustomerIdViewModel viewModel = new CustomerIdViewModel();
+            viewModel.Id = context.Customer.Id;
+
+            ActionResult result = await controller.Delete(viewModel);
+
+            Assert.IsTrue(result is ModelErrorsJson);
         }
 
         [TestMethod]

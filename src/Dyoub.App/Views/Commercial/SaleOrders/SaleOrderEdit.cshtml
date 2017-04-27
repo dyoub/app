@@ -1,0 +1,74 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SaleOrderEditController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="{{controller.pageHeader}}"></span>
+            <strong data-ng-bind="controller.saleOrder.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.saleOrderId">
+            <span class="step active" data-translate="General"></span>
+            <span class="separator"></span>
+            <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/items"
+               class="step" data-translate="Items"></a>
+            <span class="separator"></span>
+            <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <form name="controller.saleOrderForm" data-ng-submit="controller.save()">
+            <div class="box">
+                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"></button>
+            </div>
+
+            <div class="card">
+                <div class="grid-row">
+                    <div class="grid-column small-8 medium-8 large-8">
+                        <div class="box" data-has-error="controller.saleOrderForm.store.$invalid">
+                            <label>
+                                <span data-translate="Store"></span>
+                                <span class="text-danger">*</span>
+                                <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                            </label>
+                            <select name="store" data-ng-model="controller.saleOrder.store" required
+                                    data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                    data-ng-disabled="controller.searchingStores"></select>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.saleOrderForm.issueDate.$invalid">
+                            <label>
+                                <span data-translate="Issue date"></span>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="issueDate" data-ng-model="controller.saleOrder.issueDate" data-type-date required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box" data-has-error="controller.saleOrderForm.additionalInformation.$invalid">
+                    <label data-translate="Additional information"></label>
+                    <textarea rows="5" name="additionalInformation" data-ng-model="controller.saleOrder.additionalInformation" data-ng-maxlength="255"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

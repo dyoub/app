@@ -159,6 +159,9 @@
     <EmbeddedResource Include="Data\Migrations\201704221401350_CreateOtherCashActivity.resx">
       <DependentUpon>201704221401350_CreateOtherCashActivity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201704241719208_CreateSaleOrder.resx">
+      <DependentUpon>201704241719208_CreateSaleOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -183,6 +186,9 @@
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-detail.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-list.controller.js" />
     <Content Include="Scripts\controllers\financial\fixed-expenses\fixed-expense-details.controller.js" />
     <Content Include="Scripts\controllers\financial\fixed-expenses\fixed-expense-edit.controller.js" />
     <Content Include="Scripts\controllers\financial\fixed-expenses\fixed-expense-list.controller.js" />
@@ -198,6 +204,7 @@
     <Content Include="Scripts\filters\installment-limit-option.filter.js" />
     <Content Include="Scripts\filters\installment-option.filter.js" />
     <Content Include="Scripts\filters\received-date-option.filter.js" />
+    <Content Include="Scripts\filters\order-number.filter.js" />
     <Content Include="Scripts\locale\en-us.js" />
     <Content Include="Scripts\locale\pt-br.js" />
     <Content Include="Scripts\modules\dyoub-app.module.js" />
@@ -207,6 +214,7 @@
     <Content Include="Scripts\services\commercial\installment.service.js" />
     <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
+    <Content Include="Scripts\services\commercial\sale-order.service.js" />
     <Content Include="Scripts\services\financial\fixed-expense.service.js" />
     <Content Include="Scripts\services\financial\other-cash-activites.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
@@ -225,6 +233,7 @@
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
+    <Compile Include="Controllers\Commercial\SaleOrdersController.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
@@ -292,6 +301,10 @@
     <Compile Include="Data\Migrations\201704221401350_CreateOtherCashActivity.Designer.cs">
       <DependentUpon>201704221401350_CreateOtherCashActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201704241719208_CreateSaleOrder.cs" />
+    <Compile Include="Data\Migrations\201704241719208_CreateSaleOrder.Designer.cs">
+      <DependentUpon>201704241719208_CreateSaleOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -344,6 +357,9 @@
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethod.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrder.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrderMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrderQuery.cs" />
     <Compile Include="Models\EntityModel\Financial\CashActivities\CashActivity.cs" />
     <Compile Include="Models\EntityModel\Financial\CashActivities\CashActivityType.cs" />
     <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpense.cs" />
@@ -386,6 +402,8 @@
     <Compile Include="Infrastructure\Security\Sha256Hash.cs" />
     <Compile Include="Infrastructure\Security\UserIdentity.cs" />
     <Compile Include="Models\ServiceModel\Catalog\PricingTable.cs" />
+    <Compile Include="Models\ServiceModel\Commercial\ShoppingCart.cs" />
+    <Compile Include="Models\ServiceModel\Financial\Billing.cs" />
     <Compile Include="Models\ServiceModel\Financial\CashFlowAnalysis.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
@@ -413,6 +431,10 @@
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodFeeViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\UpdatePaymentMethodViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleOrders\CreateSaleOrderViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleOrders\ListSaleOrdersViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleOrders\SaleOrderIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleOrders\UpdateSaleOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\FixedExpenses\CreateFixedExpenseViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\FixedExpenses\FixedExpenseIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\FixedExpenses\ListFixedExpensesViewModel.cs" />
@@ -446,6 +468,9 @@
     <Compile Include="Results\Catalog\Services\ServiceListJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodListJson.cs" />
+    <Compile Include="Results\Commercial\SaleOrders\SaleOrderIdJson.cs" />
+    <Compile Include="Results\Commercial\SaleOrders\SaleOrderJson.cs" />
+    <Compile Include="Results\Commercial\SaleOrders\SaleOrderListJson.cs" />
     <Compile Include="Results\Common\AccessDeniedStatusCode.cs" />
     <Compile Include="Results\Common\ModelErrorsJson.cs" />
     <Compile Include="Results\Common\NotFoundStatusCode.cs" />
@@ -526,6 +551,10 @@
     <Content Include="Views\Account\Profile\ProfileDetails.cshtml" />
     <Content Include="Views\Account\Profile\ProfileEdit.cshtml" />
     <Content Include="Views\Account\Profile\ChangePassword.cshtml" />
+    <Content Include="Views\Commercial\SaleOrders\SaleOrderDetails.cshtml" />
+    <Content Include="Views\Commercial\SaleOrders\SaleOrderEdit.cshtml" />
+    <Content Include="Views\Commercial\SaleOrders\SaleOrderList.cshtml" />
+    <Content Include="Views\Commercial\SaleOrders\_RemoveSaleOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

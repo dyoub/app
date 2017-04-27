@@ -5,6 +5,7 @@ using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Commercial.Customers;
+using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.ViewModel.Commercial.Customers;
 using System.Threading.Tasks;
 using System.Data.Entity;
@@ -63,6 +64,11 @@ namespace Dyoub.App.Controllers.Commercial
             if (customer == null)
             {
                 return this.Error("Customer not found.");
+            }
+
+            if (await Tenant.SaleOrders.WhereCustomerId(customer.Id).AnyAsync())
+            {
+                return this.Error("This customer has associated sale orders.");
             }
 
             Tenant.Customers.Remove(customer);

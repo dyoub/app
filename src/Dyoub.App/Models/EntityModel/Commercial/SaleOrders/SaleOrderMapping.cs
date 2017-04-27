@@ -4,11 +4,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Commercial.Customers
+namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
 {
-    public class CustomerMapping : EntityTypeConfiguration<Customer>
+    public class SaleOrderMapping : EntityTypeConfiguration<SaleOrder>
     {
-        public CustomerMapping()
+        public SaleOrderMapping()
         {
             HasKey(p => new
             {
@@ -19,11 +19,15 @@ namespace Dyoub.App.Models.EntityModel.Commercial.Customers
             Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             HasRequired(p => p.Tenant)
-                .WithMany(p => p.Customers)
+                .WithMany(p => p.SaleOrders)
                 .HasForeignKey(p => p.TenantId);
 
-            HasMany(p => p.SaleOrders)
-                .WithOptional(p => p.Customer)
+            HasRequired(p => p.Store)
+                .WithMany(p => p.SaleOrders)
+                .HasForeignKey(p => new { p.StoreId, p.TenantId });
+
+            HasOptional(p => p.Customer)
+                .WithMany(p => p.SaleOrders)
                 .HasForeignKey(p => new { p.CustomerId, p.TenantId });
         }
     }

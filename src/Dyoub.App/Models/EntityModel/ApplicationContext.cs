@@ -22,6 +22,7 @@ using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
+using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -36,6 +37,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<PaymentMethodFee> PaymentMethodFees { get { return Set<PaymentMethodFee>(); } }
         public DbSet<Product> Products { get { return Set<Product>(); } }
         public DbSet<ProductPrice> ProductPrices { get { return Set<ProductPrice>(); } }
+        public DbSet<SaleOrder> SaleOrders { get { return Set<SaleOrder>(); } }
         public DbSet<Service> Services { get { return Set<Service>(); } }
         public DbSet<ServicePrice> ServicePrices { get { return Set<ServicePrice>(); } }
         public DbSet<Store> Stores { get { return Set<Store>(); } }
@@ -67,6 +69,7 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new PasswordRecoveryMapping());
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new ProductPriceMapping());
+            modelBuilder.Configurations.Add(new SaleOrderMapping());
             modelBuilder.Configurations.Add(new ServiceMapping());
             modelBuilder.Configurations.Add(new ServicePriceMapping());
             modelBuilder.Configurations.Add(new StoreMapping());

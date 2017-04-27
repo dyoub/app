@@ -32,7 +32,7 @@
             nationalId: customer.nationalId,
             email: customer.email,
             phoneNumber: customer.phoneNumber,
-            alternativePhoneNumber: customer.alternativePhoneNumber,
+            alternativePhoneNumber: customer.alternativePhoneNumber
         });
     };
 

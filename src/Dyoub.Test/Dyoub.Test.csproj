@@ -137,11 +137,19 @@
     <Compile Include="Contexts\Catalog\Services\FindServiceContext.cs" />
     <Compile Include="Contexts\Catalog\Services\ListServicesContext.cs" />
     <Compile Include="Contexts\Catalog\Services\UpdateServiceContext.cs" />
+    <Compile Include="Contexts\Commercial\Customers\DeleteCustomerWithSaleOrdersContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\CreatePaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\DeletePaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\FindPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\ListPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\UpdatePaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleOrders\CreateSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleOrders\DeleteConfirmedSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleOrders\DeleteSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleOrders\FindSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleOrders\ListSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleOrders\UpdateConfirmedSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleOrders\UpdateSaleOrderContext.cs" />
     <Compile Include="Contexts\EmptyContext.cs" />
     <Compile Include="Contexts\Financial\FixedExpenses\CreateFixedExpenseContext.cs" />
     <Compile Include="Contexts\Financial\FixedExpenses\DeleteFixedExpenseContext.cs" />
@@ -157,6 +165,7 @@
     <Compile Include="Contexts\Manage\Stores\DeleteStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreWithFixedExpensesContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreWithOtherCashActivitiesContext.cs" />
+    <Compile Include="Contexts\Manage\Stores\DeleteStoreWithSaleOrdersContext.cs" />
     <Compile Include="Contexts\Manage\Stores\FindStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\ListStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\UpdateStoreContext.cs" />
@@ -172,6 +181,7 @@
     <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ServicesControllerTest.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\SaleOrdersControllerTest.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesControllerTest.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
@@ -183,6 +193,7 @@
     <Compile Include="Factories\Catalog\ServiceFactory.cs" />
     <Compile Include="Factories\Catalog\ServicePriceFactory.cs" />
     <Compile Include="Factories\Commercial\PaymentMethodFactory.cs" />
+    <Compile Include="Factories\Commercial\SaleOrderFactory.cs" />
     <Compile Include="Factories\Financial\FixedExpenseFactory.cs" />
     <Compile Include="Factories\Financial\OtherCashActivityFactory.cs" />
     <Compile Include="Factories\Manage\StoreFactory.cs" />

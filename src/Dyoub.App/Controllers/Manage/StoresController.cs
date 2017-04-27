@@ -4,6 +4,7 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
+using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
@@ -65,6 +66,11 @@ namespace Dyoub.App.Controllers.Manage
             if (store == null)
             {
                 return this.Error("Store not found.");
+            }
+
+            if (await Tenant.SaleOrders.WhereStoreId(store.Id).AnyAsync())
+            {
+                return this.Error("This store has associated sale orders.");
             }
 
             if (await Tenant.FixedExpenses.WhereStoreId(store.Id).AnyAsync())

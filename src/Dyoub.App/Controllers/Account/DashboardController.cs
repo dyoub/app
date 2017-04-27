@@ -4,6 +4,7 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
+using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.CashActivities;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
@@ -58,7 +59,7 @@ namespace Dyoub.App.Controllers.Account
         {
             return View("~/Views/Account/Dashboard/General.cshtml");
         }
-        
+
         [HttpGet, Route("dashboard/stock"), Authorization]
         public ActionResult Stock()
         {
@@ -88,11 +89,14 @@ namespace Dyoub.App.Controllers.Account
         [HttpPost, Route("dashboard/commercial"), Authorization]
         public async Task<ActionResult> CommercialCount()
         {
+            IQueryable<SaleOrder> saleOrders = Tenant.SaleOrders.IssuedToday();
+
             CommercialCount counter = await Tenant.Current
                 .Select(tenant => new CommercialCount
                 {
                     Customers = tenant.Customers.Count(),
-                    PaymentMethods = tenant.PaymentMethods.Count()
+                    PaymentMethods = tenant.PaymentMethods.Count(),
+                    SaleOrders = saleOrders.Count()
                 })
                 .SingleOrDefaultAsync();
 
@@ -110,7 +114,7 @@ namespace Dyoub.App.Controllers.Account
             CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis();
             cashFlowAnalysis.CashActivities = await cashActivities.ToListAsync();
             cashFlowAnalysis.ToCurrentMonth();
-            
+
             return new FinancialOverviewJson(cashFlowAnalysis);
         }
 

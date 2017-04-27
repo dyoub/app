@@ -1,0 +1,108 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SaleOrderListController as controller"  data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Sale orders"></div>
+
+    <div class="box">
+        <a href="/dashboard/commercial" class="as-button">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+
+        @using (Html.Authorize("sale-orders.edit"))
+        {
+            <a href="/sale-orders/new" class="as-button success" data-translate="Add"></a>
+        }
+    </div>
+
+    <form name="controller.saleOrdersFilter" data-ng-submit="controller.newSearch()">
+        <label>
+            <i class="fa fa-search"></i>
+            <span data-translate="Search filter"></span>
+        </label>
+        <div class="card">
+            <div class="grid-row">
+                <div class="grid-column medium-6 large-6">
+                    <div class="box">
+                        <label>
+                            <span data-translate="Store"></span>
+                            <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                        </label>
+                        <select name="store" data-ng-model="controller.filter.store"
+                                data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                data-ng-disabled="controller.searchingStores">
+                            <option value="" data-translate="All stores"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-column medium-6 large-6">
+                    <div class="grid-row">
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
+                            <div class="box" data-has-error="controller.saleOrdersFilter.fromDate.$invalid">
+                                <label data-translate="From"></label>
+                                <input type="text" name="fromDate" data-ng-model="controller.filter.fromDate" data-type-date
+                                       data-valid-date-before="controller.filter.toDate" />
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
+                            <div class="box" data-has-error="controller.saleOrdersFilter.toDate.$invalid">
+                                <label data-translate="Until"></label>
+                                <input type="text" name="toDate" data-ng-model="controller.filter.toDate" data-type-date
+                                       data-valid-date-after="controller.filter.fromDate" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box text-center">
+            <button type="submit" class="primary" data-ng-disabled="controller.searchBlocked()">
+                <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                <em data-ng-show="controller.searching" data-translate="Searching"></em>
+            </button>
+            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+        </div>
+    </form>
+
+    <div data-ng-repeat="saleOrderHistory in controller.saleOrderHistory">
+        <div class="list-header">
+            <span data-ng-bind="saleOrderHistory.date | moment: 'fullDate'"></span>
+        </div>
+
+        <div class="card list">
+            <div class="list-item" data-ng-repeat="saleOrder in saleOrderHistory.saleOrderList">
+                <p>
+                    <a class="font-14" href="/sale-orders/details/{{saleOrder.id}}">
+                        <span data-ng-bind="saleOrder.id | orderNumber"></span>
+                    </a>
+                    <span class="hint" data-ng-show="saleOrder.draft" data-translate="Draft"></span>
+                </p>
+                <p data-ng-bind="saleOrder.store"></p>
+                <p class="font-11 text-muted">
+                    <span data-ng-bind="saleOrder.customer"></span>
+                    <span data-ng-hide="saleOrder.customer" data-translate="Customer not identified"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-center text-primary" data-translate="No records found"
+         data-ng-show="controller.saleOrderHistory.isEmpty()"></div>
+
+    <div class="box text-center" data-ng-hide="controller.saleOrderHistory.isEmpty()"
+         data-ng-disabled="controller.searchBlocked()">
+        <button type="button" class="primary" data-ng-click="controller.search()">
+            <span data-ng-hide="controller.searching" data-translate="More results"></span>
+            <em data-ng-show="controller.searching" data-translate="Searching"></em>
+        </button>
+    </div>
+</div>
