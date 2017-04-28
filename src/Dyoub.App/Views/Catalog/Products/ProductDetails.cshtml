@@ -89,7 +89,7 @@
 
                 <div class="box">
                     <label data-translate="Additional information"></label>
-                    <strong data-ng-bind="controller.product.additionalInformation"></strong>
+                    <strong data-ng-bind-html="controller.product.additionalInformation | escapeHtml"></strong>
                     <strong data-ng-hide="controller.product.additionalInformation">-</strong>
                 </div>
             </div>
