@@ -18,16 +18,15 @@ namespace Dyoub.App.Data
                 Date = t.DateTime(nullable: false),
                 Value = t.Decimal(nullable: false, precision: 8, scale: 2)
             })
-            .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_OtherCashActivity")
-            .Index(t => t.Date, name: "IX_OtherCashActivity_Date");
+            .PrimaryKey(t => new { t.Id, t.TenantId })
+            .Index(t => t.Date);
 
             AddForeignKey(
                 dependentTable: "OtherCashActivity",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_OtherCashActivity_Tenant"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -35,8 +34,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "StoreId",
                 principalTable: "Store",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_OtherCashActivity_Store"
+                cascadeDelete: false
             );
         }
 

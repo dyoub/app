@@ -16,8 +16,8 @@ namespace Dyoub.App.Data
                 CreatedAt = t.DateTime(nullable: false),
                 DeactivatedAt = t.DateTime(nullable: true)
             })
-            .PrimaryKey(t => t.Id, name: "PK_Tenant")
-            .Index(t => t.Owner, name: "IX_Tenant_Owner");
+            .PrimaryKey(t => t.Id)
+            .Index(t => t.Owner);
         }
 
         public override void Down()

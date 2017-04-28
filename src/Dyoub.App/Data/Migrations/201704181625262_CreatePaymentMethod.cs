@@ -19,15 +19,14 @@ namespace Dyoub.App.Data
                 EarlyReceipt = t.Boolean(nullable: false),
                 Active = t.Boolean(nullable: false)
             })
-            .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_PaymentMethod");
+            .PrimaryKey(t => new { t.Id, t.TenantId });
 
             AddForeignKey(
                 dependentTable: "PaymentMethod",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_PaymentMethod_Tenant"
+                cascadeDelete: false
             );
 
             CreateTable("PaymentMethodFee", t => new
@@ -38,15 +37,14 @@ namespace Dyoub.App.Data
                 FeePercentage = t.Decimal(nullable: true, precision: 5, scale: 2),
                 FeeFixedValue = t.Decimal(nullable: true, precision: 5, scale: 2)
             })
-            .PrimaryKey(t => new { t.PaymentMethodId, t.TenantId, t.MinimumInstallment }, "PK_PaymentMethodFee");
+            .PrimaryKey(t => new { t.PaymentMethodId, t.TenantId, t.MinimumInstallment });
 
             AddForeignKey(
                 dependentTable: "PaymentMethodFee",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_PaymentMethodFee_Tenant"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -54,8 +52,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "PaymentMethodId",
                 principalTable: "PaymentMethod",
                 principalColumn: "Id",
-                cascadeDelete: true,
-                name: "FK_PaymentMethodFee_PaymentMethod"
+                cascadeDelete: true
             );
         }
 

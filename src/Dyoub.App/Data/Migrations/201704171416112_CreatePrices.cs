@@ -16,15 +16,14 @@ namespace Dyoub.App.Data
                 TenantId = t.Int(nullable: false),
                 UnitPrice = t.Decimal(nullable: false, precision: 8, scale: 2)
             })
-            .PrimaryKey(t => new { t.StoreId, t.ProductId, t.TenantId }, "PK_ProductPrice");
+            .PrimaryKey(t => new { t.StoreId, t.ProductId, t.TenantId });
 
             AddForeignKey(
                 dependentTable: "ProductPrice",
                 dependentColumn: "StoreId",
                 principalTable: "Store",
                 principalColumn: "Id",
-                cascadeDelete: true,
-                name: "FK_ProductPrice_Store"
+                cascadeDelete: true
             );
 
             AddForeignKey(
@@ -32,8 +31,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "ProductId",
                 principalTable: "Product",
                 principalColumn: "Id",
-                cascadeDelete: true,
-                name: "FK_ProductPrice_Product"
+                cascadeDelete: true
             );
 
             AddForeignKey(
@@ -41,8 +39,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_ProductPrice_Tenant"
+                cascadeDelete: false
             );
 
             CreateTable("ServicePrice", t => new
@@ -52,15 +49,14 @@ namespace Dyoub.App.Data
                 TenantId = t.Int(nullable: false),
                 UnitPrice = t.Decimal(nullable: false, precision: 8, scale: 2)
             })
-            .PrimaryKey(t => new { t.StoreId, t.ServiceId, t.TenantId }, "PK_ServicePrice");
+            .PrimaryKey(t => new { t.StoreId, t.ServiceId, t.TenantId });
 
             AddForeignKey(
                 dependentTable: "ServicePrice",
                 dependentColumn: "StoreId",
                 principalTable: "Store",
                 principalColumn: "Id",
-                cascadeDelete: true,
-                name: "FK_ServicePrice_Store"
+                cascadeDelete: true
             );
 
             AddForeignKey(
@@ -68,8 +64,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "ServiceId",
                 principalTable: "Service",
                 principalColumn: "Id",
-                cascadeDelete: true,
-                name: "FK_ServicePrice_Service"
+                cascadeDelete: true
             );
 
             AddForeignKey(
@@ -77,8 +72,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_ServicePrice_Tenant"
+                cascadeDelete: false
             );
         }
 

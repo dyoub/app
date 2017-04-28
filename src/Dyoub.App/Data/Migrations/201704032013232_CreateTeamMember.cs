@@ -16,15 +16,14 @@ namespace Dyoub.App.Data
                 TeamId = t.Int(nullable: false),
                 StoreId = t.Int(nullable: false)
             })
-            .PrimaryKey(t => new { t.UserId, t.TenantId }, "PK_TeamMember");
+            .PrimaryKey(t => new { t.UserId, t.TenantId });
             
             AddForeignKey(
                 dependentTable: "TeamMember",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_TeamMember_Tenant"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -32,8 +31,7 @@ namespace Dyoub.App.Data
                 dependentColumns: new string[] { "UserId", "TenantId" },
                 principalTable: "User",
                 principalColumns: new string[] { "Id", "TenantId" },
-                cascadeDelete: false,
-                name: "FK_TeamMember_User"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -41,8 +39,7 @@ namespace Dyoub.App.Data
                 dependentColumns: new string[] { "TeamId", "TenantId" },
                 principalTable: "Team",
                 principalColumns: new string[] { "Id", "TenantId" },
-                cascadeDelete: false,
-                name: "FK_TeamMember_Team"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -50,8 +47,7 @@ namespace Dyoub.App.Data
                 dependentColumns: new string[] { "TeamId", "TenantId" },
                 principalTable: "Store",
                 principalColumns: new string[] { "Id", "TenantId" },
-                cascadeDelete: false,
-                name: "FK_TeamMember_Store"
+                cascadeDelete: false
             );
         }
 

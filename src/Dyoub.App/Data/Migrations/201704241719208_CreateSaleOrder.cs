@@ -25,16 +25,15 @@ namespace Dyoub.App.Data
                 Author = t.String(nullable: false, maxLength: 80),
                 AdditionalInformation = t.String(nullable: true, maxLength: 255)
             })
-            .PrimaryKey(t => new { t.Id, t.TenantId }, name: "PK_SaleOrder")
-            .Index(t => t.IssueDate, name: "IX_SaleOrder_IssueDate", unique: false);
+            .PrimaryKey(t => new { t.Id, t.TenantId })
+            .Index(t => t.IssueDate, unique: false);
 
             AddForeignKey(
                 dependentTable: "SaleOrder",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_SaleOrder_Tenant"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -42,8 +41,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "StoreId",
                 principalTable: "Store",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_SaleOrder_Store"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -51,8 +49,7 @@ namespace Dyoub.App.Data
                 dependentColumn: "CustomerId",
                 principalTable: "Customer",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_SaleOrder_Customer"
+                cascadeDelete: false
             );
         }
         

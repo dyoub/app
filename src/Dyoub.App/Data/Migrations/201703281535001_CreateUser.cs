@@ -22,17 +22,16 @@ namespace Dyoub.App.Data
                 LastLogin = t.DateTime(nullable: false),
                 LastChangePassword = t.DateTime(nullable: false)
             })
-            .PrimaryKey(t => new { t.Id, t.TenantId }, name: "PK_User")
-            .Index(t => t.Email, name: "IX_User_Email", unique: true)
-            .Index(t => t.Salt, name: "IX_User_Salt", unique: true);
+            .PrimaryKey(t => new { t.Id, t.TenantId })
+            .Index(t => t.Email, unique: true)
+            .Index(t => t.Salt, unique: true);
 
             AddForeignKey(
                 dependentTable: "User",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_User_Tenant"
+                cascadeDelete: false
             );
         }
 

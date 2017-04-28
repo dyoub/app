@@ -21,15 +21,14 @@ namespace Dyoub.App.Data
                 StockMovement = t.Boolean(nullable: false),
                 CanFraction = t.Boolean(nullable: false)
             })
-            .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_Product");
+            .PrimaryKey(t => new { t.Id, t.TenantId });
             
             AddForeignKey(
                 dependentTable: "Product",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_Product_Tenant"
+                cascadeDelete: false
             );
         }
 

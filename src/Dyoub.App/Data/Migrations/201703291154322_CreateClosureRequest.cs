@@ -16,7 +16,7 @@ namespace Dyoub.App.Data
                 RequestDate = t.DateTime(nullable: false),
                 ExpiryDate = t.DateTime(nullable: false)
             })
-            .PrimaryKey(t => t.Token, name: "PK_ClosureRequest");
+            .PrimaryKey(t => t.Token);
         }
 
         public override void Down()

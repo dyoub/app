@@ -19,15 +19,14 @@ namespace Dyoub.App.Data
                 PhoneNumber = t.String(nullable: true, maxLength: 50),
                 AlternativePhoneNumber = t.String(nullable: true, maxLength: 50)
             })
-            .PrimaryKey(t => new { t.Id, t.TenantId }, "PK_Customer");
+            .PrimaryKey(t => new { t.Id, t.TenantId });
 
             AddForeignKey(
                 dependentTable: "Customer",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_Customer_Tenant"
+                cascadeDelete: false
             );
         }
 

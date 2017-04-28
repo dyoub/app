@@ -15,15 +15,14 @@ namespace Dyoub.App.Data
                 TenantId = t.Int(nullable: false),
                 Scope = t.String(nullable: false, maxLength: 50)
             })
-            .PrimaryKey(t => new { t.TeamId, t.TenantId, t.Scope }, "PK_TeamRule");
+            .PrimaryKey(t => new { t.TeamId, t.TenantId, t.Scope });
 
             AddForeignKey(
                 dependentTable: "TeamRule",
                 dependentColumn: "TenantId",
                 principalTable: "Tenant",
                 principalColumn: "Id",
-                cascadeDelete: false,
-                name: "FK_TeamRule_Tenant"
+                cascadeDelete: false
             );
 
             AddForeignKey(
@@ -31,8 +30,7 @@ namespace Dyoub.App.Data
                 dependentColumns: new string[] { "TeamId", "TenantId" },
                 principalTable: "Team",
                 principalColumns: new string[] { "Id", "TenantId" },
-                cascadeDelete: false,
-                name: "FK_TeamRule_Team"
+                cascadeDelete: false
             );
         }
         
