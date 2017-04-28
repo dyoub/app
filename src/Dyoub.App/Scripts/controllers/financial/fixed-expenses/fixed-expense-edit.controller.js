@@ -10,11 +10,6 @@
         this.handleError = handleError;
     }
 
-    Controller.prototype.create = function () {
-        var controller = this;
-        controller.fixedExpense = {};
-    };
-
     Controller.prototype.find = function () {
         var controller = this;
         controller.searching = true;
@@ -56,7 +51,7 @@
             controller.find();
         } else {
             controller.pageHeader = 'New fixed expense';
-            controller.create();
+            controller.fixedExpense = controller.FixedExpense.create();
         }
 
         controller.searchStores();
