@@ -23,6 +23,7 @@ using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using Dyoub.App.Models.EntityModel.Financial.Wallets;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -46,6 +47,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<TeamRule> TeamRules { get { return Set<TeamRule>(); } }
         public DbSet<Tenant> Tenants { get { return Set<Tenant>(); } }
         public DbSet<User> Users { get { return Set<User>(); } }
+        public DbSet<Wallet> Wallets { get { return Set<Wallet>(); } }
 
         public ApplicationContext() : this(DefaultConnection()) { }
 
@@ -78,6 +80,7 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new TeamRuleMapping());
             modelBuilder.Configurations.Add(new TenantMapping());
             modelBuilder.Configurations.Add(new UserMapping());
+            modelBuilder.Configurations.Add(new WalletMapping());
         }
         
         private static DbConnection DefaultConnection()

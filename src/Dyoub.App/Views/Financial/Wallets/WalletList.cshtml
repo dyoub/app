@@ -1,0 +1,69 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="WalletListController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Wallets"></div>
+
+    @using (Html.Authorize("wallets.edit"))
+    {
+        <div class="box">
+            <a href="/dashboard/financial" class="as-button">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a href="/wallets/new" class="as-button success" data-translate="Add"></a>
+        </div>
+    }
+
+    <form name="walletsFilter" data-ng-submit="controller.newSearch()">
+        <label>
+            <i class="fa fa-search"></i>
+            <span data-translate="Search filter"></span>
+        </label>
+        <div class="card">
+            <div class="box">
+                <label data-translate="Name"></label>
+                <input type="text" data-ng-model="controller.filter.name" data-ng-maxlength="80" />
+            </div>
+        </div>
+
+        <div class="box text-center">
+            <button type="submit" class="primary" data-ng-disabled="controller.searching">
+                <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                <em data-ng-show="controller.searching" data-translate="Searching"></em>
+            </button>
+            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+        </div>
+    </form>
+
+    <div class="card list">
+        <div class="list-item" data-ng-repeat="wallet in controller.walletList">
+            <p>
+                <a class="font-14" href="/wallets/details/{{wallet.id}}" data-ng-bind="wallet.name"></a>
+            </p>
+            <p data-ng-bind="wallet.additionalInformation"></p>
+            <p data-ng-hide="wallet.active">
+                <span class="hint danger" data-translate="Inactive"></span>
+            </p>
+        </div>
+    </div>
+
+    <div class="card text-center text-primary" data-translate="No records found"
+         data-ng-show="controller.walletList.isEmpty()"></div>
+
+    <div class="box text-center" data-ng-hide="controller.walletList.isEmpty()"
+         data-ng-disabled="controller.searching">
+        <button type="button" class="primary" data-ng-click="controller.search()">
+            <span data-ng-hide="controller.searching" data-translate="More results"></span>
+            <em data-ng-show="controller.searching" data-translate="Searching"></em>
+        </button>
+    </div>
+</div>
+

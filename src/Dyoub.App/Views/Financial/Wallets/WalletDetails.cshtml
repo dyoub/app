@@ -1,0 +1,61 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="WalletDetailsController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Wallet details"></div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Wallet not found."></p>
+            <a href="/wallets" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            <div class="box">
+                <a href="/wallets" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                @using (Html.Authorize("wallets.edit"))
+                {
+                    <a href="/wallets/edit/{{controller.wallet.id}}" class="as-button" data-translate="Edit"></a>
+                    <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"></button>
+                }
+            </div>
+
+            <div class="card">
+                <div class="box">
+                    <label data-translate="Name"></label>
+                    <strong data-ng-bind="controller.wallet.name"></strong>
+                </div>
+
+                <div class="box">
+                    <label data-translate="Active"></label>
+                    <strong data-ng-bind="controller.wallet.active | translate"></strong>
+                </div>
+
+                <div class="box">
+                    <label data-translate="Additional information"></label>
+                    <strong data-ng-bind-html="controller.wallet.additionalInformation | escapeHtml"></strong>
+                    <strong data-ng-hide="controller.wallet.additionalInformation">-</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.Authorize("wallets.edit"))
+    {
+        @Html.Partial("~/Views/Financial/Wallets/_RemoveWallet.cshtml")
+    }
+</div>

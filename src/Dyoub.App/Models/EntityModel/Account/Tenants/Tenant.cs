@@ -12,6 +12,7 @@ using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
+using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using Dyoub.App.Models.EntityModel.Manage.TeamRules;
@@ -43,5 +44,6 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<TeamMember> TeamMembers { get; set; }
         public virtual ICollection<TeamRule> TeamRules { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Wallet> Wallets { get; set; }
     }
 }

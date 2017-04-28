@@ -115,7 +115,14 @@ namespace Dyoub.App.Controllers.Account
             cashFlowAnalysis.CashActivities = await cashActivities.ToListAsync();
             cashFlowAnalysis.ToCurrentMonth();
 
-            return new FinancialOverviewJson(cashFlowAnalysis);
+            FinancialCount counter = await Tenant.Current
+                .Select(tenant => new FinancialCount
+                {
+                    Wallets = tenant.Wallets.Count()
+                })
+                .SingleOrDefaultAsync();
+
+            return new FinancialOverviewJson(counter, cashFlowAnalysis);
         }
 
         [HttpPost, Route("dashboard/management"), Authorization]
