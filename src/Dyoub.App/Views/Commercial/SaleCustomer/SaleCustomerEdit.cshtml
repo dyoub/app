@@ -1,0 +1,108 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SaleCustomerEditController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Edit sale order"></span>
+            <strong data-ng-bind="controller.saleOrder.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.saleOrderId">
+            <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Customer"></span>
+            <span class="separator"></span>
+            <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/items"
+               class="step" data-translate="Items"></a>
+            <span class="separator"></span>
+            <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <form name="controller.saleCustomerForm" data-ng-submit="controller.save()">
+            <div class="box">
+                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/customer"
+                   class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+            </div>
+
+            <div class="card">
+                <div class="box" data-ng-show="controller.saleOrder.customer.id">
+                    <span data-translate="The customer data will be updated."></span>
+                    <button type="button" class="danger small" data-translate="Clear form" data-ng-click="controller.clearCustomerData()"></button>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column small-8 medium-8 large-8">
+                        <div class="box" data-has-error="controller.saleCustomerForm.name.$invalid">
+                            <label>
+                                <span data-translate="Customer"></span>
+                                <span class="text-danger" data-ng-show="controller.customerHasData()">*</span>
+                            </label>
+                            <div class="suggestion" data-suggestion-open="controller.customerSuggestionOpened">
+                                <input type="text" name="name" data-ng-model="controller.saleOrder.customer.name" data-ng-maxlength="80"
+                                       data-ng-required="controller.customerHasData()"
+                                       data-event-typing="controller.newCustomerSearch()"
+                                       data-event-typing-end="controller.searchCustomers()" />
+                                <div class="suggestion-body">
+                                    <em class="text-muted" data-ng-show="controller.searchingCustomers" data-translate="Searching..."></em>
+                                    <div class="text-primary" data-translate="No records found" data-ng-show="controller.noCustomers()"></div>
+                                    <div class="box" data-ng-repeat="customer in controller.customerList">
+                                        <button type="button" class="primary small" data-translate="Select"
+                                                data-ng-click="controller.selectCustomer(customer)"></button>
+                                        <span data-ng-bind="customer.name"></span>
+                                        <span class="text-muted" data-ng-bind="customer.nationalId || customer.email || customer.phoneNumber"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.saleCustomerForm.nationalId.$invalid">
+                            <label data-translate="National ID"></label>
+                            <input type="text" name="nationalId" data-ng-model="controller.saleOrder.customer.nationalId"
+                                   data-ng-maxlength="50" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.saleCustomerForm.email.$invalid">
+                            <label data-translate="Email"></label>
+                            <input type="text" name="email" data-ng-model="controller.saleOrder.customer.email"
+                                   data-type-email data-ng-maxlength="80" />
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.saleCustomerForm.phoneNumber.$invalid">
+                            <label data-translate="Phone number"></label>
+                            <input type="text" name="phoneNumber" data-ng-model="controller.saleOrder.customer.phoneNumber" data-ng-maxlength="50" />
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box" data-has-error="controller.saleCustomerForm.alternativePhoneNumber.$invalid">
+                            <label data-translate="Alternative phone number"></label>
+                            <input type="text" name="alternativePhoneNumber" data-ng-model="controller.saleOrder.customer.alternativePhoneNumber"
+                                   data-ng-maxlength="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

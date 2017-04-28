@@ -189,6 +189,8 @@
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-detail.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\sale-customer\sale-customer-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\sale-customer\sale-customer-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-list.controller.js" />
@@ -220,6 +222,7 @@
     <Content Include="Scripts\services\commercial\installment.service.js" />
     <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
+    <Content Include="Scripts\services\commercial\sale-customer.service.js" />
     <Content Include="Scripts\services\commercial\sale-order.service.js" />
     <Content Include="Scripts\services\financial\fixed-expense.service.js" />
     <Content Include="Scripts\services\financial\other-cash-activites.service.js" />
@@ -240,6 +243,7 @@
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
+    <Compile Include="Controllers\Commercial\SaleCustomerController.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersController.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
@@ -447,6 +451,8 @@
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodFeeViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\UpdatePaymentMethodViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleCustomer\CustomerViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleCustomer\SaleCustomerViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleOrders\CreateSaleOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleOrders\ListSaleOrdersViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleOrders\SaleOrderIdViewModel.cs" />
@@ -488,6 +494,7 @@
     <Compile Include="Results\Catalog\Services\ServiceListJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodListJson.cs" />
+    <Compile Include="Results\Commercial\SaleCustomer\SaleCustomerJson.cs" />
     <Compile Include="Results\Commercial\SaleOrders\SaleOrderIdJson.cs" />
     <Compile Include="Results\Commercial\SaleOrders\SaleOrderJson.cs" />
     <Compile Include="Results\Commercial\SaleOrders\SaleOrderListJson.cs" />
@@ -581,6 +588,8 @@
     <Content Include="Views\Financial\Wallets\WalletDetails.cshtml" />
     <Content Include="Views\Financial\Wallets\WalletEdit.cshtml" />
     <Content Include="Views\Financial\Wallets\WalletList.cshtml" />
+    <Content Include="Views\Commercial\SaleCustomer\SaleCustomerDetails.cshtml" />
+    <Content Include="Views\Commercial\SaleCustomer\SaleCustomerEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

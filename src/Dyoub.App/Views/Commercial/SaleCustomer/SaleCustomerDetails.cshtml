@@ -1,0 +1,90 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SaleCustomerDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Sale order"></span>
+            <strong data-ng-bind="controller.saleOrder.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.saleOrderId">
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Customer"></span>
+            <span class="separator"></span>
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
+               class="step" data-translate="Items"></a>
+            <span class="separator"></span>
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        @using (Html.Authorize("SaleOrders:Edit"))
+        {
+            <div class="box">
+                <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/customer" class="as-button" data-translate="Edit"
+                   data-ng-hide="controller.saleOrder.confirmed"></a>
+            </div>
+        }
+
+        <div class="box">
+            <span class="hint success" data-translate="Sale billed" data-ng-show="controller.saleOrder.confirmed"></span>
+        </div>
+
+        <div class="card">
+            <div class="grid-row">
+                <div class="grid-column small-8 medium-8 large-8">
+                    <div class="box">
+                        <label data-translate="Customer"></label>
+                        <strong data-ng-bind="controller.saleOrder.customer.name"></strong>
+                        <strong data-ng-hide="controller.saleOrder.customer.name">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="National ID"></label>
+                        <strong data-ng-bind="controller.saleOrder.customer.nationalId"></strong>
+                        <strong data-ng-hide="controller.saleOrder.customer.nationalId">-</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Email"></label>
+                        <strong data-ng-bind="controller.saleOrder.customer.email"></strong>
+                        <strong data-ng-hide="controller.saleOrder.customer.email">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Phone number"></label>
+                        <strong data-ng-bind="controller.saleOrder.customer.phoneNumber"></strong>
+                        <strong data-ng-hide="controller.saleOrder.customer.phoneNumber">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Alternative phone number"></label>
+                        <strong data-ng-bind="controller.saleOrder.customer.alternativePhoneNumber"></strong>
+                        <strong data-ng-hide="controller.saleOrder.customer.alternativePhoneNumber">-</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

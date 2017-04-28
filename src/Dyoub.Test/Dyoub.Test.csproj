@@ -143,6 +143,9 @@
     <Compile Include="Contexts\Commercial\PaymentMethods\FindPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\ListPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\UpdatePaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleCustomer\FindSaleCustomerContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleCustomer\UpdateCustomerToConfirmedSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SaleCustomer\UpdateSaleCustomerContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\CreateSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\DeleteConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\DeleteSaleOrderContext.cs" />
@@ -186,6 +189,7 @@
     <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ServicesControllerTest.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\SaleCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersControllerTest.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesControllerTest.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
