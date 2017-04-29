@@ -30,6 +30,10 @@
         return this.$http.post('/pricing-tables/items', filter);
     };
 
+    Service.prototype.listItemsForSale = function (filter) {
+        return this.$http.post('/pricing-tables/items/for-sale', filter);
+    };
+
     Service.prototype.save = function (storeId, items) {
         return this.$http.post('/pricing-tables/update', {
             storeId: storeId,

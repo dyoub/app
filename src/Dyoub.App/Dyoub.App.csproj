@@ -165,6 +165,9 @@
     <EmbeddedResource Include="Data\Migrations\201704272018542_CreateWallet.resx">
       <DependentUpon>201704272018542_CreateWallet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201704281902537_CreateSaleItems.resx">
+      <DependentUpon>201704281902537_CreateSaleItems.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -191,6 +194,8 @@
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-customer\sale-customer-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-customer\sale-customer-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\sale-items\sale-items-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\sale-items\sale-items-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-orders\sale-order-list.controller.js" />
@@ -223,6 +228,7 @@
     <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
     <Content Include="Scripts\services\commercial\sale-customer.service.js" />
+    <Content Include="Scripts\services\commercial\sale-item.service.js" />
     <Content Include="Scripts\services\commercial\sale-order.service.js" />
     <Content Include="Scripts\services\financial\fixed-expense.service.js" />
     <Content Include="Scripts\services\financial\other-cash-activites.service.js" />
@@ -244,6 +250,7 @@
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerController.cs" />
+    <Compile Include="Controllers\Commercial\SaleItemsController.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersController.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
@@ -321,6 +328,10 @@
     <Compile Include="Data\Migrations\201704272018542_CreateWallet.Designer.cs">
       <DependentUpon>201704272018542_CreateWallet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201704281902537_CreateSaleItems.cs" />
+    <Compile Include="Data\Migrations\201704281902537_CreateSaleItems.Designer.cs">
+      <DependentUpon>201704281902537_CreateSaleItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -373,9 +384,16 @@
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethod.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleItems\SaleItem.cs" />
     <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrder.cs" />
     <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrderMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrderQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleProducts\SaleProduct.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleProducts\SaleProductMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleProducts\SaleProductQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleServices\SaleService.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleServices\SaleServiceMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\SaleServices\SaleServiceQuery.cs" />
     <Compile Include="Models\EntityModel\Financial\CashActivities\CashActivity.cs" />
     <Compile Include="Models\EntityModel\Financial\CashActivities\CashActivityType.cs" />
     <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpense.cs" />
@@ -453,6 +471,8 @@
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\UpdatePaymentMethodViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleCustomer\CustomerViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleCustomer\SaleCustomerViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleItems\SaleItemViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\SaleItems\UpdateSaleItemListViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleOrders\CreateSaleOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleOrders\ListSaleOrdersViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleOrders\SaleOrderIdViewModel.cs" />
@@ -495,6 +515,7 @@
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodListJson.cs" />
     <Compile Include="Results\Commercial\SaleCustomer\SaleCustomerJson.cs" />
+    <Compile Include="Results\Commercial\SaleItems\SaleItemListJson.cs" />
     <Compile Include="Results\Commercial\SaleOrders\SaleOrderIdJson.cs" />
     <Compile Include="Results\Commercial\SaleOrders\SaleOrderJson.cs" />
     <Compile Include="Results\Commercial\SaleOrders\SaleOrderListJson.cs" />
@@ -590,6 +611,9 @@
     <Content Include="Views\Financial\Wallets\WalletList.cshtml" />
     <Content Include="Views\Commercial\SaleCustomer\SaleCustomerDetails.cshtml" />
     <Content Include="Views\Commercial\SaleCustomer\SaleCustomerEdit.cshtml" />
+    <Content Include="Views\Commercial\SaleItems\SaleItemsDetails.cshtml" />
+    <Content Include="Views\Commercial\SaleItems\SaleItemsEdit.cshtml" />
+    <Content Include="Views\Commercial\SaleItems\_RemoveItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

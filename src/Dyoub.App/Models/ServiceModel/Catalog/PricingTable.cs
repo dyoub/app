@@ -101,12 +101,12 @@ namespace Dyoub.App.Models.ServiceModel.Catalog
             
             ICollection<ProductPrice> oldProductPrices = await Tenant.ProductPrices
                 .WhereStoreId(StoreId)
-                .WhereProductIdIn(itemPrices.Where(i => i.IsProduct).Select(p => p.Id))
+                .WhereProductIdIn(itemPrices.Where(i => i.IsProduct).Select(p => p.ItemId))
                 .ToListAsync();
 
             ICollection<ServicePrice> oldServicePrices = await Tenant.ServicePrices
                 .WhereStoreId(StoreId)
-                .WhereServiceIdIn(itemPrices.Where(i => i.IsService).Select(p => p.Id))
+                .WhereServiceIdIn(itemPrices.Where(i => i.IsService).Select(p => p.ItemId))
                 .ToListAsync();
 
             Tenant.ProductPrices.RemoveRange(oldProductPrices);

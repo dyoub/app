@@ -21,7 +21,7 @@ namespace Dyoub.App.Results.Catalog.PricingTables
         {
             Data = ItemPrices.Select(item => new
             {
-                id = item.Id,
+                id = item.ItemId,
                 isProduct = item.IsProduct,
                 isService = item.IsService,
                 name = item.Name,

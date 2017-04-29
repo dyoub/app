@@ -1,0 +1,93 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SaleItemsDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header">
+        <div class="page-header">
+            <span data-translate="Sale order"></span>
+            <strong data-ng-bind="controller.saleOrder.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.saleOrderId">
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Items"></span>
+            <span class="separator"></span>
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        @using (Html.Authorize("sale-orders.edit"))
+        {
+            <div class="box">
+                <a href="/sale-orders/edit/{{controller.saleOrder.id}}/items" class="as-button" data-translate="Edit"
+                   data-ng-hide="controller.saleOrder.confirmed"></a>
+            </div>
+        }
+
+        <div class="box" >
+            <span class="hint success" data-translate="Sale billed" data-ng-show="controller.saleOrder.confirmed"></span>
+        </div>
+
+        <div class="card list">
+            <div class="list-item text-primary text-center" data-translate="At least one item must be informed."
+                 data-ng-show="controller.saleOrder.itemList.isEmpty()"></div>
+
+            <div class="list-item" data-ng-repeat="item in controller.saleOrder.itemList">
+                <div class="box">
+                    <p data-ng-bind="item.name"></p>
+                    <span class="font-11 text-muted">
+                        <i class="fa fa-barcode"></i>
+                        <span data-ng-bind="item.code"></span>
+                        <span data-ng-hide="item.code" data-translate="No code"></span>
+                    </span>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column small-6 medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <label data-translate="Unit price"></label>
+                                <strong data-ng-bind="item.unitPrice | currency"></strong>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <label data-translate="Amount"></label>
+                                <strong data-ng-bind="item.quantity | number:(item.canSellFraction ? 3 : 0)"></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-column small-6 medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <label data-translate="Discount"></label>
+                                <strong data-ng-show="item.discount">
+                                    <span data-ng-bind="item.discount | number:2"></span>%
+                                </strong>
+                                <strong data-ng-hide="item.discount">-</strong>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <label data-translate="Total payable"></label>
+                                <strong data-ng-bind="item.totalPayable | currency"></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

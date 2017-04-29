@@ -18,6 +18,10 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Services
                 .WithMany(p => p.Services)
                 .HasForeignKey(p => p.TenantId);
 
+            HasMany(p => p.SaleServices)
+                .WithRequired(p => p.Service)
+                .HasForeignKey(p => new { p.ServiceId, p.TenantId });
+
             HasMany(p => p.ServicePrices)
                 .WithRequired(p => p.Service)
                 .HasForeignKey(p => new { p.ServiceId, p.TenantId });

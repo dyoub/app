@@ -24,6 +24,10 @@ using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
+using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
+using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
+using System.Linq;
+using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -39,6 +43,8 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<Product> Products { get { return Set<Product>(); } }
         public DbSet<ProductPrice> ProductPrices { get { return Set<ProductPrice>(); } }
         public DbSet<SaleOrder> SaleOrders { get { return Set<SaleOrder>(); } }
+        public DbSet<SaleProduct> SaleProducts { get { return Set<SaleProduct>(); } }
+        public DbSet<SaleService> SaleServices { get { return Set<SaleService>(); } }
         public DbSet<Service> Services { get { return Set<Service>(); } }
         public DbSet<ServicePrice> ServicePrices { get { return Set<ServicePrice>(); } }
         public DbSet<Store> Stores { get { return Set<Store>(); } }
@@ -48,6 +54,17 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<Tenant> Tenants { get { return Set<Tenant>(); } }
         public DbSet<User> Users { get { return Set<User>(); } }
         public DbSet<Wallet> Wallets { get { return Set<Wallet>(); } }
+
+        public IQueryable<ItemPrice> ItemPrices
+        {
+            get
+            {
+                IQueryable<ItemPrice> productPrices = ProductPrices.AsItemPrice();
+                IQueryable<ItemPrice> servicePrices = ServicePrices.AsItemPrice();
+
+                return productPrices.Concat(servicePrices);
+            }
+        }
 
         public ApplicationContext() : this(DefaultConnection()) { }
 
@@ -72,6 +89,8 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new ProductPriceMapping());
             modelBuilder.Configurations.Add(new SaleOrderMapping());
+            modelBuilder.Configurations.Add(new SaleProductMapping());
+            modelBuilder.Configurations.Add(new SaleServiceMapping());
             modelBuilder.Configurations.Add(new ServiceMapping());
             modelBuilder.Configurations.Add(new ServicePriceMapping());
             modelBuilder.Configurations.Add(new StoreMapping());

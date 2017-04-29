@@ -13,7 +13,17 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
         {
             return saleOrders.Include(saleOrder => saleOrder.Customer);
         }
-        
+
+        public static IQueryable<SaleOrder> IncludeSaleProducts(this IQueryable<SaleOrder> saleOrders)
+        {
+            return saleOrders.Include(saleOrder => saleOrder.SaleProducts);
+        }
+
+        public static IQueryable<SaleOrder> IncludeSaleServices(this IQueryable<SaleOrder> saleOrders)
+        {
+            return saleOrders.Include(saleOrder => saleOrder.SaleServices);
+        }
+
         public static IQueryable<SaleOrder> IncludeStore(this IQueryable<SaleOrder> saleOrders)
         {
             return saleOrders.Include(saleOrder => saleOrder.Store);

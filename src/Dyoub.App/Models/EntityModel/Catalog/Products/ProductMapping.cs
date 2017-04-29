@@ -21,6 +21,10 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
             HasMany(p => p.ProductPrices)
                 .WithRequired(p => p.Product)
                 .HasForeignKey(p => new { p.ProductId, p.TenantId });
+
+            HasMany(p => p.SaleProducts)
+                .WithRequired(p => p.Product)
+                .HasForeignKey(p => new { p.ProductId, p.TenantId });
         }
     }
 }

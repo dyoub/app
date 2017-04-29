@@ -9,7 +9,7 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ItemPrices
 {
     public class ItemPrice : ITenantData
     {
-        public int Id { get { return (ProductId ?? ServiceId).Value; } }
+        public int ItemId { get { return (ProductId ?? ServiceId).Value; } }
         public int? ProductId { get; set; }
         public int? ServiceId { get; set; }
         public int TenantId { get; set; }

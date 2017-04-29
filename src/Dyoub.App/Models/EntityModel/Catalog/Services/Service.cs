@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
+using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Catalog.Services
@@ -18,6 +19,7 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Services
         public bool CanFraction { get; set; }
 
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<SaleService> SaleServices { get; set; }
         public virtual ICollection<ServicePrice> ServicePrices { get; set; }
     }
 }
