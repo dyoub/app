@@ -36,7 +36,8 @@
                     <span data-ng-hide="controller.saving" data-translate="Save"></span>
                     <span data-ng-show="controller.saving" data-translate="Saving"></span>
                 </button>
-                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"></button>
+                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"
+                        data-ng-disabled="controller.saving"></button>
             </div>
 
             <div class="card">
