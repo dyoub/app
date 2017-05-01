@@ -25,15 +25,18 @@
         </div>
 
         <div data-ng-hide="controller.notFound">
-            @using (Html.Authorize("pricing-tables.edit"))
-            {
-                <div class="box">
-                    <a href="/pricing-tables" class="as-button"><i class="fa fa-arrow-left"></i></a>
+            <div class="box">
+                <a href="/pricing-tables" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                @using (Html.Authorize("pricing-tables.edit"))
+                {
                     <a href="/pricing-tables/edit/{{controller.store.id}}" class="as-button" data-translate="Edit"></a>
                     <a href="/pricing-tables/copy-to/{{controller.store.id}}" class="as-button" data-translate="Copy from pricing table"></a>
                     <button type="button" class="danger" data-translate="Erase prices" data-ng-click="controller.showClearDialog()"></button>
-                </div>
-            }
+                }
+            </div>
 
             <form data-ng-submit="controller.newSearchOfItems()">
                 <label>
@@ -124,7 +127,7 @@
             </div>
         </div>
     </div>
-    
+
     @using (Html.Authorize("pricing-tables.edit"))
     {
         @Html.Partial("~/Views/Catalog/PricingTables/_ClearPricingTable.cshtml")

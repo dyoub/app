@@ -1,4 +1,6 @@
-﻿@*
+﻿@*<a href="/dashboard/commercial" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
     Copyright (c) Dyoub Applications. All rights reserved.
     Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 *@
@@ -12,15 +14,16 @@
 <div class="container" data-ng-controller="CustomerListController as controller" data-ng-init="controller.init()">
     <div class="page-header" data-translate="Customers"></div>
 
-    @using (Html.Authorize("customers.edit"))
-    {
-        <div class="box">
-            <a href="/dashboard/commercial" class="as-button">
-                <i class="fa fa-arrow-left"></i>
-            </a>
+    <div class="box">
+        <a href="/dashboard/commercial" class="as-button">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+
+        @using (Html.Authorize("customers.edit"))
+        {
             <a href="/customers/new" class="as-button success" data-translate="Add"></a>
-        </div>
-    }
+        }
+    </div>
 
     <form name="customersFilter" data-ng-submit="controller.newSearch()">
         <label>
