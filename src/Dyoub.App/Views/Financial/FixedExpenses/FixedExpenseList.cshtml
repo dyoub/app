@@ -12,99 +12,113 @@
 <div class="container" data-ng-controller="FixedExpenseListController as controller" data-ng-init="controller.init()">
     <div class="page-header" data-translate="Fixed expenses"></div>
 
-    @using (Html.Authorize("fixed-expenses.edit"))
-    {
-        <div class="box">
-            <a href="/dashboard/financial" class="as-button">
-                <i class="fa fa-arrow-left"></i>
-            </a>
-            <a href="/fixed-expenses/new" class="as-button success" data-translate="Add"></a>
-        </div>
-    }
+    <div class="loading box" data-ng-show="controller.searchingStores"></div>
 
-    <form name="controller.fixedExpensesFilter" data-ng-submit="controller.newSearch()">
-        <label>
-            <i class="fa fa-search"></i>
-            <span data-translate="Search filter"></span>
-        </label>
-        <div class="card">
+    <div class="ng-cloak" data-ng-hide="controller.searchingStores">
+        <div class="error" data-ng-show="controller.notStoresYet">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="There is no stores yet."></p>
+            <a href="/stores/new" class="as-button primary" data-translate="Add store"></a>
+        </div>
+
+        <div data-ng-hide="controller.notStoresYet">
             <div class="box">
-                <label data-translate="Description"></label>
-                <input type="text" data-ng-model="controller.filter.description" data-ng-maxlength="80" />
+                <a href="/dashboard/financial" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                @using (Html.Authorize("fixed-expenses.edit"))
+                {
+                    <a href="/fixed-expenses/new" class="as-button success" data-translate="Add"></a>
+                }
             </div>
-            <div class="grid-row">
-                <div class="grid-column small-6 medium-6 large-6">
+
+            <form name="controller.fixedExpensesFilter" data-ng-submit="controller.newSearch()">
+                <label>
+                    <i class="fa fa-search"></i>
+                    <span data-translate="Search filter"></span>
+                </label>
+                <div class="card">
                     <div class="box">
-                        <label>
-                            <span data-translate="Store"></span>
-                            <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
-                        </label>
-                        <select name="store" data-ng-model="controller.filter.store"
-                                data-ng-options="store as store.name for store in controller.storeList track by store.id"
-                                data-ng-disabled="controller.searchingStores">
-                            <option value="" data-translate="All stores"></option>
-                        </select>
+                        <label data-translate="Description"></label>
+                        <input type="text" data-ng-model="controller.filter.description" data-ng-maxlength="80" />
                     </div>
-                </div>
-                <div class="grid-column small-6 medium-6 large-6">
                     <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box" data-has-error="controller.fixedExpensesFilter.startDate.$invalid">
-                                <label data-translate="From"></label>
-                                <input type="text" name="startDate" data-ng-model="controller.filter.startDate" data-type-date
-                                       data-valid-date-before="controller.filter.endDate" />
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="box">
+                                <label>
+                                    <span data-translate="Store"></span>
+                                    <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                                </label>
+                                <select name="store" data-ng-model="controller.filter.store"
+                                        data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                        data-ng-disabled="controller.searchingStores">
+                                    <option value="" data-translate="All stores"></option>
+                                </select>
                             </div>
                         </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box" data-has-error="controller.fixedExpensesFilter.endDate.$invalid">
-                                <label data-translate="Until"></label>
-                                <input type="text" name="endDate" data-ng-model="controller.filter.endDate" data-type-date
-                                       data-valid-date-after="controller.filter.startDate" />
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="controller.fixedExpensesFilter.startDate.$invalid">
+                                        <label data-translate="From"></label>
+                                        <input type="text" name="startDate" data-ng-model="controller.filter.startDate" data-type-date
+                                               data-valid-date-before="controller.filter.endDate" />
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="controller.fixedExpensesFilter.endDate.$invalid">
+                                        <label data-translate="Until"></label>
+                                        <input type="text" name="endDate" data-ng-model="controller.filter.endDate" data-type-date
+                                               data-valid-date-after="controller.filter.startDate" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="box text-center">
+                    <button type="submit" class="primary" data-ng-disabled="controller.searchBlocked()">
+                        <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                        <em data-ng-show="controller.searching" data-translate="Searching"></em>
+                    </button>
+                    <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+                </div>
+            </form>
+
+            <div class="card list">
+                <div class="list-item" data-ng-repeat="fixedExpense in controller.fixedExpenseList">
+                    <div class="grid-row">
+                        <div class="grid-column compact-8 small-8 medium-8 large-8">
+                            <p>
+                                <a class="font-14" href="/fixed-expenses/details/{{fixedExpense.id}}"
+                                   data-ng-bind="fixedExpense.description"></a>
+                            </p>
+                            <p class="font-10 text-muted">
+                                <span data-ng-hide="fixedExpense.endDate" data-translate="Since"></span>
+                                <span data-ng-bind="fixedExpense.startDate | moment:'shortDate'"></span>
+                                <span data-ng-show="fixedExpense.endDate" data-translate="to"></span>
+                                <span data-ng-bind="fixedExpense.endDate | moment:'shortDate'"></span>
+                            </p>
+                        </div>
+                        <div class="grid-column compact-4 small-4 medium-4 large-4">
+                            <p class="text-right" data-ng-bind="fixedExpense.value | currency"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center text-primary" data-translate="No records found"
+                 data-ng-show="controller.noRecordsFound()"></div>
+
+            <div class="box text-center" data-ng-hide="controller.fixedExpenseList.isEmpty()"
+                 data-ng-disabled="controller.searching">
+                <button type="button" class="primary" data-ng-click="controller.search()">
+                    <span data-ng-hide="controller.searching" data-translate="MoreResults"></span>
+                    <em data-ng-show="controller.searching" data-translate="Searching"></em>
+                </button>
             </div>
         </div>
-
-        <div class="box text-center">
-            <button type="submit" class="primary" data-ng-disabled="controller.searchBlocked()">
-                <span data-ng-hide="controller.searching" data-translate="Search"></span>
-                <em data-ng-show="controller.searching" data-translate="Searching"></em>
-            </button>
-            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
-        </div>
-    </form>
-
-    <div class="card list">
-        <div class="list-item" data-ng-repeat="fixedExpense in controller.fixedExpenseList">
-            <div class="grid-row">
-                <div class="grid-column compact-8 small-8 medium-8 large-8">
-                    <p>
-                        <a class="font-14" href="/fixed-expenses/details/{{fixedExpense.id}}" data-ng-bind="fixedExpense.description"></a>
-                    </p>
-                    <p class="font-10 text-muted">
-                        <span data-ng-hide="fixedExpense.endDate" data-translate="Since"></span>
-                        <span data-ng-bind="fixedExpense.startDate | moment:'shortDate'"></span>
-                        <span data-ng-show="fixedExpense.endDate" data-translate="to"></span>
-                        <span data-ng-bind="fixedExpense.endDate | moment:'shortDate'"></span>
-                    </p>
-                </div>
-                <div class="grid-column compact-4 small-4 medium-4 large-4">
-                    <p class="text-right" data-ng-bind="fixedExpense.value | currency"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card text-center text-primary" data-translate="No records found"
-         data-ng-show="controller.noRecordsFound()"></div>
-
-    <div class="box text-center" data-ng-hide="controller.fixedExpenseList.isEmpty()"
-         data-ng-disabled="controller.searching">
-        <button type="button" class="primary" data-ng-click="controller.search()">
-            <span data-ng-hide="controller.searching" data-translate="MoreResults"></span>
-            <em data-ng-show="controller.searching" data-translate="Searching"></em>
-        </button>
     </div>
 </div>

@@ -74,6 +74,7 @@
             .list()
             .then(function (response) {
                 controller.storeList = response.data;
+                controller.notStoresYet = controller.storeList.length === 0;
             })
             ['catch'](function (response) {
                 controller.handleError(response);
