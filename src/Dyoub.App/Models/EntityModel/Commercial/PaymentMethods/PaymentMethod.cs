@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
+using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.PaymentMethods
@@ -19,5 +20,6 @@ namespace Dyoub.App.Models.EntityModel.Commercial.PaymentMethods
 
         public virtual Tenant Tenant { get; set; }
         public virtual ICollection<PaymentMethodFee> PaymentMethodFees { get; set; }
+        public virtual ICollection<SalePayment> SalePayments { get; set; }
     }
 }

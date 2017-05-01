@@ -26,6 +26,10 @@
         return this.$http.post('/payment-methods', filter);
     };
 
+    Service.prototype.listActives = function () {
+        return this.$http.post('/payment-methods/actives');
+    };
+
     Service.prototype.receivedDateOptions = function (max) {
         var options = [];
 

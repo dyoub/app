@@ -32,9 +32,9 @@ namespace Dyoub.App.Data
 
             AddForeignKey(
                 dependentTable: "FixedExpense",
-                dependentColumn: "StoreId",
+                dependentColumns: new string[] { "StoreId", "TenantId" },
                 principalTable: "Store",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: false
             );
         }

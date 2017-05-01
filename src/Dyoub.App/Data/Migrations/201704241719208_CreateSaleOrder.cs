@@ -38,17 +38,17 @@ namespace Dyoub.App.Data
 
             AddForeignKey(
                 dependentTable: "SaleOrder",
-                dependentColumn: "StoreId",
+                dependentColumns: new string[] { "StoreId", "TenantId" },
                 principalTable: "Store",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: false
             );
 
             AddForeignKey(
                 dependentTable: "SaleOrder",
-                dependentColumn: "CustomerId",
+                dependentColumns: new string[] { "CustomerId", "TenantId" },
                 principalTable: "Customer",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: false
             );
         }

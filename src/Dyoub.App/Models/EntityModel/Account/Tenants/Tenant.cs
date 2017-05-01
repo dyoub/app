@@ -10,6 +10,7 @@ using Dyoub.App.Models.EntityModel.Commercial.Customers;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
@@ -39,6 +40,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
+        public virtual ICollection<SalePayment> SalePayments { get; set; }
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
         public virtual ICollection<SaleService> SaleServices { get; set; }
         public virtual ICollection<Service> Services { get; set; }

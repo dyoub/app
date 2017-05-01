@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Commercial.Customers;
+using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
@@ -32,6 +33,7 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
         public virtual Customer Customer { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual Store Store { get; set; }
+        public virtual ICollection<SalePayment> SalePayments { get; set; }
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
         public virtual ICollection<SaleService> SaleServices { get; set; }
     }

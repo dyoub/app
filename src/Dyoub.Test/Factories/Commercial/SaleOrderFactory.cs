@@ -20,6 +20,9 @@ namespace Dyoub.Test.Factories.Commercial
                 IssueDate = DateTime.Today,
                 AdditionalInformation = "Additional information.",
                 Author = "user@email.com",
+                Total = 20.00M,
+                Discount = 10,
+                TotalPayable = 18.00M,
                 CreatedAt = DateTime.Now
             };
         }

@@ -156,6 +156,9 @@
     <Compile Include="Contexts\Commercial\SaleOrders\ListSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\UpdateConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\UpdateSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SalePayments\ListSalePaymentsContext.cs" />
+    <Compile Include="Contexts\Commercial\SalePayments\UpdatePaymentsOfConfirmedSaleOrderContext.cs" />
+    <Compile Include="Contexts\Commercial\SalePayments\UpdateSalePaymentsContext.cs" />
     <Compile Include="Contexts\EmptyContext.cs" />
     <Compile Include="Contexts\Financial\FixedExpenses\CreateFixedExpenseContext.cs" />
     <Compile Include="Contexts\Financial\FixedExpenses\DeleteFixedExpenseContext.cs" />
@@ -195,6 +198,7 @@
     <Compile Include="Controllers\Commercial\SaleCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleItemsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\SalePaymentsControllerTest.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesControllerTest.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
     <Compile Include="Controllers\Financial\WalletsControllerTest.cs" />
@@ -208,6 +212,7 @@
     <Compile Include="Factories\Catalog\ServicePriceFactory.cs" />
     <Compile Include="Factories\Commercial\PaymentMethodFactory.cs" />
     <Compile Include="Factories\Commercial\SaleOrderFactory.cs" />
+    <Compile Include="Factories\Commercial\SalePaymentFactory.cs" />
     <Compile Include="Factories\Commercial\SaleProductFactory.cs" />
     <Compile Include="Factories\Commercial\SaleServiceFactory.cs" />
     <Compile Include="Factories\Financial\FixedExpenseFactory.cs" />

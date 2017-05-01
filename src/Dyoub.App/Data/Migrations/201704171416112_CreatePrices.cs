@@ -20,17 +20,17 @@ namespace Dyoub.App.Data
 
             AddForeignKey(
                 dependentTable: "ProductPrice",
-                dependentColumn: "StoreId",
+                dependentColumns: new string[] { "StoreId", "TenantId" },
                 principalTable: "Store",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: true
             );
 
             AddForeignKey(
                 dependentTable: "ProductPrice",
-                dependentColumn: "ProductId",
+                dependentColumns: new string[] { "ProductId", "TenantId" },
                 principalTable: "Product",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: true
             );
 
@@ -53,17 +53,17 @@ namespace Dyoub.App.Data
 
             AddForeignKey(
                 dependentTable: "ServicePrice",
-                dependentColumn: "StoreId",
+                dependentColumns: new string[] { "StoreId", "TenantId" },
                 principalTable: "Store",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: true
             );
 
             AddForeignKey(
                 dependentTable: "ServicePrice",
-                dependentColumn: "ServiceId",
+                dependentColumns: new string[] { "ServiceId", "TenantId" },
                 principalTable: "Service",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: true
             );
 
