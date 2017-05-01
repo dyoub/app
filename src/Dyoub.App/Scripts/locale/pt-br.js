@@ -234,7 +234,7 @@
                 "New wallet": "Nova carteira",
                 "No": "Não",
                 "No code": "Sem código",
-                "No payments": "Sem pagamentos",
+                "No payment added.": "Nenhum pagamento adicionado.",
                 "No sale fees": "Sem taxa de venda.",
                 "No records found": "Nenhum registro encontrado",
                 "Not defined": "Não definido",
