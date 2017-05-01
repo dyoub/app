@@ -10,8 +10,7 @@
 <div class="container" data-ng-controller="PricingTableCopyController as controller" data-ng-init="controller.init()">
     <div class="page-header">
         <span data-translate="Copy to pricing table"></span>
-        <span>-</span>
-        <span data-ng-bind="controller.store.name"></span>
+        <strong data-ng-bind="controller.store.name"></strong>
     </div>
 
     <form name="controller.formCopyPricingTable" data-ng-submit="controller.copyPrices()">
