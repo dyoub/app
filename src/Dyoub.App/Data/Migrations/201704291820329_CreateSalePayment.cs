@@ -39,7 +39,7 @@ namespace Dyoub.App.Data
                 dependentColumns: new string[] { "SaleOrderId", "TenantId" },
                 principalTable: "SaleOrder",
                 principalColumns: new string[] { "Id", "TenantId" },
-                cascadeDelete: false
+                cascadeDelete: true
             );
 
             AddForeignKey(

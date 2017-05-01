@@ -17,7 +17,7 @@ namespace Dyoub.App.Data
                 Quantity = t.Decimal(nullable: false, precision: 9, scale: 3),
                 UnitPrice = t.Decimal(nullable: false, precision: 8, scale: 2),
                 Total = t.Decimal(nullable: false, precision: 10, scale: 2),
-                Discount = t.Decimal(nullable: false, precision: 10, scale: 2),
+                Discount = t.Decimal(nullable: true, precision: 10, scale: 2),
                 TotalPayable = t.Decimal(nullable: false, precision: 10, scale: 2)
             })
             .PrimaryKey(t => new { t.SaleOrderId, t.ProductId, t.TenantId });
@@ -43,7 +43,7 @@ namespace Dyoub.App.Data
                 dependentColumns: new string[] { "SaleOrderId", "TenantId" },
                 principalTable: "SaleOrder",
                 principalColumns: new string[] { "Id", "TenantId" },
-                cascadeDelete: false
+                cascadeDelete: true
             );
 
             CreateTable("SaleService", t => new
@@ -80,7 +80,7 @@ namespace Dyoub.App.Data
                 dependentColumns: new string[] { "SaleOrderId", "TenantId" },
                 principalTable: "SaleOrder",
                 principalColumns: new string[] { "Id", "TenantId" },
-                cascadeDelete: false
+                cascadeDelete: true
             );
         }
 
