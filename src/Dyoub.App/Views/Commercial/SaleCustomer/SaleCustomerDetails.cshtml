@@ -32,7 +32,7 @@
     <div class="loading box" data-ng-show="controller.searching"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchComplete()">
-        @using (Html.Authorize("SaleOrders:Edit"))
+        @using (Html.Authorize("sale-orders.edit"))
         {
             <div class="box">
                 <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/customer" class="as-button" data-translate="Edit"
