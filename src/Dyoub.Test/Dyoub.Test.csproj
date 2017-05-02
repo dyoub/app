@@ -216,7 +216,7 @@
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
     <Compile Include="Controllers\Financial\SaleOrderBillingControllerTest.cs" />
     <Compile Include="Controllers\Financial\WalletsControllerTest.cs" />
-    <Compile Include="Controllers\Inventory\CustomersControllerTest.cs" />
+    <Compile Include="Controllers\Inventory\SuppliersControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Controllers\Commercial\CustomersControllerTest.cs" />
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
