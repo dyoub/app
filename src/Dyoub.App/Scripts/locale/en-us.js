@@ -24,6 +24,7 @@ angular.module("ngLocale", [], ["$provide", function ($provide) {
 
     $provide.value("$locale", {
         DATETIME_FORMATS: {
+            MONTH: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             day: "DD",
             weekDay: "dddd",
             month: 'MM',

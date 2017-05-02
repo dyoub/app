@@ -54,6 +54,7 @@
         $provide.value("$locale", {
             id: "pt-br",
             DATETIME_FORMATS: {
+                MONTH: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
                 day: "DD",
                 weekDay: "dddd",
                 month: 'MM',
