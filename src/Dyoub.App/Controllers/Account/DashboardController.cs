@@ -61,10 +61,10 @@ namespace Dyoub.App.Controllers.Account
             return View("~/Views/Account/Dashboard/General.cshtml");
         }
 
-        [HttpGet, Route("dashboard/stock"), Authorization]
-        public ActionResult Stock()
+        [HttpGet, Route("dashboard/inventory"), Authorization]
+        public ActionResult Inventory()
         {
-            return View("~/Views/Account/Dashboard/Stock.cshtml");
+            return View("~/Views/Account/Dashboard/Inventory.cshtml");
         }
 
         [HttpPost, Route("dashboard/account"), Authorization]
@@ -126,6 +126,19 @@ namespace Dyoub.App.Controllers.Account
                 .SingleOrDefaultAsync();
 
             return new FinancialOverviewJson(counter, cashFlowAnalysis);
+        }
+
+        [HttpPost, Route("dashboard/inventory"), Authorization]
+        public async Task<ActionResult> InventoryCount()
+        {
+            InventoryCount counter = await Tenant.Current
+                .Select(tenant => new InventoryCount
+                {
+                    Suppliers = tenant.Suppliers.Count()
+                })
+                .SingleOrDefaultAsync();
+
+            return new InventoryOverviewJson(counter);
         }
 
         [HttpPost, Route("dashboard/management"), Authorization]

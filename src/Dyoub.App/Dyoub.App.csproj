@@ -174,11 +174,15 @@
     <EmbeddedResource Include="Data\Migrations\201705012339023_CreateSaleIncome.resx">
       <DependentUpon>201705012339023_CreateSaleIncome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705021840485_CreateSupplier.resx">
+      <DependentUpon>201705021840485_CreateSupplier.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
     <Content Include="Scripts\controllers\account\dashboard\commercial-overview.controller.js" />
     <Content Include="Scripts\controllers\account\dashboard\financial-overview.controller.js" />
+    <Content Include="Scripts\controllers\account\dashboard\inventory-overview.controller.js" />
     <Content Include="Scripts\controllers\account\password-recoveries\new-password-recovery.controller.js" />
     <Content Include="Scripts\controllers\account\profile\profile-details.controller.js" />
     <Content Include="Scripts\controllers\account\profile\profile-edit.controller.js" />
@@ -218,6 +222,9 @@
     <Content Include="Scripts\controllers\financial\wallets\wallet-details.controller.js" />
     <Content Include="Scripts\controllers\financial\wallets\wallet-edit.controller.js" />
     <Content Include="Scripts\controllers\financial\wallets\wallet-list.controller.js" />
+    <Content Include="Scripts\controllers\inventory\suppliers\supplier-details.controller.js" />
+    <Content Include="Scripts\controllers\inventory\suppliers\supplier-edit.controller.js" />
+    <Content Include="Scripts\controllers\inventory\suppliers\supplier-list.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-edit.controller.js" />
     <Content Include="Scripts\controllers\manage\stores\store-list.controller.js" />
     <Content Include="Scripts\controllers\commercial\customers\customer-details.controller.js" />
@@ -245,6 +252,7 @@
     <Content Include="Scripts\services\financial\fixed-expense.service.js" />
     <Content Include="Scripts\services\financial\other-cash-activites.service.js" />
     <Content Include="Scripts\services\financial\wallet.service.js" />
+    <Content Include="Scripts\services\inventory\supplier.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
     <Content Include="Scripts\services\commercial\customer.service.js" />
     <Content Include="Web.config" />
@@ -270,6 +278,7 @@
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
     <Compile Include="Controllers\Financial\WalletsController.cs" />
+    <Compile Include="Controllers\Inventory\SuppliersController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\Commercial\CustomersController.cs" />
@@ -355,6 +364,10 @@
     <Compile Include="Data\Migrations\201705012339023_CreateSaleIncome.Designer.cs">
       <DependentUpon>201705012339023_CreateSaleIncome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705021840485_CreateSupplier.cs" />
+    <Compile Include="Data\Migrations\201705021840485_CreateSupplier.Designer.cs">
+      <DependentUpon>201705021840485_CreateSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -437,6 +450,9 @@
     <Compile Include="Models\EntityModel\Financial\Wallets\Wallet.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletQuery.cs" />
+    <Compile Include="Models\EntityModel\Inventory\Suppliers\Supplier.cs" />
+    <Compile Include="Models\EntityModel\Inventory\Suppliers\SupplierMapping.cs" />
+    <Compile Include="Models\EntityModel\Inventory\Suppliers\SupplierQuery.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\Store.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreMapping.cs" />
     <Compile Include="Models\EntityModel\Manage\Stores\StoreQuery.cs" />
@@ -448,6 +464,7 @@
     <Compile Include="Models\EntityModel\Manage\TeamRules\TeamRuleMapping.cs" />
     <Compile Include="Models\EntityModel\Overview\CatalogCount.cs" />
     <Compile Include="Models\EntityModel\Overview\FinancialCount.cs" />
+    <Compile Include="Models\EntityModel\Overview\InventoryCount.cs" />
     <Compile Include="Models\EntityModel\Overview\ManagementCount.cs" />
     <Compile Include="Models\EntityModel\Overview\CommercialCount.cs" />
     <Compile Include="Models\EntityModel\Commercial\Customers\Customer.cs" />
@@ -523,6 +540,10 @@
     <Compile Include="Models\ViewModel\Financial\Wallets\ListWalletsViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\UpdateWalletViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\WalletIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\Suppliers\CreateSupplierViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\Suppliers\ListSuppliersViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\Suppliers\SupplierIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\Suppliers\UpdateSupplierViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\CreateStoreViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\ListStoresViewModel.cs" />
     <Compile Include="Models\ViewModel\Manage\Stores\StoreIdViewModel.cs" />
@@ -535,6 +556,7 @@
     <Compile Include="Results\Account\Dashboard\CatalogOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\FinancialOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\GeneralOverviewJson.cs" />
+    <Compile Include="Results\Account\Dashboard\InventoryOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\ManagementOverviewJson.cs" />
     <Compile Include="Results\Account\Dashboard\CommercialOverviewJson.cs" />
     <Compile Include="Results\Account\Profile\ProfileDetailsJson.cs" />
@@ -569,6 +591,8 @@
     <Compile Include="Results\Financial\OtherCashActivities\OtherCashActivityListJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletListJson.cs" />
+    <Compile Include="Results\Inventory\Suppliers\SupplierJson.cs" />
+    <Compile Include="Results\Inventory\Suppliers\SupplierListJson.cs" />
     <Compile Include="Results\Manage\Stores\StoreJson.cs" />
     <Compile Include="Results\Manage\Stores\StoreListJson.cs" />
     <Compile Include="Results\Commercial\Customers\CustomerJson.cs" />
@@ -601,7 +625,7 @@
     <Content Include="Views\Account\Dashboard\Catalog.cshtml" />
     <Content Include="Views\Account\Dashboard\Commercial.cshtml" />
     <Content Include="Views\Account\Dashboard\Financial.cshtml" />
-    <Content Include="Views\Account\Dashboard\Stock.cshtml" />
+    <Content Include="Views\Account\Dashboard\Inventory.cshtml" />
     <Content Include="Scripts\controllers\catalog\products\product-details.controller.js" />
     <Content Include="Views\Catalog\Products\ProductDetails.cshtml" />
     <Content Include="Views\Catalog\Products\ProductEdit.cshtml" />
@@ -658,6 +682,10 @@
     <Content Include="Views\Commercial\SaleOrders\_RevertSaleOrder.cshtml" />
     <Content Include="Views\Financial\CashFlow\DailyCashFlow.cshtml" />
     <Content Include="Views\Financial\CashFlow\MonthlyCashFlow.cshtml" />
+    <Content Include="Views\Inventory\Suppliers\_RemoveSupplier.cshtml" />
+    <Content Include="Views\Inventory\Suppliers\SupplierDetails.cshtml" />
+    <Content Include="Views\Inventory\Suppliers\SupplierEdit.cshtml" />
+    <Content Include="Views\Inventory\Suppliers\SupplierList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

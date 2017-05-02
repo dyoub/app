@@ -23,6 +23,7 @@ using Dyoub.App.Models.EntityModel.Manage.TeamRules;
 using Dyoub.App.Models.EntityModel.Manage.Teams;
 using System;
 using System.Collections.Generic;
+using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
 
 namespace Dyoub.App.Models.EntityModel.Account.Tenants
 {
@@ -48,6 +49,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<Service> Services { get; set; }
         public virtual ICollection<ServicePrice> ServicePrices { get; set; }
         public virtual ICollection<Store> Stores { get; set; }
+        public virtual ICollection<Supplier> Suppliers { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
         public virtual ICollection<TeamMember> TeamMembers { get; set; }
         public virtual ICollection<TeamRule> TeamRules { get; set; }

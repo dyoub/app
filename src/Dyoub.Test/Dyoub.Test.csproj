@@ -182,6 +182,11 @@
     <Compile Include="Contexts\Financial\Wallets\FindWalletContext.cs" />
     <Compile Include="Contexts\Financial\Wallets\ListWalletsContext.cs" />
     <Compile Include="Contexts\Financial\Wallets\UpdateWalletContext.cs" />
+    <Compile Include="Contexts\Inventory\Suppliers\CreateSupplierContext.cs" />
+    <Compile Include="Contexts\Inventory\Suppliers\DeleteSupplierContext.cs" />
+    <Compile Include="Contexts\Inventory\Suppliers\FindSupplierContext.cs" />
+    <Compile Include="Contexts\Inventory\Suppliers\ListSupplierContext.cs" />
+    <Compile Include="Contexts\Inventory\Suppliers\UpdateSupplierContext.cs" />
     <Compile Include="Contexts\Manage\Stores\CreateStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreContext.cs" />
     <Compile Include="Contexts\Manage\Stores\DeleteStoreWithFixedExpensesContext.cs" />
@@ -211,6 +216,7 @@
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
     <Compile Include="Controllers\Financial\SaleOrderBillingControllerTest.cs" />
     <Compile Include="Controllers\Financial\WalletsControllerTest.cs" />
+    <Compile Include="Controllers\Inventory\CustomersControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Controllers\Commercial\CustomersControllerTest.cs" />
     <Compile Include="Factories\Account\PasswordRecoveryFactory.cs" />
@@ -228,6 +234,7 @@
     <Compile Include="Factories\Financial\OtherCashActivityFactory.cs" />
     <Compile Include="Factories\Financial\SaleIncomeFactory.cs" />
     <Compile Include="Factories\Financial\WalletFactory.cs" />
+    <Compile Include="Factories\Inventory\SupplierFactory.cs" />
     <Compile Include="Factories\Manage\StoreFactory.cs" />
     <Compile Include="Factories\Manage\TeamFactory.cs" />
     <Compile Include="Factories\Manage\TeamMemberFactory.cs" />

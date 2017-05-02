@@ -30,6 +30,7 @@ using System.Linq;
 using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
 using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
+using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -52,6 +53,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<Service> Services { get { return Set<Service>(); } }
         public DbSet<ServicePrice> ServicePrices { get { return Set<ServicePrice>(); } }
         public DbSet<Store> Stores { get { return Set<Store>(); } }
+        public DbSet<Supplier> Suppliers { get { return Set<Supplier>(); } }
         public DbSet<Team> Teams { get { return Set<Team>(); } }
         public DbSet<TeamMember> TeamMembers { get { return Set<TeamMember>(); } }
         public DbSet<TeamRule> TeamRules { get { return Set<TeamRule>(); } }
@@ -100,6 +102,7 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new ServiceMapping());
             modelBuilder.Configurations.Add(new ServicePriceMapping());
             modelBuilder.Configurations.Add(new StoreMapping());
+            modelBuilder.Configurations.Add(new SupplierMapping());
             modelBuilder.Configurations.Add(new TeamMapping());
             modelBuilder.Configurations.Add(new TeamMemberMapping());
             modelBuilder.Configurations.Add(new TeamRuleMapping());

@@ -7,22 +7,22 @@
     Layout = "~/Views/Layout.cshtml";
 }
 
-<div class="container">
+<div class="container" data-ng-controller="InventoryOverviewController as controller" data-ng-init="controller.init()">
     <div class="menu-header" data-translate="Stock"></div>
 
     <div class="grid-row">
         <div class="grid-column compact-6 small-4 medium-4 large-3">
-            <button type="button" data-href="/suppliers" class="card carrot" disabled>
+            <a href="/suppliers" class="as-button card carrot">
                 <div class="card-info">
                     <div data-translate="Records"></div>
-                    <div class="value" data-ng-bind="controller.overview.counter.suppliers | currency"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.suppliers"></div>
                     <i class="fa fa-truck"></i>
                 </div>
                 <div class="card-title">
                     <span data-translate="Suppliers"></span>
                     <i class="fa fa-angle-right"></i>
                 </div>
-            </button>
+            </a>
         </div>
 
         <div class="grid-column compact-6 small-4 medium-4 large-3">

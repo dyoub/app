@@ -1,0 +1,79 @@
+﻿@*<a href="/dashboard/commercial" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="SupplierListController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Suppliers"></div>
+
+    <div class="box">
+        <a href="/dashboard/commercial" class="as-button">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+
+        @using (Html.Authorize("suppliers.edit"))
+        {
+            <a href="/suppliers/new" class="as-button success" data-translate="Add"></a>
+        }
+    </div>
+
+    <form name="suppliersFilter" data-ng-submit="controller.newSearch()">
+        <label>
+            <i class="fa fa-search"></i>
+            <span data-translate="Search filter"></span>
+        </label>
+        <div class="card">
+            <div class="box">
+                <label data-translate="Name"></label>
+                <input type="text" data-ng-model="controller.filter.name" data-ng-maxlength="80" />
+            </div>
+        </div>
+
+        <div class="box text-center">
+            <button type="submit" class="primary" data-ng-disabled="controller.searching">
+                <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                <em data-ng-show="controller.searching" data-translate="Searching"></em>
+            </button>
+            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+        </div>
+    </form>
+
+    <div class="card list">
+        <div class="list-item" data-ng-repeat="supplier in controller.supplierList">
+            <p>
+                <a class="font-14" href="/suppliers/details/{{supplier.id}}" data-ng-bind="supplier.name"></a>
+            </p>
+            <div class="font-11 text-muted">
+                <p data-ng-show="supplier.email">
+                    <i class="fa fa-envelope"></i>
+                    <span data-ng-bind="supplier.email"></span>
+                </p>
+                <p data-ng-show="supplier.phoneNumber || supplier.alternativePhoneNumber">
+                    <i class="fa fa-phone"></i>
+                    <span data-ng-bind="supplier.phoneNumber"></span>
+                    <span data-ng-bind="'|'" data-ng-show="supplier.phoneNumber && supplier.alternativePhoneNumber"></span>
+                    <span data-ng-bind="supplier.alternativePhoneNumber"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-center text-primary" data-translate="No records found"
+         data-ng-show="controller.supplierList.isEmpty()"></div>
+
+    <div class="box text-center" data-ng-hide="controller.supplierList.isEmpty()"
+         data-ng-disabled="controller.searching">
+        <button type="button" class="primary" data-ng-click="controller.search()">
+            <span data-ng-hide="controller.searching" data-translate="More results"></span>
+            <em data-ng-show="controller.searching" data-translate="Searching"></em>
+        </button>
+    </div>
+</div>
