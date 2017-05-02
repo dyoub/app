@@ -55,12 +55,12 @@
                 <p data-ng-show="customer.email">
                     <i class="fa fa-envelope"></i>
                     <span data-ng-bind="customer.email"></span>
-                    <span data-ng-show="customer.phoneNumber || customer.alternativePhoneNumber">
-                        <i class="fa fa-phone"></i>
-                        <span data-ng-bind="customer.phoneNumber"></span>
-                        <span data-ng-bind="'|'" data-ng-show="customer.phoneNumber && customer.alternativePhoneNumber"></span>
-                        <span data-ng-bind="customer.alternativePhoneNumber"></span>
-                    </span>
+                </p>
+                <p data-ng-show="customer.phoneNumber || customer.alternativePhoneNumber">
+                    <i class="fa fa-phone"></i>
+                    <span data-ng-bind="customer.phoneNumber"></span>
+                    <span data-ng-bind="'|'" data-ng-show="customer.phoneNumber && customer.alternativePhoneNumber"></span>
+                    <span data-ng-bind="customer.alternativePhoneNumber"></span>
                 </p>
             </div>
         </div>
