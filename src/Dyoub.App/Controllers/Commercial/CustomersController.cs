@@ -28,13 +28,13 @@ namespace Dyoub.App.Controllers.Commercial
         }
 
         [HttpGet, Route("customers/details/{id:int}"), Authorization(Scope = "customers.read")]
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
             return View("~/Views/Commercial/Customers/CustomerDetails.cshtml");
         }
 
         [HttpGet, Route("customers/edit/{id:int}"), Authorization(Scope = "customers.edit")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             return View("~/Views/Commercial/Customers/CustomerEdit.cshtml");
         }
