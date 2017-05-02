@@ -21,16 +21,6 @@ namespace Dyoub.App.Models.EntityModel.Financial.SaleIncomes
                 });
         }
 
-        public static IQueryable<SaleIncome> ForStoreId(this IQueryable<SaleIncome> saleIncomes, int? storeId)
-        {
-            if (storeId == null)
-            {
-                return saleIncomes;
-            }
-
-            return saleIncomes.Where(saleIncome => saleIncome.SalePayment.SaleOrder.StoreId == storeId);
-        }
-
         public static IQueryable<SaleIncome> ReceivedOnDate(this IQueryable<SaleIncome> saleIncomes, DateTime? date)
         {
             if (date == null)
@@ -70,6 +60,16 @@ namespace Dyoub.App.Models.EntityModel.Financial.SaleIncomes
             endDate = endDate.Value.Date.AddDays(1);
 
             return saleIncomes.Where(saleIncome => (saleIncome.AnticipationDate ?? saleIncome.ReceivedDate) < endDate);
+        }
+
+        public static IQueryable<SaleIncome> WhereStoreId(this IQueryable<SaleIncome> saleIncomes, int? storeId)
+        {
+            if (storeId == null)
+            {
+                return saleIncomes;
+            }
+
+            return saleIncomes.Where(saleIncome => saleIncome.SalePayment.SaleOrder.StoreId == storeId);
         }
     }
 }

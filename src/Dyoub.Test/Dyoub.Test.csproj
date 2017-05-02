@@ -149,6 +149,8 @@
     <Compile Include="Contexts\Commercial\SaleItems\ListSaleItemsContext.cs" />
     <Compile Include="Contexts\Commercial\SaleItems\UpdateItemsOfConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleItems\UpdateSaleItemsContext.cs" />
+    <Compile Include="Contexts\Financial\CashFlow\DailyCashFlowContext.cs" />
+    <Compile Include="Contexts\Financial\CashFlow\MonthlyCashFlowContext.cs" />
     <Compile Include="Contexts\Financial\SaleOrderBilling\ConfirmConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Financial\SaleOrderBilling\ConfirmSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\CreateSaleOrderContext.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Controllers\Commercial\SaleItemsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SalePaymentsControllerTest.cs" />
+    <Compile Include="Controllers\Financial\CashFlowControllerTest.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesControllerTest.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
     <Compile Include="Controllers\Financial\SaleOrderBillingControllerTest.cs" />

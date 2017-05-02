@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Overview;
 using Dyoub.App.Models.ServiceModel.Financial;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -25,9 +26,10 @@ namespace Dyoub.App.Results.Account.Dashboard
             {
                 counter = new
                 {
-                    wallets = Counter.Wallets,
+                    cashFlowBalance = CashFlowAnalysis.Balance(DateTime.Today).Amount,
                     fixedExpenses = CashFlowAnalysis.TotalFixedExpenses().Amount,
-                    otherCashActivities = CashFlowAnalysis.Others.Count()
+                    otherCashActivities = CashFlowAnalysis.Others.Count(),
+                    wallets = Counter.Wallets
                 }
             };
 

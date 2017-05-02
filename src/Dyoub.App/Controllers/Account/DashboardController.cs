@@ -8,6 +8,7 @@ using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.CashActivities;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
+using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.EntityModel.Overview;
 using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Results.Account.Dashboard;
@@ -106,9 +107,11 @@ namespace Dyoub.App.Controllers.Account
         [HttpPost, Route("dashboard/financial"), Authorization]
         public async Task<ActionResult> FinancialCount()
         {
+            IQueryable<SaleIncome> saleIncomes = Tenant.SaleIncomes.ReceivedToday();
             IQueryable<FixedExpense> fixedExpenses = Tenant.FixedExpenses.ToCurrentMonth();
             IQueryable<OtherCashActivity> otherCashActivities = Tenant.OtherCashActivities.ToCurrentMonth();
-            IQueryable<CashActivity> cashActivities = fixedExpenses.AsCashActivity()
+            IQueryable<CashActivity> cashActivities = saleIncomes.AsCashActivity()
+                .Concat(fixedExpenses.AsCashActivity())
                 .Concat(otherCashActivities.AsCashActivity());
 
             CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis();

@@ -1,0 +1,111 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="MonthlyCashFlowController as controller" data-ng-init="controller.init()">
+    <div class="step-header">
+        <div class="page-header" data-translate="Cash flow"></div>
+        <a href="/cash-flow/daily" class="step" data-translate="Daily"></a>
+        <span class="separator"></span>
+        <span class="step active" data-translate="Monthly"></span>
+    </div>
+
+    <form name="controller.filterForm" data-ng-submit="controller.newSearch()">
+        <label>
+            <i class="fa fa-search"></i>
+            <span data-translate="Search filter"></span>
+        </label>
+        <div class="card">
+            <div class="grid-row">
+                <div class="grid-column compact-8 small-8 medium-8 large-8">
+                    <div class="box">
+                        <label>
+                            <span data-translate="Store"></span>
+                            <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                        </label>
+                        <select name="store" data-ng-model="controller.filter.store"
+                                data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                data-ng-disabled="controller.searchingStores">
+                            <option value="" data-translate="All stores"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-column compact-4 small-4 medium-4 large-4">
+                    <div class="box" data-has-error="controller.filterForm.year.$invalid">
+                        <label>
+                            <span data-translate="Year"></span>
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="year" data-ng-model="controller.filter.year" required
+                               data-type-number="4" data-valid-number-min="1900" data-valid-number-max="2999" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box text-center">
+            <button type="submit" class="primary" data-ng-disabled="controller.searchBlocked()">
+                <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                <em data-ng-show="controller.searching" data-translate="Searching"></em>
+            </button>
+            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+        </div>
+    </form>
+
+    <div class="card list">
+        <div class="list-item text-center" data-ng-repeat="month in controller.monthlyCashFlow">
+            <div class="grid-row">
+                <div class="grid-column tiny-2 compact-2 small-2 medium-2 large-2">
+                    <p class="font-20 text-primary" data-ng-bind="month.baseDate | ctime:'MM'"></p>
+                    <p class="text-muted font-11" data-ng-bind="month.baseDate | ctime:'MMMM'"></p>
+                </div>
+                <div class="grid-column tiny-10 compact-10 small-10 medium-10 large-10">
+                    <div class="grid-row">
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Sales"></label>
+                                <strong data-ng-bind="month.sales | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Purchases"></label>
+                                <strong data-ng-bind="month.purchases | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Fixed expenses"></label>
+                                <strong data-ng-bind="month.fixedExpenses | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Other credits"></label>
+                                <strong data-ng-bind="month.otherCredits | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Other debits"></label>
+                                <strong data-ng-bind="month.otherDebits | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Balance"></label>
+                                <strong data-ng-bind="month.balance | currency"
+                                        data-ng-class="{ 'text-success': month.balance >= 0, 'text-danger': month.balance < 0 }"></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

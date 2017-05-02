@@ -1,0 +1,125 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="DailyCashFlowController as controller" data-ng-init="controller.init()">
+    <div class="step-header">
+        <div class="page-header" data-translate="Cash flow"></div>
+        <span class="step active" data-translate="Daily"></span>
+        <span class="separator"></span>
+        <a href="/cash-flow/monthly" class="step" data-translate="Monthly"></a>
+    </div>
+
+    <form name="controller.filterForm" data-ng-submit="controller.newSearch()">
+        <label>
+            <i class="fa fa-search"></i>
+            <span data-translate="SearchFilter"></span>
+        </label>
+        <div class="card">
+            <div class="grid-row">
+                <div class="grid-column small-6 medium-6 large-6">
+                    <div class="box">
+                        <label>
+                            <span data-translate="Store"></span>
+                            <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                        </label>
+                        <select name="store" data-ng-model="controller.filter.store"
+                                data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                data-ng-disabled="controller.searchingStores">
+                            <option value="" data-translate="All stores"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-column small-6 medium-6 large-6">
+                    <div class="grid-row">
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
+                            <div class="box" data-has-error="controller.filterForm.month.$invalid">
+                                <label>
+                                    <span data-translate="Month"></span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="month" data-ng-model="controller.filter.month"
+                                        data-ng-options="m as (m|month) for m in controller.monthList" required></select>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
+                            <div class="box" data-has-error="controller.filterForm.year.$invalid">
+                                <label>
+                                    <span data-translate="Year"></span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="year" data-ng-model="controller.filter.year" required
+                                       data-type-number="4" data-valid-number-min="1900" data-valid-number-max="2999" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box text-center">
+            <button type="submit" class="primary" data-ng-disabled="controller.searchBlocked()">
+                <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                <em data-ng-show="controller.searching" data-translate="Searching"></em>
+            </button>
+            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+        </div>
+    </form>
+
+    <div class="card list">
+        <div class="list-item text-center" data-ng-repeat="day in controller.dailyCashFlow">
+            <div class="grid-row">
+                <div class="grid-column tiny-2 compact-2 small-2 medium-2 large-2">
+                    <p class="font-20 text-primary" data-ng-bind="day.date | ctime:'dd'"></p>
+                    <p class="text-muted font-11" data-ng-bind="day.date | ctime:'EEEE'"></p>
+                </div>
+                <div class="grid-column tiny-10 compact-10 small-10 medium-10 large-10">
+                    <div class="grid-row">
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Sales"></label>
+                                <strong data-ng-bind="day.sales | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Purchases"></label>
+                                <strong data-ng-bind="day.purchases | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Fixed expenses"></label>
+                                <strong data-ng-bind="day.fixedExpenses | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Other credits"></label>
+                                <strong data-ng-bind="day.otherCredits | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Other debits"></label>
+                                <strong data-ng-bind="day.otherDebits | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Balance"></label>
+                                <strong data-ng-bind="day.balance | currency"
+                                        data-ng-class="{ 'text-success': day.balance >= 0, 'text-danger': day.balance < 0 }"></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
