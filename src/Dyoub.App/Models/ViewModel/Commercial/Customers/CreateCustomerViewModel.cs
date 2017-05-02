@@ -11,13 +11,16 @@ namespace Dyoub.App.Models.ViewModel.Commercial.Customers
         [Required, MaxLength(80)]
         public string Name { get; set; }
 
+        [MaxLength(50)]
         public string NationalId { get; set; }
 
-        [EmailAddress]
+        [EmailAddress, MaxLength(80)]
         public string Email { get; set; }
 
+        [MaxLength(50)]
         public string PhoneNumber { get; set; }
 
+        [MaxLength(50)]
         public string AlternativePhoneNumber { get; set; }
 
         public Customer MapTo(Customer customer)
