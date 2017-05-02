@@ -27,109 +27,118 @@
         </div>
     </div>
 
-    <div class="box ng-cloak">
-        <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
-                data-ng-click="controller.save()">
-            <span data-ng-hide="controller.saving" data-translate="Save"></span>
-            <span data-ng-show="controller.saving" data-translate="Saving"></span>
-        </button>
+    <div class="error ng-cloak" data-ng-show="controller.confirmed">
+        <i class="fa fa-exclamation-triangle"></i>
+        <p data-translate="Sale order already confirmed."></p>
         <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
-           class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+           class="as-button primary" data-translate="Go to items details"></a>
     </div>
 
-    <div class="loading box" data-ng-show="controller.searchingSelectedItems"></div>
+    <div class="ng-cloak" data-ng-hide="controller.confirmed">
+        <div class="box">
+            <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
+                    data-ng-click="controller.save()">
+                <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                <span data-ng-show="controller.saving" data-translate="Saving"></span>
+            </button>
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
+               class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+        </div>
 
-    <div class="ng-cloak" data-ng-show="controller.searchSelectedItemsComplete()">
-        <div class="card">
-            <div class="box">
-                <label data-translate="Item name or code"></label>
-                <div class="suggestion" data-suggestion-open="controller.itemSuggestionOpened">
-                    <input type="text" name="itemName" data-ng-model="controller.itemSearch.nameOrCode" data-ng-maxlength="80"
-                           data-event-key-enter="controller.addFirstItem()"
-                           data-event-typing="controller.newItemForSaleSearch()"
-                           data-event-typing-end="controller.searchItemsForSale()" />
-                    <div class="suggestion-body">
-                        <em class="text-muted" data-ng-show="controller.searchingItemsForSale" data-translate="Searching..."></em>
-                        <div class="text-primary" data-translate="No records found" data-ng-show="controller.noItemsForSale()"></div>
-                        <div class="box" data-ng-repeat="item in controller.itemsForSale">
-                            <button type="button" class="primary small" data-translate="Add"
-                                    data-ng-click="controller.addItem(item)"></button>
-                            <span data-ng-bind="item.name"></span>
-                            <span class="text-muted font-10">
+        <div class="loading box" data-ng-show="controller.searchingSelectedItems"></div>
+
+        <div data-ng-show="controller.searchSelectedItemsComplete()">
+            <div class="card">
+                <div class="box">
+                    <label data-translate="Item name or code"></label>
+                    <div class="suggestion" data-suggestion-open="controller.itemSuggestionOpened">
+                        <input type="text" name="itemName" data-ng-model="controller.itemSearch.nameOrCode" data-ng-maxlength="80"
+                               data-event-key-enter="controller.addFirstItem()"
+                               data-event-typing="controller.newItemForSaleSearch()"
+                               data-event-typing-end="controller.searchItemsForSale()" />
+                        <div class="suggestion-body">
+                            <em class="text-muted" data-ng-show="controller.searchingItemsForSale" data-translate="Searching..."></em>
+                            <div class="text-primary" data-translate="No records found" data-ng-show="controller.noItemsForSale()"></div>
+                            <div class="box" data-ng-repeat="item in controller.itemsForSale">
+                                <button type="button" class="primary small" data-translate="Add"
+                                        data-ng-click="controller.addItem(item)"></button>
+                                <span data-ng-bind="item.name"></span>
+                                <span class="text-muted font-10">
+                                    <i class="fa fa-barcode"></i>
+                                    <span data-ng-bind="item.code" data-ng-show="item.code"></span>
+                                    <em data-translate="No code" data-ng-hide="item.code"></em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="font-11 text-primary" data-translate="Press enter to add the first item."></div>
+                </div>
+            </div>
+
+            <div class="list-header text-left" data-ng-show="controller.itemList.any()">
+                <span data-translate="Sale total"></span>:
+                <strong class="font-14 text-success" data-ng-bind="controller.calculateTotalPayable() | currency"></strong>
+            </div>
+
+            <div class="card text-center text-primary" data-translate="At least one item must be informed."
+                 data-ng-show="controller.noItemsSelected()"></div>
+
+            <form name="controller.saleOrderItemsForm">
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="item in controller.itemList | orderBy:'name'">
+                        <div class="box">
+                            <button type="button" class="danger pull-right" data-translate="Remove"
+                                    data-ng-click="controller.showRemoveItemDialog(item)"></button>
+                            <p data-ng-bind="item.name"></p>
+                            <span class="box font-11 text-muted">
                                 <i class="fa fa-barcode"></i>
                                 <span data-ng-bind="item.code" data-ng-show="item.code"></span>
                                 <em data-translate="No code" data-ng-hide="item.code"></em>
                             </span>
                         </div>
-                    </div>
-                </div>
-                <div class="font-11 text-primary" data-translate="Press enter to add the first item."></div>
-            </div>
-        </div>
 
-        <div class="list-header text-left" data-ng-show="controller.itemList.any()">
-            <span data-translate="Sale total"></span>:
-            <strong class="font-14 text-success" data-ng-bind="controller.calculateTotalPayable() | currency"></strong>
-        </div>
-
-        <div class="card text-center text-primary" data-translate="At least one item must be informed."
-             data-ng-show="controller.noItemsSelected()"></div>
-
-        <form name="controller.saleOrderItemsForm">
-            <div class="card list">
-                <div class="list-item" data-ng-repeat="item in controller.itemList | orderBy:'name'">
-                    <div class="box">
-                        <button type="button" class="danger pull-right" data-translate="Remove"
-                                data-ng-click="controller.showRemoveItemDialog(item)"></button>
-                        <p data-ng-bind="item.name"></p>
-                        <span class="box font-11 text-muted">
-                            <i class="fa fa-barcode"></i>
-                            <span data-ng-bind="item.code" data-ng-show="item.code"></span>
-                            <em data-translate="No code" data-ng-hide="item.code"></em>
-                        </span>
-                    </div>
-
-                    <div class="grid-row">
-                        <div class="grid-column medium-6 large-6">
-                            <div class="grid-row">
-                                <div class="grid-column compact small-6 medium-6 large-6">
-                                    <div class="box">
-                                        <label data-translate="Unit price"></label>
-                                        <strong data-ng-bind="item.unitPrice | currency"></strong>
+                        <div class="grid-row">
+                            <div class="grid-column medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column compact small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label data-translate="Unit price"></label>
+                                            <strong data-ng-bind="item.unitPrice | currency"></strong>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="grid-column small-6 medium-6 large-6">
-                                    <div class="box" data-has-error="controller.saleOrderItemsForm.quantity.$invalid">
-                                        <label>
-                                            <span data-translate="Amount"></span>
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <input type="text" name="quantity" data-ng-model="item.quantity" required
-                                               data-type-number="{{ item.canSellFraction ? '8,3' : '5' }}" />
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.saleOrderItemsForm.quantity.$invalid">
+                                            <label>
+                                                <span data-translate="Amount"></span>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="quantity" data-ng-model="item.quantity" required
+                                                   data-type-number="{{ item.canSellFraction ? '8,3' : '5' }}" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="grid-column medium-6 large-6">
-                            <div class="grid-row">
-                                <div class="grid-column small-6 medium-6 large-6">
-                                    <div class="box" data-has-error="controller.saleOrderItemsForm.discount.$invalid">
-                                        <label data-translate="Discount"></label>
-                                        <input type="text" name="discount" data-ng-model="item.discount" data-type-number="8,2" />
+                            <div class="grid-column medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.saleOrderItemsForm.discount.$invalid">
+                                            <label data-translate="Discount"></label>
+                                            <input type="text" name="discount" data-ng-model="item.discount" data-type-number="8,2" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="grid-column small-6 medium-6 large-6">
-                                    <div class="box">
-                                        <label data-translate="Total"></label>
-                                        <strong class="font-16 text-success" data-ng-bind="controller.calculateItemTotalPrice(item) | currency"></strong>
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label data-translate="Total"></label>
+                                            <strong class="font-16 text-success" data-ng-bind="controller.calculateItemTotalPrice(item) | currency"></strong>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
     @Html.Partial("~/Views/Commercial/SaleItems/_RemoveItem.cshtml")

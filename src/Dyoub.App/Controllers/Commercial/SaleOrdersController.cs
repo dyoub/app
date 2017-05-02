@@ -45,7 +45,7 @@ namespace Dyoub.App.Controllers.Commercial
         {
             return View("~/Views/Commercial/SaleOrders/SaleOrderList.cshtml");
         }
-        
+
         [HttpPost, Route("sale-orders/create"), Authorization(Scope = "sale-orders.edit")]
         public async Task<ActionResult> Create(CreateSaleOrderViewModel viewModel)
         {
@@ -106,7 +106,7 @@ namespace Dyoub.App.Controllers.Commercial
 
             return new SaleOrderListJson(saleOrders);
         }
-        
+
         [HttpPost, Route("sale-orders/update"), Authorization(Scope = "sale-orders.edit")]
         public async Task<ActionResult> Update(UpdateSaleOrderViewModel viewModel)
         {

@@ -25,10 +25,14 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SalePayments
             HasRequired(p => p.PaymentMethod)
                 .WithMany(p => p.SalePayments)
                 .HasForeignKey(p => new { p.PaymentMethodId, p.TenantId });
-
+            
             HasRequired(p => p.SaleOrder)
                 .WithMany(p => p.SalePayments)
                 .HasForeignKey(p => new { p.SaleOrderId, p.TenantId });
+
+            HasMany(p => p.SaleIncomes)
+                .WithRequired(p => p.SalePayment)
+                .HasForeignKey(p => new { p.SalePaymentId, p.TenantId });
         }
     }
 }

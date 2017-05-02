@@ -29,6 +29,7 @@ using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using System.Linq;
 using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
 using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
+using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -44,6 +45,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<Product> Products { get { return Set<Product>(); } }
         public DbSet<ProductPrice> ProductPrices { get { return Set<ProductPrice>(); } }
         public DbSet<SaleOrder> SaleOrders { get { return Set<SaleOrder>(); } }
+        public DbSet<SaleIncome> SaleIncomes { get { return Set<SaleIncome>(); } }
         public DbSet<SalePayment> SalePayments { get { return Set<SalePayment>(); } }
         public DbSet<SaleProduct> SaleProducts { get { return Set<SaleProduct>(); } }
         public DbSet<SaleService> SaleServices { get { return Set<SaleService>(); } }
@@ -91,6 +93,7 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new ProductPriceMapping());
             modelBuilder.Configurations.Add(new SaleOrderMapping());
+            modelBuilder.Configurations.Add(new SaleIncomeMapping());
             modelBuilder.Configurations.Add(new SalePaymentMapping());
             modelBuilder.Configurations.Add(new SaleProductMapping());
             modelBuilder.Configurations.Add(new SaleServiceMapping());

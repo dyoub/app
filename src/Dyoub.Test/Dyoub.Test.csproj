@@ -149,11 +149,15 @@
     <Compile Include="Contexts\Commercial\SaleItems\ListSaleItemsContext.cs" />
     <Compile Include="Contexts\Commercial\SaleItems\UpdateItemsOfConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleItems\UpdateSaleItemsContext.cs" />
+    <Compile Include="Contexts\Financial\SaleOrderBilling\ConfirmConfirmedSaleOrderContext.cs" />
+    <Compile Include="Contexts\Financial\SaleOrderBilling\ConfirmSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\CreateSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\DeleteConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\DeleteSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\FindSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\ListSaleOrderContext.cs" />
+    <Compile Include="Contexts\Financial\SaleOrderBilling\RevertNotConfirmedSaleOrderContext.cs" />
+    <Compile Include="Contexts\Financial\SaleOrderBilling\RevertSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\UpdateConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\UpdateSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SalePayments\ListSalePaymentsContext.cs" />
@@ -201,6 +205,7 @@
     <Compile Include="Controllers\Commercial\SalePaymentsControllerTest.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesControllerTest.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
+    <Compile Include="Controllers\Financial\SaleOrderBillingControllerTest.cs" />
     <Compile Include="Controllers\Financial\WalletsControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Controllers\Commercial\CustomersControllerTest.cs" />
@@ -217,6 +222,7 @@
     <Compile Include="Factories\Commercial\SaleServiceFactory.cs" />
     <Compile Include="Factories\Financial\FixedExpenseFactory.cs" />
     <Compile Include="Factories\Financial\OtherCashActivityFactory.cs" />
+    <Compile Include="Factories\Financial\SaleIncomeFactory.cs" />
     <Compile Include="Factories\Financial\WalletFactory.cs" />
     <Compile Include="Factories\Manage\StoreFactory.cs" />
     <Compile Include="Factories\Manage\TeamFactory.cs" />

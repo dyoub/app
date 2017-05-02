@@ -161,6 +161,7 @@
             .list(controller.routeParams.saleOrderId)
             .then(function (response) {
                 controller.storeId = response.data.storeId;
+                controller.confirmed = response.data.confirmed;
                 controller.itemList = response.data.itemList;
             })
             ['catch'](function (response) {

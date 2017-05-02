@@ -9,6 +9,34 @@
         this.SaleOrder = SaleOrder;
     }
 
+    Controller.prototype.confirm = function () {
+        var controller = this;
+        controller.confirming = true;
+
+        controller.SaleOrder
+            .confirm(controller.routeParams.saleOrderId)
+            .then(function (response) {
+                controller.saleOrder = response.data;
+            })
+            ['catch'](function (response) {
+                controller.handleError(response);
+                controller.confirming = false;
+            })
+            ['finally'](function () {
+                controller.hideConfirmDialog();
+            });
+    };
+
+    Controller.prototype.hideConfirmDialog = function () {
+        var controller = this;
+        controller.confirmDialogOpened = false;
+    };
+
+    Controller.prototype.hideRevertDialog = function () {
+        var controller = this;
+        controller.revertDialogOpened = false;
+    };
+
     Controller.prototype.find = function () {
         var controller = this;
         controller.searching = true;
@@ -56,9 +84,39 @@
             });
     };
 
+    Controller.prototype.revert = function () {
+        var controller = this;
+        controller.reverting = true;
+
+        controller.SaleOrder
+            .revert(controller.routeParams.saleOrderId)
+            .then(function (response) {
+                controller.saleOrder = response.data;
+            })
+            ['catch'](function (response) {
+                controller.handleError(response);
+                controller.reverting = false;
+            })
+            ['finally'](function () {
+                controller.hideRevertDialog();
+            });
+    };
+
     Controller.prototype.searchComplete = function () {
         var controller = this;
         return !(controller.searching || controller.error);
+    };
+
+    Controller.prototype.showConfirmDialog = function () {
+        var controller = this;
+        controller.confirming = false;
+        controller.confirmDialogOpened = true;
+    };
+
+    Controller.prototype.showRevertDialog = function () {
+        var controller = this;
+        controller.reverting = false;
+        controller.revertDialogOpened = true;
     };
 
     Controller.prototype.showRemoveDialog = function () {

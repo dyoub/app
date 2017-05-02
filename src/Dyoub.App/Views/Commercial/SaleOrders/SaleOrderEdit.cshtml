@@ -30,46 +30,55 @@
     <div class="loading box" data-ng-show="controller.searching"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchComplete()">
-        <form name="controller.saleOrderForm" data-ng-submit="controller.save()">
-            <div class="box">
-                <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
-                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
-                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
-                </button>
-                <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"
-                        data-ng-disabled="controller.saving"></button>
-            </div>
+        <div class="error" data-ng-show="controller.saleOrder.confirmed">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Sale order already confirmed."></p>
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}" class="as-button primary"
+               data-translate="Go to sale order details"></a>
+        </div>
 
-            <div class="card">
-                <div class="grid-row">
-                    <div class="grid-column small-8 medium-8 large-8">
-                        <div class="box" data-has-error="controller.saleOrderForm.store.$invalid">
-                            <label>
-                                <span data-translate="Store"></span>
-                                <span class="text-danger">*</span>
-                                <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
-                            </label>
-                            <select name="store" data-ng-model="controller.saleOrder.store" required
-                                    data-ng-options="store as store.name for store in controller.storeList track by store.id"
-                                    data-ng-disabled="controller.searchingStores"></select>
-                        </div>
-                    </div>
-                    <div class="grid-column small-4 medium-4 large-4">
-                        <div class="box" data-has-error="controller.saleOrderForm.issueDate.$invalid">
-                            <label>
-                                <span data-translate="Issue date"></span>
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" name="issueDate" data-ng-model="controller.saleOrder.issueDate" data-type-date required />
-                        </div>
-                    </div>
+        <div data-ng-hide="controller.saleOrder.confirmed">
+            <form name="controller.saleOrderForm" data-ng-submit="controller.save()">
+                <div class="box">
+                    <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                        <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                        <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                    </button>
+                    <button type="button" data-ng-click="controller.goBack()" data-translate="Cancel"
+                            data-ng-disabled="controller.saving"></button>
                 </div>
 
-                <div class="box" data-has-error="controller.saleOrderForm.additionalInformation.$invalid">
-                    <label data-translate="Additional information"></label>
-                    <textarea rows="5" name="additionalInformation" data-ng-model="controller.saleOrder.additionalInformation" data-ng-maxlength="255"></textarea>
+                <div class="card">
+                    <div class="grid-row">
+                        <div class="grid-column small-8 medium-8 large-8">
+                            <div class="box" data-has-error="controller.saleOrderForm.store.$invalid">
+                                <label>
+                                    <span data-translate="Store"></span>
+                                    <span class="text-danger">*</span>
+                                    <em class="font-10 text-muted" data-translate="Loading" data-ng-show="controller.searchingStores"></em>
+                                </label>
+                                <select name="store" data-ng-model="controller.saleOrder.store" required
+                                        data-ng-options="store as store.name for store in controller.storeList track by store.id"
+                                        data-ng-disabled="controller.searchingStores"></select>
+                            </div>
+                        </div>
+                        <div class="grid-column small-4 medium-4 large-4">
+                            <div class="box" data-has-error="controller.saleOrderForm.issueDate.$invalid">
+                                <label>
+                                    <span data-translate="Issue date"></span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="issueDate" data-ng-model="controller.saleOrder.issueDate" data-type-date required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box" data-has-error="controller.saleOrderForm.additionalInformation.$invalid">
+                        <label data-translate="Additional information"></label>
+                        <textarea rows="5" name="additionalInformation" data-ng-model="controller.saleOrder.additionalInformation" data-ng-maxlength="255"></textarea>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

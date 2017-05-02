@@ -37,7 +37,8 @@ namespace Dyoub.App.Results.Commercial.SaleOrders
                     issueDate = saleOrder.IssueDate,
                     store = saleOrder.Store.Name,
                     customer = saleOrder.Customer != null ? saleOrder.Customer.Name : null,
-                    draft = saleOrder.ConfirmationDate == null
+                    draft = saleOrder.Draft,
+                    budget = saleOrder.Budget
                 })
             });
 

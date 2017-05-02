@@ -4,7 +4,9 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using System;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.SalePayments
 {
@@ -26,5 +28,6 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SalePayments
         public virtual Tenant Tenant { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }
         public virtual SaleOrder SaleOrder { get; set; }
+        public virtual ICollection<SaleIncome> SaleIncomes { get; set; }
     }
 }

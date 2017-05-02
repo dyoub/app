@@ -41,7 +41,14 @@ namespace Dyoub.App.Results.Commercial.SalePayments
                     feeFixedValue = payment.FeeFixedValue,
                     total = payment.Total,
                     billedAmount = payment.BilledAmount,
-                    date = payment.Date
+                    date = payment.Date,
+                    incomes = payment.SaleIncomes
+                        .OrderBy(income => income.ReceivedDate)
+                        .Select(income => new
+                        {
+                            receivedDate = income.ReceivedDate,
+                            amountReceived = income.AmountReceived
+                        })
                 })
             };
 

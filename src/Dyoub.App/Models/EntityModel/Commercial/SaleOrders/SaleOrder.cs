@@ -6,6 +6,7 @@ using Dyoub.App.Models.EntityModel.Commercial.Customers;
 using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
+using Dyoub.App.Models.EntityModel.Financial;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,22 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
         public string Author { get; set; }
         public string AdditionalInformation { get; set; }
         public bool Confirmed { get { return ConfirmationDate != null; } }
-        public bool HasNoItems { get { return TotalPayable == 0; } }
+        public bool Budget
+        {
+            get
+            {
+                return !Confirmed && Total > 0 && new Money(Total)
+                    .SubtractPercentage(Discount ?? 0) == TotalPayable;
+            }
+        }
+        public bool Draft
+        {
+            get
+            {
+                return !Confirmed && (Total == 0 || new Money(Total)
+                    .SubtractPercentage(Discount ?? 0) != TotalPayable);
+            }
+        }
 
         public virtual Customer Customer { get; set; }
         public virtual Tenant Tenant { get; set; }

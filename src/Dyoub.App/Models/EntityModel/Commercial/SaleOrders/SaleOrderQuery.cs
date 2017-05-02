@@ -26,6 +26,12 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
                 .SalePayments.Select(salePayment => salePayment.PaymentMethod.PaymentMethodFees));
         }
 
+        public static IQueryable<SaleOrder> IncludeSaleIncomes(this IQueryable<SaleOrder> saleOrders)
+        {
+            return saleOrders.Include(saleOrder => saleOrder.SalePayments
+                .Select(salePayment => salePayment.SaleIncomes));
+        }
+
         public static IQueryable<SaleOrder> IncludeSalePayments(this IQueryable<SaleOrder> saleOrders)
         {
             return saleOrders.Include(saleOrder => saleOrder.SalePayments);

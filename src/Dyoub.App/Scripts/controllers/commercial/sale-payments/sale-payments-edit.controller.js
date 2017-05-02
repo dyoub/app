@@ -154,6 +154,7 @@
                 controller.total = response.data.total;
                 controller.discount = response.data.discount;
                 controller.totalPayable = response.data.totalPayable;
+                controller.confirmed = response.data.confirmed;
                 controller.paymentList = response.data.paymentList;
                 controller.calculateTotalPayable();
                 controller.calculateTotalPaid();

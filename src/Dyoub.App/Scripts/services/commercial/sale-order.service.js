@@ -7,6 +7,10 @@
         this.$http = $http;
     }
 
+    Service.prototype.confirm = function (saleOrderId) {
+        return this.$http.post('/sale-orders/confirm', { id: saleOrderId });
+    };
+
     Service.prototype.create = function () {
         return { issueDate: new Date() };
     };
@@ -21,6 +25,10 @@
 
     Service.prototype.remove = function (saleOrderId) {
         return this.$http.post('/sale-orders/delete', { id: saleOrderId });
+    };
+
+    Service.prototype.revert = function (saleOrderId) {
+        return this.$http.post('/sale-orders/revert', { id: saleOrderId });
     };
 
     Service.prototype.save = function (saleOrder) {

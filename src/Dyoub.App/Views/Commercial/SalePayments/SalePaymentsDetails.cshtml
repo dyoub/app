@@ -139,9 +139,9 @@
                                 <div class="box">
                                     <label data-translate="Received date"></label>
                                     <strong>
-                                        <span data-ng-bind="payment.incomes.first().receivedDate | ctime:'shortDate'"></span>
+                                        <span data-ng-bind="payment.incomes.first().receivedDate | moment:'shortDate'"></span>
                                         <span data-translate="to" data-ng-show="payment.incomes.length > 1"></span>
-                                        <span data-ng-bind="payment.incomes.last().receivedDate | ctime:'shortDate'"
+                                        <span data-ng-bind="payment.incomes.last().receivedDate | moment:'shortDate'"
                                               data-ng-show="payment.incomes.length > 1"></span>
                                     </strong>
                                 </div>

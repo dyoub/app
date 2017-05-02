@@ -39,6 +39,7 @@ namespace Dyoub.App.Controllers.Commercial
             SaleOrder saleOrder = await Tenant.SaleOrders
                 .WhereId(viewModel.Id.Value)
                 .IncludePaymentMethods()
+                .IncludeSaleIncomes()
                 .SingleOrDefaultAsync();
 
             return new SalePaymentListJson(saleOrder);
