@@ -61,8 +61,8 @@
         <div class="list-item text-center" data-ng-repeat="month in controller.monthlyCashFlow">
             <div class="grid-row">
                 <div class="grid-column tiny-2 compact-2 small-2 medium-2 large-2">
-                    <p class="font-20 text-primary" data-ng-bind="month.baseDate | ctime:'MM'"></p>
-                    <p class="text-muted font-11" data-ng-bind="month.baseDate | ctime:'MMMM'"></p>
+                    <p class="font-20 text-primary" data-ng-bind="month.baseDate | moment:'month'"></p>
+                    <p class="text-muted font-11" data-ng-bind="month.baseDate | moment:'monthName'"></p>
                 </div>
                 <div class="grid-column tiny-10 compact-10 small-10 medium-10 large-10">
                     <div class="grid-row">

@@ -18,7 +18,7 @@
     <form name="controller.filterForm" data-ng-submit="controller.newSearch()">
         <label>
             <i class="fa fa-search"></i>
-            <span data-translate="SearchFilter"></span>
+            <span data-translate="Search filter"></span>
         </label>
         <div class="card">
             <div class="grid-row">
@@ -75,8 +75,8 @@
         <div class="list-item text-center" data-ng-repeat="day in controller.dailyCashFlow">
             <div class="grid-row">
                 <div class="grid-column tiny-2 compact-2 small-2 medium-2 large-2">
-                    <p class="font-20 text-primary" data-ng-bind="day.date | ctime:'dd'"></p>
-                    <p class="text-muted font-11" data-ng-bind="day.date | ctime:'EEEE'"></p>
+                    <p class="font-20 text-primary" data-ng-bind="day.date | moment:'day'"></p>
+                    <p class="text-muted font-11" data-ng-bind="day.date | moment:'weekDay'"></p>
                 </div>
                 <div class="grid-column tiny-10 compact-10 small-10 medium-10 large-10">
                     <div class="grid-row">

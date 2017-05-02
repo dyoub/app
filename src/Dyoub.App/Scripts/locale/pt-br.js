@@ -2,8 +2,6 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 (function () {
-    // TODO: Improve
-
     moment.defineLocale('pt-br', {
         months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
         monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
@@ -56,11 +54,10 @@
         $provide.value("$locale", {
             id: "pt-br",
             DATETIME_FORMATS: {
-                AMPMS: ["AM", "PM"],
-                DAY: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
-                MONTH: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-                SHORTDAY: ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"],
-                SHORTMONTH: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
+                day: "DD",
+                weekDay: "dddd",
+                month: 'MM',
+                monthName: 'MMMM',
                 fullDate: "dddd, DD [de] MMMM [de] YYYY",
                 longDate: "DD [de] MMMM [de] YYYY",
                 medium: "D [de] MMM [de] YY HH:mm:ss",
@@ -115,6 +112,7 @@
                 "Are you sure you want to permanently delete?": "Deseja realmente remover permanentemente?",
                 "Are you sure you want undo the changes?": "Deseja realmente desfazer as alterações?",
                 "At least one item must be informed.": "Pelo menos um item deve ser informado.",
+                "Balance": "Saldo",
                 "Billed amount": "Total faturado",
                 "Billed value": "Valor faturado",
                 "Budget": "Orçamento",
@@ -151,6 +149,7 @@
                 "Customer name": "Nome do cliente",
                 "Customers": "Clientes",
                 "Dangerous zone": "Área crítica",
+                "Daily": "Diário",
                 "Date": "Data",
                 "day after payment": "dia após o pagamento",
                 "days after payment": "dias após o pagamento",
@@ -223,6 +222,8 @@
                 "Manually entered": "Informado manualmente",
                 "Make sure the fields are filled correctly.": "Verifique se os campos foram preenchidos corretamente.",
                 "Marketed": "Comercializado",
+                "Month": "Mês",
+                "Monthly": "Mensal",
                 "Monthly payment,": "Pagamento mensal,",
                 "More much...": "Muito mais...",
                 "More results": "Mais resultados",
@@ -257,6 +258,8 @@
                 "Operation": "Operação",
                 "Organize your catalog and pricing table.": "Organize seu catálogo e tabela de preços.",
                 "Other cash activities": "Outros lançamentos",
+                "Other credits": "Outros créditos",
+                "Other debits": "Outros débitos",
                 "Other movements": "Outros movimentos",
                 "Payment": "Pagamento",
                 "Payment date": "Data do pagamento",
@@ -284,6 +287,7 @@
                 "Profile": "Perfil",
                 "Purchase, sale and rent operations.": "Operações de compra, venda e aluguel.",
                 "Purchase orders": "Ordens de compra",
+                "Purchases": "Compras",
                 "Read carefully our": "Leia atentamente nossos",
                 "Receivables": "Recebíveis",
                 'Received date': 'Data do recebimento',
@@ -303,6 +307,7 @@
                 "Sale order already confirmed.": "Ordem de venda já confirmada.",
                 "Sale orders": "Ordens de venda",
                 "Sale total": "Total da venda",
+                "Sales": "Vendas",
                 "Same payment date": "Mesma data do pagamento",
                 "Save": "Salvar",
                 "Saving": "Salvando",
@@ -371,6 +376,7 @@
                 "We are excited to help your business grow.": "Estamos animados em ajudar seu negócio a crescer.",
                 "We will send you a confirmation": "Nós te enviaremos uma confirmação",
                 "with one user free in the first month.": "com um usuário grátis no primeiro mês.",
+                "Year": "Ano",
                 "Yes": "Sim"
             }
         });

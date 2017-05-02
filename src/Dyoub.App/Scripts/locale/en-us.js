@@ -24,32 +24,26 @@ angular.module("ngLocale", [], ["$provide", function ($provide) {
 
     $provide.value("$locale", {
         DATETIME_FORMATS: {
-            "AMPMS": ["AM", "PM"],
-            "DAY": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "ERANAMES": ["Before Christ", "Anno Domini"],
-            "ERAS": ["BC", "AD"],
-            "FIRSTDAYOFWEEK": 6,
-            "MONTH": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            "SHORTDAY": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            "SHORTMONTH": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            "STANDALONEMONTH": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            "WEEKENDRANGE": [5, 6],
-            "fullDate": "EEEE, MMMM d, y",
-            "longDate": "MMMM d, y",
-            "medium": "MMM d, y h:mm:ss a",
-            "mediumDate": "MMM d, y",
-            "mediumTime": "h:mm:ss a",
-            "short": "MM/DD/yyyy h:mm a",
-            "shortDate": "MM/DD/YYYY",
-            "shortTime": "h:mm a"
+            day: "DD",
+            weekDay: "dddd",
+            month: 'MM',
+            monthName: 'MMMM',
+            fullDate: "dddd, DD [de] MMMM [de] YYYY",
+            longDate: "DD [de] MMMM [de] YYYY",
+            medium: "D [de] MMM [de] YY HH:mm:ss",
+            mediumDate: "D [de] MMM [de] YY",
+            mediumTime: "HH:mm:ss",
+            short: "DD/MM/YYYY HH:mm",
+            shortDate: "DD/MM/YYYY",
+            shortTime: "HH:mm"
         },
         NUMBER_FORMATS: {
-            "CURRENCY_SYM": "$",
-            "DECIMAL_SEP": ".",
-            "GROUP_SEP": ",",
-            "PATTERNS": [
-              { "gSize": 3, "lgSize": 3, "maxFrac": 3, "minFrac": 0, "minInt": 1, "negPre": "-", "negSuf": "", "posPre": "", "posSuf": "" },
-              { "gSize": 3, "lgSize": 3, "maxFrac": 2, "minFrac": 2, "minInt": 1, "negPre": "-\u00a4", "negSuf": "", "posPre": "\u00a4", "posSuf": "" }
+            CURRENCY_SYM: "$",
+            DECIMAL_SEP: ".",
+            GROUP_SEP: ",",
+            PATTERNS: [
+              { gSize: 3, lgSize: 3, maxFrac: 3, minFrac: 0, minInt: 1, negPre: "-", negSuf: "", posPre: "", posSuf: "" },
+              { gSize: 3, lgSize: 3, maxFrac: 2, minFrac: 2, minInt: 1, negPre: "-\u00a4", negSuf: "", posPre: "\u00a4", posSuf: "" }
             ]
         },
         id: "en-us",

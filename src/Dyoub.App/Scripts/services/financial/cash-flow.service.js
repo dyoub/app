@@ -8,7 +8,7 @@
     }
 
     Service.prototype.daily = function (filter) {
-        return this.$http.post('/cash-flow/monthly', {
+        return this.$http.post('/cash-flow/daily', {
             storeId: filter.storeId,
             month: filter.month,
             year: filter.year
@@ -22,7 +22,7 @@
         });
     };
 
-    angular.module('dyoub.app').service('FixedExpense', [
+    angular.module('dyoub.app').service('CashFlow', [
         '$http',
         Service
     ]);
