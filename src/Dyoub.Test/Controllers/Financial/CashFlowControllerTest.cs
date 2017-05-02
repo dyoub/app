@@ -43,7 +43,7 @@ namespace Dyoub.Test.Controllers.Financial
 
             ActionResult result = await controller.Monthly(viewModel);
 
-            Assert.IsTrue(result is DailyCashFlowListJson);
+            Assert.IsTrue(result is MonthlyCashFlowListJson);
         }
     }
 }
