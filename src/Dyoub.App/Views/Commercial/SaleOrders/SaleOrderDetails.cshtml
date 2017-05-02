@@ -56,20 +56,26 @@
             </div>
 
             <div class="grid-row">
+                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                    <div class="box">
+                        <label data-translate="Store"></label>
+                        <strong data-ng-bind="controller.saleOrder.store.name"></strong>
+                    </div>
+                </div>
+                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                    <div class="box">
+                        <label data-translate="Issue date"></label>
+                        <strong data-ng-bind="controller.saleOrder.issueDate | moment:'shortDate'"></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
                 <div class="grid-column medium-6 large-6">
-                    <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Store"></label>
-                                <strong data-ng-bind="controller.saleOrder.store.name"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Issue date"></label>
-                                <strong data-ng-bind="controller.saleOrder.issueDate | moment:'shortDate'"></strong>
-                            </div>
-                        </div>
+                    <div class="box">
+                        <label data-translate="Wallet"></label>
+                        <strong data-ng-bind="controller.saleOrder.wallet.name"></strong>
+                        <strong data-ng-hide="controller.saleOrder.wallet.name" data-translate="Not defined"></strong>
                     </div>
                 </div>
                 <div class="grid-column medium-6 large-6">

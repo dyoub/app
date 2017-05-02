@@ -11,6 +11,8 @@ namespace Dyoub.App.Models.ViewModel.Commercial.SaleOrders
     {
         [Required]
         public int? StoreId { get; set; }
+        
+        public int? WalletId { get; set; }
 
         [Required]
         public DateTime? IssueDate { get; set; }
@@ -21,6 +23,7 @@ namespace Dyoub.App.Models.ViewModel.Commercial.SaleOrders
         public SaleOrder MapTo(SaleOrder saleOrder)
         {
             saleOrder.StoreId = StoreId.Value;
+            saleOrder.WalletId = WalletId;
             saleOrder.IssueDate = IssueDate.Value.Date;
             saleOrder.AdditionalInformation = AdditionalInformation;
 

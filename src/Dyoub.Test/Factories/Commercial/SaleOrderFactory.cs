@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Commercial.Customers;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
 
@@ -10,13 +11,14 @@ namespace Dyoub.Test.Factories.Commercial
 {
     public class SaleOrderFactory
     {
-        public static SaleOrder SaleOrder(Store store, Customer customer = null)
+        public static SaleOrder SaleOrder(Store store, Customer customer = null, Wallet wallet = null)
         {
             return new SaleOrder
             {
                 Store = store,
-                Customer = customer,
                 Tenant = store.Tenant,
+                Customer = customer,
+                Wallet = wallet,
                 IssueDate = DateTime.Today,
                 AdditionalInformation = "Additional information.",
                 Author = "user@email.com",

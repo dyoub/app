@@ -52,6 +52,11 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
             return saleOrders.Include(saleOrder => saleOrder.Store);
         }
 
+        public static IQueryable<SaleOrder> IncludeWallet(this IQueryable<SaleOrder> saleOrders)
+        {
+            return saleOrders.Include(saleOrder => saleOrder.Wallet);
+        }
+
         public static IQueryable<SaleOrder> IssuedOnDate(this IQueryable<SaleOrder> saleOrders, DateTime? date)
         {
             if (date == null)
@@ -121,6 +126,16 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
             }
 
             return saleOrders.Where(saleOrder => saleOrder.StoreId == storeId);
+        }
+
+        public static IQueryable<SaleOrder> WhereWalletId(this IQueryable<SaleOrder> saleOrders, int? walletId)
+        {
+            if (walletId == null)
+            {
+                return saleOrders;
+            }
+
+            return saleOrders.Where(saleOrder => saleOrder.WalletId == walletId);
         }
     }
 }

@@ -30,6 +30,10 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
                 .WithMany(p => p.SaleOrders)
                 .HasForeignKey(p => new { p.CustomerId, p.TenantId });
 
+            HasOptional(p => p.Wallet)
+                .WithMany(p => p.SaleOrders)
+                .HasForeignKey(p => new { p.WalletId, p.TenantId });
+
             HasMany(p => p.SalePayments)
                 .WithRequired(p => p.SaleOrder)
                 .HasForeignKey(p => new { p.SaleOrderId, p.TenantId });

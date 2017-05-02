@@ -3,6 +3,7 @@
 
 using Dyoub.App.Controllers.Financial;
 using Dyoub.App.Models.ViewModel.Financial.Wallets;
+using Dyoub.App.Results.Common;
 using Dyoub.App.Results.Financial.Wallets;
 using Dyoub.Test.Contexts.Financial.Wallets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,6 +42,21 @@ namespace Dyoub.Test.Controllers.Financial
             await controller.Delete(viewModel);
 
             Assert.IsTrue(context.WalletWasDeleted());
+        }
+
+        [TestMethod]
+        public async Task DeleteWalletWithSaleOrders()
+        {
+            DeleteWalletWithSaleOrdersContext context = new DeleteWalletWithSaleOrdersContext();
+            WalletsController controller = new WalletsController(context);
+
+            WalletIdViewModel viewModel = new WalletIdViewModel();
+            viewModel.Id = context.Wallet.Id;
+
+            ActionResult result = await controller.Delete(viewModel);
+
+            Assert.IsTrue(context.WalletWasNotDeleted());
+            Assert.IsTrue(result is ModelErrorsJson);
         }
 
         [TestMethod]

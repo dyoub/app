@@ -7,6 +7,7 @@ using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using Dyoub.App.Models.EntityModel.Financial;
+using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
         public DateTime IssueDate { get; set; }
         public DateTime? ConfirmationDate { get; set; }
         public int? CustomerId { get; set; }
+        public int? WalletId { get; set; }
         public decimal Total { get; set; }
         public decimal? Discount { get; set; }
         public decimal TotalPayable { get; set; }
@@ -49,6 +51,7 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
         public virtual Customer Customer { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual Store Store { get; set; }
+        public virtual Wallet Wallet { get; set; }
         public virtual ICollection<SalePayment> SalePayments { get; set; }
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
         public virtual ICollection<SaleService> SaleServices { get; set; }

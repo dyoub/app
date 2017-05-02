@@ -37,6 +37,7 @@
         return this.$http.post(action, {
             id: saleOrder.id,
             storeId: saleOrder.store.id,
+            walletId: saleOrder.wallet ? saleOrder.wallet.id : null,
             issueDate: saleOrder.issueDate,
             additionalInformation: saleOrder.additionalInformation
         });

@@ -2,6 +2,8 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
+using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Financial.Wallets
 {
@@ -14,5 +16,6 @@ namespace Dyoub.App.Models.EntityModel.Financial.Wallets
         public bool Active { get; set; }
 
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<SaleOrder> SaleOrders { get; set; }
     }
 }

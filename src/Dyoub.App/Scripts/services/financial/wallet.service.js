@@ -19,6 +19,10 @@
         return this.$http.post('/wallets', filter);
     };
 
+    Service.prototype.listActives = function () {
+        return this.$http.post('/wallets/actives');
+    };
+
     Service.prototype.remove = function (walletId) {
         return this.$http.post('/wallets/delete', { id: walletId });
     };

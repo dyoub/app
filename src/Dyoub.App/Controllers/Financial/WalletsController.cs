@@ -4,6 +4,7 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
+using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.ViewModel.Financial.Wallets;
@@ -61,11 +62,18 @@ namespace Dyoub.App.Controllers.Financial
                 .WhereId(viewModel.Id.Value)
                 .SingleOrDefaultAsync();
 
-            if (wallet != null)
+            if (wallet == null)
             {
-                Tenant.Wallets.Remove(wallet);
-                await Tenant.SaveChangesAsync();
+                return this.Error("Wallet not found.");
             }
+
+            if (await Tenant.SaleOrders.WhereWalletId(wallet.Id).AnyAsync())
+            {
+                return this.Error("This wallet has associated sales orders.");
+            }
+
+            Tenant.Wallets.Remove(wallet);
+            await Tenant.SaveChangesAsync();
 
             return this.Success();
         }
@@ -83,13 +91,23 @@ namespace Dyoub.App.Controllers.Financial
         [HttpPost, Route("wallets"), Authorization(Scope = "wallets.read")]
         public async Task<ActionResult> List(ListWalletsViewModel viewModel)
         {
-            ICollection<Wallet> wallet = await Tenant.Wallets
+            ICollection<Wallet> wallets = await Tenant.Wallets
                 .WhereNameContains(viewModel.Name.Words())
                 .OrderByName()
                 .Paginate(viewModel.Index)
                 .ToListAsync();
 
-            return new WalletListJson(wallet);
+            return new WalletListJson(wallets);
+        }
+
+        [HttpPost, Route("wallets/actives"), Authorization(Scope = "wallets.read")]
+        public async Task<ActionResult> ListActives()
+        {
+            ICollection<Wallet> wallets = await Tenant.Wallets
+                .OrderByName()
+                .ToListAsync();
+
+            return new WalletListJson(wallets);
         }
 
         [HttpPost, Route("wallets/update"), Authorization(Scope = "wallets.edit")]

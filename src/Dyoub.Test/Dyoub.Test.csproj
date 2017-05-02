@@ -176,6 +176,7 @@
     <Compile Include="Contexts\Financial\OtherCashActivities\UpdateOtherCashActivityContext.cs" />
     <Compile Include="Contexts\Financial\Wallets\CreateWalletContext.cs" />
     <Compile Include="Contexts\Financial\Wallets\DeleteWalletContext.cs" />
+    <Compile Include="Contexts\Financial\Wallets\DeleteWalletWithSaleOrdersContext.cs" />
     <Compile Include="Contexts\Financial\Wallets\FindWalletContext.cs" />
     <Compile Include="Contexts\Financial\Wallets\ListWalletsContext.cs" />
     <Compile Include="Contexts\Financial\Wallets\UpdateWalletContext.cs" />

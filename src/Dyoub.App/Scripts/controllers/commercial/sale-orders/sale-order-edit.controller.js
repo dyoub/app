@@ -3,17 +3,17 @@
 
 (function () {
 
-    function Controller(handleError, path, SaleOrder, Store) {
+    function Controller(handleError, path, SaleOrder, Store, Wallet) {
         this.path = path;
         this.handleError = handleError;
         this.SaleOrder = SaleOrder;
         this.Store = Store;
+        this.Wallet = Wallet;
     }
 
     Controller.prototype.find = function () {
         var controller = this;
         controller.searching = true;
-
 
         controller.SaleOrder
             .find(controller.routeParams.saleOrderId)
@@ -55,6 +55,7 @@
         }
 
         controller.searchStores();
+        controller.searchWallets();
     };
 
     Controller.prototype.save = function () {
@@ -103,11 +104,29 @@
             });
     };
 
+    Controller.prototype.searchWallets = function () {
+        var controller = this;
+        controller.searchingWallets = true;
+
+        controller.Wallet
+            .listActives()
+            .then(function (response) {
+                controller.walletList = response.data;
+            })
+            ['catch'](function (response) {
+                controller.handleError(response);
+            })
+            ['finally'](function () {
+                controller.searchingWallets = false;
+            });
+    };
+
     angular.module('dyoub.app').controller('SaleOrderEditController', [
         'HandleError',
         'Path',
         'SaleOrder',
         'Store',
+        'Wallet',
         Controller
     ]);
 

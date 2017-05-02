@@ -29,7 +29,12 @@ namespace Dyoub.App.Results.Commercial.SaleOrders
                 store = new
                 {
                     id = SaleOrder.Store.Id,
-                    name = SaleOrder.Store.Name,
+                    name = SaleOrder.Store.Name
+                },
+                wallet = SaleOrder.Wallet == null ? null : new
+                {
+                    id = SaleOrder.Wallet.Id,
+                    name = SaleOrder.Wallet.Name
                 }
             };
 

@@ -5,6 +5,7 @@ using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.ViewModel.Commercial.SaleOrders;
 using Dyoub.App.Results.Commercial.SaleOrders;
@@ -54,6 +55,14 @@ namespace Dyoub.App.Controllers.Commercial
                 return this.Error("Store not found.");
             }
 
+            if (viewModel.WalletId != null)
+            {
+                if (!await Tenant.Wallets.WhereId(viewModel.WalletId.Value).AnyAsync())
+                {
+                    return this.Error("Wallet not found.");
+                }
+            }
+
             SaleOrder saleOrder = viewModel.MapTo(new SaleOrder());
             saleOrder.CreatedAt = DateTime.Now;
             saleOrder.Author = HttpContext.UserIdentity().Email;
@@ -86,6 +95,7 @@ namespace Dyoub.App.Controllers.Commercial
             SaleOrder saleOrder = await Tenant.SaleOrders
                 .WhereId(viewModel.Id.Value)
                 .IncludeStore()
+                .IncludeWallet()
                 .SingleOrDefaultAsync();
 
             return new SaleOrderJson(saleOrder);
@@ -116,6 +126,19 @@ namespace Dyoub.App.Controllers.Commercial
 
             if (saleOrder == null) return this.Error("Sale order not found.");
             if (saleOrder.Confirmed) return this.Error("Cannot change confirmed sales orders.");
+
+            if (!await Tenant.Stores.WhereId(viewModel.StoreId.Value).AnyAsync())
+            {
+                return this.Error("Store not found.");
+            }
+
+            if (viewModel.WalletId != null)
+            {
+                if (!await Tenant.Wallets.WhereId(viewModel.WalletId.Value).AnyAsync())
+                {
+                    return this.Error("Wallet not found.");
+                }
+            }
 
             viewModel.MapTo(saleOrder);
             await Tenant.SaveChangesAsync();
