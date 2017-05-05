@@ -114,6 +114,7 @@
                 "Are you sure you want undo the changes?": "Deseja realmente desfazer as alterações?",
                 "At least one item must be informed.": "Pelo menos um item deve ser informado.",
                 "Balance": "Saldo",
+                "Bank reconciliation": "Conciliação bancária",
                 "Billed amount": "Total faturado",
                 "Billed value": "Valor faturado",
                 "Budget": "Orçamento",
