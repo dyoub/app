@@ -31,9 +31,9 @@ namespace Dyoub.App.Data
 
             AddForeignKey(
                 dependentTable: "SaleOrder",
-                dependentColumn: "WalletId",
+                dependentColumns: new string[] { "WalletId", "TenantId" },
                 principalTable: "Wallet",
-                principalColumn: "Id",
+                principalColumns: new string[] { "Id", "TenantId" },
                 cascadeDelete: false
             );
         }
@@ -42,7 +42,7 @@ namespace Dyoub.App.Data
         {
             DropForeignKey(
                 dependentTable: "SaleOrder",
-                dependentColumn: "WalletId",
+                dependentColumns: new string[] { "WalletId", "TenantId" },
                 principalTable: "Wallet"
             );
 
