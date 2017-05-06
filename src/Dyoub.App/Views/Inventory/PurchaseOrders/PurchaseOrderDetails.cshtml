@@ -1,0 +1,107 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PurchaseOrderDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Purchase order"></span>
+            <strong data-ng-bind="controller.purchaseOrder.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.purchaseOrderId">
+            <span class="step active" data-translate="General"></span>
+            <span class="separator"></span>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/supplier"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/items"
+               class="step" data-translate="Items"></a>
+            <span class="separator"></span>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="box">
+            <a href="/purchase-orders" class="as-button">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+
+            @using (Html.Authorize("purchase-orders.edit"))
+            {
+                <a href="/purchase-orders/edit/{{controller.purchaseOrder.id}}" class="as-button" data-translate="Edit"
+                    data-ng-hide="controller.purchaseOrder.confirmed"></a>
+                <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"
+                        data-ng-hide="controller.purchaseOrder.confirmed"></button>
+            }
+        </div>
+
+        <div class="card">
+            <div class="box">
+                <span class="hint success" data-ng-show="controller.purchaseOrder.confirmed" data-translate="Confirmed purchase"></span>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                    <div class="box">
+                        <label data-translate="Store"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.store.name"></strong>
+                    </div>
+                </div>
+                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                    <div class="box">
+                        <label data-translate="Issue date"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.issueDate | moment:'shortDate'"></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-column medium-6 large-6">
+                    <div class="box">
+                        <label data-translate="Wallet"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.wallet.name"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.wallet.name" data-translate="Not defined"></strong>
+                    </div>
+                </div>
+                <div class="grid-column medium-6 large-6">
+                    <div class="grid-row">
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
+                            <div class="box">
+                                <label data-translate="Purchase total"></label>
+                                <strong data-ng-bind="controller.purchaseOrder.total | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
+                            <div class="box">
+                                <label data-translate="Total cost"></label>
+                                <strong data-ng-bind="controller.purchaseOrder.totalCost | currency"></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <label data-translate="Additional information"></label>
+                <strong data-ng-bind-html="controller.purchaseOrder.additionalInformation | escapeHtml"></strong>
+                <strong data-ng-hide="controller.purchaseOrder.additionalInformation">-</strong>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.Authorize("purchase-orders.edit"))
+    {
+        @Html.Partial("~/Views/Inventory/PurchaseOrders/_RemovePurchaseOrder.cshtml")
+    }
+</div>

@@ -22,6 +22,10 @@ namespace Dyoub.App.Models.EntityModel.Financial.Wallets
                 .WithMany(p => p.Wallets)
                 .HasForeignKey(p => p.TenantId);
 
+            HasMany(p => p.PurchaseOrders)
+                .WithOptional(p => p.Wallet)
+                .HasForeignKey(p => new { p.WalletId, p.TenantId });
+
             HasMany(p => p.SaleOrders)
                 .WithOptional(p => p.Wallet)
                 .HasForeignKey(p => new { p.WalletId, p.TenantId });

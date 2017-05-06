@@ -9,6 +9,7 @@ using Dyoub.App.Models.EntityModel.Financial.CashActivities;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
+using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using Dyoub.App.Models.EntityModel.Overview;
 using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Results.Account.Dashboard;
@@ -90,7 +91,7 @@ namespace Dyoub.App.Controllers.Account
         [HttpPost, Route("dashboard/commercial"), Authorization]
         public async Task<ActionResult> CommercialCount()
         {
-            IQueryable<SaleOrder> saleOrders = Tenant.SaleOrders.IssuedToday();
+            IQueryable<SaleOrder> saleOrders = Tenant.SaleOrders.IssuedThisMonth();
 
             CommercialCount counter = await Tenant.Current
                 .Select(tenant => new CommercialCount
@@ -131,10 +132,13 @@ namespace Dyoub.App.Controllers.Account
         [HttpPost, Route("dashboard/inventory"), Authorization]
         public async Task<ActionResult> InventoryCount()
         {
+            IQueryable<PurchaseOrder> purchaseOrders = Tenant.PurchaseOrders.IssuedThisMonth();
+
             InventoryCount counter = await Tenant.Current
                 .Select(tenant => new InventoryCount
                 {
-                    Suppliers = tenant.Suppliers.Count()
+                    Suppliers = tenant.Suppliers.Count(),
+                    PurchaseOrders = purchaseOrders.Count()
                 })
                 .SingleOrDefaultAsync();
 

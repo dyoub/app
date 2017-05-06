@@ -177,6 +177,9 @@
     <EmbeddedResource Include="Data\Migrations\201705021840485_CreateSupplier.resx">
       <DependentUpon>201705021840485_CreateSupplier.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705061153072_CreatePurchaseOrder.resx">
+      <DependentUpon>201705061153072_CreatePurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -222,6 +225,9 @@
     <Content Include="Scripts\controllers\financial\wallets\wallet-details.controller.js" />
     <Content Include="Scripts\controllers\financial\wallets\wallet-edit.controller.js" />
     <Content Include="Scripts\controllers\financial\wallets\wallet-list.controller.js" />
+    <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-details.controller.js" />
+    <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-edit.controller.js" />
+    <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-list.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-details.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-edit.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-list.controller.js" />
@@ -252,6 +258,7 @@
     <Content Include="Scripts\services\financial\fixed-expense.service.js" />
     <Content Include="Scripts\services\financial\other-cash-activites.service.js" />
     <Content Include="Scripts\services\financial\wallet.service.js" />
+    <Content Include="Scripts\services\inventory\purchase-orders.service.js" />
     <Content Include="Scripts\services\inventory\supplier.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
     <Content Include="Scripts\services\commercial\customer.service.js" />
@@ -278,6 +285,7 @@
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
     <Compile Include="Controllers\Financial\WalletsController.cs" />
+    <Compile Include="Controllers\Inventory\PurchaseOrdersController.cs" />
     <Compile Include="Controllers\Inventory\SuppliersController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -368,6 +376,10 @@
     <Compile Include="Data\Migrations\201705021840485_CreateSupplier.Designer.cs">
       <DependentUpon>201705021840485_CreateSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705061153072_CreatePurchaseOrder.cs" />
+    <Compile Include="Data\Migrations\201705061153072_CreatePurchaseOrder.Designer.cs">
+      <DependentUpon>201705061153072_CreatePurchaseOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -450,6 +462,9 @@
     <Compile Include="Models\EntityModel\Financial\Wallets\Wallet.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletQuery.cs" />
+    <Compile Include="Models\EntityModel\Inventory\PurchaseOrders\PurchaseOrder.cs" />
+    <Compile Include="Models\EntityModel\Inventory\PurchaseOrders\PurchaseOrderMapping.cs" />
+    <Compile Include="Models\EntityModel\Inventory\PurchaseOrders\PurchaseOrderQuery.cs" />
     <Compile Include="Models\EntityModel\Inventory\Suppliers\Supplier.cs" />
     <Compile Include="Models\EntityModel\Inventory\Suppliers\SupplierMapping.cs" />
     <Compile Include="Models\EntityModel\Inventory\Suppliers\SupplierQuery.cs" />
@@ -540,6 +555,10 @@
     <Compile Include="Models\ViewModel\Financial\Wallets\ListWalletsViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\UpdateWalletViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\WalletIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\CreatePurchaseOrderViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\ListPurchaseOrdersViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\PurchaseOrderIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\UpdatePurchaseOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\Suppliers\CreateSupplierViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\Suppliers\ListSuppliersViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\Suppliers\SupplierIdViewModel.cs" />
@@ -591,6 +610,9 @@
     <Compile Include="Results\Financial\OtherCashActivities\OtherCashActivityListJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletListJson.cs" />
+    <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderIdJson.cs" />
+    <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderJson.cs" />
+    <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderListJson.cs" />
     <Compile Include="Results\Inventory\Suppliers\SupplierJson.cs" />
     <Compile Include="Results\Inventory\Suppliers\SupplierListJson.cs" />
     <Compile Include="Results\Manage\Stores\StoreJson.cs" />
@@ -686,6 +708,10 @@
     <Content Include="Views\Inventory\Suppliers\SupplierDetails.cshtml" />
     <Content Include="Views\Inventory\Suppliers\SupplierEdit.cshtml" />
     <Content Include="Views\Inventory\Suppliers\SupplierList.cshtml" />
+    <Content Include="Views\Inventory\PurchaseOrders\_RemovePurchaseOrder.cshtml" />
+    <Content Include="Views\Inventory\PurchaseOrders\PurchaseOrderDetails.cshtml" />
+    <Content Include="Views\Inventory\PurchaseOrders\PurchaseOrderEdit.cshtml" />
+    <Content Include="Views\Inventory\PurchaseOrders\PurchaseOrderList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

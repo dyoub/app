@@ -34,6 +34,10 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
                 .WithRequired(p => p.Tenant)
                 .HasForeignKey(p => p.TenantId);
 
+            HasMany(p => p.PurchaseOrders)
+                .WithRequired(p => p.Tenant)
+                .HasForeignKey(p => p.TenantId);
+
             HasMany(p => p.SaleIncomes)
                 .WithRequired(p => p.Tenant)
                 .HasForeignKey(p => p.TenantId);

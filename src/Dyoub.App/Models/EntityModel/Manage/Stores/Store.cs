@@ -7,6 +7,7 @@ using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
+using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using System.Collections.Generic;
 
@@ -23,6 +24,7 @@ namespace Dyoub.App.Models.EntityModel.Manage.Stores
         public virtual ICollection<FixedExpense> FixedExpenses { get; set; }
         public virtual ICollection<OtherCashActivity> OtherCashActivities { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
+        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
         public virtual ICollection<ServicePrice> ServicePrices { get; set; }
         public virtual ICollection<TeamMember> TeamMembers { get; set; }

@@ -2,6 +2,8 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
+using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Inventory.Suppliers
 {
@@ -21,5 +23,6 @@ namespace Dyoub.App.Models.EntityModel.Inventory.Suppliers
         public string GooglePlus { get; set; }
 
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

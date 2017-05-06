@@ -1,4 +1,5 @@
-﻿// Copyright (c) Dyoub Applications. All rights reserved.
+﻿
+// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,10 @@ namespace Dyoub.App.Models.EntityModel.Inventory.Suppliers
             HasRequired(p => p.Tenant)
                 .WithMany(p => p.Suppliers)
                 .HasForeignKey(p => p.TenantId);
+
+            HasMany(p => p.PurchaseOrders)
+                .WithOptional(p => p.Supplier)
+                .HasForeignKey(p => new { p.SupplierId, p.TenantId });
         }
     }
 }

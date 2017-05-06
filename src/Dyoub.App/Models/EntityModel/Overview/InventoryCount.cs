@@ -6,5 +6,6 @@ namespace Dyoub.App.Models.EntityModel.Overview
     public class InventoryCount
     {
         public int Suppliers { get; set; }
+        public int PurchaseOrders { get; set; }
     }
 }

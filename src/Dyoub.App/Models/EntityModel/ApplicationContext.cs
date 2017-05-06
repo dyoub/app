@@ -31,6 +31,7 @@ using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
 using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
+using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 
 namespace Dyoub.App.Models.EntityModel
 {
@@ -45,6 +46,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<PaymentMethodFee> PaymentMethodFees { get { return Set<PaymentMethodFee>(); } }
         public DbSet<Product> Products { get { return Set<Product>(); } }
         public DbSet<ProductPrice> ProductPrices { get { return Set<ProductPrice>(); } }
+        public DbSet<PurchaseOrder> PurchaseOrders { get { return Set<PurchaseOrder>(); } }
         public DbSet<SaleOrder> SaleOrders { get { return Set<SaleOrder>(); } }
         public DbSet<SaleIncome> SaleIncomes { get { return Set<SaleIncome>(); } }
         public DbSet<SalePayment> SalePayments { get { return Set<SalePayment>(); } }

@@ -69,6 +69,15 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
             return saleOrders.Where(saleOrder => saleOrder.IssueDate == date);
         }
 
+        public static IQueryable<SaleOrder> IssuedThisMonth(this IQueryable<SaleOrder> saleOrders)
+        {
+            DateTime startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            DateTime endDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+            return saleOrders.WhereIssueDateStartAt(startDate).WhereIssueDateEndAt(endDate);
+        }
+
         public static IQueryable<SaleOrder> IssuedToday(this IQueryable<SaleOrder> saleOrders)
         {
             return saleOrders.IssuedOnDate(DateTime.Today);

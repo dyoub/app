@@ -26,17 +26,17 @@
         </div>
 
         <div class="grid-column compact-6 small-4 medium-4 large-3">
-            <button type="button" data-href="/purchase-orders" class="card carrot" disabled>
+            <a href="/purchase-orders" class="as-button card carrot">
                 <div class="card-info">
                     <div data-translate="This month"></div>
-                    <div class="value" data-ng-bind="controller.overview.counter.monthlyPurchases | currency"></div>
+                    <div class="value" data-ng-bind="controller.overview.counter.purchaseOrders"></div>
                     <i class="fa fa-file-text-o"></i>
                 </div>
                 <div class="card-title">
                     <span data-translate="Purchase orders"></span>
                     <i class="fa fa-angle-right"></i>
                 </div>
-            </button>
+            </a>
         </div>
 
         <div class="grid-column compact-6 small-4 medium-4 large-3">

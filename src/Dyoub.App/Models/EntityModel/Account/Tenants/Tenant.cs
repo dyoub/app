@@ -24,6 +24,7 @@ using Dyoub.App.Models.EntityModel.Manage.Teams;
 using System;
 using System.Collections.Generic;
 using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
+using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 
 namespace Dyoub.App.Models.EntityModel.Account.Tenants
 {
@@ -41,6 +42,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<PaymentMethodFee> PaymentMethodFees { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
+        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual ICollection<SaleIncome> SaleIncomes { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
         public virtual ICollection<SalePayment> SalePayments { get; set; }
