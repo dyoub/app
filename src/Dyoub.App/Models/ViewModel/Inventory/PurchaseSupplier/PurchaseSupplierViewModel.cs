@@ -3,7 +3,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Dyoub.App.Models.ViewModel.Commercial.PurchaseSupplier
+namespace Dyoub.App.Models.ViewModel.Inventory.PurchaseSupplier
 {
     public class PurchaseSupplierViewModel
     {

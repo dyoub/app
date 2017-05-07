@@ -39,9 +39,7 @@ namespace Dyoub.Test.Controllers.Commercial
 
             SaleCustomerViewModel viewModel = new SaleCustomerViewModel();
             viewModel.SaleOrderId = context.SaleOrder.Id;
-            viewModel.Customer = new CustomerViewModel();
-            viewModel.Customer.Id = context.AnotherCustomer.Id;
-            viewModel.Customer.Name = context.AnotherCustomer.Name;
+            viewModel.CustomerId = context.AnotherCustomer.Id;
 
             await controller.Update(viewModel);
 
@@ -56,9 +54,7 @@ namespace Dyoub.Test.Controllers.Commercial
 
             SaleCustomerViewModel viewModel = new SaleCustomerViewModel();
             viewModel.SaleOrderId = context.SaleOrder.Id;
-            viewModel.Customer = new CustomerViewModel();
-            viewModel.Customer.Id = context.AnotherCustomer.Id;
-            viewModel.Customer.Name = context.AnotherCustomer.Name;
+            viewModel.CustomerId = context.AnotherCustomer.Id;
 
             ActionResult result = await controller.Update(viewModel);
 

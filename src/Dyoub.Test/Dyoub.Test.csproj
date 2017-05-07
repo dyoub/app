@@ -189,6 +189,9 @@
     <Compile Include="Contexts\Inventory\PurchaseOrders\ListPurchaseOrderContext.cs" />
     <Compile Include="Contexts\Inventory\PurchaseOrders\UpdateConfirmedPurchaseOrderContext.cs" />
     <Compile Include="Contexts\Inventory\PurchaseOrders\UpdatePurchaseOrderContext.cs" />
+    <Compile Include="Contexts\Inventory\PurchaseSupplier\FindPurchaseSupplierContext.cs" />
+    <Compile Include="Contexts\Inventory\PurchaseSupplier\UpdatePurchaseCustomerContext.cs" />
+    <Compile Include="Contexts\Inventory\PurchaseSupplier\UpdateSupplierToConfirmedPurchaseOrderContext.cs" />
     <Compile Include="Contexts\Inventory\Suppliers\CreateSupplierContext.cs" />
     <Compile Include="Contexts\Inventory\Suppliers\DeleteSupplierContext.cs" />
     <Compile Include="Contexts\Inventory\Suppliers\FindSupplierContext.cs" />
@@ -224,6 +227,7 @@
     <Compile Include="Controllers\Financial\SaleOrderBillingControllerTest.cs" />
     <Compile Include="Controllers\Financial\WalletsControllerTest.cs" />
     <Compile Include="Controllers\Inventory\PurchaseOrdersControllerTest.cs" />
+    <Compile Include="Controllers\Inventory\PurchaseSupplierControllerTest.cs" />
     <Compile Include="Controllers\Inventory\SuppliersControllerTest.cs" />
     <Compile Include="Controllers\Manage\StoresControllerTest.cs" />
     <Compile Include="Controllers\Commercial\CustomersControllerTest.cs" />

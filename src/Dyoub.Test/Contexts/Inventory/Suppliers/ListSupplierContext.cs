@@ -4,7 +4,7 @@
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.Test.Factories.Account;
-using Dyoub.Test.Factories.Commercial;
+using Dyoub.Test.Factories.Inventory;
 using Effort;
 
 namespace Dyoub.Test.Contexts.Inventory.Suppliers

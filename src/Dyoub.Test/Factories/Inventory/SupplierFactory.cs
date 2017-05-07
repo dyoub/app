@@ -4,7 +4,7 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
 
-namespace Dyoub.Test.Factories.Commercial
+namespace Dyoub.Test.Factories.Inventory
 {
     public class SupplierFactory
     {

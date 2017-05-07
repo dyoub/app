@@ -6,7 +6,7 @@ using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
-using Dyoub.App.Models.ViewModel.Commercial.PurchaseSupplier;
+using Dyoub.App.Models.ViewModel.Inventory.PurchaseSupplier;
 using Dyoub.App.Models.ViewModel.Inventory.PurchaseOrders;
 using Dyoub.App.Results.Inventory.PurchaseSupplier;
 using System.Data.Entity;
