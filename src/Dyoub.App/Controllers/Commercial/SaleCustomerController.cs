@@ -44,9 +44,7 @@ namespace Dyoub.App.Controllers.Commercial
             return new SaleCustomerJson(saleOrder);
         }
 
-        [HttpPost]
-        [Route("sale-orders/customer/update")]
-        [Authorization(Scope = "sale-orders.edit")]
+        [HttpPost, Route("sale-orders/customer/update"), Authorization(Scope = "sale-orders.edit")]
         public async Task<ActionResult> Update(SaleCustomerViewModel viewModel)
         {
             SaleOrder saleOrder = await Tenant.SaleOrders
