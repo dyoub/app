@@ -59,11 +59,11 @@
                             <div class="box" data-has-error="controller.saleCustomerForm.name.$invalid">
                                 <label>
                                     <span data-translate="Customer"></span>
-                                    <span class="text-danger" data-ng-show="controller.customerHasData()">*</span>
+                                    <span class="text-danger" data-ng-show="controller.hasCustomerData()">*</span>
                                 </label>
                                 <div class="suggestion" data-suggestion-open="controller.customerSuggestionOpened">
                                     <input type="text" name="name" data-ng-model="controller.saleOrder.customer.name" data-ng-maxlength="80"
-                                           data-ng-required="controller.customerHasData()"
+                                           data-ng-required="controller.hasCustomerData()"
                                            data-event-typing="controller.newCustomerSearch()"
                                            data-event-typing-end="controller.searchCustomers()" />
                                     <div class="suggestion-body">
