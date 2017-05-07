@@ -348,6 +348,7 @@
                 "Store not found.": "Loja não encontrada",
                 "Store": "Loja",
                 "Stores": "Lojas",
+                "Supplier": "Fornecedor",
                 "Supplier details": "Detalhes do fornecedor",
                 "Supplier name": "Nome do fornecedor",
                 "Supplier not found.": "Fornecedor não encontrado.",

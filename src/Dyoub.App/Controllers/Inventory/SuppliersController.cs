@@ -48,10 +48,10 @@ namespace Dyoub.App.Controllers.Inventory
         [HttpPost, Route("suppliers/create"), Authorization(Scope = "suppliers.edit")]
         public async Task<ActionResult> Create(CreateSupplierViewModel viewModel)
         {
-            Tenant.Suppliers.Add(viewModel.MapTo(new Supplier()));
+            Supplier supplier = Tenant.Suppliers.Add(viewModel.MapTo(new Supplier()));
             await Tenant.SaveChangesAsync();
 
-            return this.Success();
+            return new SupplierJson(supplier);
         }
 
         [HttpPost, Route("suppliers/delete"), Authorization(Scope = "suppliers.edit")]
@@ -109,7 +109,7 @@ namespace Dyoub.App.Controllers.Inventory
             viewModel.MapTo(supplier);
             await Tenant.SaveChangesAsync();
 
-            return this.Success();
+            return new SupplierJson(supplier);
         }
     }
 }

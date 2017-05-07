@@ -1,0 +1,117 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PurchaseSupplierEditController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Edit purchase order"></span>
+            <strong data-ng-bind="controller.purchaseOrder.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.purchaseOrderId">
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Supplier"></span>
+            <span class="separator"></span>
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/items"
+               class="step" data-translate="Items"></a>
+            <span class="separator"></span>
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.purchaseOrder.confirmed">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Sale order already confirmed."></p>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/supplier"
+               class="as-button primary" data-translate="Go to supplier details"></a>
+        </div>
+
+        <div data-ng-hide="controller.purchaseOrder.confirmed">
+            <form name="controller.purchaseSupplierForm" data-ng-submit="controller.save()">
+                <div class="box">
+                    <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                        <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                        <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                    </button>
+                    <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/supplier"
+                       class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+                </div>
+
+                <div class="card">
+                    <div class="box" data-ng-show="controller.purchaseOrder.supplier.id">
+                        <span data-translate="The supplier data will be updated."></span>
+                        <button type="button" class="danger small" data-translate="Clear form" data-ng-click="controller.clearSupplierData()"></button>
+                    </div>
+
+                    <div class="grid-row">
+                        <div class="grid-column small-8 medium-8 large-8">
+                            <div class="box" data-has-error="controller.purchaseSupplierForm.name.$invalid">
+                                <label>
+                                    <span data-translate="Supplier"></span>
+                                    <span class="text-danger" data-ng-show="controller.hasSupplierData()">*</span>
+                                </label>
+                                <div class="suggestion" data-suggestion-open="controller.supplierSuggestionOpened">
+                                    <input type="text" name="name" data-ng-model="controller.purchaseOrder.supplier.name" data-ng-maxlength="80"
+                                           data-ng-required="controller.hasSupplierData()"
+                                           data-event-typing="controller.newSupplierSearch()"
+                                           data-event-typing-end="controller.searchSuppliers()" />
+                                    <div class="suggestion-body">
+                                        <em class="text-muted" data-ng-show="controller.searchingSuppliers" data-translate="Searching..."></em>
+                                        <div class="text-primary" data-translate="No records found" data-ng-show="controller.noSuppliers()"></div>
+                                        <div class="box" data-ng-repeat="supplier in controller.supplierList">
+                                            <button type="button" class="primary small" data-translate="Select"
+                                                    data-ng-click="controller.selectSupplier(supplier)"></button>
+                                            <span data-ng-bind="supplier.name"></span>
+                                            <span class="text-muted" data-ng-bind="supplier.nationalId || supplier.email || supplier.phoneNumber"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column small-4 medium-4 large-4">
+                            <div class="box" data-has-error="controller.purchaseSupplierForm.nationalId.$invalid">
+                                <label data-translate="National ID"></label>
+                                <input type="text" name="nationalId" data-ng-model="controller.purchaseOrder.supplier.nationalId"
+                                       data-ng-maxlength="50" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-row">
+                        <div class="grid-column small-4 medium-4 large-4">
+                            <div class="box" data-has-error="controller.purchaseSupplierForm.email.$invalid">
+                                <label data-translate="Email"></label>
+                                <input type="text" name="email" data-ng-model="controller.purchaseOrder.supplier.email"
+                                       data-type-email data-ng-maxlength="80" />
+                            </div>
+                        </div>
+                        <div class="grid-column small-4 medium-4 large-4">
+                            <div class="box" data-has-error="controller.purchaseSupplierForm.phoneNumber.$invalid">
+                                <label data-translate="Phone number"></label>
+                                <input type="text" name="phoneNumber" data-ng-model="controller.purchaseOrder.supplier.phoneNumber" data-ng-maxlength="50" />
+                            </div>
+                        </div>
+                        <div class="grid-column small-4 medium-4 large-4">
+                            <div class="box" data-has-error="controller.purchaseSupplierForm.alternativePhoneNumber.$invalid">
+                                <label data-translate="Alternative phone number"></label>
+                                <input type="text" name="alternativePhoneNumber" data-ng-model="controller.purchaseOrder.supplier.alternativePhoneNumber"
+                                       data-ng-maxlength="50" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

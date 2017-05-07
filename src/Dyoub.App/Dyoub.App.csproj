@@ -228,6 +228,8 @@
     <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-details.controller.js" />
     <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-edit.controller.js" />
     <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-list.controller.js" />
+    <Content Include="Scripts\controllers\inventory\purchase-supplier\purchase-supplier-details.controller.js" />
+    <Content Include="Scripts\controllers\inventory\purchase-supplier\purchase-supplier-edit.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-details.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-edit.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-list.controller.js" />
@@ -259,6 +261,7 @@
     <Content Include="Scripts\services\financial\other-cash-activites.service.js" />
     <Content Include="Scripts\services\financial\wallet.service.js" />
     <Content Include="Scripts\services\inventory\purchase-orders.service.js" />
+    <Content Include="Scripts\services\inventory\purchase-supplier.service.js" />
     <Content Include="Scripts\services\inventory\supplier.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
     <Content Include="Scripts\services\commercial\customer.service.js" />
@@ -286,6 +289,7 @@
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
     <Compile Include="Controllers\Financial\WalletsController.cs" />
     <Compile Include="Controllers\Inventory\PurchaseOrdersController.cs" />
+    <Compile Include="Controllers\Inventory\SupplierPurchaseController.cs" />
     <Compile Include="Controllers\Inventory\SuppliersController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -559,6 +563,7 @@
     <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\ListPurchaseOrdersViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\PurchaseOrderIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\UpdatePurchaseOrderViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\PurchaseSupplier\PurchaseSupplierViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\Suppliers\CreateSupplierViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\Suppliers\ListSuppliersViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\Suppliers\SupplierIdViewModel.cs" />
@@ -613,6 +618,7 @@
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderIdJson.cs" />
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderJson.cs" />
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderListJson.cs" />
+    <Compile Include="Results\Inventory\PurchaseSupplier\PurchaseSupplierJson.cs" />
     <Compile Include="Results\Inventory\Suppliers\SupplierJson.cs" />
     <Compile Include="Results\Inventory\Suppliers\SupplierListJson.cs" />
     <Compile Include="Results\Manage\Stores\StoreJson.cs" />
@@ -712,6 +718,8 @@
     <Content Include="Views\Inventory\PurchaseOrders\PurchaseOrderDetails.cshtml" />
     <Content Include="Views\Inventory\PurchaseOrders\PurchaseOrderEdit.cshtml" />
     <Content Include="Views\Inventory\PurchaseOrders\PurchaseOrderList.cshtml" />
+    <Content Include="Views\Inventory\PurchaseSupplier\PurchaseSupplierDetails.cshtml" />
+    <Content Include="Views\Inventory\PurchaseSupplier\PurchaseSupplierEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

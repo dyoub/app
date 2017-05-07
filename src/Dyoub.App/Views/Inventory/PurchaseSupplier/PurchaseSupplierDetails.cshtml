@@ -1,0 +1,90 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PurchaseSupplierDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Purchase order"></span>
+            <strong data-ng-bind="controller.purchaseOrder.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.purchaseOrderId">
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Supplier"></span>
+            <span class="separator"></span>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/items"
+               class="step" data-translate="Items"></a>
+            <span class="separator"></span>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        @using (Html.Authorize("purchase-orders.edit"))
+        {
+            <div class="box">
+                <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/supplier" class="as-button" data-translate="Edit"
+                   data-ng-hide="controller.purchaseOrder.confirmed"></a>
+            </div>
+        }
+
+        <div class="box">
+            <span class="hint success" data-translate="Purchase billed" data-ng-show="controller.purchaseOrder.confirmed"></span>
+        </div>
+
+        <div class="card">
+            <div class="grid-row">
+                <div class="grid-column small-8 medium-8 large-8">
+                    <div class="box">
+                        <label data-translate="Supplier"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.supplier.name"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.supplier.name">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="National ID"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.supplier.nationalId"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.supplier.nationalId">-</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Email"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.supplier.email"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.supplier.email">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Phone number"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.supplier.phoneNumber"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.supplier.phoneNumber">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Alternative phone number"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.supplier.alternativePhoneNumber"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.supplier.alternativePhoneNumber">-</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
