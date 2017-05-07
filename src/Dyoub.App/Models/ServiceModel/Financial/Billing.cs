@@ -83,7 +83,6 @@ namespace Dyoub.App.Models.ServiceModel.Financial
                 for (int installment = 1; installment <= installments; installment++)
                 {
                     SaleIncome income = new SaleIncome();
-                    income.TenantId = SaleOrder.TenantId;
                     income.SalePaymentId = payment.Id;
 
                     CalculateTotals(payment, income, installments);

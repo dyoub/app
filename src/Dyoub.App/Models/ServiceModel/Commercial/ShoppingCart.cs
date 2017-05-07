@@ -34,7 +34,6 @@ namespace Dyoub.App.Models.ServiceModel.Commercial
             {
                 SaleOrderId = SaleOrder.Id,
                 ProductId = item.Id,
-                TenantId = SaleOrder.TenantId,
                 Quantity = item.Quantity,
                 UnitPrice = item.UnitPrice,
                 Total = item.Total,
@@ -49,7 +48,6 @@ namespace Dyoub.App.Models.ServiceModel.Commercial
             {
                 SaleOrderId = SaleOrder.Id,
                 ServiceId = item.Id,
-                TenantId = SaleOrder.TenantId,
                 Quantity = item.Quantity,
                 UnitPrice = item.UnitPrice,
                 Total = item.Total,
