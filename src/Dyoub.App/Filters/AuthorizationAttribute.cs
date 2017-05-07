@@ -44,21 +44,18 @@ namespace Dyoub.App.Filters
         {
             string token = filterContext.HttpContext.Request.AccessToken();
 
-            if (token == null)
+            if (token != null)
             {
-                RespondWithAccessDenied(filterContext);
-                return;
+                UserIdentity userIdentity = Context.Users.AsUserIdentity(token).SingleOrDefault();
+
+                if (userIdentity != null && userIdentity.HasPermission(Scope))
+                {
+                    filterContext.HttpContext.SetUserIdentity(userIdentity);
+                    return;
+                }
             }
 
-            UserIdentity userIdentity = Context.Users.AsUserIdentity(token).SingleOrDefault();
-
-            if (userIdentity == null || !userIdentity.HasPermission(Scope))
-            {
-                RespondWithAccessDenied(filterContext);
-                return;
-            }
-            
-            filterContext.HttpContext.SetUserIdentity(userIdentity);
+            RespondWithAccessDenied(filterContext);
         }
     }
 }

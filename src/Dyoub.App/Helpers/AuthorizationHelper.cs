@@ -37,9 +37,7 @@ namespace Dyoub.App.Helpers
 
             public void Dispose()
             {
-                UserIdentity userIdentity = httpContext.UserIdentity();
-
-                if (!userIdentity.HasPermission(scope))
+                if (!httpContext.UserIdentity().HasPermission(scope))
                 {
                     html.Clear();
                     html.Append(rollbackHtml);
