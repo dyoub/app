@@ -9,8 +9,7 @@ namespace Dyoub.App.Models.ViewModel.Commercial.PurchaseSupplier
     {
         [Required]
         public int? PurchaseOrderId { get; set; }
-
-        [Required]
+        
         public int? SupplierId { get; set; }
     }
 }

@@ -88,8 +88,6 @@
         if (controller.saleCustomerForm.$valid && !controller.saving) {
             controller.saving = true;
 
-            console.info(controller.routeParams);
-
             controller.SaleCustomer.save({
                 saleOrderId: controller.routeParams.saleOrderId,
                 customer: controller.getCustomer()

@@ -289,7 +289,7 @@
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
     <Compile Include="Controllers\Financial\WalletsController.cs" />
     <Compile Include="Controllers\Inventory\PurchaseOrdersController.cs" />
-    <Compile Include="Controllers\Inventory\SupplierPurchaseController.cs" />
+    <Compile Include="Controllers\Inventory\PurchaseSupplierController.cs" />
     <Compile Include="Controllers\Inventory\SuppliersController.cs" />
     <Compile Include="Controllers\Manage\StoresController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -535,7 +535,6 @@
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodFeeViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\UpdatePaymentMethodViewModel.cs" />
-    <Compile Include="Models\ViewModel\Commercial\SaleCustomer\CustomerViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleCustomer\SaleCustomerViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleItems\SaleItemViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleItems\UpdateSaleItemListViewModel.cs" />

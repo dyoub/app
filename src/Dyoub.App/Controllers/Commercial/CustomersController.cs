@@ -48,10 +48,10 @@ namespace Dyoub.App.Controllers.Commercial
         [HttpPost, Route("customers/create"), Authorization(Scope = "customers.edit")]
         public async Task<ActionResult> Create(CreateCustomerViewModel viewModel)
         {
-            Tenant.Customers.Add(viewModel.MapTo(new Customer()));
+            Customer customer = Tenant.Customers.Add(viewModel.MapTo(new Customer()));
             await Tenant.SaveChangesAsync();
 
-            return this.Success();
+            return new CustomerJson(customer);
         }
 
         [HttpPost, Route("customers/delete"), Authorization(Scope = "customers.edit")]
@@ -114,7 +114,7 @@ namespace Dyoub.App.Controllers.Commercial
             viewModel.MapTo(customer);
             await Tenant.SaveChangesAsync();
 
-            return this.Success();
+            return new CustomerJson(customer);
         }
     }
 }

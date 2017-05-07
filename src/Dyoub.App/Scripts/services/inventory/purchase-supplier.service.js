@@ -12,17 +12,24 @@
         return this.$http.post('/purchase-orders/supplier', { id: purchaseOrderId });
     };
 
+    Service.prototype.saveOrder = function (purchaseSupplier) {
+        return this.$http.post('/purchase-orders/supplier/update', {
+            purchaseOrderId: purchaseSupplier.purchaseOrderId,
+            supplierId: purchaseSupplier.supplierId
+        });
+    };
+
     Service.prototype.save = function (purchaseSupplier) {
         var service = this;
 
-        return this.Supplier
-            .save(purchaseSupplier.supplier)
-            .then(function (response) {
-                return service.$http.post('/purchase-orders/supplier/update', {
-                    purchaseOrderId: purchaseSupplier.purchaseOrderId,
-                    supplierId: response.data.id
-                });
+        if (purchaseSupplier.supplier) {
+            return this.Supplier.save(purchaseSupplier.supplier).then(function (response) {
+                purchaseSupplier.supplierId = response.data.id;
+                return service.saveOrder(purchaseSupplier);
             });
+        } else {
+            return service.saveOrder(purchaseSupplier);
+        }
     };
 
     angular.module('dyoub.app').service('PurchaseSupplier', [

@@ -3,30 +3,38 @@
 
 (function () {
 
-    function Service($http) {
+    function Service($http, Customer) {
         this.$http = $http;
+        this.Customer = Customer;
     }
 
     Service.prototype.find = function (saleOrderId) {
         return this.$http.post('/sale-orders/customer', { id: saleOrderId });
     };
 
-    Service.prototype.save = function (saleCustomer) {
+    Service.prototype.saveOrder = function (saleCustomer) {
         return this.$http.post('/sale-orders/customer/update', {
             saleOrderId: saleCustomer.saleOrderId,
-            customer: saleCustomer.customer === null ? null : {
-                id: saleCustomer.customer.id,
-                name: saleCustomer.customer.name,
-                nationalId: saleCustomer.customer.nationalId,
-                email: saleCustomer.customer.email,
-                phoneNumber: saleCustomer.customer.phoneNumber,
-                alternativePhoneNumber: saleCustomer.customer.alternativePhoneNumber
-            }
+            customerId: saleCustomer.customerId
         });
+    };
+
+    Service.prototype.save = function (saleCustomer) {
+        var service = this;
+
+        if (saleCustomer.customer) {
+            return this.Customer.save(saleCustomer.customer).then(function (response) {
+                saleCustomer.customerId = response.data.id;
+                return service.saveOrder(saleCustomer);
+            });
+        } else {
+            return service.saveOrder(saleCustomer);
+        }
     };
 
     angular.module('dyoub.app').service('SaleCustomer', [
         '$http',
+        'Customer',
         Service
     ]);
 

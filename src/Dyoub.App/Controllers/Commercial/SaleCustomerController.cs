@@ -51,30 +51,25 @@ namespace Dyoub.App.Controllers.Commercial
                 .WhereId(viewModel.SaleOrderId.Value)
                 .SingleOrDefaultAsync();
 
-            if (saleOrder == null) return this.Error("Sale order not found.");
-            if (saleOrder.Confirmed) return this.Error("Sale order already confirmed.");
-
-            Customer customer = null;
-
-            if (viewModel.HasCustomerData)
+            if (saleOrder == null)
             {
-                if (viewModel.IsKnownCustomer)
-                {
-                    customer = await Tenant.Customers
-                        .WhereId(viewModel.Customer.Id.Value)
-                        .SingleOrDefaultAsync();
-
-                    if (customer == null) return this.Error("Customer not found.");
-                }
-                else
-                {
-                    customer = Tenant.Customers.Add(new Customer());
-                }
-
-                viewModel.MapTo(customer);
+                return this.Error("Sale order not found.");
             }
 
-            saleOrder.CustomerId = customer != null ? (int?)customer.Id : null;
+            if (saleOrder.Confirmed)
+            {
+                return this.Error("Sale order already confirmed.");
+            }
+
+            if (viewModel.CustomerId != null)
+            {
+                if (!await Tenant.Customers.WhereId(viewModel.CustomerId.Value).AnyAsync())
+                {
+                    return this.Error("Customer not found.");
+                }
+            }
+            
+            saleOrder.CustomerId = viewModel.CustomerId;
             await Tenant.SaveChangesAsync();
 
             return this.Success();
