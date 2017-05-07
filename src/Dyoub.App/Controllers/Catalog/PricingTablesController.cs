@@ -99,7 +99,7 @@ namespace Dyoub.App.Controllers.Catalog
             return new PricingTableListJson(stores);
         }
 
-        [HttpPost, Route("pricing-tables/items"), Authorization(Scope = "ItemPrices:Read")]
+        [HttpPost, Route("pricing-tables/items"), Authorization(Scope = "pricing-tables.read")]
         public async Task<ActionResult> ListItems(ListItemsViewModel viewModel)
         {
             IQueryable<ItemPrice> productItems = Tenant.Products.AsItemPrice(viewModel.StoreId.Value);
@@ -123,7 +123,7 @@ namespace Dyoub.App.Controllers.Catalog
             return new ItemPriceListJson(itemPrices);
         }
 
-        [HttpPost, Route("pricing-tables/items/for-sale"), Authorization(Scope = "item-prices.read")]
+        [HttpPost, Route("pricing-tables/items/for-sale"), Authorization(Scope = "pricing-tables.read")]
         public async Task<ActionResult> ListItemsForSale(ListItemsForSaleViewModel viewModel)
         {
             IQueryable<ItemPrice> productItems = Tenant.ProductPrices
