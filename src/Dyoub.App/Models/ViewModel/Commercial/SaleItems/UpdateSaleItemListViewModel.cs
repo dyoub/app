@@ -17,7 +17,7 @@ namespace Dyoub.App.Models.ViewModel.Commercial.SaleItems
         public List<SaleItemViewModel> Items { get; private set; }
         
         [ValidIf]
-        public bool HasAtLeastOnItem
+        public bool HasAtLeastOneItem
         {
             get { return Items.Any(); }
         }
