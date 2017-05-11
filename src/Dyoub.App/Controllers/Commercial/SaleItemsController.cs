@@ -32,17 +32,13 @@ namespace Dyoub.App.Controllers.Commercial
             return View("~/Views/Commercial/SaleItems/SaleItemsDetails.cshtml");
         }
 
-        [HttpGet]
-        [Route("sale-orders/edit/{id:int}/items")]
-        [Authorization(Scope = "sale-orders.edit")]
+        [HttpGet, Route("sale-orders/edit/{id:int}/items"), Authorization(Scope = "sale-orders.edit")]
         public ActionResult Edit()
         {
             return View("~/Views/Commercial/SaleItems/SaleItemsEdit.cshtml");
         }
 
-        [HttpPost]
-        [Route("sale-orders/items")]
-        [Authorization(Scope = "sale-orders.read")]
+        [HttpPost, Route("sale-orders/items"), Authorization(Scope = "sale-orders.read")]
         public async Task<ActionResult> List(SaleOrderIdViewModel viewModel)
         {
             SaleOrder saleOrder = await Tenant.SaleOrders
@@ -62,12 +58,10 @@ namespace Dyoub.App.Controllers.Commercial
             return new SaleItemListJson(saleOrder, itemList);
         }
 
-        [HttpPost]
-        [Route("sale-orders/items/update")]
-        [Authorization(Scope = "sale-orders.edit")]
+        [HttpPost, Route("sale-orders/items/update"), Authorization(Scope = "sale-orders.edit")]
         public async Task<ActionResult> Update(UpdateSaleItemListViewModel viewModel)
         {
-            ShoppingCart shoppingCart = new ShoppingCart(Tenant);
+            SaleShoppingCart shoppingCart = new SaleShoppingCart(Tenant);
 
             if (!await shoppingCart.Checkout(viewModel.SaleOrderId.Value, viewModel.Map()))
             {
@@ -89,6 +83,11 @@ namespace Dyoub.App.Controllers.Commercial
                 if (shoppingCart.HasOneOrMorePricesNotDefined)
                 {
                     return this.Error("One or more prices not defined.");
+                }
+
+                if (shoppingCart.HasItemWithTotalNegative)
+                {
+                    return this.Error("One or more items have total negative.");
                 }
             }
             
