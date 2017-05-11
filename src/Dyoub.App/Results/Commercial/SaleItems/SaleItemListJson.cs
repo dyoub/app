@@ -1,9 +1,7 @@
 ﻿using Dyoub.App.Models.EntityModel.Commercial.SaleItems;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Dyoub.App.Results.Commercial.SaleItems

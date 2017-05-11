@@ -2,17 +2,12 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Controllers.Commercial;
-using Dyoub.App.Extensions;
-using Dyoub.App.Infrastructure.Security;
 using Dyoub.App.Models.ViewModel.Commercial.SaleItems;
 using Dyoub.App.Models.ViewModel.Commercial.SaleOrders;
 using Dyoub.App.Results.Commercial.SaleItems;
-using Dyoub.App.Results.Commercial.SaleOrders;
 using Dyoub.App.Results.Common;
 using Dyoub.Test.Contexts.Commercial.SaleOrders;
-using Dyoub.Test.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
