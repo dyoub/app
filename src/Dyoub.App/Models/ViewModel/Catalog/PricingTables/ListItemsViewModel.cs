@@ -11,10 +11,8 @@ namespace Dyoub.App.Models.ViewModel.Catalog.PricingTables
 
         [Required]
         public int? StoreId { get; set; }
-
-        public string Code { get; set; }
-
-        public string Name { get; set; }
+        
+        public string NameOrCode { get; set; }
 
         public Filter SearchFor { get; set; }
 

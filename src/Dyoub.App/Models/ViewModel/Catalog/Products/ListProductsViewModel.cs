@@ -5,8 +5,9 @@ namespace Dyoub.App.Models.ViewModel.Catalog.Products
 {
     public class ListProductsViewModel
     {
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public string NameOrCode { get; set; }
+        public bool? StockMovement { get; set; }
         public int Index { get; set; }
+        public int? Limit { get; set; }
     }
 }

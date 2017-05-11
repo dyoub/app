@@ -24,17 +24,12 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ItemPrices
             return items.OrderBy(item => item.Name);
         }
 
-        public static IQueryable<ItemPrice> WherwCode(this IQueryable<ItemPrice> items, string code)
+        public static IQueryable<ItemPrice> WhereItemMarketed(this IQueryable<ItemPrice> itemPrices)
         {
-            if (string.IsNullOrWhiteSpace(code))
-            {
-                return items;
-            }
-
-            return items = items.Where(item => item.Code == code);
+            return itemPrices.Where(itemPrice => itemPrice.Marketed);
         }
 
-        public static IQueryable<ItemPrice> WhereCodeOrName(this IQueryable<ItemPrice> items, params string[] words)
+        public static IQueryable<ItemPrice> WhereNameOrCode(this IQueryable<ItemPrice> items, params string[] words)
         {
             if (words.Count() == 1)
             {
@@ -42,21 +37,6 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ItemPrices
                 return items.Where(item => item.Code == word || item.Name.Contains(word));
             }
 
-            foreach (string word in words)
-            {
-                items = items.Where(item => item.Name.Contains(word));
-            }
-
-            return items;
-        }
-
-        public static IQueryable<ItemPrice> WhereItemMarketed(this IQueryable<ItemPrice> itemPrices)
-        {
-            return itemPrices.Where(itemPrice => itemPrice.Marketed);
-        }
-
-        public static IQueryable<ItemPrice> WhereNameContains(this IQueryable<ItemPrice> items, params string[] words)
-        {
             foreach (string word in words)
             {
                 items = items.Where(item => item.Name.Contains(word));

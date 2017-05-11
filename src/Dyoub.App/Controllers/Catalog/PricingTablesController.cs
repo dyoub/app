@@ -114,8 +114,7 @@ namespace Dyoub.App.Controllers.Catalog
             }
 
             ICollection<ItemPrice> itemPrices = await fetchedItems
-                .WherwCode(viewModel.Code)
-                .WhereNameContains(viewModel.Name.Words())
+                .WhereNameOrCode(viewModel.NameOrCode.Words())
                 .OrderedByName()
                 .Paginate(viewModel.Index)
                 .ToListAsync();
@@ -135,7 +134,7 @@ namespace Dyoub.App.Controllers.Catalog
                 .AsItemPrice();
 
             ICollection<ItemPrice> itemPrices = await productItems.Concat(serviceItems)
-                .WhereCodeOrName(viewModel.NameOrCode.Words())
+                .WhereNameOrCode(viewModel.NameOrCode.Words())
                 .OrderedByName()
                 .Take(3)
                 .ToListAsync();

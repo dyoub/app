@@ -5,8 +5,7 @@ namespace Dyoub.App.Models.ViewModel.Catalog.Services
 {
     public class ListServicesViewModel
     {
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public string NameOrCode { get; set; }
         public int Index { get; set; }
     }
 }

@@ -86,9 +86,9 @@ namespace Dyoub.App.Controllers.Catalog
         {
             ICollection<Product> products = await Tenant.Products
                 .OrderByName()
-                .WhereNameContains(viewModel.Name.Words())
-                .WhereCode(viewModel.Code)
-                .Paginate(viewModel.Index)
+                .WhereNameOrCode(viewModel.NameOrCode.Words())
+                .WhereStockMovement(viewModel.StockMovement)
+                .Paginate(viewModel.Index, viewModel.Limit)
                 .ToListAsync();
 
             return new ProductListJson(products);

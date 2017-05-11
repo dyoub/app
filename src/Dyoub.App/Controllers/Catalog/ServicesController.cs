@@ -86,8 +86,7 @@ namespace Dyoub.App.Controllers.Catalog
         {
             ICollection<Service> services = await Tenant.Services
                 .OrderByName()
-                .WhereNameContains(viewModel.Name.Words())
-                .WhereCode(viewModel.Code)
+                .WhereNameOrCode(viewModel.NameOrCode.Words())
                 .Paginate(viewModel.Index)
                 .ToListAsync();
 

@@ -2,6 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Dyoub.App.Models.EntityModel.Catalog.Products
@@ -31,15 +32,21 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
         {
             return products.OrderBy(product => product.Name);
         }
-
-        public static IQueryable<Product> WhereCode(this IQueryable<Product> products, string code)
+        
+        public static IQueryable<Product> WhereNameOrCode(this IQueryable<Product> products, params string[] words)
         {
-            if (string.IsNullOrWhiteSpace(code))
+            if (words.Count() == 1)
             {
-                return products;
+                string word = words.First();
+                return products.Where(product => product.Code == word || product.Name.Contains(word));
             }
 
-            return products.Where(product => product.Code == code);
+            foreach (string word in words)
+            {
+                products = products.Where(product => product.Name.Contains(word));
+            }
+
+            return products;
         }
 
         public static IQueryable<Product> WhereId(this IQueryable<Product> products, int id)
@@ -47,14 +54,19 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
             return products.Where(product => product.Id == id);
         }
 
-        public static IQueryable<Product> WhereNameContains(this IQueryable<Product> products, params string[] words)
+        public static IQueryable<Product> WhereIdIn(this IQueryable<Product> products, IEnumerable<int> ids)
         {
-            foreach (string word in words)
+            return products.Where(product => ids.Contains(product.Id));
+        }
+        
+        public static IQueryable<Product> WhereStockMovement(this IQueryable<Product> products, bool? stockMovement)
+        {
+            if (stockMovement == null)
             {
-                products = products.Where(product => product.Name.Contains(word));
+                return products;
             }
-
-            return products;
+            
+            return products.Where(product => product.StockMovement == stockMovement);
         }
     }
 }

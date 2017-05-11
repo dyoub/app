@@ -32,29 +32,25 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Services
             return products.OrderBy(product => product.Name);
         }
 
-        public static IQueryable<Service> WhereCode(this IQueryable<Service> products, string code)
+        public static IQueryable<Service> WhereNameOrCode(this IQueryable<Service> services, params string[] words)
         {
-            if (string.IsNullOrWhiteSpace(code))
+            if (words.Count() == 1)
             {
-                return products;
+                string word = words.First();
+                return services.Where(service => service.Code == word || service.Name.Contains(word));
             }
 
-            return products.Where(product => product.Code == code);
+            foreach (string word in words)
+            {
+                services = services.Where(service => service.Name.Contains(word));
+            }
+
+            return services;
         }
 
         public static IQueryable<Service> WhereId(this IQueryable<Service> products, int id)
         {
             return products.Where(product => product.Id == id);
-        }
-
-        public static IQueryable<Service> WhereNameContains(this IQueryable<Service> products, params string[] words)
-        {
-            foreach (string word in words)
-            {
-                products = products.Where(product => product.Name.Contains(word));
-            }
-
-            return products;
         }
     }
 }
