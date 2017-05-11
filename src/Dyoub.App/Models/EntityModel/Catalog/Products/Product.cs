@@ -4,6 +4,7 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.ProductPrices;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
+using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
 using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Catalog.Products
@@ -22,6 +23,7 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
 
         public virtual Tenant Tenant { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
+        public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
     }
 }

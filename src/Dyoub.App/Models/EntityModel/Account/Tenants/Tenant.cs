@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
+using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
 
 namespace Dyoub.App.Models.EntityModel.Account.Tenants
 {
@@ -43,6 +44,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }
         public virtual ICollection<SaleIncome> SaleIncomes { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
         public virtual ICollection<SalePayment> SalePayments { get; set; }

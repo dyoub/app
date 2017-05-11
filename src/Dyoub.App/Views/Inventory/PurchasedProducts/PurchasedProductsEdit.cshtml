@@ -1,0 +1,152 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PurchasedProductsEditController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Edit purchase order"></span>
+            <strong data-ng-bind="controller.routeParams.purchaseOrderId | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.purchaseOrderId">
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/supplier"
+               class="step" data-translate="Supplier"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Products"></span>
+            <span class="separator"></span>
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/payments"
+               class="step" data-translate="Payment"></a>
+        </div>
+    </div>
+
+    <div class="error ng-cloak" data-ng-show="controller.confirmed">
+        <i class="fa fa-exclamation-triangle"></i>
+        <p data-translate="Purchase order already confirmed."></p>
+        <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/products"
+           class="as-button primary" data-translate="Go to products details"></a>
+    </div>
+
+    <div class="ng-cloak" data-ng-hide="controller.confirmed">
+        <div class="box">
+            <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
+                    data-ng-click="controller.save()">
+                <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                <span data-ng-show="controller.saving" data-translate="Saving"></span>
+            </button>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/products"
+               class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+        </div>
+
+        <div class="loading box" data-ng-show="controller.searchingSelectedProducts"></div>
+
+        <div data-ng-show="controller.searchSelectedProductsComplete()">
+            <div class="card">
+                <div class="box">
+                    <label data-translate="Product name or code"></label>
+                    <div class="suggestion" data-suggestion-open="controller.productSuggestionOpened">
+                        <input type="text" name="productName" data-ng-model="controller.productSearch.nameOrCode" data-ng-maxlength="80"
+                               data-event-key-enter="controller.addFirstProduct()"
+                               data-event-typing="controller.newProductForPurchaseSearch()"
+                               data-event-typing-end="controller.searchProductsForPurchase()" />
+                        <div class="suggestion-body">
+                            <em class="text-muted" data-ng-show="controller.searchingProductsForPurchase" data-translate="Searching..."></em>
+                            <div class="text-primary" data-translate="No records found" data-ng-show="controller.noProductsForPurchase()"></div>
+                            <div class="box" data-ng-repeat="product in controller.productsForPurchase">
+                                <button type="button" class="primary small" data-translate="Add"
+                                        data-ng-click="controller.addProduct(product)"></button>
+                                <span data-ng-bind="product.name"></span>
+                                <span class="text-muted font-10">
+                                    <i class="fa fa-barcode"></i>
+                                    <span data-ng-bind="product.code" data-ng-show="product.code"></span>
+                                    <em data-translate="No code" data-ng-hide="product.code"></em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="font-11 text-primary" data-translate="Press enter to add the first product."></div>
+                </div>
+            </div>
+
+            <div class="list-header text-left" data-ng-show="controller.productList.any()">
+                <span data-translate="Purchase total"></span>:
+                <strong class="font-14 text-success" data-ng-bind="controller.calculateTotalCost() | currency"></strong>
+            </div>
+
+            <div class="card text-center text-primary" data-translate="At least one product must be added."
+                 data-ng-show="controller.noProductsSelected()"></div>
+
+            <form name="controller.purchaseOrderProductsForm">
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="product in controller.productList | orderBy:'name'">
+                        <div class="box">
+                            <button type="button" class="danger pull-right" data-translate="Remove"
+                                    data-ng-click="controller.showRemoveProductDialog(product)"></button>
+                            <p data-ng-bind="product.name"></p>
+                            <span class="box font-11 text-muted">
+                                <i class="fa fa-barcode"></i>
+                                <span data-ng-bind="product.code" data-ng-show="product.code"></span>
+                                <em data-translate="No code" data-ng-hide="product.code"></em>
+                            </span>
+                        </div>
+
+                        <div class="grid-row">
+                            <div class="grid-column medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column compact small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.purchaseOrderProductsForm.cost.$invalid">
+                                            <label>
+                                                <span data-translate="Unit cost"></span>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="cost" data-ng-model="product.unitCost" required
+                                                   data-type-number="8,2" />
+                                        </div>
+                                    </div>
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.purchaseOrderProductsForm.quantity.$invalid">
+                                            <label>
+                                                <span data-translate="Amount"></span>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="quantity" data-ng-model="product.quantity" required
+                                                   data-type-number="8,3" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-column medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.purchaseOrderProductsForm.discount.$invalid">
+                                            <label data-translate="Discount"></label>
+                                            <input type="text" name="discount" data-ng-model="product.discount" data-type-number="8,2" />
+                                        </div>
+                                    </div>
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label data-translate="Total"></label>
+                                            <strong class="font-16"
+                                                    data-ng-class="{'text-success':product.totalCost >= 0, 'text-danger':product.totalCost < 0}"
+                                                    data-ng-bind="controller.calculateProductTotalCost(product) | currency"></strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @Html.Partial("~/Views/Inventory/PurchasedProducts/_RemoveProduct.cshtml")
+</div>
+

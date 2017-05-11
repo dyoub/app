@@ -180,6 +180,9 @@
     <EmbeddedResource Include="Data\Migrations\201705061153072_CreatePurchaseOrder.resx">
       <DependentUpon>201705061153072_CreatePurchaseOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705081751032_CreatePurchasedProduct.resx">
+      <DependentUpon>201705081751032_CreatePurchasedProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -230,6 +233,8 @@
     <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-list.controller.js" />
     <Content Include="Scripts\controllers\inventory\purchase-supplier\purchase-supplier-details.controller.js" />
     <Content Include="Scripts\controllers\inventory\purchase-supplier\purchase-supplier-edit.controller.js" />
+    <Content Include="Scripts\controllers\inventory\purchased-products\purchased-products-details.controller.js" />
+    <Content Include="Scripts\controllers\inventory\purchased-products\purchased-products-edit.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-details.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-edit.controller.js" />
     <Content Include="Scripts\controllers\inventory\suppliers\supplier-list.controller.js" />
@@ -262,6 +267,7 @@
     <Content Include="Scripts\services\financial\wallet.service.js" />
     <Content Include="Scripts\services\inventory\purchase-orders.service.js" />
     <Content Include="Scripts\services\inventory\purchase-supplier.service.js" />
+    <Content Include="Scripts\services\inventory\purchased-products.service.js" />
     <Content Include="Scripts\services\inventory\supplier.service.js" />
     <Content Include="Scripts\services\manage\store.service.js" />
     <Content Include="Scripts\services\commercial\customer.service.js" />
@@ -288,6 +294,7 @@
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
     <Compile Include="Controllers\Financial\WalletsController.cs" />
+    <Compile Include="Controllers\Inventory\PurchasedProductsController.cs" />
     <Compile Include="Controllers\Inventory\PurchaseOrdersController.cs" />
     <Compile Include="Controllers\Inventory\PurchaseSupplierController.cs" />
     <Compile Include="Controllers\Inventory\SuppliersController.cs" />
@@ -384,6 +391,10 @@
     <Compile Include="Data\Migrations\201705061153072_CreatePurchaseOrder.Designer.cs">
       <DependentUpon>201705061153072_CreatePurchaseOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705081751032_CreatePurchasedProduct.cs" />
+    <Compile Include="Data\Migrations\201705081751032_CreatePurchasedProduct.Designer.cs">
+      <DependentUpon>201705081751032_CreatePurchasedProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -466,6 +477,9 @@
     <Compile Include="Models\EntityModel\Financial\Wallets\Wallet.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletQuery.cs" />
+    <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProduct.cs" />
+    <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProductMapping.cs" />
+    <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProductQuery.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchaseOrders\PurchaseOrder.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchaseOrders\PurchaseOrderMapping.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchaseOrders\PurchaseOrderQuery.cs" />
@@ -506,9 +520,13 @@
     <Compile Include="Infrastructure\Security\UserIdentity.cs" />
     <Compile Include="Models\ServiceModel\Catalog\PricingTable.cs" />
     <Compile Include="Models\ServiceModel\Commercial\CashRegister.cs" />
-    <Compile Include="Models\ServiceModel\Commercial\ShoppingCart.cs" />
+    <Compile Include="Models\ServiceModel\Commercial\SaleShoppingCart.cs" />
     <Compile Include="Models\ServiceModel\Financial\Billing.cs" />
     <Compile Include="Models\ServiceModel\Financial\CashFlowAnalysis.cs" />
+    <Compile Include="Models\ServiceModel\Financial\PurchaseCost.cs" />
+    <Compile Include="Models\ServiceModel\Inventory\ProductConsumption.cs" />
+    <Compile Include="Models\ServiceModel\Inventory\PurchaseShoppingCart.cs" />
+    <Compile Include="Models\ServiceModel\Inventory\ProductReplenishment.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Profile\ChangePasswordViewModel.cs" />
@@ -558,6 +576,8 @@
     <Compile Include="Models\ViewModel\Financial\Wallets\ListWalletsViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\UpdateWalletViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\WalletIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\PurchasedProducts\PurchasedProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\PurchasedProducts\UpdatePurchasedProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\CreatePurchaseOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\ListPurchaseOrdersViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\PurchaseOrderIdViewModel.cs" />
@@ -614,6 +634,7 @@
     <Compile Include="Results\Financial\OtherCashActivities\OtherCashActivityListJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletListJson.cs" />
+    <Compile Include="Results\Inventory\PurchasedProducts\PurchasedProductListJson.cs" />
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderIdJson.cs" />
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderJson.cs" />
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderListJson.cs" />
@@ -719,6 +740,9 @@
     <Content Include="Views\Inventory\PurchaseOrders\PurchaseOrderList.cshtml" />
     <Content Include="Views\Inventory\PurchaseSupplier\PurchaseSupplierDetails.cshtml" />
     <Content Include="Views\Inventory\PurchaseSupplier\PurchaseSupplierEdit.cshtml" />
+    <Content Include="Views\Inventory\PurchasedProducts\_RemoveProduct.cshtml" />
+    <Content Include="Views\Inventory\PurchasedProducts\PurchasedProductsDetails.cshtml" />
+    <Content Include="Views\Inventory\PurchasedProducts\PurchasedProductsEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

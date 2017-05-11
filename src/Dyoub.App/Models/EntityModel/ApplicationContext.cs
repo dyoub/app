@@ -21,6 +21,7 @@ using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
+using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
@@ -46,6 +47,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<PaymentMethodFee> PaymentMethodFees { get { return Set<PaymentMethodFee>(); } }
         public DbSet<Product> Products { get { return Set<Product>(); } }
         public DbSet<ProductPrice> ProductPrices { get { return Set<ProductPrice>(); } }
+        public DbSet<PurchasedProduct> PurchasedProducts { get { return Set<PurchasedProduct>(); } }
         public DbSet<PurchaseOrder> PurchaseOrders { get { return Set<PurchaseOrder>(); } }
         public DbSet<SaleOrder> SaleOrders { get { return Set<SaleOrder>(); } }
         public DbSet<SaleIncome> SaleIncomes { get { return Set<SaleIncome>(); } }
@@ -96,6 +98,8 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new PasswordRecoveryMapping());
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new ProductPriceMapping());
+            modelBuilder.Configurations.Add(new PurchasedProductMapping());
+            modelBuilder.Configurations.Add(new PurchaseOrderMapping());
             modelBuilder.Configurations.Add(new SaleOrderMapping());
             modelBuilder.Configurations.Add(new SaleIncomeMapping());
             modelBuilder.Configurations.Add(new SalePaymentMapping());

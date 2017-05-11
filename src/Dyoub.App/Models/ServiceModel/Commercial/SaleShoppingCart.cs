@@ -16,18 +16,19 @@ using System.Threading.Tasks;
 
 namespace Dyoub.App.Models.ServiceModel.Commercial
 {
-    public class ShoppingCart
+    public class SaleShoppingCart
     {
         public TenantContext Tenant { get; private set; }
         public SaleOrder SaleOrder { get; private set; }
         public bool HasOneOrMoreItemsNotFound { get; private set; }
         public bool HasOneOrMorePricesNotDefined { get; private set; }
+        public bool HasItemWithTotalNegative { get; private set; }
 
-        public ShoppingCart(TenantContext tenant)
+        public SaleShoppingCart(TenantContext tenant)
         {
             Tenant = tenant;
         }
-        
+
         private IEnumerable<SaleProduct> SaleProducts(IEnumerable<SaleItem> itemList)
         {
             return itemList.Where(item => item.IsProduct).Select(item => new SaleProduct
@@ -112,6 +113,10 @@ namespace Dyoub.App.Models.ServiceModel.Commercial
                 item.UnitPrice = PriceOf(item, priceList);
                 item.Total = new Money(item.UnitPrice).Multiply(item.Quantity);
                 item.TotalPayable = new Money(item.Total).Subtract(item.Discount ?? 0);
+
+                HasItemWithTotalNegative = item.TotalPayable < 0;
+
+                if (HasItemWithTotalNegative) return;
             }
 
             SaleOrder.Total = new Money(itemList.Sum(item => item.TotalPayable));
@@ -145,6 +150,12 @@ namespace Dyoub.App.Models.ServiceModel.Commercial
             }
 
             CalculateTotals(itemList, priceList);
+
+            if (HasItemWithTotalNegative)
+            {
+                return false;
+            }
+
             await Save(itemList);
 
             return true;
