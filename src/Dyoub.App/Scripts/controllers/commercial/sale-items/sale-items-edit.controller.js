@@ -40,13 +40,11 @@
     };
 
     Controller.prototype.calculateItemTotalPrice = function (item) {
-        if (typeof item.quantity !== 'number') {
-            return 0;
-        }
+        var quantity = item.quantity || 0,
+            unitPrice = item.unitPrice || 0,
+            discount = item.discount || 0;
 
-        var discount = item.discount || 0;
-
-        return (item.quantity * item.unitPrice - discount).round(2);
+        return item.total = (quantity * unitPrice - discount).round(2);
     };
 
     Controller.prototype.calculateTotalPayable = function () {
@@ -57,7 +55,7 @@
             totalPayable += controller.calculateItemTotalPrice(item);
         });
 
-        return totalPayable;
+        return totalPayable < 0 ? 0 : totalPayable;
     };
 
     Controller.prototype.hideRemoveDialog = function () {

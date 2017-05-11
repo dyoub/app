@@ -113,7 +113,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" name="quantity" data-ng-model="item.quantity" required
-                                                   data-type-number="{{ item.canSellFraction ? '8,3' : '5' }}" />
+                                                   data-type-number="{{ item.canFraction ? '8,3' : '5' }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +129,9 @@
                                     <div class="grid-column small-6 medium-6 large-6">
                                         <div class="box">
                                             <label data-translate="Total"></label>
-                                            <strong class="font-16 text-success" data-ng-bind="controller.calculateItemTotalPrice(item) | currency"></strong>
+                                            <strong class="font-16 text-success"
+                                                    data-ng-class="{'text-success':item.total >= 0, 'text-danger':item.total < 0}"
+                                                    data-ng-bind="controller.calculateItemTotalPrice(item) | currency"></strong>
                                         </div>
                                     </div>
                                 </div>
