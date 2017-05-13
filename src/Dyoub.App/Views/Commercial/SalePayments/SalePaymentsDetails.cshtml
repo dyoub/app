@@ -25,7 +25,7 @@
             <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
                class="step" data-translate="Items"></a>
             <span class="separator"></span>
-            <span class="step active" data-translate="Payment"></span>
+            <span class="step active" data-translate="Payments"></span>
         </div>
     </div>
 
@@ -84,10 +84,10 @@
             </div>
         </div>
 
-        <div class="card text-primary text-center" data-translate="At least one item must be informed."
-             data-ng-show="controller.saleOrder.paymentList.isEmpty()"></div>
-
         <div class="list-header" data-translate="Payments"></div>
+
+        <div class="card text-primary text-center" data-translate="At least one payment must be added."
+             data-ng-show="controller.saleOrder.paymentList.isEmpty()"></div>
 
         <div class="card list">
             <div class="list-item" data-ng-repeat="payment in controller.saleOrder.paymentList | orderBy:'date'">
@@ -178,7 +178,4 @@
             </div>
         </div>
     </div>
-
-    @*@Html.Partial("~/Views/Sales/SaleOrders/_SaleOrderConfirm.cshtml")
-    @Html.Partial("~/Views/Sales/SaleOrders/_SaleOrderRemove.cshtml")*@
 </div>

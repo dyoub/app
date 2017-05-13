@@ -37,6 +37,10 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders
             HasMany(p => p.PurchasedProducts)
                 .WithRequired(p => p.PurchaseOrder)
                 .HasForeignKey(p => new { p.PurchaseOrderId, p.TenantId });
+
+            HasMany(p => p.PurchasePayments)
+                .WithRequired(p => p.PurchaseOrder)
+                .HasForeignKey(p => new { p.PurchaseOrderId, p.TenantId });
         }
     }
 }

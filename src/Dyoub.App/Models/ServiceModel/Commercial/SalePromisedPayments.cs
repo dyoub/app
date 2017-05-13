@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace Dyoub.App.Models.ServiceModel.Commercial
 {
-    public class CashRegister
+    public class SalePromisedPayments
     {
         public TenantContext Tenant { get; private set; }
         public SaleOrder SaleOrder { get; private set; }
         public bool HasPendingPayment { get; set; }
 
-        public CashRegister(TenantContext tenant)
+        public SalePromisedPayments(TenantContext tenant)
         {
             Tenant = tenant;
         }
@@ -34,7 +34,7 @@ namespace Dyoub.App.Models.ServiceModel.Commercial
             HasPendingPayment = totalPaid != SaleOrder.TotalPayable;
         }
 
-        public async Task<bool> RegisterPayment(int saleOrderId, IEnumerable<SalePayment> payments, decimal? discount)
+        public async Task<bool> RegisterPayments(int saleOrderId, IEnumerable<SalePayment> payments, decimal? discount)
         {
             SaleOrder = await Tenant.SaleOrders
                 .WhereId(saleOrderId)

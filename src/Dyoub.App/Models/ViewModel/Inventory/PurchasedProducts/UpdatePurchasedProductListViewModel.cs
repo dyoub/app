@@ -32,7 +32,7 @@ namespace Dyoub.App.Models.ViewModel.Inventory.PurchasedProducts
             return Products.Select(product => product.MapTo(new PurchasedProduct
             {
                 PurchaseOrderId = PurchaseOrderId.Value
-            }));
+            })).ToList();
         }
     }
 }

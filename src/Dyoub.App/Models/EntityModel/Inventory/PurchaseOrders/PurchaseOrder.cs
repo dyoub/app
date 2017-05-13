@@ -5,6 +5,7 @@ using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Financial;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
+using Dyoub.App.Models.EntityModel.Inventory.PurchasePayments;
 using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
@@ -53,5 +54,6 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders
         public virtual Supplier Supplier { get; set; }
         public virtual Wallet Wallet { get; set; }
         public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }
+        public virtual ICollection<PurchasePayment> PurchasePayments { get; set; }
     }
 }

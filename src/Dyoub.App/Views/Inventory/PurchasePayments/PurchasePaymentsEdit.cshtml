@@ -1,0 +1,153 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PurchasePaymentsEditController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Edit purchase order"></span>
+            <strong data-ng-bind="controller.routeParams.purchaseOrderId | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.purchaseOrderId">
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/supplier"
+               class="step" data-translate="Supplier"></a>
+            <span class="separator"></span>
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/products"
+               class="step" data-translate="Products"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Payments"></span>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searchingPayments"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchPaymentsComplete()">
+        <div class="error" data-ng-hide="controller.purchaseHasProducts()">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="This purchase order has no products."></p>
+            <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/products"
+               class="as-button" data-translate="Add products"></a>
+        </div>
+
+        <div class="error" data-ng-show="controller.confirmed">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Purchase order already confirmed."></p>
+            <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/payments"
+               class="as-button primary" data-translate="Go to payment details"></a>
+        </div>
+
+        <div data-ng-hide="controller.confirmed">
+            <form name="controller.paymentsForm" data-ng-submit="controller.save()"
+                  data-ng-show="controller.purchaseHasProducts()">
+                <div class="box">
+                    <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
+                        <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                        <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                    </button>
+                    <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/payments"
+                       class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+                </div>
+
+                <div class="card">
+                    <div class="grid-row">
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Purchase total"></label>
+                                        <strong class="font-14 text-success" data-ng-bind="controller.total | currency"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="">
+                                        <label>
+                                            <span data-translate="Discount"></span> (%)
+                                        </label>
+                                        <input type="text" name="discount" data-ng-model="controller.discount"
+                                               data-type-number="5,2" data-valid-number-min="0" data-valid-number-max="100"
+                                               data-ng-change="controller.calculateTotalPayable()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Total payable"></label>
+                                        <strong class="font-14 text-success" data-ng-bind="controller.totalPayable | currency"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Total paid"></label>
+                                        <strong class="font-14" data-ng-class="{'text-success':controller.paidOut(),'text-danger':!controller.paidOut()}"
+                                                data-ng-bind="controller.totalPaid | currency"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card text-primary" data-translate="No payment added."
+                     data-ng-show="controller.noPayments()"></div>
+
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="payment in controller.paymentList">
+                        <div class="grid-row" data-ng-form="paymentForm">
+                            <div class="grid-column small-4 medium-4 large-4">
+                                <div class="box" data-has-error="paymentForm.total.$invalid">
+                                    <label>
+                                        <span data-translate="Value"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="total" data-ng-model="payment.total" required
+                                           data-ng-change="controller.calculatePayment(payment)"
+                                           data-type-number="10,2" data-valid-number-min="0.01" />
+                                </div>
+                            </div>
+                            <div class="grid-column small-4 medium-4 large-4">
+                                <div class="box" data-has-error="paymentForm.date.$invalid">
+                                    <label>
+                                        <span data-translate="Payment date"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="date" data-ng-model="payment.date" data-type-date required />
+                                </div>
+                            </div>
+                            <div class="grid-column small-4 medium-4 large-4">
+                                <div class="box" data-has-error="paymentForm.numerOfInstallments.$invalid">
+                                    <label>
+                                        <span data-translate="Number of installments"></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="numerOfInstallments" data-ng-model="payment.numberOfInstallments"
+                                           data-type-number="2" data-valid-number-min="1" data-valid-number-max="36" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="danger" data-translate="Remove"
+                                data-ng-click="controller.showRemovePaymentDialog(payment)"></button>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <button type="button" class="primary" data-translate="Add payment"
+                            data-ng-click="controller.addPayment()"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @Html.Partial("~/Views/Inventory/PurchasePayments/_RemovePayment.cshtml")
+</div>

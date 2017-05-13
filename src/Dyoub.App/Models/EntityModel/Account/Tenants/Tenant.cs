@@ -14,18 +14,19 @@ using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
-using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
+using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
+using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
+using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
+using Dyoub.App.Models.EntityModel.Inventory.PurchasePayments;
+using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.App.Models.EntityModel.Manage.TeamMembers;
 using Dyoub.App.Models.EntityModel.Manage.TeamRules;
 using Dyoub.App.Models.EntityModel.Manage.Teams;
 using System;
 using System.Collections.Generic;
-using Dyoub.App.Models.EntityModel.Inventory.Suppliers;
-using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
-using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
 
 namespace Dyoub.App.Models.EntityModel.Account.Tenants
 {
@@ -44,6 +45,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual ICollection<PurchasePayment> PurchasePayments { get; set; }
         public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }
         public virtual ICollection<SaleIncome> SaleIncomes { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }

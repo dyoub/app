@@ -48,9 +48,9 @@ namespace Dyoub.App.Controllers.Commercial
         [HttpPost, Route("sale-orders/payments/update"), Authorization(Scope = "sale-orders.edit")]
         public async Task<ActionResult> Update(UpdateSalePaymentsViewModel viewModel)
         {
-            CashRegister cashRegister = new CashRegister(Tenant);
+            SalePromisedPayments promisedPayments = new SalePromisedPayments(Tenant);
 
-            bool registered = await cashRegister.RegisterPayment(
+            bool registered = await promisedPayments.RegisterPayments(
                 viewModel.SaleOrderId.Value,
                 viewModel.MapSalePayments(),
                 viewModel.Discount
@@ -58,17 +58,17 @@ namespace Dyoub.App.Controllers.Commercial
 
             if (!registered)
             {
-                if (cashRegister.SaleOrder == null)
+                if (promisedPayments.SaleOrder == null)
                 {
                     return this.Error("Sale order not found.");
                 }
 
-                if (cashRegister.SaleOrder.Confirmed)
+                if (promisedPayments.SaleOrder.Confirmed)
                 {
                     return this.Error("Sale order already confirmed.");
                 }
 
-                if (cashRegister.HasPendingPayment)
+                if (promisedPayments.HasPendingPayment)
                 {
                     return this.Error("Sale order has pending payment.");
                 }
