@@ -12,9 +12,10 @@ namespace Dyoub.Test.Factories.Catalog
         {
             return new Product
             {
+                Tenant = tenant,
                 Name = "Product Test",
                 Marketed = true,
-                Tenant = tenant,
+                StockMovement = true
             };
         }
     }

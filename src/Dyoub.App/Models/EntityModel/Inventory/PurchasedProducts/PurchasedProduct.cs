@@ -4,6 +4,7 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
+using System;
 
 namespace Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts
 {
@@ -17,6 +18,7 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts
         public decimal Total { get; set; }
         public decimal? Discount { get; set; }
         public decimal TotalCost { get; set; }
+        public Guid? StockTransactionId { get; set; }
 
         public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual Product Product { get; set; }

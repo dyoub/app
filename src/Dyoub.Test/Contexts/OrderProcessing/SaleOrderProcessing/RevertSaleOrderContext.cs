@@ -11,40 +11,40 @@ using Dyoub.Test.Factories.Account;
 using Dyoub.Test.Factories.Commercial;
 using Dyoub.Test.Factories.Manage;
 using Effort;
-using System;
+using System.Linq;
 
-namespace Dyoub.Test.Contexts.Commercial.SaleOrderBilling
+namespace Dyoub.Test.Contexts.OrderProcessing.SaleOrderProcessing
 {
-    public class ConfirmConfirmedSaleOrderContext : TenantContext
+    public class RevertSaleOrderContext : TenantContext
     {
-        private SaleOrder originial;
         private SalePayment salePayment;
 
         public SaleOrder SaleOrder { get; private set; }
 
-        public ConfirmConfirmedSaleOrderContext() : base(1, DbConnectionFactory.CreateTransient())
+        public RevertSaleOrderContext() : base(1, DbConnectionFactory.CreateTransient())
         {
             Tenant tenant = Tenants.Add(TenantFactory.Tenant());
             Store store = Stores.Add(StoreFactory.Store(tenant));
             PaymentMethod paymentMethod = PaymentMethods.Add(PaymentMethodFactory.PaymentMethod(tenant));
 
             SaleOrder = SaleOrders.Add(SaleOrderFactory.ConfirmedSaleOrder(store));
-            SaleOrder.ConfirmationDate = DateTime.Today.AddDays(-1);
 
             salePayment = SalePayments.Add(SalePaymentFactory.SalePayment(SaleOrder, paymentMethod));
             salePayment.NumberOfInstallments = 2;
-            salePayment.InstallmentValue = salePayment.Total / salePayment.NumberOfInstallments;
-
-            originial = SaleOrders.Add(SaleOrderFactory.ConfirmedSaleOrder(store));
-            originial.ConfirmationDate = SaleOrder.ConfirmationDate;
 
             SaveChanges();
         }
 
-        public bool SaleOrderWasNotConfirmedAgain()
+        public bool SaleOrderWasReverted()
         {
             Entry(SaleOrder).Reload();
-            return SaleOrder.ConfirmationDate == originial.ConfirmationDate;
+            Entry(salePayment).Reload();
+
+            return !SaleOrder.Confirmed &&
+                   SaleOrder.BilledAmount == 0 &&
+                   salePayment.InstallmentBilling == 0 &&
+                   salePayment.BilledAmount == 0 &&
+                   !SaleIncomes.Any();
         }
     }
 }

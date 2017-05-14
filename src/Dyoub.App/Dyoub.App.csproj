@@ -186,6 +186,9 @@
     <EmbeddedResource Include="Data\Migrations\201705111339025_CreatePurchasePayment.resx">
       <DependentUpon>201705111339025_CreatePurchasePayment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705131231355_CreateProductStockMovement.resx">
+      <DependentUpon>201705131231355_CreateProductStockMovement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -296,7 +299,8 @@
     <Compile Include="Controllers\Commercial\SaleOrdersController.cs" />
     <Compile Include="Controllers\Commercial\SalePaymentsController.cs" />
     <Compile Include="Controllers\Financial\CashFlowController.cs" />
-    <Compile Include="Controllers\Financial\SaleOrderBillingController.cs" />
+    <Compile Include="Controllers\OrderProcessing\PurchaseOrderProcessingController.cs" />
+    <Compile Include="Controllers\OrderProcessing\SaleOrderProcessingController.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
     <Compile Include="Controllers\Financial\WalletsController.cs" />
@@ -406,6 +410,10 @@
     <Compile Include="Data\Migrations\201705111339025_CreatePurchasePayment.Designer.cs">
       <DependentUpon>201705111339025_CreatePurchasePayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705131231355_CreateProductStockMovement.cs" />
+    <Compile Include="Data\Migrations\201705131231355_CreateProductStockMovement.Designer.cs">
+      <DependentUpon>201705131231355_CreateProductStockMovement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtension.cs" />
@@ -488,6 +496,9 @@
     <Compile Include="Models\EntityModel\Financial\Wallets\Wallet.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletQuery.cs" />
+    <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovement.cs" />
+    <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovementMapping.cs" />
+    <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovementQuery.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProduct.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProductMapping.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProductQuery.cs" />
@@ -542,6 +553,8 @@
     <Compile Include="Models\ServiceModel\Inventory\PurchasePromisedPayments.cs" />
     <Compile Include="Models\ServiceModel\Inventory\PurchaseShoppingCart.cs" />
     <Compile Include="Models\ServiceModel\Inventory\ProductReplenishment.cs" />
+    <Compile Include="Models\ServiceModel\OrderProcessing\PurchaseOrderProcessing.cs" />
+    <Compile Include="Models\ServiceModel\OrderProcessing\SaleOrderProcessing.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\Profile\ChangePasswordViewModel.cs" />
@@ -764,6 +777,8 @@
     <Content Include="Views\Inventory\PurchasePayments\_RemovePayment.cshtml" />
     <Content Include="Views\Inventory\PurchasePayments\PurchasePaymentsDetails.cshtml" />
     <Content Include="Views\Inventory\PurchasePayments\PurchasePaymentsEdit.cshtml" />
+    <Content Include="Views\Inventory\PurchaseOrders\_ConfirmPurchaseOrder.cshtml" />
+    <Content Include="Views\Inventory\PurchaseOrders\_RevertPurchaseOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

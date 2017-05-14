@@ -17,6 +17,7 @@ using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
+using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
 using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using Dyoub.App.Models.EntityModel.Inventory.PurchasePayments;
@@ -44,6 +45,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<PaymentMethodFee> PaymentMethodFees { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
+        public virtual ICollection<ProductStockMovement> ProductStockMovements { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual ICollection<PurchasePayment> PurchasePayments { get; set; }
         public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }

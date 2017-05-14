@@ -9,9 +9,7 @@ using Dyoub.App.Models.EntityModel.Financial;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Dyoub.App.Models.ServiceModel.Financial
 {
@@ -19,22 +17,13 @@ namespace Dyoub.App.Models.ServiceModel.Financial
     {
         public TenantContext Tenant { get; private set; }
         public SaleOrder SaleOrder { get; private set; }
-        public bool HasNoItems { get; private set; }
-        public bool HasPendingPayment { get; private set; }
 
-        public Billing(TenantContext tenant)
+        public Billing(TenantContext tenant, SaleOrder saleOrder)
         {
             Tenant = tenant;
+            SaleOrder = saleOrder;
         }
         
-        private bool SaleOrderIsPending()
-        {
-            HasNoItems = SaleOrder.TotalPayable == 0;
-            HasPendingPayment = SaleOrder.TotalPayable != SaleOrder.SalePayments.Sum(p => p.Total);
-
-            return HasNoItems || HasPendingPayment;
-        }
-
         private void AssignPaymentMethodFee(SalePayment payment)
         {
             PaymentMethodFee paymentMethodFee = payment.PaymentMethod.PaymentMethodFees
@@ -93,42 +82,16 @@ namespace Dyoub.App.Models.ServiceModel.Financial
             }
         }
 
-        public async Task<bool> Confirm(int saleOrderId)
+        public void Confirm()
         {
-            SaleOrder = await Tenant.SaleOrders
-                .WhereId(saleOrderId)
-                .IncludeStore()
-                .IncludePaymentMethodsAndFees()
-                .SingleOrDefaultAsync();
-
-            if (SaleOrder == null || SaleOrder.Confirmed || SaleOrderIsPending())
-            {
-                return false;
-            }
-
             Tenant.SaleIncomes.AddRange(CalculateIncomes());
 
             SaleOrder.ConfirmationDate = DateTime.Now;
             SaleOrder.BilledAmount = new Money(SaleOrder.SalePayments.Sum(p => p.BilledAmount));
-            
-            await Tenant.SaveChangesAsync();
-
-            return true;
         }
 
-        public async Task<bool> Revert(int saleOrderId)
+        public void Revert()
         {
-            SaleOrder = await Tenant.SaleOrders
-                .WhereId(saleOrderId)
-                .IncludeStore()
-                .IncludeSaleIncomes()
-                .SingleOrDefaultAsync();
-
-            if (SaleOrder == null || !SaleOrder.Confirmed)
-            {
-                return false;
-            }
-
             foreach (SalePayment payment in SaleOrder.SalePayments)
             {
                 payment.FeePercentage = null;
@@ -142,10 +105,6 @@ namespace Dyoub.App.Models.ServiceModel.Financial
 
             Tenant.SaleIncomes.RemoveRange(SaleOrder.SalePayments
                 .SelectMany(s => s.SaleIncomes));
-
-            await Tenant.SaveChangesAsync();
-            
-            return true;
         }
     }
 }

@@ -9,42 +9,27 @@ using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.Test.Factories.Account;
 using Dyoub.Test.Factories.Commercial;
+using Dyoub.Test.Factories.Financial;
 using Dyoub.Test.Factories.Manage;
 using Effort;
-using System.Linq;
 
-namespace Dyoub.Test.Contexts.Commercial.SaleOrderBilling
+namespace Dyoub.Test.Contexts.OrderProcessing.SaleOrderProcessing
 {
-    public class RevertSaleOrderContext : TenantContext
+    public class RevertNotConfirmedSaleOrderContext : TenantContext
     {
-        private SalePayment salePayment;
-
         public SaleOrder SaleOrder { get; private set; }
 
-        public RevertSaleOrderContext() : base(1, DbConnectionFactory.CreateTransient())
+        public RevertNotConfirmedSaleOrderContext() : base(1, DbConnectionFactory.CreateTransient())
         {
             Tenant tenant = Tenants.Add(TenantFactory.Tenant());
             Store store = Stores.Add(StoreFactory.Store(tenant));
             PaymentMethod paymentMethod = PaymentMethods.Add(PaymentMethodFactory.PaymentMethod(tenant));
 
-            SaleOrder = SaleOrders.Add(SaleOrderFactory.ConfirmedSaleOrder(store));
-
-            salePayment = SalePayments.Add(SalePaymentFactory.SalePayment(SaleOrder, paymentMethod));
-            salePayment.NumberOfInstallments = 2;
+            SaleOrder = SaleOrders.Add(SaleOrderFactory.SaleOrder(store));
+            SalePayment salePayment = SalePayments.Add(SalePaymentFactory.SalePayment(SaleOrder, paymentMethod));
+            SaleIncomes.Add(SaleIncomeFactory.SaleIncome(salePayment));
 
             SaveChanges();
-        }
-
-        public bool SaleOrderWasReverted()
-        {
-            Entry(SaleOrder).Reload();
-            Entry(salePayment).Reload();
-
-            return SaleOrder.ConfirmationDate == null &&
-                   SaleOrder.BilledAmount == 0 &&
-                   salePayment.InstallmentBilling == 0 &&
-                   salePayment.BilledAmount == 0 &&
-                   !SaleIncomes.Any();
         }
     }
 }

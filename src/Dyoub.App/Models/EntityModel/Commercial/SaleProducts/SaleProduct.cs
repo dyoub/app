@@ -4,6 +4,7 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using System;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.SaleProducts
 {
@@ -17,6 +18,7 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleProducts
         public decimal Total { get; set; }
         public decimal? Discount { get; set; }
         public decimal TotalPayable { get; set; }
+        public Guid? StockTransactionId { get; set; }
 
         public virtual SaleOrder SaleOrder { get; set; }
         public virtual Product Product { get; set; }

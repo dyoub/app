@@ -1,24 +1,24 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
-using Dyoub.App.Controllers.Financial;
+using Dyoub.App.Controllers.OrderProcessing;
 using Dyoub.App.Models.ViewModel.Commercial.SaleOrders;
 using Dyoub.App.Results.Common;
-using Dyoub.Test.Contexts.Commercial.SaleOrderBilling;
+using Dyoub.Test.Contexts.OrderProcessing.SaleOrderProcessing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Dyoub.Test.Controllers.Financial
+namespace Dyoub.Test.Controllers.OrderProcessing
 {
     [TestClass]
-    public class SaleOrderBillingControllerTest
+    public class SaleOrderProcessingControllerTest
     {
         [TestMethod]
         public async Task ConfirmSaleOrder()
         {
             ConfirmSaleOrderContext context = new ConfirmSaleOrderContext();
-            SaleOrderBillingController controller = new SaleOrderBillingController(context);
+            SaleOrderProcessingController controller = new SaleOrderProcessingController(context);
 
             SaleOrderIdViewModel viewModel = new SaleOrderIdViewModel();
             viewModel.Id = context.SaleOrder.Id;
@@ -32,14 +32,14 @@ namespace Dyoub.Test.Controllers.Financial
         public async Task ConfirmConfirmedSaleOrder()
         {
             ConfirmConfirmedSaleOrderContext context = new ConfirmConfirmedSaleOrderContext();
-            SaleOrderBillingController controller = new SaleOrderBillingController(context);
+            SaleOrderProcessingController controller = new SaleOrderProcessingController(context);
 
             SaleOrderIdViewModel viewModel = new SaleOrderIdViewModel();
             viewModel.Id = context.SaleOrder.Id;
 
             ActionResult result = await controller.Confirm(viewModel);
 
-            Assert.IsTrue(context.SaleOrderWasNotConfirmedAgain());
+            Assert.IsTrue(context.SaleOrderWasNotConfirmedMoreThanOnce());
             Assert.IsTrue(result is ModelErrorsJson);
         }
 
@@ -47,7 +47,7 @@ namespace Dyoub.Test.Controllers.Financial
         public async Task RevertSaleOrder()
         {
             RevertSaleOrderContext context = new RevertSaleOrderContext();
-            SaleOrderBillingController controller = new SaleOrderBillingController(context);
+            SaleOrderProcessingController controller = new SaleOrderProcessingController(context);
 
             SaleOrderIdViewModel viewModel = new SaleOrderIdViewModel();
             viewModel.Id = context.SaleOrder.Id;
@@ -61,7 +61,7 @@ namespace Dyoub.Test.Controllers.Financial
         public async Task RevertConfirmedSaleOrder()
         {
             RevertNotConfirmedSaleOrderContext context = new RevertNotConfirmedSaleOrderContext();
-            SaleOrderBillingController controller = new SaleOrderBillingController(context);
+            SaleOrderProcessingController controller = new SaleOrderProcessingController(context);
 
             SaleOrderIdViewModel viewModel = new SaleOrderIdViewModel();
             viewModel.Id = context.SaleOrder.Id;

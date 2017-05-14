@@ -1,0 +1,16 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+<div class="modal" data-modal-open="controller.revertDialogOpened">
+    <div class="modal-content">
+        <div class="box" data-translate="Are you sure you want revert this purchase order?"></div>
+        <button type="button" class="danger" data-ng-click="controller.revert()" data-ng-disabled="controller.reverting">
+            <span data-ng-show="controller.reverting" data-translate="Reverting"></span>
+            <span data-ng-hide="controller.reverting" data-translate="Yes"></span>
+        </button>
+        <button type="button" data-translate="No" data-ng-click="controller.hideRevertDialog()"
+                data-ng-disabled="controller.reverting"></button>
+    </div>
+</div>
