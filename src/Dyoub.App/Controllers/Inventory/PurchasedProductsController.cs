@@ -24,7 +24,7 @@ namespace Dyoub.App.Controllers.Inventory
 
         public PurchasedProductsController(TenantContext tenant) : base(tenant) { }
 
-        [HttpGet, Route("purchase-orders/details/{id:int}/products"), Authorization(Scope = "purchase-orders.edit")]
+        [HttpGet, Route("purchase-orders/details/{id:int}/products"), Authorization(Scope = "purchase-orders.read")]
         public ActionResult Details()
         {
             return View("~/Views/Inventory/PurchasedProducts/PurchasedProductsDetails.cshtml");
