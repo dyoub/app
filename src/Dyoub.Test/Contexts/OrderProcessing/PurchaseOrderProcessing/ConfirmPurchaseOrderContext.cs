@@ -52,7 +52,13 @@ namespace Dyoub.Test.Contexts.OrderProcessing.PurchaseOrderProcessing
 
         public bool TotalCostHasBeenCalculated()
         {
-            return PurchaseOrder.TotalCost == purchasePayment.Total;
+            decimal shippingCost = PurchaseOrder.ShippingCost ?? 0;
+            decimal otherTaxes = PurchaseOrder.OtherTaxes ?? 0;
+            decimal discount = purchasePayment.Total *
+                (PurchaseOrder.Discount ?? 0) / 100;
+
+            return PurchaseOrder.TotalCost == purchasePayment.Total
+                + shippingCost + otherTaxes - discount;
         }
 
         public bool PurchaseExpensesHaveBeenGenerated()
