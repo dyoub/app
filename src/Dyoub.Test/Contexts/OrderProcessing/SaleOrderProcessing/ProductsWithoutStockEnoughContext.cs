@@ -12,65 +12,34 @@ using Dyoub.App.Models.EntityModel.Manage.Stores;
 using Dyoub.Test.Factories.Account;
 using Dyoub.Test.Factories.Catalog;
 using Dyoub.Test.Factories.Commercial;
-using Dyoub.Test.Factories.Inventory;
 using Dyoub.Test.Factories.Manage;
 using Effort;
-using System.Linq;
 
 namespace Dyoub.Test.Contexts.OrderProcessing.SaleOrderProcessing
 {
-    public class RevertSaleOrderContext : TenantContext
+    public class ProductsWithoutStockEnoughContext : TenantContext
     {
         private SalePayment salePayment;
         private SaleProduct saleProduct;
 
         public SaleOrder SaleOrder { get; private set; }
 
-        public RevertSaleOrderContext() : base(1, DbConnectionFactory.CreateTransient())
+        public ProductsWithoutStockEnoughContext() : base(1, DbConnectionFactory.CreateTransient())
         {
             Tenant tenant = Tenants.Add(TenantFactory.Tenant());
             Store store = Stores.Add(StoreFactory.Store(tenant));
             Product product = Products.Add(ProductFactory.Product(tenant));
             PaymentMethod paymentMethod = PaymentMethods.Add(PaymentMethodFactory.PaymentMethod(tenant));
 
-            SaleOrder = SaleOrders.Add(SaleOrderFactory.ConfirmedSaleOrder(store));
+            SaleOrder = SaleOrders.Add(SaleOrderFactory.SaleOrder(store));
 
             saleProduct = SaleProducts.Add(SaleProductFactory.SaleProduct(SaleOrder, product));
-            ProductStockMovements.Add(ProductStockMovementFactory.ProductStockMovement(saleProduct));
-            
+
             salePayment = SalePayments.Add(SalePaymentFactory.SalePayment(SaleOrder, paymentMethod));
             salePayment.NumberOfInstallments = 2;
+            salePayment.InstallmentValue = salePayment.Total / salePayment.NumberOfInstallments;
 
             SaveChanges();
-        }
-
-        public bool SaleOrderHasBeenReverted()
-        {
-            Entry(SaleOrder).Reload();
-
-            return !SaleOrder.Confirmed;       
-        }
-
-        public bool BillingValuesHaveBeenReset()
-        {
-            Entry(salePayment).Reload();
-
-            return SaleOrder.BilledAmount == 0 &&
-                   salePayment.InstallmentBilling == 0 &&
-                   salePayment.BilledAmount == 0;
-        }
-
-        public bool SaleIncomesHaveBeenRemoved()
-        {
-            return !SaleIncomes.Any();
-        }
-
-        public bool StockTransacionsHaveBeenRemoved()
-        {
-            Entry(saleProduct).Reload();
-
-            return saleProduct.StockTransactionId == null &&
-                   !ProductStockMovements.Any();
         }
     }
 }

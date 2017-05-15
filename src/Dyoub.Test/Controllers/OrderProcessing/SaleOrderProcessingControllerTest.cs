@@ -15,6 +15,20 @@ namespace Dyoub.Test.Controllers.OrderProcessing
     public class SaleOrderProcessingControllerTest
     {
         [TestMethod]
+        public async Task CannotSellProductsWithoutStockEnough()
+        {
+            ProductsWithoutStockEnoughContext context = new ProductsWithoutStockEnoughContext();
+            SaleOrderProcessingController controller = new SaleOrderProcessingController(context);
+
+            SaleOrderIdViewModel viewModel = new SaleOrderIdViewModel();
+            viewModel.Id = context.SaleOrder.Id;
+
+            ActionResult result = await controller.Confirm(viewModel);
+
+            Assert.IsTrue(result is ModelErrorsJson);
+        }
+
+        [TestMethod]
         public async Task ConfirmSaleOrder()
         {
             ConfirmSaleOrderContext context = new ConfirmSaleOrderContext();
@@ -25,7 +39,10 @@ namespace Dyoub.Test.Controllers.OrderProcessing
 
             await controller.Confirm(viewModel);
 
-            Assert.IsTrue(context.SaleOrderWasConfirmed());
+            Assert.IsTrue(context.SaleOrderHasBeenConfirmed());
+            Assert.IsTrue(context.BillingValuesHaveBeenCalculated());
+            Assert.IsTrue(context.SaleIncomesHaveBeenGenerated());
+            Assert.IsTrue(context.StockMovementHasBeenRegistered());
         }
 
         [TestMethod]
@@ -54,7 +71,10 @@ namespace Dyoub.Test.Controllers.OrderProcessing
 
             await controller.Revert(viewModel);
 
-            Assert.IsTrue(context.SaleOrderWasReverted());
+            Assert.IsTrue(context.SaleOrderHasBeenReverted());
+            Assert.IsTrue(context.BillingValuesHaveBeenReset());
+            Assert.IsTrue(context.SaleIncomesHaveBeenRemoved());
+            Assert.IsTrue(context.StockTransacionsHaveBeenRemoved());
         }
 
         [TestMethod]

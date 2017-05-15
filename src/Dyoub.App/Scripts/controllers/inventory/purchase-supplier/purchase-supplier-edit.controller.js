@@ -93,7 +93,7 @@
                 supplier: controller.getSupplier()
             })
             .then(function () {
-                controller.path.redirectTo('/purchase-orders/edit/:purchaseOrderId/items',
+                controller.path.redirectTo('/purchase-orders/edit/:purchaseOrderId/products',
                     controller.routeParams);
             })
             ['catch'](function (response) {

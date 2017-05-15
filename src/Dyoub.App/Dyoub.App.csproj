@@ -499,6 +499,7 @@
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovement.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovementMapping.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovementQuery.cs" />
+    <Compile Include="Models\EntityModel\Inventory\ProductQuantities\ProductQuantity.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProduct.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProductMapping.cs" />
     <Compile Include="Models\EntityModel\Inventory\PurchasedProducts\PurchasedProductQuery.cs" />

@@ -26,24 +26,19 @@ namespace Dyoub.App.Controllers.OrderProcessing
             if (!await processing.Confirm(viewModel.Id.Value))
             {
                 if (processing.SaleOrder == null)
-                {
                     return this.Error("Sale order not found.");
-                }
 
                 if (processing.SaleOrder.Confirmed)
-                {
                     return this.Error("Sale order already confirmed.");
-                }
 
                 if (processing.HasNoItems)
-                {
                     return this.Error("Cannot confirm sale order without items.");
-                }
 
                 if (processing.HasPendingPayment)
-                {
                     return this.Error("Cannot confirm sale order with pending payment.");
-                }
+
+                if (processing.ProductConsumption.QuantityOfProductUnavailable)
+                    return this.Error("One or more products with quantity unavailable.");
             }
 
             return new SaleOrderJson(processing.SaleOrder);

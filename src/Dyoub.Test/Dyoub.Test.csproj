@@ -162,6 +162,7 @@
     <Compile Include="Contexts\Commercial\SaleOrders\DeleteSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\FindSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\ListSaleOrderContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\ProductsWithoutStockEnoughContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\RevertNotConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\RevertSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\UpdateConfirmedSaleOrderContext.cs" />

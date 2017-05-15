@@ -16,7 +16,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
     {
         public TenantContext Tenant { get; private set; }
         public SaleOrder SaleOrder { get; private set; }
-        public ProductConsumption Consumption { get; private set; }
+        public ProductConsumption ProductConsumption { get; private set; }
         public Billing Billing { get; private set; }
         public bool HasNoItems { get; private set; }
         public bool HasPendingPayment { get; private set; }
@@ -39,6 +39,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
             SaleOrder = await Tenant.SaleOrders
                 .WhereId(saleOrderId)
                 .IncludeStore()
+                .IncludeSaleProducts()
                 .IncludePaymentMethodsAndFees()
                 .SingleOrDefaultAsync();
 
@@ -47,14 +48,14 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
                 return false;
             }
 
-            SaleOrder.ConfirmationDate = DateTime.Now;
-
-            Consumption = new ProductConsumption(Tenant, SaleOrder);
-            Consumption.Confirm();
+            ProductConsumption = new ProductConsumption(Tenant, SaleOrder);
+            if (!await ProductConsumption.Confirm()) return false;
 
             Billing = new Billing(Tenant, SaleOrder);
             Billing.Confirm();
-            
+
+            SaleOrder.ConfirmationDate = DateTime.Now;
+
             await Tenant.SaveChangesAsync();
 
             return true;
@@ -65,7 +66,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
             SaleOrder = await Tenant.SaleOrders
                 .WhereId(saleOrderId)
                 .IncludeStore()
-                //.IncludeSaleProducts()
+                .IncludeSaleProducts()
                 .IncludeSaleIncomes()
                 .SingleOrDefaultAsync();
 
@@ -74,13 +75,13 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
                 return false;
             }
 
-            SaleOrder.ConfirmationDate = null;
-
-            Consumption = new ProductConsumption(Tenant, SaleOrder);
-            Consumption.Revert();
+            ProductConsumption = new ProductConsumption(Tenant, SaleOrder);
+            await ProductConsumption.Revert();
 
             Billing = new Billing(Tenant, SaleOrder);
             Billing.Revert();
+
+            SaleOrder.ConfirmationDate = null;
 
             await Tenant.SaveChangesAsync();
 
