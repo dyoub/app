@@ -23,10 +23,11 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders
         public DateTime? ConfirmationDate { get; set; }
         public int? SupplierId { get; set; }
         public int? WalletId { get; set; }
+        public string InvoiceNumber { get; set; }
         public decimal Total { get; set; }
         public decimal? Discount { get; set; }
         public decimal? ShippingCost { get; set; }
-        public decimal? Taxes { get; set; }
+        public decimal? OtherTaxes { get; set; }
         public decimal TotalPayable { get; set; }
         public decimal TotalCost { get; set; }
         public string Author { get; set; }

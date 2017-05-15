@@ -40,15 +40,31 @@ namespace Dyoub.Test.Contexts.OrderProcessing.PurchaseOrderProcessing
 
             SaveChanges();
         }
-
-        public bool PurchaseOrderWasReverted()
+        
+        public bool PurchaseOrderHasBeenReverted()
         {
             Entry(PurchaseOrder).Reload();
+
+            return !PurchaseOrder.Confirmed;
+        }
+
+        public bool TotalCostHasBeenReset()
+        {
             Entry(purchasePayment).Reload();
 
-            return !PurchaseOrder.Confirmed &&
-                   PurchaseOrder.TotalCost == 0 &&
-                   purchasedProduct.StockTransactionId == null &&
+            return PurchaseOrder.TotalCost == 0;
+        }
+
+        public bool PurchaseExpensesHaveBeenRemoved()
+        {
+            return !PurchaseExpenses.Any();
+        }
+
+        public bool StockTransacionsHaveBeenRemoved()
+        {
+            Entry(purchasedProduct).Reload();
+
+            return purchasedProduct.StockTransactionId == null &&
                    !ProductStockMovements.Any();
         }
     }

@@ -4,11 +4,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Inventory.PurchasePayments
+namespace Dyoub.App.Models.EntityModel.Financial.PurchaseExpenses
 {
-    public class PurchasePaymentMapping : EntityTypeConfiguration<PurchasePayment>
+    public class PurchaseExpenseMapping : EntityTypeConfiguration<PurchaseExpense>
     {
-        public PurchasePaymentMapping()
+        public PurchaseExpenseMapping()
         {
             HasKey(p => new
             {
@@ -19,15 +19,11 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchasePayments
             Property(p => p.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             HasRequired(p => p.Tenant)
-                .WithMany(p => p.PurchasePayments)
+                .WithMany(p => p.PurchaseExpenses)
                 .HasForeignKey(p => p.TenantId);
-            
-            HasRequired(p => p.PurchaseOrder)
-                .WithMany(p => p.PurchasePayments)
-                .HasForeignKey(p => new { p.PurchaseOrderId, p.TenantId });
 
-            HasMany(p => p.PurchaseExpenses)
-                .WithRequired(p => p.PurchasePayment)
+            HasRequired(p => p.PurchasePayment)
+                .WithMany(p => p.PurchaseExpenses)
                 .HasForeignKey(p => new { p.PurchasePaymentId, p.TenantId });
         }
     }

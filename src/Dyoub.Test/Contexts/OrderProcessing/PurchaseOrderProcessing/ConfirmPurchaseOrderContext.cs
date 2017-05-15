@@ -4,6 +4,7 @@
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
+using Dyoub.App.Models.EntityModel.Financial.PurchaseExpenses;
 using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
 using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
@@ -41,17 +42,36 @@ namespace Dyoub.Test.Contexts.OrderProcessing.PurchaseOrderProcessing
 
             SaveChanges();
         }
-
-        public bool PurchaseOrderWasConfirmed()
+        
+        public bool PurchaseOrderHasBeenConfirmed()
         {
             Entry(PurchaseOrder).Reload();
 
-            ProductStockMovement stockMovement = ProductStockMovements
-                .Single(movement => movement.TransactionId == purchasedProduct.StockTransactionId);
+            return PurchaseOrder.Confirmed;
+        }
 
-            return PurchaseOrder.Confirmed &&
-                   purchasedProduct.StockTransactionId != null &&
-                   stockMovement.Quantity == purchasedProduct.Quantity;
+        public bool TotalCostHasBeenCalculated()
+        {
+            return PurchaseOrder.TotalCost == purchasePayment.Total;
+        }
+
+        public bool PurchaseExpensesHaveBeenGenerated()
+        {
+            PurchaseExpense[] expenses = PurchaseExpenses.ToArray();
+
+            return expenses[0].PaymentDate == purchasePayment.Date &&
+                   expenses[0].AmountPaid == purchasePayment.InstallmentValue &&
+                   expenses[1].PaymentDate == purchasePayment.Date.AddMonths(1) &&
+                   expenses[1].AmountPaid == purchasePayment.InstallmentValue;
+        }
+
+        public bool StockMovementHasBeenRegistered()
+        {
+            Entry(purchasedProduct).Reload();
+
+            return ProductStockMovements
+                .Where(movement => movement.TransactionId == purchasedProduct.StockTransactionId.Value)
+                .Any();
         }
     }
 }

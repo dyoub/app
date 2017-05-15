@@ -26,24 +26,19 @@ namespace Dyoub.App.Controllers.OrderProcessing
             if (!await processing.Confirm(viewModel.Id.Value))
             {
                 if (processing.PurchaseOrder == null)
-                {
                     return this.Error("Purchase order not found.");
-                }
 
                 if (processing.PurchaseOrder.Confirmed)
-                {
                     return this.Error("Purchase order already confirmed.");
-                }
 
                 if (processing.HasNoItems)
-                {
                     return this.Error("Cannot confirm purchase order without items.");
-                }
 
                 if (processing.HasPendingPayment)
-                {
                     return this.Error("Cannot confirm purchase order with pending payment.");
-                }
+
+                if (processing.ProductReplenishment.HasProductThatNotMovementStock)
+                    return this.Error("One or more products do not movement stock.");
             }
 
             return new PurchaseOrderJson(processing.PurchaseOrder);

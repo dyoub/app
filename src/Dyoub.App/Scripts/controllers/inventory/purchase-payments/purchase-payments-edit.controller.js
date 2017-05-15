@@ -42,7 +42,10 @@
     Controller.prototype.calculateTotalPayable = function () {
         var controller = this,
             discount = controller.discount || 0,
-            totalPayable = controller.total - (controller.total * discount / 100);
+            shippingCost = controller.shippingCost || 0,
+            otherTaxes = controller.otherTaxes || 0,
+            totalPayable = controller.total + shippingCost + otherTaxes
+                - (controller.total * discount / 100);
 
         controller.totalPayable = totalPayable.round(2);
     };
@@ -99,6 +102,8 @@
 
         controller.PurchasePayments.save({
             purchaseOrderId: controller.routeParams.purchaseOrderId,
+            shippingCost: controller.shippingCost,
+            otherTaxes: controller.otherTaxes,
             discount: controller.discount,
             payments: controller.paymentList
         })
@@ -127,6 +132,8 @@
             .list(controller.routeParams.purchaseOrderId)
             .then(function (response) {
                 controller.total = response.data.total;
+                controller.shippingCost = response.data.shippingCost;
+                controller.otherTaxes = response.data.otherTaxes;
                 controller.discount = response.data.discount;
                 controller.totalPayable = response.data.totalPayable;
                 controller.confirmed = response.data.confirmed;

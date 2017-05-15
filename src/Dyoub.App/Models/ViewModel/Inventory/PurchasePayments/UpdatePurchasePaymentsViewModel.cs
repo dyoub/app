@@ -14,8 +14,14 @@ namespace Dyoub.App.Models.ViewModel.Inventory.PurchasePayments
         [Required]
         public int? PurchaseOrderId { get; set; }
 
-        [Range(0, 99999999.99)]
+        [Range(0, 100)]
         public decimal? Discount { get; set; }
+
+        [Range(0, 999999.99)]
+        public decimal? ShippingCost { get; set; }
+
+        [Range(0, 999999.99)]
+        public decimal? OtherTaxes { get; set; }
 
         public List<PurchasePaymentViewModel> Payments { get; private set; }
 

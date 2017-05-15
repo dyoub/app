@@ -23,6 +23,7 @@ namespace Dyoub.App.Results.Inventory.PurchaseOrders
                 issueDate = PurchaseOrder.IssueDate,
                 confirmationDate = PurchaseOrder.ConfirmationDate,
                 additionalInformation = PurchaseOrder.AdditionalInformation,
+                invoiceNumber = PurchaseOrder.InvoiceNumber,
                 total = PurchaseOrder.Total,
                 totalCost = PurchaseOrder.TotalCost,
                 confirmed = PurchaseOrder.Confirmed,

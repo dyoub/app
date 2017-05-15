@@ -38,7 +38,7 @@ namespace Dyoub.App.Controllers.Inventory
         {
             PurchaseOrder purchaseOrder = await Tenant.PurchaseOrders
                 .WhereId(viewModel.Id.Value)
-                .IncludePurchasePayments()
+                .IncludePurchaseExpenses()
                 .SingleOrDefaultAsync();
 
             return new PurchasePaymentListJson(purchaseOrder);
@@ -48,11 +48,13 @@ namespace Dyoub.App.Controllers.Inventory
         public async Task<ActionResult> Update(UpdatePurchasePaymentsViewModel viewModel)
         {
             PurchasePromisedPayments promisedPayments = new PurchasePromisedPayments(Tenant);
+            promisedPayments.ShippingCost = viewModel.ShippingCost;
+            promisedPayments.OtherTaxes = viewModel.OtherTaxes;
+            promisedPayments.Discount = viewModel.Discount;
 
             bool registered = await promisedPayments.RegisterPayments(
                 viewModel.PurchaseOrderId.Value,
-                viewModel.MapPurchasePayments(),
-                viewModel.Discount
+                viewModel.MapPurchasePayments()
             );
 
             if (!registered)

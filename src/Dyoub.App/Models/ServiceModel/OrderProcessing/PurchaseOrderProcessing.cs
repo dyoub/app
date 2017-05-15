@@ -16,7 +16,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
     {
         public TenantContext Tenant { get; private set; }
         public PurchaseOrder PurchaseOrder { get; private set; }
-        public ProductReplenishment Replenishment { get; private set; }
+        public ProductReplenishment ProductReplenishment { get; private set; }
         public PurchaseCost PurchaseCost { get; private set; }
         public bool HasNoItems { get; private set; }
         public bool HasPendingPayment { get; private set; }
@@ -48,8 +48,8 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
                 return false;
             }
             
-            Replenishment = new ProductReplenishment(Tenant, PurchaseOrder);
-            if (!await Replenishment.Confirm()) return false;
+            ProductReplenishment = new ProductReplenishment(Tenant, PurchaseOrder);
+            if (!await ProductReplenishment.Confirm()) return false;
 
             PurchaseCost = new PurchaseCost(Tenant, PurchaseOrder);
             PurchaseCost.Confirm();
@@ -67,7 +67,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
                 .WhereId(saleOrderId)
                 .IncludeStore()
                 .IncludePurchasedProducts()
-                //.IncludePurchaseExpenses()
+                .IncludePurchaseExpenses()
                 .SingleOrDefaultAsync();
 
             if (PurchaseOrder == null || !PurchaseOrder.Confirmed)
@@ -75,8 +75,8 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
                 return false;
             }
 
-            Replenishment = new ProductReplenishment(Tenant, PurchaseOrder);
-            await Replenishment.Revert();
+            ProductReplenishment = new ProductReplenishment(Tenant, PurchaseOrder);
+            await ProductReplenishment.Revert();
 
             PurchaseCost = new PurchaseCost(Tenant, PurchaseOrder);
             PurchaseCost.Revert();

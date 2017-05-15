@@ -25,7 +25,10 @@ namespace Dyoub.Test.Controllers.OrderProcessing
 
             await controller.Confirm(viewModel);
 
-            Assert.IsTrue(context.PurchaseOrderWasConfirmed());
+            Assert.IsTrue(context.PurchaseOrderHasBeenConfirmed());
+            Assert.IsTrue(context.TotalCostHasBeenCalculated());
+            Assert.IsTrue(context.PurchaseExpensesHaveBeenGenerated());
+            Assert.IsTrue(context.StockMovementHasBeenRegistered());
         }
 
         [TestMethod]
@@ -54,7 +57,10 @@ namespace Dyoub.Test.Controllers.OrderProcessing
 
             await controller.Revert(viewModel);
 
-            Assert.IsTrue(context.PurchaseOrderWasReverted());
+            Assert.IsTrue(context.PurchaseOrderHasBeenReverted());
+            Assert.IsTrue(context.TotalCostHasBeenReset());
+            Assert.IsTrue(context.PurchaseExpensesHaveBeenRemoved());
+            Assert.IsTrue(context.StockTransacionsHaveBeenRemoved());
         }
 
         [TestMethod]

@@ -41,44 +41,53 @@
         }
 
         <div class="box">
-            <span class="hint success" data-translate="Purchase billed" data-ng-show="controller.purchaseOrder.confirmed"></span>
+            <span class="hint success" data-translate="Confirmed" data-ng-show="controller.purchaseOrder.confirmed"></span>
         </div>
 
         <div class="card">
             <div class="grid-row">
-                <div class="grid-column medium-6 large-6">
-                    <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Purchase total"></label>
-                                <strong data-ng-bind="controller.purchaseOrder.total | currency"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Discount"></label>
-                                <strong data-ng-show="controller.purchaseOrder.discount">
-                                    <span data-ng-bind="controller.purchaseOrder.discount | number:2"></span>%
-                                </strong>
-                                <strong data-ng-hide="controller.purchaseOrder.discount">-</strong>
-                            </div>
-                        </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Purchase total"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.total | currency"></strong>
                     </div>
                 </div>
-                <div class="grid-column medium-6 large-6">
-                    <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Total payable"></label>
-                                <strong data-ng-bind="controller.purchaseOrder.totalPayable | currency"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Total cost"></label>
-                                <strong data-ng-bind="controller.purchaseOrder.totalCost | currency"></strong>
-                            </div>
-                        </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Total payable"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.totalPayable | currency"></strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Total cost"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.totalCost | currency"></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Discount"></label>
+                        <strong data-ng-show="controller.purchaseOrder.discount">
+                            <span data-ng-bind="controller.purchaseOrder.discount | number:2"></span>%
+                        </strong>
+                        <strong data-ng-hide="controller.purchaseOrder.discount">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Shipping cost"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.shippingCost | currency"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.shippingCost">-</strong>
+                    </div>
+                </div>
+                <div class="grid-column small-4 medium-4 large-4">
+                    <div class="box">
+                        <label data-translate="Other taxes"></label>
+                        <strong data-ng-bind="controller.purchaseOrder.otherTaxes | currency"></strong>
+                        <strong data-ng-hide="controller.purchaseOrder.otherTaxes">-</strong>
                     </div>
                 </div>
             </div>
@@ -103,7 +112,14 @@
                             <div class="grid-column compact-6 small-6 medium-6 large-6">
                                 <div class="box">
                                     <label data-translate="Payment date"></label>
-                                    <strong data-ng-bind="payment.date | moment:'shortDate'"></strong>
+                                    <strong data-ng-bind="payment.date | moment:'shortDate'"
+                                            data-ng-hide="controller.purchaseOrder.confirmed"></strong>
+                                    <strong>
+                                        <span data-ng-bind="payment.expenses.first().paymentDate | moment:'shortDate'"></span>
+                                        <span data-translate="to" data-ng-show="payment.expenses.length > 1"></span>
+                                        <span data-ng-bind="payment.expenses.last().paymentDate | moment:'shortDate'"
+                                              data-ng-show="payment.expenses.length > 1"></span>
+                                    </strong>
                                 </div>
                             </div>
                         </div>

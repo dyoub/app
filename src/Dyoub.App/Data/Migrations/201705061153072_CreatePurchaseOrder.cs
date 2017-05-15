@@ -19,17 +19,19 @@ namespace Dyoub.App.Data
                 IssueDate = t.DateTime(nullable: false),
                 ConfirmationDate = t.DateTime(nullable: true),
                 CreatedAt = t.DateTime(nullable: false),
+                InvoiceNumber = t.String(nullable: true, maxLength: 50),
                 Total = t.Decimal(nullable: false, precision: 10, scale: 2),
                 Discount = t.Decimal(nullable: true, precision: 10, scale: 2),
                 ShippingCost = t.Decimal(nullable: true, precision: 8, scale: 2),
-                Taxes = t.Decimal(nullable: true, precision: 8, scale: 2),
+                OtherTaxes = t.Decimal(nullable: true, precision: 8, scale: 2),
                 TotalPayable = t.Decimal(nullable: false, precision: 10, scale: 2),
                 TotalCost = t.Decimal(nullable: false, precision: 10, scale: 2),
                 Author = t.String(nullable: false, maxLength: 80),
                 AdditionalInformation = t.String(nullable: true, maxLength: 255)
             })
             .PrimaryKey(t => new { t.Id, t.TenantId })
-            .Index(t => t.IssueDate, unique: false);
+            .Index(t => t.IssueDate, unique: false)
+            .Index(t => t.InvoiceNumber, unique: false);
 
             AddForeignKey(
                 dependentTable: "PurchaseOrder",

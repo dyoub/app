@@ -16,6 +16,8 @@
 
         return this.$http.post('/purchase-orders/payments/update', {
             purchaseOrderId: purchasePayments.purchaseOrderId,
+            shippingCost: purchasePayments.shippingCost,
+            otherTaxes: purchasePayments.otherTaxes,
             discount: purchasePayments.discount,
             payments: purchasePayments.payments.select(function (payment) {
                 return {

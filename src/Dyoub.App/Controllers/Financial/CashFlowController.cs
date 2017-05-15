@@ -7,6 +7,7 @@ using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.CashActivities;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
+using Dyoub.App.Models.EntityModel.Financial.PurchaseExpenses;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Models.ViewModel.Financial.CashFlow;
@@ -33,6 +34,12 @@ namespace Dyoub.App.Controllers.Financial
                 .WhereReceivedDateEndAt(toDate)
                 .AsCashActivity();
 
+            IQueryable<CashActivity> purchaseExpenses = Tenant.PurchaseExpenses
+                .WhereStoreId(storeId)
+                .WhereReceivedDateStartAt(fromDate)
+                .WhereReceivedDateEndAt(toDate)
+                .AsCashActivity();
+
             IQueryable<CashActivity> fixedExpenses = Tenant.FixedExpenses
                 .WhereStoreId(storeId)
                 .WhereEffectiveFrom(fromDate)
@@ -45,7 +52,10 @@ namespace Dyoub.App.Controllers.Financial
                 .UntilDate(toDate)
                 .AsCashActivity();
 
-            return saleIncomes.Concat(fixedExpenses).Concat(others);
+            return saleIncomes
+                .Concat(purchaseExpenses)
+                .Concat(fixedExpenses)
+                .Concat(others);
         }
 
         [HttpGet, Route("cash-flow/daily"), Authorization(Scope = "cash-flow.read")]

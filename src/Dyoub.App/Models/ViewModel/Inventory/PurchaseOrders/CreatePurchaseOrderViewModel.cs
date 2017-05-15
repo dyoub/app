@@ -14,6 +14,8 @@ namespace Dyoub.App.Models.ViewModel.Inventory.PurchaseOrders
 
         public int? WalletId { get; set; }
 
+        public string InvoiceNumber { get; set; }
+
         [Required]
         public DateTime? IssueDate { get; set; }
 
@@ -24,6 +26,7 @@ namespace Dyoub.App.Models.ViewModel.Inventory.PurchaseOrders
         {
             purchaseOrder.StoreId = StoreId.Value;
             purchaseOrder.WalletId = WalletId;
+            purchaseOrder.InvoiceNumber = InvoiceNumber;
             purchaseOrder.IssueDate = IssueDate.Value.Date;
             purchaseOrder.AdditionalInformation = AdditionalInformation;
 

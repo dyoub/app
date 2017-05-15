@@ -16,25 +16,32 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
     {
         public TenantContext Tenant { get; private set; }
         public PurchaseOrder PurchaseOrder { get; private set; }
-        public bool HasPendingPayment { get; set; }
+        public bool HasPendingPayment { get; private set; }
+        public decimal? ShippingCost { get; set; }
+        public decimal? OtherTaxes { get; set; }
+        public decimal? Discount { get; set; }
 
         public PurchasePromisedPayments(TenantContext tenant)
         {
             Tenant = tenant;
         }
 
-        private void CalculateTotals(IEnumerable<PurchasePayment> payments, decimal? discount)
+        private void CalculateTotals(IEnumerable<PurchasePayment> payments)
         {
             decimal totalPaid = payments.Sum(payment => payment.Total);
 
-            PurchaseOrder.Discount = discount;
+            PurchaseOrder.Discount = Discount;
+            PurchaseOrder.ShippingCost = ShippingCost;
+            PurchaseOrder.OtherTaxes = OtherTaxes;
             PurchaseOrder.TotalPayable = new Money(PurchaseOrder.Total)
+                .Add(PurchaseOrder.ShippingCost ?? 0)
+                .Add(PurchaseOrder.OtherTaxes ?? 0)
                 .SubtractPercentage(PurchaseOrder.Discount ?? 0);
 
             HasPendingPayment = totalPaid != PurchaseOrder.TotalPayable;
         }
 
-        public async Task<bool> RegisterPayments(int purchaseOrderId, IEnumerable<PurchasePayment> payments, decimal? discount)
+        public async Task<bool> RegisterPayments(int purchaseOrderId, IEnumerable<PurchasePayment> payments)
         {
             PurchaseOrder = await Tenant.PurchaseOrders
                 .WhereId(purchaseOrderId)
@@ -46,7 +53,7 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
                 return false;
             }
 
-            CalculateTotals(payments, discount);
+            CalculateTotals(payments);
 
             if (HasPendingPayment)
             {

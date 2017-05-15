@@ -38,6 +38,7 @@
             id: purchaseOrder.id,
             storeId: purchaseOrder.store.id,
             walletId: purchaseOrder.wallet ? purchaseOrder.wallet.id : null,
+            invoiceNumber: purchaseOrder.invoiceNumber,
             issueDate: purchaseOrder.issueDate,
             additionalInformation: purchaseOrder.additionalInformation
         });

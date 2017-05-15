@@ -22,6 +22,8 @@ namespace Dyoub.App.Results.Inventory.PurchasePayments
             {
                 id = PurchaseOrder.Id,
                 total = PurchaseOrder.Total,
+                shippingCost = PurchaseOrder.ShippingCost,
+                otherTaxes = PurchaseOrder.OtherTaxes,
                 discount = PurchaseOrder.Discount,
                 totalPayable = PurchaseOrder.TotalPayable,
                 totalCost = PurchaseOrder.TotalCost,
@@ -31,7 +33,14 @@ namespace Dyoub.App.Results.Inventory.PurchasePayments
                     numberOfInstallments = payment.NumberOfInstallments,
                     installmentValue = payment.InstallmentValue,
                     total = payment.Total,
-                    date = payment.Date
+                    date = payment.Date,
+                    expenses = payment.PurchaseExpenses
+                        .OrderBy(expense => expense.PaymentDate)
+                        .Select(expense => new
+                        {
+                            paymentDate = expense.PaymentDate,
+                            amountPaid = expense.AmountPaid
+                        })
                 })
             };
 

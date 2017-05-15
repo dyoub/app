@@ -2,8 +2,10 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
+using Dyoub.App.Models.EntityModel.Financial.PurchaseExpenses;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using System;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Inventory.PurchasePayments
 {
@@ -19,5 +21,6 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchasePayments
 
         public virtual Tenant Tenant { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
+        public virtual ICollection<PurchaseExpense> PurchaseExpenses { get; set; }
     }
 }
