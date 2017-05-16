@@ -45,6 +45,20 @@ namespace Dyoub.Test.Controllers.OrderProcessing
             Assert.IsTrue(context.PurchaseOrderWasNotConfirmedMoreThanOnce());
             Assert.IsTrue(result is ModelErrorsJson);
         }
+        
+        [TestMethod]
+        public async Task ConfirmPurchaseOrderWithoutStockEnough()
+        {
+            RevertWithoutStockEnoughContext context = new RevertWithoutStockEnoughContext();
+            PurchaseOrderProcessingController controller = new PurchaseOrderProcessingController(context);
+
+            PurchaseOrderIdViewModel viewModel = new PurchaseOrderIdViewModel();
+            viewModel.Id = context.PurchaseOrder.Id;
+
+            ActionResult result = await controller.Revert(viewModel);
+
+            Assert.IsTrue(result is ModelErrorsJson);
+        }
 
         [TestMethod]
         public async Task RevertPurchaseOrder()

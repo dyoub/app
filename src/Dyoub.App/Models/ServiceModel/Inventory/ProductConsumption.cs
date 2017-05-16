@@ -21,7 +21,7 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
         public SaleOrder SaleOrder { get; private set; }
         public IEnumerable<Product> Products { get; private set; }
         public IEnumerable<ProductQuantity> ProductQuantities { get; private set; }
-        public bool QuantityOfProductUnavailable { get; set; }
+        public bool InsufficientBalance { get; set; }
 
         public ProductConsumption(TenantContext tenant, SaleOrder saleOrder)
         {
@@ -50,7 +50,7 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
             ProductQuantity productQuantity = ProductQuantities
                 .SingleOrDefault(p => p.Id == saleProduct.ProductId);
 
-            QuantityOfProductUnavailable = 
+            InsufficientBalance = 
                 productQuantity == null ||
                 productQuantity.TotalAvailable < saleProduct.Quantity;
         }
@@ -82,10 +82,7 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
 
                     CheckQuantityAvailableOf(saleProduct);
 
-                    if (QuantityOfProductUnavailable)
-                    {
-                        return false;
-                    }
+                    if (InsufficientBalance) return false;
 
                     RegisterStockTransactionFor(saleProduct);
                 }

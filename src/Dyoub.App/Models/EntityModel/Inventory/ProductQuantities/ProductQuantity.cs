@@ -8,6 +8,7 @@ namespace Dyoub.App.Models.EntityModel.Inventory.ProductQuantities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
+        public bool Marketed { get; set; }
         public decimal TotalAvailable { get; set; }
     }
 }

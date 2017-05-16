@@ -37,8 +37,8 @@ namespace Dyoub.App.Controllers.OrderProcessing
                 if (processing.HasPendingPayment)
                     return this.Error("Cannot confirm sale order with pending payment.");
 
-                if (processing.ProductConsumption.QuantityOfProductUnavailable)
-                    return this.Error("One or more products with quantity unavailable.");
+                if (processing.ProductConsumption.InsufficientBalance)
+                    return this.Error("One or more products with insufficient balance.");
             }
 
             return new SaleOrderJson(processing.SaleOrder);

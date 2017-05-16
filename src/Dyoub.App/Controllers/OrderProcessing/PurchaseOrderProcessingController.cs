@@ -52,14 +52,13 @@ namespace Dyoub.App.Controllers.OrderProcessing
             if (!await processing.Revert(viewModel.Id.Value))
             {
                 if (processing.PurchaseOrder == null)
-                {
                     return this.Error("Purchase order not found.");
-                }
 
                 if (!processing.PurchaseOrder.Confirmed)
-                {
                     return this.Error("Cannot revert purchase order not confirmed.");
-                }
+
+                if (processing.ProductReplenishment.InsufficientBalance)
+                    return this.Error("One or more products with insufficient balance.");
             }
 
             return new PurchaseOrderJson(processing.PurchaseOrder);

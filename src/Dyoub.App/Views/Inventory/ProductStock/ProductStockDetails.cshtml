@@ -1,0 +1,94 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="ProductStockDetailsController as controller" data-ng-init="controller.init()">
+    <div class="page-header">
+        <span data-translate="Product stock"></span>
+        <strong data-ng-bind="controller.store.name"></strong>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.finding"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.findComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Product stock not found."></p>
+            <a href="/product-stock" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            <div class="box">
+                <a href="/product-stock" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <form data-ng-submit="controller.newSearchOfProducts()">
+                <label>
+                    <i class="fa fa-search"></i>
+                    <span data-translate="Search filter"></span>
+                </label>
+
+                <div class="card">
+                    <div class="box">
+                        <label data-translate="Product name or code"></label>
+                        <input type="text" data-ng-model="controller.filter.nameOrCode" data-ng-maxlength="80" />
+                    </div>
+                </div>
+
+                <div class="box text-center">
+                    <button type="submit" class="primary" data-ng-disabled="controller.searchingProducts">
+                        <span data-ng-hide="controller.searchingProducts" data-translate="Search"></span>
+                        <em data-ng-show="controller.searchingProducts" data-translate="Searching"></em>
+                    </button>
+                    <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+                </div>
+            </form>
+
+            <div class="loading box" data-ng-show="controller.searchingProducts"></div>
+
+            <div data-ng-show="controller.searchProductsComplete()">
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="product in controller.productList">
+                        <div class="grid-row">
+                            <div class="grid-column compact-7 small-8 medium-9 large-10">
+                                <p class="font-14" data-ng-bind="product.name"></p>
+                                <p class="text-muted font-11" data-ng-show="product.code">
+                                    <i class="fa fa-barcode"></i>
+                                    <span data-ng-bind="product.code"></span>
+                                </p>
+                                <p data-ng-hide="product.marketed">
+                                    <span class="hint danger" data-translate="Not marketed"></span>
+                                </p>
+                            </div>
+                            <div class="grid-column compact-5 small-4 medium-3 large-2">
+                                <div class="box">
+                                    <label data-translate="Total available"></label>
+                                    <strong data-ng-bind="(product.totalAvailable || 0) | number:3"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card text-center text-primary" data-translate="No records found"
+                     data-ng-show="controller.productList.isEmpty()"></div>
+
+                <div class="box text-center" data-ng-hide="controller.productList.isEmpty()">
+                    <button type="button" class="primary" data-ng-click="controller.searchProducts()">
+                        <span data-ng-hide="controller.searchingProducts" data-translate="More results"></span>
+                        <em data-ng-show="controller.searchingProducts" data-translate="Searching"></em>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

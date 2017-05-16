@@ -15,20 +15,6 @@ namespace Dyoub.Test.Controllers.OrderProcessing
     public class SaleOrderProcessingControllerTest
     {
         [TestMethod]
-        public async Task CannotSellProductsWithoutStockEnough()
-        {
-            ProductsWithoutStockEnoughContext context = new ProductsWithoutStockEnoughContext();
-            SaleOrderProcessingController controller = new SaleOrderProcessingController(context);
-
-            SaleOrderIdViewModel viewModel = new SaleOrderIdViewModel();
-            viewModel.Id = context.SaleOrder.Id;
-
-            ActionResult result = await controller.Confirm(viewModel);
-
-            Assert.IsTrue(result is ModelErrorsJson);
-        }
-
-        [TestMethod]
         public async Task ConfirmSaleOrder()
         {
             ConfirmSaleOrderContext context = new ConfirmSaleOrderContext();
@@ -43,6 +29,20 @@ namespace Dyoub.Test.Controllers.OrderProcessing
             Assert.IsTrue(context.BillingValuesHaveBeenCalculated());
             Assert.IsTrue(context.SaleIncomesHaveBeenGenerated());
             Assert.IsTrue(context.StockMovementHasBeenRegistered());
+        }
+
+        [TestMethod]
+        public async Task ConfirmSaleOrderWithoutStockEnough()
+        {
+            ConfirmWithoutStockEnoughContext context = new ConfirmWithoutStockEnoughContext();
+            SaleOrderProcessingController controller = new SaleOrderProcessingController(context);
+
+            SaleOrderIdViewModel viewModel = new SaleOrderIdViewModel();
+            viewModel.Id = context.SaleOrder.Id;
+
+            ActionResult result = await controller.Confirm(viewModel);
+
+            Assert.IsTrue(result is ModelErrorsJson);
         }
 
         [TestMethod]

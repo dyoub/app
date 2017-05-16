@@ -237,6 +237,8 @@
     <Content Include="Scripts\controllers\financial\wallets\wallet-details.controller.js" />
     <Content Include="Scripts\controllers\financial\wallets\wallet-edit.controller.js" />
     <Content Include="Scripts\controllers\financial\wallets\wallet-list.controller.js" />
+    <Content Include="Scripts\controllers\inventory\product-stock\product-stock-details.controller.js" />
+    <Content Include="Scripts\controllers\inventory\product-stock\product-stock-list.controller.js" />
     <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-details.controller.js" />
     <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-edit.controller.js" />
     <Content Include="Scripts\controllers\inventory\purchase-orders\purchase-order-list.controller.js" />
@@ -276,6 +278,7 @@
     <Content Include="Scripts\services\financial\fixed-expense.service.js" />
     <Content Include="Scripts\services\financial\other-cash-activites.service.js" />
     <Content Include="Scripts\services\financial\wallet.service.js" />
+    <Content Include="Scripts\services\inventory\product-stock.service.js" />
     <Content Include="Scripts\services\inventory\purchase-orders.service.js" />
     <Content Include="Scripts\services\inventory\purchase-payments.service.js" />
     <Content Include="Scripts\services\inventory\purchase-supplier.service.js" />
@@ -302,6 +305,7 @@
     <Compile Include="Controllers\Commercial\SaleOrdersController.cs" />
     <Compile Include="Controllers\Commercial\SalePaymentsController.cs" />
     <Compile Include="Controllers\Financial\CashFlowController.cs" />
+    <Compile Include="Controllers\Inventory\ProductStockController.cs" />
     <Compile Include="Controllers\OrderProcessing\PurchaseOrderProcessingController.cs" />
     <Compile Include="Controllers\OrderProcessing\SaleOrderProcessingController.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
@@ -506,6 +510,7 @@
     <Compile Include="Models\EntityModel\Financial\Wallets\Wallet.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletQuery.cs" />
+    <Compile Include="Models\EntityModel\Inventory\ProductQuantities\ProductQuantityQuery.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovement.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovementMapping.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovementQuery.cs" />
@@ -615,6 +620,9 @@
     <Compile Include="Models\ViewModel\Financial\Wallets\ListWalletsViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\UpdateWalletViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\Wallets\WalletIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\ProductStock\ListProductStockViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\ProductStock\ProductStockIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Inventory\ProductStock\ListProductQuantitiesViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchasedProducts\PurchasedProductViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchasedProducts\UpdatePurchasedProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\Inventory\PurchaseOrders\CreatePurchaseOrderViewModel.cs" />
@@ -675,6 +683,9 @@
     <Compile Include="Results\Financial\OtherCashActivities\OtherCashActivityListJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletJson.cs" />
     <Compile Include="Results\Financial\Wallets\WalletListJson.cs" />
+    <Compile Include="Results\Inventory\ProductStock\ProductQuantityListJson.cs" />
+    <Compile Include="Results\Inventory\ProductStock\ProductStockJson.cs" />
+    <Compile Include="Results\Inventory\ProductStock\ProductStockListJson.cs" />
     <Compile Include="Results\Inventory\PurchasedProducts\PurchasedProductListJson.cs" />
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderIdJson.cs" />
     <Compile Include="Results\Inventory\PurchaseOrders\PurchaseOrderJson.cs" />
@@ -790,6 +801,8 @@
     <Content Include="Views\Inventory\PurchasePayments\PurchasePaymentsEdit.cshtml" />
     <Content Include="Views\Inventory\PurchaseOrders\_ConfirmPurchaseOrder.cshtml" />
     <Content Include="Views\Inventory\PurchaseOrders\_RevertPurchaseOrder.cshtml" />
+    <Content Include="Views\Inventory\ProductStock\ProductStockList.cshtml" />
+    <Content Include="Views\Inventory\ProductStock\ProductStockDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

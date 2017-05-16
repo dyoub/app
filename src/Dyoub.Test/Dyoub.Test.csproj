@@ -151,10 +151,13 @@
     <Compile Include="Contexts\Commercial\SaleItems\UpdateSaleItemsContext.cs" />
     <Compile Include="Contexts\Financial\CashFlow\DailyCashFlowContext.cs" />
     <Compile Include="Contexts\Financial\CashFlow\MonthlyCashFlowContext.cs" />
+    <Compile Include="Contexts\Inventory\ProductStock\ListProductQuantitiesContext.cs" />
+    <Compile Include="Contexts\Inventory\ProductStock\ListProductStockContext.cs" />
     <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\ConfirmConfirmedPurchaseOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\ConfirmPurchaseOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\RevertNotConfirmedPurchaseOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\RevertSPurchaseOrderContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\RevertWithoutStockEnoughContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\ConfirmConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\ConfirmSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\CreateSaleOrderContext.cs" />
@@ -162,7 +165,7 @@
     <Compile Include="Contexts\Commercial\SaleOrders\DeleteSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\FindSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\ListSaleOrderContext.cs" />
-    <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\ProductsWithoutStockEnoughContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\ConfirmWithoutStockEnoughContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\RevertNotConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\RevertSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\UpdateConfirmedSaleOrderContext.cs" />
@@ -235,6 +238,7 @@
     <Compile Include="Controllers\Financial\CashFlowControllerTest.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesControllerTest.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
+    <Compile Include="Controllers\Inventory\ProductStockControllerTest.cs" />
     <Compile Include="Controllers\OrderProcessing\PurchaseOrderProcessingControllerTest.cs" />
     <Compile Include="Controllers\OrderProcessing\SaleOrderProcessingControllerTest.cs" />
     <Compile Include="Controllers\Financial\WalletsControllerTest.cs" />

@@ -2,6 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
+using Dyoub.App.Models.EntityModel.Inventory.ProductQuantities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +27,22 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
                     .Select(productPrice => (decimal?)productPrice.UnitPrice)
                     .FirstOrDefault()
             });
+        }
+
+        public static IQueryable<ProductQuantity> AsProductQuantity(this IQueryable<Product> products, int storeId)
+        {
+            return products
+                .WhereStockMovement(true)
+                .Select(product => new ProductQuantity
+                {
+                    Id = product.Id,
+                    Code = product.Code,
+                    Name = product.Name,
+                    Marketed = product.Marketed,
+                    TotalAvailable = product.ProductStockMovements
+                        .Where(stock => stock.StoreId == storeId)
+                        .Sum(stock => (decimal?)stock.Quantity) ?? 0
+                });
         }
 
         public static IQueryable<Product> OrderByName(this IQueryable<Product> products)

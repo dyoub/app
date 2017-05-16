@@ -76,7 +76,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
             }
 
             ProductReplenishment = new ProductReplenishment(Tenant, PurchaseOrder);
-            await ProductReplenishment.Revert();
+            if (!await ProductReplenishment.Revert()) return false;
 
             PurchaseCost = new PurchaseCost(Tenant, PurchaseOrder);
             PurchaseCost.Revert();

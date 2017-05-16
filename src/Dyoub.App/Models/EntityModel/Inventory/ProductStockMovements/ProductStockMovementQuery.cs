@@ -12,20 +12,26 @@ namespace Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements
     {
         public static IQueryable<ProductQuantity> AsProductQuantity(this IQueryable<ProductStockMovement> movements)
         {
-            return movements.GroupBy(movement => movement.ProductId)
+            return movements
+                .GroupBy(movement => movement.ProductId)
                 .Select(productGroup => new ProductQuantity
                 {
                     Id = productGroup.FirstOrDefault().Product.Id,
                     Code = productGroup.FirstOrDefault().Product.Code,
                     Name = productGroup.FirstOrDefault().Product.Name,
+                    Marketed = productGroup.FirstOrDefault().Product.Marketed,
                     TotalAvailable = productGroup.Sum(product => product.Quantity)
                 });
         }
 
-        public static IQueryable<ProductStockMovement> WhereUntilDate(this IQueryable<ProductStockMovement> movements, DateTime date)
+        public static IQueryable<ProductStockMovement> WhereProductId(this IQueryable<ProductStockMovement> movements, int? productId)
         {
-            date = date.Date;
-            return movements.Where(movement => movement.Date <= date);
+            if (productId == null)
+            {
+                return movements;
+            }
+
+            return movements.Where(movement => movement.ProductId == productId);
         }
 
         public static IQueryable<ProductStockMovement> WhereProductIdIn(this IQueryable<ProductStockMovement> movements, IEnumerable<int> productIds)
@@ -33,14 +39,25 @@ namespace Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements
             return movements.Where(movement => productIds.Contains(movement.ProductId));
         }
 
+        public static IQueryable<ProductStockMovement> WhereStoreId(this IQueryable<ProductStockMovement> movements, int? storeId)
+        {
+            if (storeId == null)
+            {
+                return movements;
+            }
+
+            return movements.Where(movement => movement.StoreId == storeId);
+        }
+
         public static IQueryable<ProductStockMovement> WhereTransactionIdIn(this IQueryable<ProductStockMovement> movements, IEnumerable<Guid> transactionIds)
         {
             return movements.Where(movement => transactionIds.Contains(movement.TransactionId));
         }
 
-        public static IQueryable<ProductStockMovement> WhereStoreId(this IQueryable<ProductStockMovement> movements, int storeId)
+        public static IQueryable<ProductStockMovement> WhereUntilDate(this IQueryable<ProductStockMovement> movements, DateTime date)
         {
-            return movements.Where(movement => movement.StoreId == storeId);
+            date = date.Date;
+            return movements.Where(movement => movement.Date <= date);
         }
     }
 }

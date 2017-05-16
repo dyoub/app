@@ -17,14 +17,14 @@ using Effort;
 
 namespace Dyoub.Test.Contexts.OrderProcessing.SaleOrderProcessing
 {
-    public class ProductsWithoutStockEnoughContext : TenantContext
+    public class ConfirmWithoutStockEnoughContext : TenantContext
     {
         private SalePayment salePayment;
         private SaleProduct saleProduct;
 
         public SaleOrder SaleOrder { get; private set; }
 
-        public ProductsWithoutStockEnoughContext() : base(1, DbConnectionFactory.CreateTransient())
+        public ConfirmWithoutStockEnoughContext() : base(1, DbConnectionFactory.CreateTransient())
         {
             Tenant tenant = Tenants.Add(TenantFactory.Tenant());
             Store store = Stores.Add(StoreFactory.Store(tenant));
