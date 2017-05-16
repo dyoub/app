@@ -289,8 +289,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\StringTrimModelBinder.cs" />
     <Compile Include="Configuration\BundleConfiguration.cs" />
     <Compile Include="Configuration\GlobalFiltersConfiguration.cs" />
+    <Compile Include="Configuration\ModelBindersConfiguration.cs" />
     <Compile Include="Configuration\RouteConfiguration.cs" />
     <Compile Include="Controllers\Account\DashboardController.cs" />
     <Compile Include="Controllers\Account\ProfileController.cs" />
