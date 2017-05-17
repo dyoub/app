@@ -17,6 +17,7 @@
             .find(controller.routeParams.purchaseOrderId)
             .then(function (response) {
                 controller.purchaseOrder = response.data;
+                controller.notFound = !controller.purchaseOrder;
             })
             ['catch'](function (response) {
                 controller.handleError(response);

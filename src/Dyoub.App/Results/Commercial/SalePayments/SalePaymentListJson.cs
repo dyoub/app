@@ -19,7 +19,7 @@ namespace Dyoub.App.Results.Commercial.SalePayments
 
         public override void ExecuteResult(ControllerContext context)
         {
-            Data = new
+            Data = SaleOrder == null ? null : new
             {
                 id = SaleOrder.Id,
                 total = SaleOrder.Total,

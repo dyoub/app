@@ -17,7 +17,7 @@ namespace Dyoub.App.Results.Inventory.PurchaseSupplier
 
         public override void ExecuteResult(ControllerContext context)
         {
-            Data = new
+            Data = PurchaseOrder == null ? null : new
             {
                 id = PurchaseOrder.Id,
                 confirmed = PurchaseOrder.Confirmed,

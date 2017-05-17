@@ -17,7 +17,7 @@ namespace Dyoub.App.Results.Commercial.SaleCustomer
 
         public override void ExecuteResult(ControllerContext context)
         {
-            Data = new
+            Data = SaleOrder == null ? null : new
             {
                 id = SaleOrder.Id,
                 confirmed = SaleOrder.Confirmed,

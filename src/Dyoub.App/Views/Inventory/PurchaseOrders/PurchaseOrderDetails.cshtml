@@ -32,85 +32,93 @@
     <div class="loading box" data-ng-show="controller.searching"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchComplete()">
-        <div class="box">
-            <a href="/purchase-orders" class="as-button">
-                <i class="fa fa-arrow-left"></i>
-            </a>
-
-            @using (Html.Authorize("purchase-orders.edit"))
-            {
-                <button type="button" class="success" data-translate="Confirm" data-ng-click="controller.showConfirmDialog()"
-                        data-ng-hide="controller.purchaseOrder.confirmed"></button>
-                <a href="/purchase-orders/edit/{{controller.purchaseOrder.id}}" class="as-button" data-translate="Edit"
-                    data-ng-hide="controller.purchaseOrder.confirmed"></a>
-                <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"
-                        data-ng-hide="controller.purchaseOrder.confirmed"></button>
-                <button type="button" class="danger" data-translate="Revert" data-ng-click="controller.showRevertDialog()"
-                        data-ng-show="controller.purchaseOrder.confirmed"></button>
-            }
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Purchase order not found."></p>
+            <a href="/purchase-orders" class="as-button" data-translate="Go back"></a>
         </div>
 
-        <div class="card">
+        <div data-ng-hide="controller.notFound">
             <div class="box">
-                <span class="hint success" data-ng-show="controller.purchaseOrder.confirmed" data-translate="Confirmed"></span>
+                <a href="/purchase-orders" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                @using (Html.Authorize("purchase-orders.edit"))
+                {
+                    <button type="button" class="success" data-translate="Confirm" data-ng-click="controller.showConfirmDialog()"
+                            data-ng-hide="controller.purchaseOrder.confirmed"></button>
+                    <a href="/purchase-orders/edit/{{controller.purchaseOrder.id}}" class="as-button" data-translate="Edit"
+                       data-ng-hide="controller.purchaseOrder.confirmed"></a>
+                    <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"
+                            data-ng-hide="controller.purchaseOrder.confirmed"></button>
+                    <button type="button" class="danger" data-translate="Revert" data-ng-click="controller.showRevertDialog()"
+                            data-ng-show="controller.purchaseOrder.confirmed"></button>
+                }
             </div>
 
-            <div class="grid-row">
-                <div class="grid-column medium-6 large-6">
-                    <div class="box">
-                        <label data-translate="Store"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.store.name"></strong>
-                    </div>
+            <div class="card">
+                <div class="box">
+                    <span class="hint success" data-ng-show="controller.purchaseOrder.confirmed" data-translate="Confirmed"></span>
                 </div>
-                <div class="grid-column medium-6 large-6">
-                    <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Issue date"></label>
-                                <strong data-ng-bind="controller.purchaseOrder.issueDate | moment:'shortDate'"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Invoice number"></label>
-                                <strong data-ng-bind="controller.purchaseOrder.invoiceNumber"></strong>
-                                <strong data-ng-hide="controller.purchaseOrder.invoiceNumber">-</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="grid-row">
-                <div class="grid-column medium-6 large-6">
-                    <div class="box">
-                        <label data-translate="Wallet"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.wallet.name"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.wallet.name" data-translate="Not defined"></strong>
-                    </div>
-                </div>
-                <div class="grid-column medium-6 large-6">
-                    <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Purchase total"></label>
-                                <strong data-ng-bind="controller.purchaseOrder.total | currency"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Total cost"></label>
-                                <strong data-ng-bind="controller.purchaseOrder.totalCost | currency"></strong>
-                            </div>
+                <div class="grid-row">
+                    <div class="grid-column medium-6 large-6">
+                        <div class="box">
+                            <label data-translate="Store"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.store.name"></strong>
                         </div>
                     </div>
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Issue date"></label>
+                                    <strong data-ng-bind="controller.purchaseOrder.issueDate | moment:'shortDate'"></strong>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Invoice number"></label>
+                                    <strong data-ng-bind="controller.purchaseOrder.invoiceNumber"></strong>
+                                    <strong data-ng-hide="controller.purchaseOrder.invoiceNumber">-</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="box">
-                <label data-translate="Additional information"></label>
-                <strong data-ng-bind-html="controller.purchaseOrder.additionalInformation | escapeHtml"></strong>
-                <strong data-ng-hide="controller.purchaseOrder.additionalInformation">-</strong>
+                <div class="grid-row">
+                    <div class="grid-column medium-6 large-6">
+                        <div class="box">
+                            <label data-translate="Wallet"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.wallet.name"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.wallet.name" data-translate="Not defined"></strong>
+                        </div>
+                    </div>
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Purchase total"></label>
+                                    <strong data-ng-bind="controller.purchaseOrder.total | currency"></strong>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Total cost"></label>
+                                    <strong data-ng-bind="controller.purchaseOrder.totalCost | currency"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <label data-translate="Additional information"></label>
+                    <strong data-ng-bind-html="controller.purchaseOrder.additionalInformation | escapeHtml"></strong>
+                    <strong data-ng-hide="controller.purchaseOrder.additionalInformation">-</strong>
+                </div>
             </div>
         </div>
     </div>

@@ -32,56 +32,64 @@
     <div class="loading box" data-ng-show="controller.searching"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchComplete()">
-        @using (Html.Authorize("purchase-orders.edit"))
-        {
-            <div class="box">
-                <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/supplier" class="as-button" data-translate="Edit"
-                   data-ng-hide="controller.purchaseOrder.confirmed"></a>
-            </div>
-        }
-
-        <div class="box">
-            <span class="hint success" data-translate="Confirmed" data-ng-show="controller.purchaseOrder.confirmed"></span>
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Purchase order not found."></p>
+            <a href="/purchase-orders" class="as-button" data-translate="Go back"></a>
         </div>
 
-        <div class="card">
-            <div class="grid-row">
-                <div class="grid-column small-8 medium-8 large-8">
-                    <div class="box">
-                        <label data-translate="Supplier"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.supplier.name"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.supplier.name">-</strong>
-                    </div>
+        <div data-ng-hide="controller.notFound">
+            @using (Html.Authorize("purchase-orders.edit"))
+            {
+                <div class="box">
+                    <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}/supplier" class="as-button" data-translate="Edit"
+                       data-ng-hide="controller.purchaseOrder.confirmed"></a>
                 </div>
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="National ID"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.supplier.nationalId"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.supplier.nationalId">-</strong>
-                    </div>
-                </div>
+            }
+
+            <div class="box">
+                <span class="hint success" data-translate="Confirmed" data-ng-show="controller.purchaseOrder.confirmed"></span>
             </div>
 
-            <div class="grid-row">
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Email"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.supplier.email"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.supplier.email">-</strong>
+            <div class="card">
+                <div class="grid-row">
+                    <div class="grid-column small-8 medium-8 large-8">
+                        <div class="box">
+                            <label data-translate="Supplier"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.supplier.name"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.supplier.name">-</strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="National ID"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.supplier.nationalId"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.supplier.nationalId">-</strong>
+                        </div>
                     </div>
                 </div>
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Phone number"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.supplier.phoneNumber"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.supplier.phoneNumber">-</strong>
+
+                <div class="grid-row">
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Email"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.supplier.email"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.supplier.email">-</strong>
+                        </div>
                     </div>
-                </div>
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Alternative phone number"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.supplier.alternativePhoneNumber"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.supplier.alternativePhoneNumber">-</strong>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Phone number"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.supplier.phoneNumber"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.supplier.phoneNumber">-</strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Alternative phone number"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.supplier.alternativePhoneNumber"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.supplier.alternativePhoneNumber">-</strong>
+                        </div>
                     </div>
                 </div>
             </div>

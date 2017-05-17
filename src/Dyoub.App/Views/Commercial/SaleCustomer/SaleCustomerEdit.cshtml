@@ -30,6 +30,12 @@
     <div class="loading box" data-ng-show="controller.searching"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Sale order not found."></p>
+            <a href="/sale-orders" class="as-button" data-translate="Go back"></a>
+        </div>
+
         <div class="error" data-ng-show="controller.saleOrder.confirmed">
             <i class="fa fa-exclamation-triangle"></i>
             <p data-translate="Sale order already confirmed."></p>
@@ -38,7 +44,7 @@
         </div>
 
         <div data-ng-hide="controller.saleOrder.confirmed">
-            <form name="controller.saleCustomerForm" data-ng-submit="controller.save()">
+            <form name="controller.saleCustomerForm" data-ng-submit="controller.save()" data-ng-hide="controller.notFound">
                 <div class="box">
                     <button type="submit" class="success" data-ng-disabled="controller.saveBlocked()">
                         <span data-ng-hide="controller.saving" data-translate="Save"></span>
