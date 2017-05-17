@@ -137,12 +137,16 @@
     <Compile Include="Contexts\Catalog\Services\FindServiceContext.cs" />
     <Compile Include="Contexts\Catalog\Services\ListServicesContext.cs" />
     <Compile Include="Contexts\Catalog\Services\UpdateServiceContext.cs" />
+    <Compile Include="Contexts\Commercial\Customers\DeleteCustomerWithRentContractsContext.cs" />
     <Compile Include="Contexts\Commercial\Customers\DeleteCustomerWithSaleOrdersContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\CreatePaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\DeletePaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\FindPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\ListPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\UpdatePaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContractCustomer\FindRentContractCustomerContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContractCustomer\UpdateCustomerToConfirmedRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContractCustomer\UpdateRentContractCustomerContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\CreateRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\DeleteConfirmedRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\DeleteRentContractContext.cs" />
@@ -238,6 +242,7 @@
     <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ServicesControllerTest.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\RentContractCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentContractsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleItemsControllerTest.cs" />

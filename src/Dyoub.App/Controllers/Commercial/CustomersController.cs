@@ -5,6 +5,7 @@ using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Commercial.Customers;
+using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.ViewModel.Commercial.Customers;
 using System.Threading.Tasks;
@@ -62,14 +63,13 @@ namespace Dyoub.App.Controllers.Commercial
                 .SingleOrDefaultAsync();
 
             if (customer == null)
-            {
                 return this.Error("Customer not found.");
-            }
 
             if (await Tenant.SaleOrders.WhereCustomerId(customer.Id).AnyAsync())
-            {
                 return this.Error("This customer has associated sale orders.");
-            }
+
+            if (await Tenant.RentContracts.WhereCustomerId(customer.Id).AnyAsync())
+                return this.Error("This customer has associated rent contracts.");
 
             Tenant.Customers.Remove(customer);
             await Tenant.SaveChangesAsync();

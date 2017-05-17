@@ -220,6 +220,8 @@
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-detail.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\rent-contract-customer\rent-contract-customer-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\rent-contract-customer\rent-contract-customer-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-list.controller.js" />
@@ -276,6 +278,7 @@
     <Content Include="Scripts\services\commercial\installment.service.js" />
     <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
+    <Content Include="Scripts\services\commercial\rent-contract-customer.service.js" />
     <Content Include="Scripts\services\commercial\rent-contract.service.js" />
     <Content Include="Scripts\services\commercial\sale-customer.service.js" />
     <Content Include="Scripts\services\commercial\sale-items.service.js" />
@@ -309,6 +312,7 @@
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
+    <Compile Include="Controllers\Commercial\RentContractCustomerController.cs" />
     <Compile Include="Controllers\Commercial\RentContractsController.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerController.cs" />
     <Compile Include="Controllers\Commercial\SaleItemsController.cs" />
@@ -615,6 +619,7 @@
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodFeeViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\UpdatePaymentMethodViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\RentContractCustomer\RentContractCustomerViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentContracts\CreateRentContractViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentContracts\ListRentContractViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentContracts\RentContractIdViewModel.cs" />
@@ -684,6 +689,7 @@
     <Compile Include="Results\Catalog\Services\ServiceListJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodListJson.cs" />
+    <Compile Include="Results\Commercial\RentContractCustomer\RentContractCustomerJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractIdJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractListJson.cs" />
@@ -832,6 +838,8 @@
     <Content Include="Views\Commercial\RentContracts\RentContractDetails.cshtml" />
     <Content Include="Views\Commercial\RentContracts\RentContractEdit.cshtml" />
     <Content Include="Views\Commercial\RentContracts\RentContractList.cshtml" />
+    <Content Include="Views\Commercial\RentContractCustomer\RentContractCustomerDetails.cshtml" />
+    <Content Include="Views\Commercial\RentContractCustomer\RentContractCustomerEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

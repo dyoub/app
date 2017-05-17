@@ -59,6 +59,20 @@ namespace Dyoub.Test.Controllers.Commercial
         }
 
         [TestMethod]
+        public async Task DeleteCustomerWithRentContracts()
+        {
+            DeleteCustomerWithRentContractsContext context = new DeleteCustomerWithRentContractsContext();
+            CustomersController controller = new CustomersController(context);
+
+            CustomerIdViewModel viewModel = new CustomerIdViewModel();
+            viewModel.Id = context.Customer.Id;
+
+            ActionResult result = await controller.Delete(viewModel);
+
+            Assert.IsTrue(result is ModelErrorsJson);
+        }
+
+        [TestMethod]
         public async Task FindCustomer()
         {
             FindCustomerContext context = new FindCustomerContext();
