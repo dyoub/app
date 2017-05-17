@@ -812,9 +812,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Seed\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Data\Migrations\201703280220123_CreateTenant.resx">
       <DependentUpon>201703280220123_CreateTenant.cs</DependentUpon>
