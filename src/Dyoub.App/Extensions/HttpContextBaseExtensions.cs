@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Dyoub.App.Extensions
 {
-    public static class HttpContextBaseExtension
+    public static class HttpContextBaseExtensions
     {
         public static UserIdentity UserIdentity(this HttpContextBase httpContext)
         {
