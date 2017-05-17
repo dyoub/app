@@ -29,7 +29,7 @@ namespace Dyoub.App.Models.EntityModel.Manage.Stores
         {
             foreach (string word in words)
             {
-                stores = stores.Where(tenant => tenant.Name.Contains(word));
+                stores = stores.Where(store => store.Name.Contains(word));
             }
 
             return stores;

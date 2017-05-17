@@ -22,6 +22,7 @@
     Controller.prototype.newSearch = function () {
         var controller = this;
         controller.storeList = [];
+        controller.filter.index = 0;
         controller.search();
     };
 
