@@ -27,8 +27,9 @@ namespace Dyoub.App.Results.Account.Dashboard
                 counter = new
                 {
                     cashFlowBalance = CashFlowAnalysis.Balance(DateTime.Today).Amount,
-                    fixedExpenses = CashFlowAnalysis.TotalFixedExpenses().Amount,
-                    otherCashActivities = CashFlowAnalysis.Others.Count(),
+                    fixedExpenses = CashFlowAnalysis.Debits.TotalFixedExpenses().Amount,
+                    otherCashActivities = CashFlowAnalysis.Credits.Others.Count() +
+                        CashFlowAnalysis.Debits.Others.Count(),
                     wallets = Counter.Wallets
                 }
             };

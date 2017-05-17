@@ -586,6 +586,8 @@
     <Compile Include="Models\ServiceModel\Commercial\SaleShoppingCart.cs" />
     <Compile Include="Models\ServiceModel\Financial\Billing.cs" />
     <Compile Include="Models\ServiceModel\Financial\CashFlowAnalysis.cs" />
+    <Compile Include="Models\ServiceModel\Financial\CashFlowCredits.cs" />
+    <Compile Include="Models\ServiceModel\Financial\CashFlowDebits.cs" />
     <Compile Include="Models\ServiceModel\Financial\PurchaseCost.cs" />
     <Compile Include="Models\ServiceModel\Inventory\ProductConsumption.cs" />
     <Compile Include="Models\ServiceModel\Inventory\PurchasePromisedPayments.cs" />

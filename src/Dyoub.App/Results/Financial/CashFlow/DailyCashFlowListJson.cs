@@ -22,11 +22,12 @@ namespace Dyoub.App.Results.Financial.CashFlow
             Data = CashFlowAnalysis.DailyPeriod.Select(date => new
             {
                 date = date.ToJson(),
-                sales = CashFlowAnalysis.TotalSales(date).Amount,
-                purchases = CashFlowAnalysis.TotalPurchases(date).Amount,
-                fixedExpenses = CashFlowAnalysis.TotalFixedExpenses(date).Amount,
-                otherCredits = CashFlowAnalysis.TotalOtherCredits(date).Amount,
-                otherDebits = CashFlowAnalysis.TotalOtherDebits(date).Amount,
+                rentContracts = CashFlowAnalysis.Credits.TotalRentContracts(date).Amount,
+                sales = CashFlowAnalysis.Credits.TotalSales(date).Amount,
+                purchases = CashFlowAnalysis.Debits.TotalPurchases(date).Amount,
+                fixedExpenses = CashFlowAnalysis.Debits.TotalFixedExpenses(date).Amount,
+                otherCredits = CashFlowAnalysis.Credits.TotalOthers(date).Amount,
+                otherDebits = CashFlowAnalysis.Debits.TotalOthers(date).Amount,
                 balance = CashFlowAnalysis.Balance(date).Amount
             });
 

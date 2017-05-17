@@ -83,6 +83,8 @@
                 <div class="grid-column tiny-2 compact-2 small-2 medium-2 large-2">
                     <p class="font-20 text-primary" data-ng-bind="day.date | moment:'day'"></p>
                     <p class="text-muted font-11" data-ng-bind="day.date | moment:'weekDay'"></p>
+                    <strong data-ng-bind="day.balance | currency"
+                            data-ng-class="{ 'text-success': day.balance >= 0, 'text-danger': day.balance < 0 }"></strong>
                 </div>
                 <div class="grid-column tiny-10 compact-10 small-10 medium-10 large-10">
                     <div class="grid-row">
@@ -90,6 +92,12 @@
                             <div class="box">
                                 <label data-translate="Sales"></label>
                                 <strong data-ng-bind="day.sales | currency"></strong>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-4 medium-4 large-2">
+                            <div class="box">
+                                <label data-translate="Rentals"></label>
+                                <strong data-ng-bind="day.rentContracts | currency"></strong>
                             </div>
                         </div>
                         <div class="grid-column compact-6 small-4 medium-4 large-2">
@@ -114,13 +122,6 @@
                             <div class="box">
                                 <label data-translate="Other debits"></label>
                                 <strong data-ng-bind="day.otherDebits | currency"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-4 medium-4 large-2">
-                            <div class="box">
-                                <label data-translate="Balance"></label>
-                                <strong data-ng-bind="day.balance | currency"
-                                        data-ng-class="{ 'text-success': day.balance >= 0, 'text-danger': day.balance < 0 }"></strong>
                             </div>
                         </div>
                     </div>

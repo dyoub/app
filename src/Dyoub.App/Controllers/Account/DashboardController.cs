@@ -14,6 +14,7 @@ using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using Dyoub.App.Models.EntityModel.Overview;
 using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Results.Account.Dashboard;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -114,12 +115,13 @@ namespace Dyoub.App.Controllers.Account
             IQueryable<SaleIncome> saleIncomes = Tenant.SaleIncomes.ReceivedToday();
             IQueryable<FixedExpense> fixedExpenses = Tenant.FixedExpenses.ToCurrentMonth();
             IQueryable<OtherCashActivity> otherCashActivities = Tenant.OtherCashActivities.ToCurrentMonth();
-            IQueryable<CashActivity> cashActivities = saleIncomes.AsCashActivity()
-                .Concat(fixedExpenses.AsCashActivity())
-                .Concat(otherCashActivities.AsCashActivity());
 
-            CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis();
-            cashFlowAnalysis.CashActivities = await cashActivities.ToListAsync();
+            IEnumerable<CashActivity> cashActivities = await saleIncomes.AsCashActivity()
+                .Concat(fixedExpenses.AsCashActivity())
+                .Concat(otherCashActivities.AsCashActivity())
+                .ToListAsync();
+            
+            CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis(cashActivities);
             cashFlowAnalysis.ToCurrentMonth();
 
             FinancialCount counter = await Tenant.Current

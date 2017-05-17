@@ -13,6 +13,7 @@ using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Models.ViewModel.Financial.CashFlow;
 using Dyoub.App.Results.Financial.CashFlow;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -73,10 +74,11 @@ namespace Dyoub.App.Controllers.Financial
         [HttpPost, Route("cash-flow/daily"), Authorization(Scope = "cash-flow.read")]
         public async Task<ActionResult> Daily(DailyCashFlowViewModel viewModel)
         {
-            CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis();
-            cashFlowAnalysis.ToPeriod(viewModel.FromDate, viewModel.ToDate);
-            cashFlowAnalysis.CashActivities = await CashActivities(viewModel.StoreId,
+            IEnumerable<CashActivity> cashActivities = await CashActivities(viewModel.StoreId,
                 viewModel.FromDate, viewModel.ToDate).ToListAsync();
+
+            CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis(cashActivities);
+            cashFlowAnalysis.ToPeriod(viewModel.FromDate, viewModel.ToDate);
 
             return new DailyCashFlowListJson(cashFlowAnalysis);
         }
@@ -84,10 +86,11 @@ namespace Dyoub.App.Controllers.Financial
         [HttpPost, Route("cash-flow/monthly"), Authorization(Scope = "cash-flow.read")]
         public async Task<ActionResult> Monthly(MonthlyCashFlowViewModel viewModel)
         {
-            CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis();
-            cashFlowAnalysis.ToPeriod(viewModel.FromDate, viewModel.ToDate);
-            cashFlowAnalysis.CashActivities = await CashActivities(viewModel.StoreId,
+            IEnumerable<CashActivity> cashActivities = await CashActivities(viewModel.StoreId,
                 viewModel.FromDate, viewModel.ToDate).ToListAsync();
+
+            CashFlowAnalysis cashFlowAnalysis = new CashFlowAnalysis(cashActivities);
+            cashFlowAnalysis.ToPeriod(viewModel.FromDate, viewModel.ToDate);
 
             return new MonthlyCashFlowListJson(cashFlowAnalysis);
         }
