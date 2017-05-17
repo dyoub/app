@@ -10,7 +10,7 @@ namespace Dyoub.App.Models.EntityModel.Account.PasswordRecoveries
     {
         public static IQueryable<PasswordRecovery> NotExpiredByDate(this IQueryable<PasswordRecovery> passwordRecoveries)
         {
-            return passwordRecoveries.Where(passwordRecovery => passwordRecovery.ExpiryDate > DateTime.Now);
+            return passwordRecoveries.Where(passwordRecovery => passwordRecovery.ExpiryDate > DateTime.UtcNow);
         }
 
         public static IQueryable<PasswordRecovery> WhereToken(this IQueryable<PasswordRecovery> passwordRecoveries, string token)

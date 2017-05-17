@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Dyoub.App.Results.Commercial.SaleOrders
                 saleOrderList = history.Select(saleOrder => new
                 {
                     id = saleOrder.Id,
-                    issueDate = saleOrder.IssueDate,
+                    issueDate = saleOrder.IssueDate.ToJson(),
                     store = saleOrder.Store.Name,
                     customer = saleOrder.Customer != null ? saleOrder.Customer.Name : null,
                     draft = saleOrder.Draft,

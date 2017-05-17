@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Account.Users;
 using System.Web.Mvc;
 
@@ -21,8 +22,8 @@ namespace Dyoub.App.Results.Account.Profile
             {
                 name = User.Name,
                 email = User.Email,
-                lastLogin = User.LastLogin,
-                lastChangePassword = User.LastChangePassword
+                lastLogin = User.LastLogin.ToJsonLocalTimeZone(),
+                lastChangePassword = User.LastChangePassword.ToJsonLocalTimeZone()
             };
 
             base.ExecuteResult(context);

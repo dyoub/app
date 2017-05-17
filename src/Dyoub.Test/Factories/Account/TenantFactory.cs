@@ -13,7 +13,7 @@ namespace Dyoub.Test.Factories.Account
             return new Tenant
             {
                 Owner = owner,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.UtcNow
             };
         }
     }

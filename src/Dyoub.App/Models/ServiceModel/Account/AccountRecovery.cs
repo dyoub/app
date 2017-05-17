@@ -28,7 +28,7 @@ namespace Dyoub.App.Models.ServiceModel.Account
                 PasswordRecovery = new PasswordRecovery();
                 PasswordRecovery.Token = Guid.NewGuid().ToString("N");
                 PasswordRecovery.Email = email;
-                PasswordRecovery.RequestDate = DateTime.Now;
+                PasswordRecovery.RequestDate = DateTime.UtcNow;
                 PasswordRecovery.ExpiryDate = PasswordRecovery.RequestDate.AddHours(PasswordRecovery.TokenExpiryTime);
 
                 Context.PasswordRecoveries.Add(PasswordRecovery);
@@ -53,7 +53,7 @@ namespace Dyoub.App.Models.ServiceModel.Account
                 {
                     user.Salt = Guid.NewGuid().ToString("N");
                     user.Password = new Sha256Hash(newPassword, user.Salt).ToString();
-                    user.LastChangePassword = DateTime.Now;
+                    user.LastChangePassword = DateTime.UtcNow;
 
                     await Context.SaveChangesAsync();
                 }

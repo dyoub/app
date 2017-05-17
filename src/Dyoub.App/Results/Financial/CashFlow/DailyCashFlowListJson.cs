@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.ServiceModel.Financial;
 using System.Linq;
 using System.Web.Mvc;
@@ -20,7 +21,7 @@ namespace Dyoub.App.Results.Financial.CashFlow
         {
             Data = CashFlowAnalysis.DailyPeriod.Select(date => new
             {
-                date = date,
+                date = date.ToJson(),
                 sales = CashFlowAnalysis.TotalSales(date).Amount,
                 purchases = CashFlowAnalysis.TotalPurchases(date).Amount,
                 fixedExpenses = CashFlowAnalysis.TotalFixedExpenses(date).Amount,

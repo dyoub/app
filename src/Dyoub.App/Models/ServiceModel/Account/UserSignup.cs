@@ -32,13 +32,13 @@ namespace Dyoub.App.Models.ServiceModel.Account
             if (!EmailAlreadyTaken)
             {
                 User.Token = new AccessToken().ToString();
-                User.LastLogin = DateTime.Now;
+                User.LastLogin = DateTime.UtcNow;
                 User.Salt = Guid.NewGuid().ToString("N");
                 User.Password = new Sha256Hash(User.Password, User.Salt).ToString();
-                User.LastChangePassword = DateTime.Now;
+                User.LastChangePassword = DateTime.UtcNow;
                 User.Tenant = new Tenant();
                 User.Tenant.Owner = User.Email;
-                User.Tenant.CreatedAt = DateTime.Now;
+                User.Tenant.CreatedAt = DateTime.UtcNow;
 
                 ClosureRequest = new ClosureRequest();
                 ClosureRequest.Token = Guid.NewGuid().ToString("N");

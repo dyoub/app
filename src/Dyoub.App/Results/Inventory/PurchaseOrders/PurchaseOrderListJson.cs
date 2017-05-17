@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Dyoub.App.Results.Inventory.PurchaseOrders
                 purchaseOrderList = history.Select(purchaseOrder => new
                 {
                     id = purchaseOrder.Id,
-                    issueDate = purchaseOrder.IssueDate,
+                    issueDate = purchaseOrder.IssueDate.ToJson(),
                     store = purchaseOrder.Store.Name,
                     supplier = purchaseOrder.Supplier != null ? purchaseOrder.Supplier.Name : null,
                     draft = purchaseOrder.Draft,

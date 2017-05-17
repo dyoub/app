@@ -25,14 +25,14 @@ namespace Dyoub.Test.Factories.Commercial
                 Total = 20.00M,
                 Discount = 10,
                 TotalPayable = 18.00M,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.UtcNow
             };
         }
 
         public static SaleOrder ConfirmedSaleOrder(Store store, Customer customer = null)
         {
             SaleOrder saleOrder = SaleOrder(store, customer);
-            saleOrder.ConfirmationDate = DateTime.Now;
+            saleOrder.ConfirmationDate = DateTime.UtcNow;
 
             return saleOrder;
         }

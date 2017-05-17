@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using System.Web.Mvc;
 
@@ -20,8 +21,8 @@ namespace Dyoub.App.Results.Inventory.PurchaseOrders
             Data = PurchaseOrder == null? null : new
             {
                 id = PurchaseOrder.Id,
-                issueDate = PurchaseOrder.IssueDate,
-                confirmationDate = PurchaseOrder.ConfirmationDate,
+                issueDate = PurchaseOrder.IssueDate.ToJson(),
+                confirmationDate = PurchaseOrder.ConfirmationDate.ToJsonLocalTimeZone(),
                 additionalInformation = PurchaseOrder.AdditionalInformation,
                 invoiceNumber = PurchaseOrder.InvoiceNumber,
                 total = PurchaseOrder.Total,

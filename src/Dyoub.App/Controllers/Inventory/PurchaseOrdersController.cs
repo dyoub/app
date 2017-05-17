@@ -64,7 +64,7 @@ namespace Dyoub.App.Controllers.Inventory
             }
 
             PurchaseOrder purchaseOrder = viewModel.MapTo(new PurchaseOrder());
-            purchaseOrder.CreatedAt = DateTime.Now;
+            purchaseOrder.CreatedAt = DateTime.UtcNow;
             purchaseOrder.Author = HttpContext.UserIdentity().Email;
 
             Tenant.PurchaseOrders.Add(purchaseOrder);

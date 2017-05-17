@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace Dyoub.App.Results.Financial.FixedExpenses
             {
                 id = fixedExpense.Id,
                 description = fixedExpense.Description,
-                startDate = fixedExpense.StartDate,
-                endDate = fixedExpense.EndDate,
+                startDate = fixedExpense.StartDate.ToJson(),
+                endDate = fixedExpense.EndDate.ToJson(),
                 value = fixedExpense.Value
             });
 

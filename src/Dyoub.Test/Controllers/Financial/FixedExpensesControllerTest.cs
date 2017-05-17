@@ -25,7 +25,7 @@ namespace Dyoub.Test.Controllers.Financial
             CreateFixedExpenseViewModel viewModel = new CreateFixedExpenseViewModel();
             viewModel.StoreId = context.Store.Id;
             viewModel.Description = "Test";
-            viewModel.StartDate = DateTime.Now;
+            viewModel.StartDate = DateTime.UtcNow;
             viewModel.Value = 10.50M;
 
             await controller.Create(viewModel);

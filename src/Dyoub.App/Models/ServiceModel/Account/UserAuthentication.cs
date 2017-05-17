@@ -30,7 +30,7 @@ namespace Dyoub.App.Models.ServiceModel.Account
 
             User.Salt = Guid.NewGuid().ToString("N");
             User.Password = new Sha256Hash(newPassword, User.Salt).ToString();
-            User.LastChangePassword = DateTime.Now;
+            User.LastChangePassword = DateTime.UtcNow;
 
             await Context.SaveChangesAsync();
 
@@ -50,7 +50,7 @@ namespace Dyoub.App.Models.ServiceModel.Account
                 if (User.Password == passwordHash.ToString())
                 {
                     User.Token = new AccessToken().ToString();
-                    User.LastLogin = DateTime.Now;
+                    User.LastLogin = DateTime.UtcNow;
 
                     await Context.SaveChangesAsync();
                 }

@@ -54,7 +54,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
             Billing = new Billing(Tenant, SaleOrder);
             Billing.Confirm();
 
-            SaleOrder.ConfirmationDate = DateTime.Now;
+            SaleOrder.ConfirmationDate = DateTime.UtcNow;
 
             await Tenant.SaveChangesAsync();
 

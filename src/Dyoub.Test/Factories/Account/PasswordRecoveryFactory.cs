@@ -16,7 +16,7 @@ namespace Dyoub.Test.Factories.Account
                 Token = Guid.NewGuid().ToString("N"),
                 Email = user.Email,
                 ExpiryDate = DateTime.Today.AddDays(1),
-                RequestDate = DateTime.Now
+                RequestDate = DateTime.UtcNow
             };
         }
 

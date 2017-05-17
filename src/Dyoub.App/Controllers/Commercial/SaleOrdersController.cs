@@ -64,7 +64,7 @@ namespace Dyoub.App.Controllers.Commercial
             }
 
             SaleOrder saleOrder = viewModel.MapTo(new SaleOrder());
-            saleOrder.CreatedAt = DateTime.Now;
+            saleOrder.CreatedAt = DateTime.UtcNow;
             saleOrder.Author = HttpContext.UserIdentity().Email;
 
             Tenant.SaleOrders.Add(saleOrder);

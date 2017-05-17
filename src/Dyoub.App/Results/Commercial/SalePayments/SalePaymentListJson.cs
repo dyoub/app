@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using System.Linq;
 using System.Web.Mvc;
@@ -41,12 +42,12 @@ namespace Dyoub.App.Results.Commercial.SalePayments
                     feeFixedValue = payment.FeeFixedValue,
                     total = payment.Total,
                     billedAmount = payment.BilledAmount,
-                    date = payment.Date,
+                    date = payment.Date.ToJson(),
                     incomes = payment.SaleIncomes
                         .OrderBy(income => income.ReceivedDate)
                         .Select(income => new
                         {
-                            receivedDate = income.ReceivedDate,
+                            receivedDate = income.ReceivedDate.ToJson(),
                             amountReceived = income.AmountReceived
                         })
                 })

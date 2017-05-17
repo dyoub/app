@@ -25,7 +25,7 @@ namespace Dyoub.Test.Controllers.Financial
             CreateOtherCashActivityViewModel viewModel = new CreateOtherCashActivityViewModel();
             viewModel.StoreId = context.Store.Id;
             viewModel.Description = "Test";
-            viewModel.Date = DateTime.Now;
+            viewModel.Date = DateTime.UtcNow;
             viewModel.Value = 10.50M;
 
             await controller.Create(viewModel);

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using System.Web.Mvc;
 
@@ -20,8 +21,8 @@ namespace Dyoub.App.Results.Commercial.SaleOrders
             Data = SaleOrder == null ? null : new
             {
                 id = SaleOrder.Id,
-                issueDate = SaleOrder.IssueDate,
-                confirmationDate = SaleOrder.ConfirmationDate,
+                issueDate = SaleOrder.IssueDate.ToJson(),
+                confirmationDate = SaleOrder.ConfirmationDate.ToJsonLocalTimeZone(),
                 additionalInformation = SaleOrder.AdditionalInformation,
                 total = SaleOrder.Total,
                 billedAmount = SaleOrder.BilledAmount,

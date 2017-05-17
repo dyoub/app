@@ -86,7 +86,7 @@ namespace Dyoub.App.Models.ServiceModel.Financial
         {
             Tenant.SaleIncomes.AddRange(CalculateIncomes());
 
-            SaleOrder.ConfirmationDate = DateTime.Now;
+            SaleOrder.ConfirmationDate = DateTime.UtcNow;
             SaleOrder.BilledAmount = new Money(SaleOrder.SalePayments.Sum(p => p.BilledAmount));
         }
 

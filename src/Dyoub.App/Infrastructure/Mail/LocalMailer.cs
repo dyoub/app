@@ -32,7 +32,7 @@ namespace Dyoub.App.Infrastructure.Mail
 
         public override void Send()
         {
-            DateTime sendDate = DateTime.Now;
+            DateTime sendDate = DateTime.UtcNow;
             string mailbox = string.Format("{0}temp\\mailbox", AppDomain.CurrentDomain.BaseDirectory);
             string htmlFilePath = string.Format("{0}/{1:yyyyMMddHHmmss}.html", mailbox, sendDate);
 

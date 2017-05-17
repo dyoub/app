@@ -54,7 +54,7 @@ namespace Dyoub.App.Models.ServiceModel.OrderProcessing
             PurchaseCost = new PurchaseCost(Tenant, PurchaseOrder);
             PurchaseCost.Confirm();
 
-            PurchaseOrder.ConfirmationDate = DateTime.Now;
+            PurchaseOrder.ConfirmationDate = DateTime.UtcNow;
 
             await Tenant.SaveChangesAsync();
 

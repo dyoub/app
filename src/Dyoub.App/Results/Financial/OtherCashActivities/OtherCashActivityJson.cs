@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Extensions;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using System;
 using System.Web.Mvc;
@@ -27,7 +28,7 @@ namespace Dyoub.App.Results.Financial.OtherCashActivities
                     name = OtherCashActivity.Store.Name
                 },
                 description = OtherCashActivity.Description,
-                date = OtherCashActivity.Date,
+                date = OtherCashActivity.Date.ToJson(),
                 operation = OtherCashActivity.Value > 0 ? "Credit" : "Debit",
                 value = Math.Abs(OtherCashActivity.Value)
             };
