@@ -37,6 +37,7 @@ namespace Dyoub.App.Filters
             else
             {
                 filterContext.HttpContext.Response.StatusCode = 401;
+                filterContext.Result = new EmptyResult();
             }
         }
 
