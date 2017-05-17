@@ -22,6 +22,10 @@ namespace Dyoub.App.Models.EntityModel.Commercial.Customers
                 .WithMany(p => p.Customers)
                 .HasForeignKey(p => p.TenantId);
 
+            HasMany(p => p.RentContracts)
+                .WithOptional(p => p.Customer)
+                .HasForeignKey(p => new { p.CustomerId, p.TenantId });
+
             HasMany(p => p.SaleOrders)
                 .WithOptional(p => p.Customer)
                 .HasForeignKey(p => new { p.CustomerId, p.TenantId });

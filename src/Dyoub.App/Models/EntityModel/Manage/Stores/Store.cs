@@ -4,6 +4,7 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.ProductPrices;
 using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
+using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
@@ -27,6 +28,7 @@ namespace Dyoub.App.Models.EntityModel.Manage.Stores
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual ICollection<ProductStockMovement> ProductStockMovements { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual ICollection<RentContract> RentContracts { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
         public virtual ICollection<ServicePrice> ServicePrices { get; set; }
         public virtual ICollection<TeamMember> TeamMembers { get; set; }

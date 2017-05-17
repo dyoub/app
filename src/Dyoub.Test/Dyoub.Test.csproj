@@ -143,6 +143,13 @@
     <Compile Include="Contexts\Commercial\PaymentMethods\FindPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\ListPaymentMethodContext.cs" />
     <Compile Include="Contexts\Commercial\PaymentMethods\UpdatePaymentMethodContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContracts\CreateRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContracts\DeleteConfirmedRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContracts\DeleteRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContracts\FindRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContracts\ListRentContractsContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContracts\UpdateConfirmedRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContracts\UpdateRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\SaleCustomer\FindSaleCustomerContext.cs" />
     <Compile Include="Contexts\Commercial\SaleCustomer\UpdateCustomerToConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleCustomer\UpdateSaleCustomerContext.cs" />
@@ -231,6 +238,7 @@
     <Compile Include="Controllers\Catalog\ProductsControllerTest.cs" />
     <Compile Include="Controllers\Catalog\ServicesControllerTest.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\RentContractsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleItemsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersControllerTest.cs" />
@@ -256,6 +264,7 @@
     <Compile Include="Factories\Catalog\ServiceFactory.cs" />
     <Compile Include="Factories\Catalog\ServicePriceFactory.cs" />
     <Compile Include="Factories\Commercial\PaymentMethodFactory.cs" />
+    <Compile Include="Factories\Commercial\RentContractFactory.cs" />
     <Compile Include="Factories\Commercial\SaleOrderFactory.cs" />
     <Compile Include="Factories\Commercial\SalePaymentFactory.cs" />
     <Compile Include="Factories\Commercial\SaleProductFactory.cs" />

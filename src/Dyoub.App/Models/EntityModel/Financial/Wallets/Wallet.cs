@@ -2,6 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
+using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Dyoub.App.Models.EntityModel.Financial.Wallets
 
         public virtual Tenant Tenant { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual ICollection<RentContract> RentContracts { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
     }
 }

@@ -23,7 +23,8 @@ namespace Dyoub.App.Results.Account.Dashboard
                 {
                     customers = Counter.Customers,
                     paymentMethods = Counter.PaymentMethods,
-                    saleOrders = Counter.SaleOrders
+                    saleOrders = Counter.SaleOrders,
+                    rentContracts = Counter.RentContracts
                 }
             };
 

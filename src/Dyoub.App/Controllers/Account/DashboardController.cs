@@ -4,6 +4,7 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
+using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
 using Dyoub.App.Models.EntityModel.Financial.CashActivities;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
@@ -92,13 +93,15 @@ namespace Dyoub.App.Controllers.Account
         public async Task<ActionResult> CommercialCount()
         {
             IQueryable<SaleOrder> saleOrders = Tenant.SaleOrders.IssuedThisMonth();
+            IQueryable<RentContract> rentContracts = Tenant.RentContracts.StartedThisMonth();
 
             CommercialCount counter = await Tenant.Current
                 .Select(tenant => new CommercialCount
                 {
                     Customers = tenant.Customers.Count(),
                     PaymentMethods = tenant.PaymentMethods.Count(),
-                    SaleOrders = saleOrders.Count()
+                    SaleOrders = saleOrders.Count(),
+                    RentContracts = rentContracts.Count()
                 })
                 .SingleOrDefaultAsync();
 

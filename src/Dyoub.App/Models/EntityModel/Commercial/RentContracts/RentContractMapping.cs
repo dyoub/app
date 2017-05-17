@@ -4,11 +4,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Financial.Wallets
+namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
 {
-    public class WalletMapping : EntityTypeConfiguration<Wallet>
+    public class RentContractMapping : EntityTypeConfiguration<RentContract>
     {
-        public WalletMapping()
+        public RentContractMapping()
         {
             HasKey(p => new
             {
@@ -19,19 +19,19 @@ namespace Dyoub.App.Models.EntityModel.Financial.Wallets
             Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             HasRequired(p => p.Tenant)
-                .WithMany(p => p.Wallets)
+                .WithMany(p => p.RentContracts)
                 .HasForeignKey(p => p.TenantId);
 
-            HasMany(p => p.PurchaseOrders)
-                .WithOptional(p => p.Wallet)
-                .HasForeignKey(p => new { p.WalletId, p.TenantId });
+            HasRequired(p => p.Store)
+                .WithMany(p => p.RentContracts)
+                .HasForeignKey(p => new { p.StoreId, p.TenantId });
 
-            HasMany(p => p.RentContracts)
-                .WithOptional(p => p.Wallet)
-                .HasForeignKey(p => new { p.WalletId, p.TenantId });
+            HasOptional(p => p.Customer)
+                .WithMany(p => p.RentContracts)
+                .HasForeignKey(p => new { p.CustomerId, p.TenantId });
 
-            HasMany(p => p.SaleOrders)
-                .WithOptional(p => p.Wallet)
+            HasOptional(p => p.Wallet)
+                .WithMany(p => p.RentContracts)
                 .HasForeignKey(p => new { p.WalletId, p.TenantId });
         }
     }
