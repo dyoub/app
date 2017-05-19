@@ -146,7 +146,6 @@
                 "Collaborators": "Colaboradores",
                 "Commercial": "Comercial",
                 "Confirmed": "Confirmado",
-                "Contract total value": "Valor total do contrato",
                 "Copy": "Copiar",
                 "Copying": "Copiando",
                 "Copy from pricing table": "Copiar de outra tabela",

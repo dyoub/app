@@ -1,0 +1,189 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="RentPaymentsDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Rent contract"></span>
+            <strong class="text-muted" data-ng-bind="controller.rentContract.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.rentContractId">
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/products"
+               class="step" data-translate="Products"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Payments"></span>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract not found."></p>
+            <a href="/rent-contracts" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            @using (Html.Authorize("rent-contracts.edit"))
+            {
+                <div class="box">
+                    <a href="/rent-contracts/edit/{{controller.rentContract.id}}/payments" class="as-button" data-translate="Edit"
+                       data-ng-hide="controller.rentContract.confirmed"></a>
+                </div>
+            }
+
+            <div class="box">
+                <span class="hint success" data-translate="Billed" data-ng-show="controller.rentContract.confirmed"></span>
+            </div>
+
+            <div class="card">
+                <div class="grid-row">
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Rent total"></label>
+                                    <strong data-ng-bind="controller.rentContract.total | currency"></strong>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Discount"></label>
+                                    <strong data-ng-show="controller.rentContract.discount">
+                                        <span data-ng-bind="controller.rentContract.discount | number:2"></span>%
+                                    </strong>
+                                    <strong data-ng-hide="controller.rentContract.discount">-</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-column medium-6 large-6">
+                        <div class="grid-row">
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Total payable"></label>
+                                    <strong data-ng-bind="controller.rentContract.totalPayable | currency"></strong>
+                                </div>
+                            </div>
+                            <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="box">
+                                    <label data-translate="Billed amount"></label>
+                                    <strong data-ng-bind="controller.rentContract.billedAmount | currency"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-header" data-translate="Payments"></div>
+
+            <div class="card text-primary text-center" data-translate="At least one payment must be added."
+                 data-ng-show="controller.rentContract.paymentList.isEmpty()"></div>
+
+            <div class="card list">
+                <div class="list-item" data-ng-repeat="payment in controller.rentContract.paymentList | orderBy:'date'">
+                    <div class="grid-row">
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Value"></label>
+                                        <strong data-ng-bind="payment.total | currency"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Payment date"></label>
+                                        <strong data-ng-bind="payment.date | moment:'shortDate'"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Payment method"></label>
+                                        <strong data-ng-bind="payment.method.name"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Installment option"></label>
+                                        <strong data-ng-bind="payment | installmentOption"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-row" data-ng-show="controller.rentContract.confirmed">
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Billed value"></label>
+                                        <strong data-ng-bind="payment.billedAmount | currency"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Received date"></label>
+                                        <strong>
+                                            <span data-ng-bind="payment.incomes.first().receivedDate | moment:'shortDate'"></span>
+                                            <span data-translate="to" data-ng-show="payment.incomes.length > 1"></span>
+                                            <span data-ng-bind="payment.incomes.last().receivedDate | moment:'shortDate'"
+                                                  data-ng-show="payment.incomes.length > 1"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Rent fee"></label>
+                                        <strong data-ng-show="payment.feePercentage">
+                                            <span data-ng-bind="payment.feePercentage | number:2"></span>%
+                                        </strong>
+                                        <span data-ng-show="payment.feePercentage && payment.feeFixedValue">+</span>
+                                        <strong data-ng-bind="payment.feeFixedValue | currency"></strong>
+                                        <strong data-ng-hide="payment.feePercentage || payment.feeFixedValue"
+                                                data-translate="There is not fee"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Receivables"></label>
+                                        <strong>
+                                            <span data-ng-bind="payment.incomes.length"></span>x
+                                            <span data-translate="of"></span>
+                                            <span data-ng-bind="payment.installmentBilling | currency"></span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

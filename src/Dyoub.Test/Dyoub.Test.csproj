@@ -158,6 +158,9 @@
     <Compile Include="Contexts\Commercial\RentedProducts\ListRentedProductsContext.cs" />
     <Compile Include="Contexts\Commercial\RentedProducts\UpdateProductsOfConfirmedRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentedProducts\UpdateRentedProductsContext.cs" />
+    <Compile Include="Contexts\Commercial\RentPayments\ListRentPaymentsContext.cs" />
+    <Compile Include="Contexts\Commercial\RentPayments\UpdatePaymentsOfConfirmedRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentPayments\UpdateRentPaymentsContext.cs" />
     <Compile Include="Contexts\Commercial\SaleCustomer\FindSaleCustomerContext.cs" />
     <Compile Include="Contexts\Commercial\SaleCustomer\UpdateCustomerToConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleCustomer\UpdateSaleCustomerContext.cs" />
@@ -249,6 +252,7 @@
     <Compile Include="Controllers\Commercial\RentContractCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentContractsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentedProductsControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\RentPaymentsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleItemsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersControllerTest.cs" />
@@ -276,6 +280,7 @@
     <Compile Include="Factories\Commercial\PaymentMethodFactory.cs" />
     <Compile Include="Factories\Commercial\RentContractFactory.cs" />
     <Compile Include="Factories\Commercial\RentedProductFactory.cs" />
+    <Compile Include="Factories\Commercial\RentPaymentFactory.cs" />
     <Compile Include="Factories\Commercial\SaleOrderFactory.cs" />
     <Compile Include="Factories\Commercial\SalePaymentFactory.cs" />
     <Compile Include="Factories\Commercial\SaleProductFactory.cs" />

@@ -27,6 +27,10 @@ namespace Dyoub.App.Models.EntityModel.Commercial.PaymentMethods
                 .HasForeignKey(p => new { p.PaymentMethodId, p.TenantId })
                 .WillCascadeOnDelete();
 
+            HasMany(p => p.RentPayments)
+                .WithRequired(p => p.PaymentMethod)
+                .HasForeignKey(p => new { p.PaymentMethodId, p.TenantId });
+
             HasMany(p => p.SalePayments)
                 .WithRequired(p => p.PaymentMethod)
                 .HasForeignKey(p => new { p.PaymentMethodId, p.TenantId });
