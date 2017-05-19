@@ -45,15 +45,20 @@ namespace Dyoub.App.Controllers.Commercial
                 .WhereId(viewModel.Id.Value)
                 .SingleOrDefaultAsync();
 
-            IQueryable<SaleItem> productItems = Tenant.SaleProducts
-                .WhereSaleOrderId(saleOrder.Id)
-                .AsSaleItem();
+            ICollection<SaleItem> itemList = null;
 
-            IQueryable<SaleItem> serviceItems = Tenant.SaleServices
-                .WhereSaleOrderId(saleOrder.Id)
-                .AsSaleItem();
+            if (saleOrder != null)
+            {
+                IQueryable<SaleItem> productItems = Tenant.SaleProducts
+                    .WhereSaleOrderId(saleOrder.Id)
+                    .AsSaleItem();
 
-            ICollection<SaleItem> itemList = await productItems.Concat(serviceItems).ToListAsync();
+                IQueryable<SaleItem> serviceItems = Tenant.SaleServices
+                    .WhereSaleOrderId(saleOrder.Id)
+                    .AsSaleItem();
+
+                itemList = await productItems.Concat(serviceItems).ToListAsync();
+            }
 
             return new SaleItemListJson(saleOrder, itemList);
         }

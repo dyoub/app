@@ -14,7 +14,7 @@
     Controller.prototype.addItem = function (item) {
         var controller = this;
 
-        var alreadyAdded = controller.itemList.where(function (selectedItem) {
+        var alreadyAdded = controller.saleOrder.itemList.where(function (selectedItem) {
             return selectedItem.id === item.id &&
                 selectedItem.isProduct === item.isProduct &&
                 selectedItem.isService === item.isService;
@@ -26,7 +26,7 @@
         } else {
             item.quantity = 1;
             controller.calculateItemTotalPrice(item);
-            controller.itemList.push(item);
+            controller.saleOrder.itemList.push(item);
         }
     };
 
@@ -48,10 +48,13 @@
     };
 
     Controller.prototype.calculateTotalPayable = function () {
-        var controller = this,
-            totalPayable = 0;
+        var controller = this;
 
-        angular.forEach(controller.itemList, function (item) {
+        if (!controller.saleOrder) return;
+
+        var totalPayable = 0;
+
+        angular.forEach(controller.saleOrder.itemList, function (item) {
             totalPayable += controller.calculateItemTotalPrice(item);
         });
 
@@ -88,16 +91,17 @@
 
     Controller.prototype.noItemsSelected = function () {
         var controller = this;
-        return controller.itemList &&
-            controller.itemList.isEmpty() &&
+        return controller.saleOrder &&
+            controller.saleOrder.itemList &&
+            controller.saleOrder.itemList.isEmpty() &&
             !controller.searchingSelectedItems;
     };
 
     Controller.prototype.removeItem = function () {
         var controller = this,
-            itemIndex = controller.itemList.indexOf(controller.itemToRemove);
+            itemIndex = controller.saleOrder.itemList.indexOf(controller.itemToRemove);
 
-        controller.itemList.splice(itemIndex, 1);
+        controller.saleOrder.itemList.splice(itemIndex, 1);
         controller.itemToRemove = null;
     };
 
@@ -112,7 +116,7 @@
 
         controller.SaleItems.save({
             saleOrderId: controller.routeParams.saleOrderId,
-            items: controller.itemList
+            items: controller.saleOrder.itemList
         })
         .then(function () {
             controller.path.redirectTo('/sale-orders/edit/:saleOrderId/payments',
@@ -128,8 +132,9 @@
         var controller = this;
         return controller.saving ||
                controller.saleOrderItemsForm.$invalid ||
-               !controller.itemList ||
-                controller.itemList.isEmpty();
+               !controller.saleOrder ||
+               !controller.saleOrder.itemList ||
+                controller.saleOrder.itemList.isEmpty();
     };
 
     Controller.prototype.searchItemsForSale = function () {
@@ -137,7 +142,7 @@
         controller.searchingItemsForSale = true;
 
         controller.PricingTable.listItemsForSale({
-            storeId: controller.storeId,
+            storeId: controller.saleOrder.storeId,
             nameOrCode: controller.itemSearch.nameOrCode
         })
         .then(function (response) {
@@ -158,9 +163,8 @@
         controller.SaleItems
             .list(controller.routeParams.saleOrderId)
             .then(function (response) {
-                controller.storeId = response.data.storeId;
-                controller.confirmed = response.data.confirmed;
-                controller.itemList = response.data.itemList;
+                controller.saleOrder = response.data;
+                controller.notFound = !controller.saleOrder;
             })
             ['catch'](function (response) {
                 controller.handleError(response);

@@ -12,9 +12,9 @@
 
     Controller.prototype.addPayment = function () {
         var controller = this,
-            totalPayable = controller.totalPayable,
-            totalPaid = controller.totalPaid,
-            paymentList = controller.paymentList;
+            totalPayable = controller.saleOrder.totalPayable,
+            totalPaid = controller.saleOrder.totalPaid,
+            paymentList = controller.saleOrder.paymentList;
 
         paymentList.push({
             date: new Date(),
@@ -54,21 +54,21 @@
 
     Controller.prototype.calculateTotalPaid = function () {
         var controller = this;
-        controller.totalPaid = 0;
+        controller.saleOrder.totalPaid = 0;
 
-        if (controller.paymentList) {
-            controller.paymentList.forEach(function (payment) {
-                controller.totalPaid += (payment.total || 0);
+        if (controller.saleOrder.paymentList) {
+            controller.saleOrder.paymentList.forEach(function (payment) {
+                controller.saleOrder.totalPaid += (payment.total || 0);
             });
         }
     };
 
     Controller.prototype.calculateTotalPayable = function () {
         var controller = this,
-            discount = controller.discount || 0,
-            totalPayable = controller.total - (controller.total * discount / 100);
+            discount = controller.saleOrder.discount || 0,
+            totalPayable = controller.saleOrder.total - (controller.saleOrder.total * discount / 100);
 
-        controller.totalPayable = totalPayable.round(2);
+        controller.saleOrder.totalPayable = totalPayable.round(2);
     };
 
     Controller.prototype.hideRemoveDialog = function () {
@@ -89,28 +89,30 @@
     Controller.prototype.noPayments = function () {
         var controller = this;
         return !controller.searchingPayments &&
-            controller.paymentList &&
-            controller.paymentList.isEmpty();
+            controller.saleOrder.paymentList &&
+            controller.saleOrder.paymentList.isEmpty();
     };
 
     Controller.prototype.paidOut = function () {
         var controller = this;
-        return controller.totalPaid === controller.totalPayable;
+        return controller.saleOrder &&
+            controller.saleOrder.totalPaid === controller.saleOrder.totalPayable;
     };
 
     Controller.prototype.removePayment = function () {
         var controller = this,
             payment = controller.paymentToRemove,
-            paymentIndex = controller.paymentList.indexOf(payment);
+            paymentIndex = controller.saleOrder.paymentList.indexOf(payment);
 
-        controller.totalPaid -= payment.total;
-        controller.paymentList.splice(paymentIndex, 1);
+        controller.saleOrder.totalPaid -= payment.total;
+        controller.saleOrder.paymentList.splice(paymentIndex, 1);
         controller.paymentToRemove = null;
     };
 
     Controller.prototype.saleHasItems = function () {
         var controller = this;
-        return controller.total > 0;
+        return controller.saleOrder &&
+            controller.saleOrder.total > 0;
     };
 
     Controller.prototype.save = function () {
@@ -124,8 +126,8 @@
 
         controller.SalePayments.save({
             saleOrderId: controller.routeParams.saleOrderId,
-            discount: controller.discount,
-            payments: controller.paymentList
+            discount: controller.saleOrder.discount,
+            payments: controller.saleOrder.paymentList
         })
         .then(function () {
             controller.path.redirectTo('/sale-orders/details/:saleOrderId',
@@ -151,16 +153,16 @@
         controller.SalePayments
             .list(controller.routeParams.saleOrderId)
             .then(function (response) {
-                controller.total = response.data.total;
-                controller.discount = response.data.discount;
-                controller.totalPayable = response.data.totalPayable;
-                controller.confirmed = response.data.confirmed;
-                controller.paymentList = response.data.paymentList;
-                controller.calculateTotalPayable();
-                controller.calculateTotalPaid();
-                controller.paymentList.forEach(function (payment) {
-                    controller.calculateInstallmentOptions(payment);
-                });
+                controller.saleOrder = response.data;
+                controller.notFound = !controller.saleOrder;
+
+                if (controller.saleOrder) {
+                    controller.calculateTotalPayable();
+                    controller.calculateTotalPaid();
+                    controller.saleOrder.paymentList.forEach(function (payment) {
+                        controller.calculateInstallmentOptions(payment);
+                    });
+                }
             })
             ['catch'](function (response) {
                 controller.handleError(response);

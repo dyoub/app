@@ -32,78 +32,42 @@
     <div class="loading box" data-ng-show="controller.searching"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchComplete()">
-        @using (Html.Authorize("sale-orders.edit"))
-        {
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Sale order not found."></p>
+            <a href="/sale-orders" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            @using (Html.Authorize("sale-orders.edit"))
+            {
+                <div class="box">
+                    <a href="/sale-orders/edit/{{controller.saleOrder.id}}/payments" class="as-button" data-translate="Edit"
+                       data-ng-hide="controller.saleOrder.confirmed"></a>
+                </div>
+            }
+
             <div class="box">
-                <a href="/sale-orders/edit/{{controller.saleOrder.id}}/payments" class="as-button" data-translate="Edit"
-                   data-ng-hide="controller.saleOrder.confirmed"></a>
+                <span class="hint success" data-translate="Billed" data-ng-show="controller.saleOrder.confirmed"></span>
             </div>
-        }
 
-        <div class="box">
-            <span class="hint success" data-translate="Billed" data-ng-show="controller.saleOrder.confirmed"></span>
-        </div>
-
-        <div class="card">
-            <div class="grid-row">
-                <div class="grid-column medium-6 large-6">
-                    <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Sale total"></label>
-                                <strong data-ng-bind="controller.saleOrder.total | currency"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Discount"></label>
-                                <strong data-ng-show="controller.saleOrder.discount">
-                                    <span data-ng-bind="controller.saleOrder.discount | number:2"></span>%
-                                </strong>
-                                <strong data-ng-hide="controller.saleOrder.discount">-</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-column medium-6 large-6">
-                    <div class="grid-row">
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Total payable"></label>
-                                <strong data-ng-bind="controller.saleOrder.totalPayable | currency"></strong>
-                            </div>
-                        </div>
-                        <div class="grid-column compact-6 small-6 medium-6 large-6">
-                            <div class="box">
-                                <label data-translate="Billed amount"></label>
-                                <strong data-ng-bind="controller.saleOrder.billedAmount | currency"></strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="list-header" data-translate="Payments"></div>
-
-        <div class="card text-primary text-center" data-translate="At least one payment must be added."
-             data-ng-show="controller.saleOrder.paymentList.isEmpty()"></div>
-
-        <div class="card list">
-            <div class="list-item" data-ng-repeat="payment in controller.saleOrder.paymentList | orderBy:'date'">
+            <div class="card">
                 <div class="grid-row">
                     <div class="grid-column medium-6 large-6">
                         <div class="grid-row">
                             <div class="grid-column compact-6 small-6 medium-6 large-6">
                                 <div class="box">
-                                    <label data-translate="Value"></label>
-                                    <strong data-ng-bind="payment.total | currency"></strong>
+                                    <label data-translate="Sale total"></label>
+                                    <strong data-ng-bind="controller.saleOrder.total | currency"></strong>
                                 </div>
                             </div>
                             <div class="grid-column compact-6 small-6 medium-6 large-6">
                                 <div class="box">
-                                    <label data-translate="Payment date"></label>
-                                    <strong data-ng-bind="payment.date | moment:'shortDate'"></strong>
+                                    <label data-translate="Discount"></label>
+                                    <strong data-ng-show="controller.saleOrder.discount">
+                                        <span data-ng-bind="controller.saleOrder.discount | number:2"></span>%
+                                    </strong>
+                                    <strong data-ng-hide="controller.saleOrder.discount">-</strong>
                                 </div>
                             </div>
                         </div>
@@ -112,64 +76,108 @@
                         <div class="grid-row">
                             <div class="grid-column compact-6 small-6 medium-6 large-6">
                                 <div class="box">
-                                    <label data-translate="Payment method"></label>
-                                    <strong data-ng-bind="payment.method.name"></strong>
+                                    <label data-translate="Total payable"></label>
+                                    <strong data-ng-bind="controller.saleOrder.totalPayable | currency"></strong>
                                 </div>
                             </div>
                             <div class="grid-column compact-6 small-6 medium-6 large-6">
                                 <div class="box">
-                                    <label data-translate="Installment option"></label>
-                                    <strong data-ng-bind="payment | installmentOption"></strong>
+                                    <label data-translate="Billed amount"></label>
+                                    <strong data-ng-bind="controller.saleOrder.billedAmount | currency"></strong>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="grid-row" data-ng-show="controller.saleOrder.confirmed">
-                    <div class="grid-column medium-6 large-6">
-                        <div class="grid-row">
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Billed value"></label>
-                                    <strong data-ng-bind="payment.billedAmount | currency"></strong>
+            <div class="list-header" data-translate="Payments"></div>
+
+            <div class="card text-primary text-center" data-translate="At least one payment must be added."
+                 data-ng-show="controller.saleOrder.paymentList.isEmpty()"></div>
+
+            <div class="card list">
+                <div class="list-item" data-ng-repeat="payment in controller.saleOrder.paymentList | orderBy:'date'">
+                    <div class="grid-row">
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Value"></label>
+                                        <strong data-ng-bind="payment.total | currency"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Payment date"></label>
+                                        <strong data-ng-bind="payment.date | moment:'shortDate'"></strong>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Received date"></label>
-                                    <strong>
-                                        <span data-ng-bind="payment.incomes.first().receivedDate | moment:'shortDate'"></span>
-                                        <span data-translate="to" data-ng-show="payment.incomes.length > 1"></span>
-                                        <span data-ng-bind="payment.incomes.last().receivedDate | moment:'shortDate'"
-                                              data-ng-show="payment.incomes.length > 1"></span>
-                                    </strong>
+                        </div>
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Payment method"></label>
+                                        <strong data-ng-bind="payment.method.name"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Installment option"></label>
+                                        <strong data-ng-bind="payment | installmentOption"></strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="grid-column medium-6 large-6">
-                        <div class="grid-row">
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Sale fee"></label>
-                                    <strong data-ng-show="payment.feePercentage">
-                                        <span data-ng-bind="payment.feePercentage | number:2"></span>%
-                                    </strong>
-                                    <span data-ng-show="payment.feePercentage && payment.feeFixedValue">+</span>
-                                    <strong data-ng-bind="payment.feeFixedValue | currency"></strong>
-                                    <strong data-ng-hide="payment.feePercentage || payment.feeFixedValue"
-                                            data-translate="There is not fee"></strong>
+
+                    <div class="grid-row" data-ng-show="controller.saleOrder.confirmed">
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Billed value"></label>
+                                        <strong data-ng-bind="payment.billedAmount | currency"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Received date"></label>
+                                        <strong>
+                                            <span data-ng-bind="payment.incomes.first().receivedDate | moment:'shortDate'"></span>
+                                            <span data-translate="to" data-ng-show="payment.incomes.length > 1"></span>
+                                            <span data-ng-bind="payment.incomes.last().receivedDate | moment:'shortDate'"
+                                                  data-ng-show="payment.incomes.length > 1"></span>
+                                        </strong>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Receivables"></label>
-                                    <strong>
-                                        <span data-ng-bind="payment.incomes.length"></span>x
-                                        <span data-translate="of"></span>
-                                        <span data-ng-bind="payment.installmentBilling | currency"></span>
-                                    </strong>
+                        </div>
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Sale fee"></label>
+                                        <strong data-ng-show="payment.feePercentage">
+                                            <span data-ng-bind="payment.feePercentage | number:2"></span>%
+                                        </strong>
+                                        <span data-ng-show="payment.feePercentage && payment.feeFixedValue">+</span>
+                                        <strong data-ng-bind="payment.feeFixedValue | currency"></strong>
+                                        <strong data-ng-hide="payment.feePercentage || payment.feeFixedValue"
+                                                data-translate="There is not fee"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Receivables"></label>
+                                        <strong>
+                                            <span data-ng-bind="payment.incomes.length"></span>x
+                                            <span data-translate="of"></span>
+                                            <span data-ng-bind="payment.installmentBilling | currency"></span>
+                                        </strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>

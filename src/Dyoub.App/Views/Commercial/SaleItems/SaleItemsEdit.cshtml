@@ -27,27 +27,33 @@
         </div>
     </div>
 
-    <div class="error ng-cloak" data-ng-show="controller.confirmed">
-        <i class="fa fa-exclamation-triangle"></i>
-        <p data-translate="Sale order already confirmed."></p>
-        <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
-           class="as-button primary" data-translate="Go to items details"></a>
-    </div>
+    <div class="loading box" data-ng-show="controller.searchingSelectedItems"></div>
 
-    <div class="ng-cloak" data-ng-hide="controller.confirmed">
-        <div class="box">
-            <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
-                    data-ng-click="controller.save()">
-                <span data-ng-hide="controller.saving" data-translate="Save"></span>
-                <span data-ng-show="controller.saving" data-translate="Saving"></span>
-            </button>
-            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
-               class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+    <div class="ng-cloak" data-ng-show="controller.searchSelectedItemsComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Sale order not found."></p>
+            <a href="/sale-orders" class="as-button" data-translate="Go back"></a>
         </div>
 
-        <div class="loading box" data-ng-show="controller.searchingSelectedItems"></div>
+        <div class="error" data-ng-show="controller.confirmed">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Sale order already confirmed."></p>
+            <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
+               class="as-button primary" data-translate="Go to items details"></a>
+        </div>
 
-        <div data-ng-show="controller.searchSelectedItemsComplete()">
+        <div data-ng-hide="controller.notFound || controller.saleOrder.confirmed">
+            <div class="box">
+                <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
+                        data-ng-click="controller.save()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/items"
+                   class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+            </div>
+
             <div class="card">
                 <div class="box">
                     <label data-translate="Item name or code"></label>
@@ -75,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="list-header text-left" data-ng-show="controller.itemList.any()">
+            <div class="list-header text-left" data-ng-show="controller.saleOrder.itemList.any()">
                 <span data-translate="Sale total"></span>:
                 <strong class="font-14 text-success" data-ng-bind="controller.calculateTotalPayable() | currency"></strong>
             </div>
@@ -85,7 +91,7 @@
 
             <form name="controller.saleOrderItemsForm">
                 <div class="card list">
-                    <div class="list-item" data-ng-repeat="item in controller.itemList | orderBy:'name'">
+                    <div class="list-item" data-ng-repeat="item in controller.saleOrder.itemList | orderBy:'name'">
                         <div class="box">
                             <button type="button" class="danger pull-right" data-translate="Remove"
                                     data-ng-click="controller.showRemoveItemDialog(item)"></button>

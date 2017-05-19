@@ -30,21 +30,27 @@
     <div class="loading box" data-ng-show="controller.searchingPayments"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchPaymentsComplete()">
-        <div class="error" data-ng-hide="controller.saleHasItems()">
+        <div class="error" data-ng-show="controller.notFound">
             <i class="fa fa-exclamation-triangle"></i>
-            <p data-translate="This sale order has no items."></p>
-            <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/items"
-               class="as-button" data-translate="Add items"></a>
+            <p data-translate="Sale order not found."></p>
+            <a href="/sale-orders" class="as-button" data-translate="Go back"></a>
         </div>
 
-        <div class="error" data-ng-show="controller.confirmed">
+        <div class="error" data-ng-show="controller.saleOrder.confirmed">
             <i class="fa fa-exclamation-triangle"></i>
             <p data-translate="Sale order already confirmed."></p>
             <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/payments"
                class="as-button primary" data-translate="Go to payment details"></a>
         </div>
 
-        <div data-ng-hide="controller.confirmed">
+        <div data-ng-hide="controller.notFound || controller.saleOrder.confirmed">
+            <div class="error" data-ng-hide="controller.saleHasItems()">
+                <i class="fa fa-exclamation-triangle"></i>
+                <p data-translate="This sale order has no items."></p>
+                <a href="/sale-orders/edit/{{controller.routeParams.saleOrderId}}/items"
+                   class="as-button" data-translate="Add items"></a>
+            </div>
+
             <form name="controller.paymentsForm" data-ng-submit="controller.save()"
                   data-ng-show="controller.saleHasItems()">
                 <div class="box">
@@ -63,7 +69,7 @@
                                 <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
                                     <div class="box">
                                         <label data-translate="Sale total"></label>
-                                        <strong class="font-14 text-success" data-ng-bind="controller.total | currency"></strong>
+                                        <strong class="font-14 text-success" data-ng-bind="controller.saleOrder.total | currency"></strong>
                                     </div>
                                 </div>
                                 <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
@@ -71,7 +77,7 @@
                                         <label>
                                             <span data-translate="Discount"></span> (%)
                                         </label>
-                                        <input type="text" name="discount" data-ng-model="controller.discount"
+                                        <input type="text" name="discount" data-ng-model="controller.saleOrder.discount"
                                                data-type-number="5,2" data-valid-number-min="0" data-valid-number-max="100"
                                                data-ng-change="controller.calculateTotalPayable()" />
                                     </div>
@@ -83,14 +89,14 @@
                                 <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
                                     <div class="box">
                                         <label data-translate="Total payable"></label>
-                                        <strong class="font-14 text-success" data-ng-bind="controller.totalPayable | currency"></strong>
+                                        <strong class="font-14 text-success" data-ng-bind="controller.saleOrder.totalPayable | currency"></strong>
                                     </div>
                                 </div>
                                 <div class="grid-column tiny-6 compact-6 small-6 medium-6 large-6">
                                     <div class="box">
                                         <label data-translate="Total paid"></label>
                                         <strong class="font-14" data-ng-class="{'text-success':controller.paidOut(),'text-danger':!controller.paidOut()}"
-                                                data-ng-bind="controller.totalPaid | currency"></strong>
+                                                data-ng-bind="controller.saleOrder.totalPaid | currency"></strong>
                                     </div>
                                 </div>
                             </div>
@@ -102,12 +108,12 @@
                      data-ng-show="controller.noPayments()"></div>
 
                 <div class="card list">
-                    <div class="list-item" data-ng-repeat="payment in controller.paymentList">
+                    <div class="list-item" data-ng-repeat="payment in controller.saleOrder.paymentList">
                         <div class="grid-row" data-ng-form="paymentForm">
                             <div class="grid-column medium-6 large-6">
                                 <div class="grid-row">
                                     <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                        <div class="box" data-has-error="paymentForm.total.$invalid">
+                                        <div class="box" data-has-error="paymentForm.saleOrder.total.$invalid">
                                             <label>
                                                 <span data-translate="Value"></span>
                                                 <span class="text-danger">*</span>
