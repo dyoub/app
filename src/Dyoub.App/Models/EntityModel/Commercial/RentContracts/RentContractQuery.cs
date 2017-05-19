@@ -31,9 +31,9 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
 
         public static IQueryable<RentContract> StartedThisMonth(this IQueryable<RentContract> rentContracts)
         {
-            DateTime startDate = new DateTime(DateTime.UtcNow.Date.Year, DateTime.UtcNow.Date.Month, 1);
-            DateTime endDate = new DateTime(DateTime.UtcNow.Date.Year, DateTime.UtcNow.Date.Month,
-                DateTime.DaysInMonth(DateTime.UtcNow.Date.Year, DateTime.UtcNow.Date.Month));
+            DateTime startDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
+            DateTime endDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month,
+                DateTime.DaysInMonth(DateTime.UtcNow.Year, DateTime.UtcNow.Month));
 
             return rentContracts.WhereStartAt(startDate).WhereEndAt(endDate);
         }

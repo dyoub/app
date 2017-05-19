@@ -23,24 +23,21 @@ namespace Dyoub.App.Models.ServiceModel.Financial
         {
             get { return new MonthlyPeriod(StartDate, EndDate); }
         }
-
-        public IEnumerable<CashActivity> CashActivities { get; private set; }
-
+        
         public CashFlowCredits Credits { get; private set; }
 
         public CashFlowDebits Debits { get; private set; }
 
         public CashFlowAnalysis(IEnumerable<CashActivity> cashActivities)
         {
-            CashActivities = cashActivities;
             Credits = new CashFlowCredits(cashActivities);
             Debits = new CashFlowDebits(cashActivities);
         }
         
         public void ToCurrentMonth()
         {
-            int year = DateTime.UtcNow.Date.Year;
-            int month = DateTime.UtcNow.Date.Month;
+            int year = DateTime.UtcNow.Year;
+            int month = DateTime.UtcNow.Month;
 
             StartDate = new DateTime(year, month, 1);
             EndDate = new DateTime(year, month, DateTime.DaysInMonth(year, month));

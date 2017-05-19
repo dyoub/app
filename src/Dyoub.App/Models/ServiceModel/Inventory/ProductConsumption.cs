@@ -55,7 +55,7 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
                 productQuantity.TotalAvailable < saleProduct.Quantity;
         }
 
-        private void RegisterStockTransactionFor(SaleProduct saleProduct)
+        private void RegisterStockMovementFor(SaleProduct saleProduct)
         {
             saleProduct.StockTransactionId = Guid.NewGuid();
 
@@ -84,7 +84,7 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
 
                     if (InsufficientBalance) return false;
 
-                    RegisterStockTransactionFor(saleProduct);
+                    RegisterStockMovementFor(saleProduct);
                 }
             }
 
