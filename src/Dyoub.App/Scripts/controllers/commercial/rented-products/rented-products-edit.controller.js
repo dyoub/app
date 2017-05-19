@@ -45,9 +45,10 @@
         var quantity = product.quantity || 0,
             totalDays = controller.rentContract.totalDays,
             unitPrice = product.unitPrice || 0,
-            discount = product.discount || 0;
+            total = quantity * unitPrice * totalDays
+            discount = total * (product.discount || 0) / 100;
 
-        return product.totalPayable = (quantity * unitPrice * totalDays - discount).round(2);
+        return product.totalPayable = (total - discount).round(2);
     };
 
     Controller.prototype.calculateTotalPayable = function () {
@@ -134,7 +135,7 @@
     Controller.prototype.saveBlocked = function () {
         var controller = this;
         return controller.saving ||
-               controller.rentContractProductsForm.$invalid ||
+               controller.rentedProductsForm.$invalid ||
                !controller.rentContract ||
                !controller.rentContract.productList ||
                 controller.rentContract.productList.isEmpty();

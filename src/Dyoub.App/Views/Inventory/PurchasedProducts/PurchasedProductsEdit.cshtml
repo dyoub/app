@@ -29,21 +29,21 @@
 
     <div class="loading box" data-ng-show="controller.searchingSelectedProducts"></div>
 
-    <div data-ng-show="controller.searchSelectedProductsComplete()">
+    <div class="ng-cloak" data-ng-show="controller.searchSelectedProductsComplete()">
         <div class="error" data-ng-show="controller.notFound">
             <i class="fa fa-exclamation-triangle"></i>
             <p data-translate="Purchase order not found."></p>
             <a href="/purchase-orders" class="as-button" data-translate="Go back"></a>
         </div>
 
-        <div class="error ng-cloak" data-ng-show="controller.purchaseOrder.confirmed">
+        <div class="error" data-ng-show="controller.purchaseOrder.confirmed">
             <i class="fa fa-exclamation-triangle"></i>
             <p data-translate="Purchase order already confirmed."></p>
             <a href="/purchase-orders/details/{{controller.routeParams.purchaseOrderId}}/products"
                class="as-button primary" data-translate="Go to products details"></a>
         </div>
 
-        <div class="ng-cloak" data-ng-hide="controller.notFound || controller.purchaseOrder.confirmed">
+        <div data-ng-hide="controller.notFound || controller.purchaseOrder.confirmed">
             <div class="box">
                 <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
                         data-ng-click="controller.save()">
@@ -132,8 +132,11 @@
                                 <div class="grid-row">
                                     <div class="grid-column small-6 medium-6 large-6">
                                         <div class="box" data-has-error="controller.purchaseOrderProductsForm.discount.$invalid">
-                                            <label data-translate="Discount"></label>
-                                            <input type="text" name="discount" data-ng-model="product.discount" data-type-number="8,2" />
+                                            <label>
+                                                <span data-translate="Discount"></span> (%)
+                                            </label>
+                                            <input type="text" name="discount" data-ng-model="product.discount" data-type-number="5,2"
+                                                   data-valid-number-min="0" data-valid-number-max="100" />
                                         </div>
                                     </div>
                                     <div class="grid-column small-6 medium-6 large-6">

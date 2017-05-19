@@ -128,8 +128,11 @@
                                 <div class="grid-row">
                                     <div class="grid-column small-6 medium-6 large-6">
                                         <div class="box" data-has-error="controller.saleOrderItemsForm.discount.$invalid">
-                                            <label data-translate="Discount"></label>
-                                            <input type="text" name="discount" data-ng-model="item.discount" data-type-number="8,2" />
+                                            <label>
+                                                <span data-translate="Discount"></span> (%)
+                                            </label>
+                                            <input type="text" name="discount" data-ng-model="item.discount" data-type-number="5,2"
+                                                   data-valid-number-min="0" data-valid-number-max="100" />
                                         </div>
                                     </div>
                                     <div class="grid-column small-6 medium-6 large-6">

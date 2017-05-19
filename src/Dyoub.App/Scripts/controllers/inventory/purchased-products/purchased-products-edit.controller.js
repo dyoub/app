@@ -40,9 +40,10 @@
     Controller.prototype.calculateProductTotalCost = function (product) {
         var quantity = product.quantity || 0,
             unitCost = product.unitCost || 0,
-            discount = product.discount || 0;
+            total = quantity * unitCost,
+            discount = total * (product.discount || 0) / 100;
 
-        return product.totalCost = (quantity * unitCost - discount).round(2);
+        return product.totalPayable = (total - discount).round(2);
     };
 
     Controller.prototype.calculateTotalCost = function () {

@@ -42,9 +42,10 @@
     Controller.prototype.calculateItemTotalPrice = function (item) {
         var quantity = item.quantity || 0,
             unitPrice = item.unitPrice || 0,
-            discount = item.discount || 0;
+            total = quantity * unitPrice,
+            discount = total * (item.discount || 0) / 100;
 
-        return item.total = (quantity * unitPrice - discount).round(2);
+        return item.total = (total - discount).round(2);
     };
 
     Controller.prototype.calculateTotalPayable = function () {
