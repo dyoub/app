@@ -21,7 +21,8 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ProductPrices
                 Code = productPrice.Product.Code,
                 Marketed = productPrice.Product.Marketed,
                 CanFraction = productPrice.Product.CanFraction,
-                UnitPrice = productPrice.UnitPrice
+                UnitRentPrice = productPrice.UnitRentPrice,
+                UnitSalePrice = productPrice.UnitSalePrice
             });
         }
 
@@ -43,6 +44,16 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ProductPrices
         public static IQueryable<ProductPrice> WhereStoreId(this IQueryable<ProductPrice> productPrices, int storeId)
         {
             return productPrices.Where(productPrice => productPrice.StoreId == storeId);
+        }
+
+        public static IQueryable<ProductPrice> WhereUnitSalePriceNotNull(this IQueryable<ProductPrice> productPrices)
+        {
+            return productPrices.Where(productPrice => productPrice.UnitSalePrice != null);
+        }
+
+        public static IQueryable<ProductPrice> WhereUnitRentPriceNotNull(this IQueryable<ProductPrice> productPrices)
+        {
+            return productPrices.Where(productPrice => productPrice.UnitRentPrice != null);
         }
     }
 }

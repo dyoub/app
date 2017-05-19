@@ -62,7 +62,7 @@ namespace Dyoub.Test.Contexts.Catalog.PricingTables
             ProductPrice newShirtPrice = ProductPrices.WhereProductId(Shirt.Id).Single();
             ServicePrice newSeamPrice = ServicePrices.WhereServiceId(Seam.Id).Single();
 
-            return newShirtPrice.UnitPrice != initialShirtPrice.UnitPrice &&
+            return newShirtPrice.UnitSalePrice != initialShirtPrice.UnitSalePrice &&
                    newSeamPrice.UnitPrice != initialSeamPrice.UnitPrice;
         }
 

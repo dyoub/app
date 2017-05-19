@@ -27,7 +27,8 @@ namespace Dyoub.App.Results.Catalog.PricingTables
                 name = item.Name,
                 code = item.Code,
                 marketed = item.Marketed,
-                unitPrice = item.UnitPrice,
+                unitRentPrice = item.UnitRentPrice,
+                unitSalePrice = item.UnitSalePrice,
                 canFraction = item.CanFraction
             });
 

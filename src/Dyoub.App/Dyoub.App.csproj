@@ -195,6 +195,9 @@
     <EmbeddedResource Include="Data\Migrations\201705171715319_CreateRentContract.resx">
       <DependentUpon>201705171715319_CreateRentContract.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705190011131_CreateRentPrice.resx">
+      <DependentUpon>201705190011131_CreateRentPrice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -442,6 +445,10 @@
     <Compile Include="Data\Migrations\201705171715319_CreateRentContract.cs" />
     <Compile Include="Data\Migrations\201705171715319_CreateRentContract.Designer.cs">
       <DependentUpon>201705171715319_CreateRentContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\201705190011131_CreateRentPrice.cs" />
+    <Compile Include="Data\Migrations\201705190011131_CreateRentPrice.Designer.cs">
+      <DependentUpon>201705190011131_CreateRentPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />

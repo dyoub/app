@@ -15,7 +15,8 @@
             itemIndex = controller.changes.indexOf(item),
             itemAddedToChanges = itemIndex >= 0;
 
-        item.priceChanged = item.unitPrice !== item.oldUnitPrice;
+        item.priceChanged = item.unitRentPrice !== item.oldUnitRentPrice ||
+            item.unitSalePrice !== item.oldUnitSalePrice;
 
         if (item.priceChanged && !itemAddedToChanges) {
             controller.changes.push(item);
@@ -155,12 +156,14 @@
             if (itemFromChanges) {
                 itemFromChanges.name = item.name;
                 itemFromChanges.code = item.code;
-                itemFromChanges.oldUnitPrice = item.unitPrice;
+                itemFromChanges.oldUnitRentPrice = item.unitRentPrice;
+                itemFromChanges.oldUnitSalePrice = item.unitSalePrice;
 
                 return itemFromChanges;
             }
 
-            item.oldUnitPrice = item.unitPrice;
+            item.oldUnitRentPrice = item.unitRentPrice;
+            item.oldUnitSalePrice = item.unitSalePrice;
             item.priceChanged = false;
 
             return item;
@@ -171,7 +174,8 @@
         var controller = this;
 
         angular.forEach(controller.changes, function (item) {
-            item.unitPrice = item.oldUnitPrice;
+            item.unitRentPrice = item.oldUnitRentPrice;
+            item.unitSalePrice = item.oldUnitSalePrice;
             item.priceChanged = false;
         });
 

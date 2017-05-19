@@ -20,7 +20,8 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Services
                 Code = service.Code,
                 Marketed = service.Marketed,
                 CanFraction = service.CanFraction,
-                UnitPrice = service.ServicePrices
+                UnitRentPrice = null,
+                UnitSalePrice = service.ServicePrices
                     .Where(servicePrice => servicePrice.StoreId == storeId)
                     .Select(servicePrice => (decimal?)servicePrice.UnitPrice)
                     .FirstOrDefault()

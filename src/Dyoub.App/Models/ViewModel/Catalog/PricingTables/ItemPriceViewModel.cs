@@ -26,8 +26,11 @@ namespace Dyoub.App.Models.ViewModel.Catalog.PricingTables
         }
 
         [Range(0, 999999.99)]
-        public decimal? UnitPrice { get; set; }
+        public decimal? UnitRentPrice { get; set; }
 
+        [Range(0, 999999.99)]
+        public decimal? UnitSalePrice { get; set; }
+        
         public ItemPrice MapToItemPrice(int storeId)
         {
             return new ItemPrice
@@ -35,7 +38,8 @@ namespace Dyoub.App.Models.ViewModel.Catalog.PricingTables
                 StoreId = storeId,
                 ProductId = IsProduct ? Id : null,
                 ServiceId = IsService ? Id : null,
-                UnitPrice = UnitPrice
+                UnitRentPrice = UnitRentPrice,
+                UnitSalePrice = UnitSalePrice
             };
         }
     }

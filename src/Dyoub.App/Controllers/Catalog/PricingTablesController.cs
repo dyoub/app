@@ -127,6 +127,7 @@ namespace Dyoub.App.Controllers.Catalog
         {
             IQueryable<ItemPrice> productItems = Tenant.ProductPrices
                 .WhereStoreId(viewModel.StoreId.Value)
+                .WhereUnitSalePriceNotNull()
                 .AsItemPrice();
 
             IQueryable<ItemPrice> serviceItems = Tenant.ServicePrices

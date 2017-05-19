@@ -12,7 +12,8 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ProductPrices
         public int StoreId { get; set; }
         public int ProductId { get; set; }
         public int TenantId { get; set; }
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitSalePrice { get; set; }
+        public decimal? UnitRentPrice { get; set; }
 
         public virtual Tenant Tenant { get; set; }
         public virtual Store Store { get; set; }

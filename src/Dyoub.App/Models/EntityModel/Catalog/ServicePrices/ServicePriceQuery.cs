@@ -21,7 +21,8 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ServicePrices
                 Code = servicePrice.Service.Code,
                 Marketed = servicePrice.Service.Marketed,
                 CanFraction = servicePrice.Service.CanFraction,
-                UnitPrice = servicePrice.UnitPrice
+                UnitRentPrice = null,
+                UnitSalePrice = servicePrice.UnitPrice
             });
         }
 

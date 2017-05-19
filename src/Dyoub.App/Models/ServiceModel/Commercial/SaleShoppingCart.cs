@@ -74,7 +74,7 @@ namespace Dyoub.App.Models.ServiceModel.Commercial
                 price.IsProduct == item.IsProduct &&
                 price.IsService == item.IsService);
 
-            return itemPrice.UnitPrice.Value;
+            return itemPrice.UnitSalePrice.Value;
         }
 
         private async Task FindSaleOrder(int saleOrderId)
@@ -96,7 +96,7 @@ namespace Dyoub.App.Models.ServiceModel.Commercial
 
             HasOneOrMoreItemsNotFound = priceList.Count() != itemList.Count();
             HasOneOrMorePricesNotDefined = !priceList.Any() ||
-                priceList.Any(itemPrice => itemPrice.UnitPrice == null);
+                priceList.Any(itemPrice => itemPrice.UnitSalePrice == null);
 
             return priceList;
         }

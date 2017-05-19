@@ -22,9 +22,13 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
                 Code = product.Code,
                 Marketed = product.Marketed,
                 CanFraction = product.CanFraction,
-                UnitPrice = product.ProductPrices
+                UnitRentPrice = product.ProductPrices
                     .Where(productPrice => productPrice.StoreId == storeId)
-                    .Select(productPrice => (decimal?)productPrice.UnitPrice)
+                    .Select(productPrice => productPrice.UnitRentPrice)
+                    .FirstOrDefault(),
+                UnitSalePrice = product.ProductPrices
+                    .Where(productPrice => productPrice.StoreId == storeId)
+                    .Select(productPrice => productPrice.UnitSalePrice)
                     .FirstOrDefault()
             });
         }

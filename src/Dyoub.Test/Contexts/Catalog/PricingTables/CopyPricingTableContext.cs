@@ -45,7 +45,7 @@ namespace Dyoub.Test.Contexts.Catalog.PricingTables
             ProductPrice copiedProductPrice = ProductPrices.WhereStoreId(Store.Id).Single();
             ServicePrice copiedServicePrice = ServicePrices.WhereStoreId(Store.Id).Single();
 
-            return copiedProductPrice.UnitPrice == productPrice.UnitPrice &&
+            return copiedProductPrice.UnitSalePrice == productPrice.UnitSalePrice &&
                    copiedServicePrice.UnitPrice == servicePrice.UnitPrice;
         }
     }

@@ -18,10 +18,14 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ItemPrices
         public string Code { get; set; }
         public bool Marketed { get; set; }
         public bool CanFraction { get; set; }
-        public decimal? UnitPrice { get; set; }
+        public decimal? UnitRentPrice { get; set; }
+        public decimal? UnitSalePrice { get; set; }
         public bool IsProduct { get { return ProductId != null; } }
         public bool IsService { get { return ServiceId != null; } }
-        public bool HasPrice { get { return UnitPrice != null; } }
+        public bool HasPrice
+        {
+            get { return UnitRentPrice != null || UnitSalePrice != null; }
+        }
 
         public ProductPrice ToProductPrice()
         {
@@ -29,7 +33,8 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ItemPrices
             {
                 StoreId = StoreId,
                 ProductId = ProductId.Value,
-                UnitPrice = UnitPrice.Value
+                UnitRentPrice = UnitRentPrice,
+                UnitSalePrice = UnitSalePrice
             };
         }
 
@@ -39,7 +44,7 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ItemPrices
             {
                 StoreId = StoreId,
                 ServiceId = ServiceId.Value,
-                UnitPrice = UnitPrice.Value
+                UnitPrice = UnitSalePrice.Value
             };
         }
     }

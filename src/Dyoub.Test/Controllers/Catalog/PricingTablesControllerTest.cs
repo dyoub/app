@@ -104,12 +104,12 @@ namespace Dyoub.Test.Controllers.Catalog
 
             UpdatePricesViewModel viewModel = new UpdatePricesViewModel();
             viewModel.StoreId = context.Store.Id;
-            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Shirt.Id, IsProduct =true, UnitPrice = 50.00M });
-            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Sneakers.Id, IsProduct = true, UnitPrice = null });
-            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Pants.Id, IsProduct = true, UnitPrice = 60.00M });
-            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Seam.Id, IsService = true, UnitPrice = 50.00M });
-            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Clean.Id, IsService = true, UnitPrice = null });
-            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Adjustment.Id, IsService = true, UnitPrice = 60.00M });
+            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Shirt.Id, IsProduct =true, UnitSalePrice = 50.00M });
+            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Sneakers.Id, IsProduct = true, UnitSalePrice = null });
+            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Pants.Id, IsProduct = true, UnitSalePrice = 60.00M });
+            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Seam.Id, IsService = true, UnitSalePrice = 50.00M });
+            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Clean.Id, IsService = true, UnitSalePrice = null });
+            viewModel.Items.Add(new ItemPriceViewModel { Id = context.Adjustment.Id, IsService = true, UnitSalePrice = 60.00M });
 
             await controller.Update(viewModel);
 

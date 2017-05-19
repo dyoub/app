@@ -42,7 +42,8 @@
                     id: item.id,
                     isProduct: item.isProduct,
                     isService: item.isService,
-                    unitPrice: item.unitPrice
+                    unitRentPrice: item.unitRentPrice,
+                    unitSalePrice: item.unitSalePrice
                 };
             })
         });

@@ -41,7 +41,7 @@ namespace Dyoub.App.Models.ServiceModel.Catalog
                 {
                     StoreId = StoreId,
                     ProductId = productPrice.ProductId,
-                    UnitPrice = productPrice.UnitPrice
+                    UnitSalePrice = productPrice.UnitSalePrice
                 };
             }
         }
@@ -98,7 +98,7 @@ namespace Dyoub.App.Models.ServiceModel.Catalog
                 .SingleOrDefaultAsync();
 
             if (store == null) return false;
-            
+
             ICollection<ProductPrice> oldProductPrices = await Tenant.ProductPrices
                 .WhereStoreId(StoreId)
                 .WhereProductIdIn(itemPrices.Where(i => i.IsProduct).Select(p => p.ItemId))
@@ -112,12 +112,15 @@ namespace Dyoub.App.Models.ServiceModel.Catalog
             Tenant.ProductPrices.RemoveRange(oldProductPrices);
             Tenant.ServicePrices.RemoveRange(oldServicePrices);
 
-            IEnumerable<ProductPrice> newProductPrices = itemPrices
-                .Where(itemPrice => itemPrice.IsProduct && itemPrice.UnitPrice != null)
+            IEnumerable<ItemPrice> itemsToRentOrSell = itemPrices.Where(itemPrice =>
+                itemPrice.UnitRentPrice != null || itemPrice.UnitSalePrice != null);
+
+            IEnumerable<ProductPrice> newProductPrices = itemsToRentOrSell
+                .Where(itemPrice => itemPrice.IsProduct)
                 .Select(itemPrice => itemPrice.ToProductPrice());
 
-            IEnumerable<ServicePrice> newServicePrices = itemPrices
-                .Where(itemPrice => itemPrice.IsService && itemPrice.UnitPrice != null)
+            IEnumerable<ServicePrice> newServicePrices = itemsToRentOrSell
+                .Where(itemPrice => itemPrice.IsService)
                 .Select(itemPrice => itemPrice.ToServicePrice());
 
             Tenant.ProductPrices.AddRange(newProductPrices);

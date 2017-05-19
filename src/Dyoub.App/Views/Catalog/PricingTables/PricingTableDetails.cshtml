@@ -80,7 +80,7 @@
                 <div class="card list">
                     <div class="list-item" data-ng-repeat="item in controller.itemList">
                         <div class="grid-row">
-                            <div class="grid-column compact-7 small-8 medium-9 large-10">
+                            <div class="grid-column small-6 medium-6 large-6">
                                 <label data-ng-show="item.isProduct" data-translate="Product"></label>
                                 <label data-ng-show="item.isService" data-translate="Service"></label>
                                 <p class="font-14" data-ng-bind="item.name"></p>
@@ -92,12 +92,27 @@
                                     <span class="hint danger" data-translate="Not marketed"></span>
                                 </p>
                             </div>
-                            <div class="grid-column compact-5 small-4 medium-3 large-2">
-                                <div class="box">
-                                    <label data-translate="Unit price"></label>
-                                    <strong data-ng-show="item.unitPrice"
-                                            data-ng-bind="item.unitPrice | currency"></strong>
-                                    <strong data-ng-hide="item.unitPrice" data-translate="Not defined"></strong>
+                            <div class="grid-column small-6 medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label data-translate="Unit sale price"></label>
+                                            <strong data-ng-show="item.unitSalePrice"
+                                                    data-ng-bind="item.unitSalePrice | currency"></strong>
+                                            <strong data-ng-hide="item.unitSalePrice" data-translate="Not defined"></strong>
+                                        </div>
+                                    </div>
+                                    <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label data-translate="Unit rent price"></label>
+                                            <strong data-ng-show="item.unitRentPrice"
+                                                    data-ng-bind="item.unitRentPrice | currency"></strong>
+                                            <strong data-ng-hide="item.unitRentPrice || item.isService"
+                                                    data-translate="Not defined"></strong>
+                                            <strong data-ng-show="item.isService"
+                                                    data-translate="Not applicable"></strong>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
