@@ -14,7 +14,7 @@
     Controller.prototype.addProduct = function (product) {
         var controller = this;
 
-        var alreadyAdded = controller.productList.where(function (selectedProduct) {
+        var alreadyAdded = controller.purchaseOrder.productList.where(function (selectedProduct) {
             return selectedProduct.id === product.id;
         })
         .any();
@@ -24,7 +24,7 @@
         } else {
             product.quantity = 1;
             controller.calculateProductTotalCost(product);
-            controller.productList.push(product);
+            controller.purchaseOrder.productList.push(product);
         }
     };
 
@@ -46,10 +46,13 @@
     };
 
     Controller.prototype.calculateTotalCost = function () {
-        var controller = this,
-            totalCost = 0;
+        var controller = this;
 
-        angular.forEach(controller.productList, function (product) {
+        if (!controller.purchaseOrder) return;
+
+        var totalCost = 0;
+
+        angular.forEach(controller.purchaseOrder.productList, function (product) {
             totalCost += controller.calculateProductTotalCost(product);
         });
 
@@ -86,16 +89,17 @@
 
     Controller.prototype.noProductsSelected = function () {
         var controller = this;
-        return controller.productList &&
-            controller.productList.isEmpty() &&
+        return controller.purchaseOrder &&
+            controller.purchaseOrder.productList &&
+            controller.purchaseOrder.productList.isEmpty() &&
             !controller.searchingSelectedProducts;
     };
 
     Controller.prototype.removeProduct = function () {
         var controller = this,
-            productIndex = controller.productList.indexOf(controller.productToRemove);
+            productIndex = controller.purchaseOrder.productList.indexOf(controller.productToRemove);
 
-        controller.productList.splice(productIndex, 1);
+        controller.purchaseOrder.productList.splice(productIndex, 1);
         controller.productToRemove = null;
     };
 
@@ -110,7 +114,7 @@
 
         controller.PurchasedProducts.save({
             purchaseOrderId: controller.routeParams.purchaseOrderId,
-            products: controller.productList
+            products: controller.purchaseOrder.productList
         })
         .then(function () {
             controller.path.redirectTo('/purchase-orders/edit/:purchaseOrderId/payments',
@@ -126,8 +130,9 @@
         var controller = this;
         return controller.saving ||
                controller.purchaseOrderProductsForm.$invalid ||
-               !controller.productList ||
-                controller.productList.isEmpty();
+               !controller.purchaseOrder
+        !controller.purchaseOrder.productList ||
+         controller.purchaseOrder.productList.isEmpty();
     };
 
     Controller.prototype.searchProductsForPurchase = function () {
@@ -157,9 +162,8 @@
         controller.PurchasedProducts
             .list(controller.routeParams.purchaseOrderId)
             .then(function (response) {
-                controller.storeId = response.data.storeId;
-                controller.confirmed = response.data.confirmed;
-                controller.productList = response.data.productList;
+                controller.purchaseOrder = response.data;
+                controller.notFound = !controller.purchaseOrder;
             })
             ['catch'](function (response) {
                 controller.handleError(response);

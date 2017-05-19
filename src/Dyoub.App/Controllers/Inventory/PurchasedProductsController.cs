@@ -43,10 +43,15 @@ namespace Dyoub.App.Controllers.Inventory
                 .WhereId(viewModel.Id.Value)
                 .SingleOrDefaultAsync();
 
-            ICollection<PurchasedProduct> purchasedProducts = await Tenant.PurchasedProducts
-                .IncludeProduct()
-                .WherePurchaseOrderId(purchaseOrder.Id)
-                .ToListAsync();
+            ICollection<PurchasedProduct> purchasedProducts = null;
+
+            if (purchaseOrder != null)
+            {
+                purchasedProducts = await Tenant.PurchasedProducts
+                    .IncludeProduct()
+                    .WherePurchaseOrderId(purchaseOrder.Id)
+                    .ToListAsync();
+            }
             
             return new PurchasedProductListJson(purchaseOrder, purchasedProducts);
         }

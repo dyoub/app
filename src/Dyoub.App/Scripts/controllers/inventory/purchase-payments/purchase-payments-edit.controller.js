@@ -11,9 +11,9 @@
 
     Controller.prototype.addPayment = function () {
         var controller = this,
-            totalPayable = controller.totalPayable,
-            totalPaid = controller.totalPaid,
-            paymentList = controller.paymentList;
+            totalPayable = controller.purchaseOrder.totalPayable,
+            totalPaid = controller.purchaseOrder.totalPaid,
+            paymentList = controller.purchaseOrder.paymentList;
 
         paymentList.push({
             date: new Date(),
@@ -30,24 +30,25 @@
 
     Controller.prototype.calculateTotalPaid = function () {
         var controller = this;
-        controller.totalPaid = 0;
+        controller.purchaseOrder.totalPaid = 0;
 
-        if (controller.paymentList) {
-            controller.paymentList.forEach(function (payment) {
-                controller.totalPaid += (payment.total || 0);
+        if (controller.purchaseOrder.paymentList) {
+            controller.purchaseOrder.paymentList.forEach(function (payment) {
+                controller.purchaseOrder.totalPaid += (payment.total || 0);
             });
         }
     };
 
     Controller.prototype.calculateTotalPayable = function () {
         var controller = this,
-            discount = controller.discount || 0,
-            shippingCost = controller.shippingCost || 0,
-            otherTaxes = controller.otherTaxes || 0,
-            totalPayable = controller.total + shippingCost + otherTaxes
-                - (controller.total * discount / 100);
+            discount = controller.purchaseOrder.discount || 0,
+            shippingCost = controller.purchaseOrder.shippingCost || 0,
+            otherTaxes = controller.purchaseOrder.otherTaxes || 0,
+            total = controller.purchaseOrder.total,
+            totalPayable = total + shippingCost + otherTaxes
+                - (controller.purchaseOrder.total * discount / 100);
 
-        controller.totalPayable = totalPayable.round(2);
+        controller.purchaseOrder.totalPayable = totalPayable.round(2);
     };
 
     Controller.prototype.hideRemoveDialog = function () {
@@ -67,28 +68,30 @@
     Controller.prototype.noPayments = function () {
         var controller = this;
         return !controller.searchingPayments &&
-            controller.paymentList &&
-            controller.paymentList.isEmpty();
+            controller.purchaseOrder.paymentList &&
+            controller.purchaseOrder.paymentList.isEmpty();
     };
 
     Controller.prototype.paidOut = function () {
         var controller = this;
-        return controller.totalPaid === controller.totalPayable;
+        return controller.purchaseOrder &&
+            controller.purchaseOrder.totalPaid === controller.purchaseOrder.totalPayable;
     };
 
     Controller.prototype.removePayment = function () {
         var controller = this,
             payment = controller.paymentToRemove,
-            paymentIndex = controller.paymentList.indexOf(payment);
+            paymentIndex = controller.purchaseOrder.paymentList.indexOf(payment);
 
-        controller.totalPaid -= payment.total;
-        controller.paymentList.splice(paymentIndex, 1);
+        controller.purchaseOrder.totalPaid -= payment.total;
+        controller.purchaseOrder.paymentList.splice(paymentIndex, 1);
         controller.paymentToRemove = null;
     };
 
     Controller.prototype.purchaseHasProducts = function () {
         var controller = this;
-        return controller.total > 0;
+        return controller.purchaseOrder &&
+            controller.purchaseOrder.total > 0;
     };
 
     Controller.prototype.save = function () {
@@ -102,10 +105,10 @@
 
         controller.PurchasePayments.save({
             purchaseOrderId: controller.routeParams.purchaseOrderId,
-            shippingCost: controller.shippingCost,
-            otherTaxes: controller.otherTaxes,
-            discount: controller.discount,
-            payments: controller.paymentList
+            shippingCost: controller.purchaseOrder.shippingCost,
+            otherTaxes: controller.purchaseOrder.otherTaxes,
+            discount: controller.purchaseOrder.discount,
+            payments: controller.purchaseOrder.paymentList
         })
         .then(function () {
             controller.path.redirectTo('/purchase-orders/details/:purchaseOrderId',
@@ -131,15 +134,13 @@
         controller.PurchasePayments
             .list(controller.routeParams.purchaseOrderId)
             .then(function (response) {
-                controller.total = response.data.total;
-                controller.shippingCost = response.data.shippingCost;
-                controller.otherTaxes = response.data.otherTaxes;
-                controller.discount = response.data.discount;
-                controller.totalPayable = response.data.totalPayable;
-                controller.confirmed = response.data.confirmed;
-                controller.paymentList = response.data.paymentList;
-                controller.calculateTotalPayable();
-                controller.calculateTotalPaid();
+                controller.purchaseOrder = response.data;
+                controller.notFound = !controller.purchaseOrder;
+
+                if (controller.purchaseOrder) {
+                    controller.calculateTotalPayable();
+                    controller.calculateTotalPaid();
+                }
             })
             ['catch'](function (response) {
                 controller.handleError(response);

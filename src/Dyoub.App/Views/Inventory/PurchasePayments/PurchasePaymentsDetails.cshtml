@@ -32,110 +32,118 @@
     <div class="loading box" data-ng-show="controller.searching"></div>
 
     <div class="ng-cloak" data-ng-show="controller.searchComplete()">
-        @using (Html.Authorize("purchase-orders.edit"))
-        {
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Purchase order not found."></p>
+            <a href="/purchase-orders" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            @using (Html.Authorize("purchase-orders.edit"))
+            {
+                <div class="box">
+                    <a href="/purchase-orders/edit/{{controller.purchaseOrder.id}}/payments" class="as-button" data-translate="Edit"
+                       data-ng-hide="controller.purchaseOrder.confirmed"></a>
+                </div>
+            }
+
             <div class="box">
-                <a href="/purchase-orders/edit/{{controller.purchaseOrder.id}}/payments" class="as-button" data-translate="Edit"
-                   data-ng-hide="controller.purchaseOrder.confirmed"></a>
-            </div>
-        }
-
-        <div class="box">
-            <span class="hint success" data-translate="Confirmed" data-ng-show="controller.purchaseOrder.confirmed"></span>
-        </div>
-
-        <div class="card">
-            <div class="grid-row">
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Purchase total"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.total | currency"></strong>
-                    </div>
-                </div>
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Total payable"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.totalPayable | currency"></strong>
-                    </div>
-                </div>
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Total cost"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.totalCost | currency"></strong>
-                    </div>
-                </div>
+                <span class="hint success" data-translate="Confirmed" data-ng-show="controller.purchaseOrder.confirmed"></span>
             </div>
 
-            <div class="grid-row">
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Discount"></label>
-                        <strong data-ng-show="controller.purchaseOrder.discount">
-                            <span data-ng-bind="controller.purchaseOrder.discount | number:2"></span>%
-                        </strong>
-                        <strong data-ng-hide="controller.purchaseOrder.discount">-</strong>
-                    </div>
-                </div>
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Shipping cost"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.shippingCost | currency"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.shippingCost">-</strong>
-                    </div>
-                </div>
-                <div class="grid-column small-4 medium-4 large-4">
-                    <div class="box">
-                        <label data-translate="Other taxes"></label>
-                        <strong data-ng-bind="controller.purchaseOrder.otherTaxes | currency"></strong>
-                        <strong data-ng-hide="controller.purchaseOrder.otherTaxes">-</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="list-header" data-translate="Payments"></div>
-
-        <div class="card text-primary text-center" data-translate="At least one payment must be added."
-             data-ng-show="controller.purchaseOrder.paymentList.isEmpty()"></div>
-
-        <div class="card list">
-            <div class="list-item" data-ng-repeat="payment in controller.purchaseOrder.paymentList | orderBy:'date'">
+            <div class="card">
                 <div class="grid-row">
-                    <div class="grid-column medium-6 large-6">
-                        <div class="grid-row">
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Value"></label>
-                                    <strong data-ng-bind="payment.total | currency"></strong>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Purchase total"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.total | currency"></strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Total payable"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.totalPayable | currency"></strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Total cost"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.totalCost | currency"></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Discount"></label>
+                            <strong data-ng-show="controller.purchaseOrder.discount">
+                                <span data-ng-bind="controller.purchaseOrder.discount | number:2"></span>%
+                            </strong>
+                            <strong data-ng-hide="controller.purchaseOrder.discount">-</strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Shipping cost"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.shippingCost | currency"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.shippingCost">-</strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Other taxes"></label>
+                            <strong data-ng-bind="controller.purchaseOrder.otherTaxes | currency"></strong>
+                            <strong data-ng-hide="controller.purchaseOrder.otherTaxes">-</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-header" data-translate="Payments"></div>
+
+            <div class="card text-primary text-center" data-translate="At least one payment must be added."
+                 data-ng-show="controller.purchaseOrder.paymentList.isEmpty()"></div>
+
+            <div class="card list">
+                <div class="list-item" data-ng-repeat="payment in controller.purchaseOrder.paymentList | orderBy:'date'">
+                    <div class="grid-row">
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Value"></label>
+                                        <strong data-ng-bind="payment.total | currency"></strong>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Payment date"></label>
-                                    <strong data-ng-bind="payment.date | moment:'shortDate'"
-                                            data-ng-hide="controller.purchaseOrder.confirmed"></strong>
-                                    <strong>
-                                        <span data-ng-bind="payment.expenses.first().paymentDate | moment:'shortDate'"></span>
-                                        <span data-translate="to" data-ng-show="payment.expenses.length > 1"></span>
-                                        <span data-ng-bind="payment.expenses.last().paymentDate | moment:'shortDate'"
-                                              data-ng-show="payment.expenses.length > 1"></span>
-                                    </strong>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Payment date"></label>
+                                        <strong data-ng-bind="payment.date | moment:'shortDate'"
+                                                data-ng-hide="controller.purchaseOrder.confirmed"></strong>
+                                        <strong>
+                                            <span data-ng-bind="payment.expenses.first().paymentDate | moment:'shortDate'"></span>
+                                            <span data-translate="to" data-ng-show="payment.expenses.length > 1"></span>
+                                            <span data-ng-bind="payment.expenses.last().paymentDate | moment:'shortDate'"
+                                                  data-ng-show="payment.expenses.length > 1"></span>
+                                        </strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="grid-column medium-6 large-6">
-                        <div class="grid-row">
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Number of installments"></label>
-                                    <strong data-ng-bind="payment.numberOfInstallments"></strong>
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Number of installments"></label>
+                                        <strong data-ng-bind="payment.numberOfInstallments"></strong>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                <div class="box">
-                                    <label data-translate="Installment value"></label>
-                                    <strong data-ng-bind="payment.installmentValue | currency"></strong>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Installment value"></label>
+                                        <strong data-ng-bind="payment.installmentValue | currency"></strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
