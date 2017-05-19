@@ -19,7 +19,7 @@ namespace Dyoub.Test.Factories.Commercial
                 Tenant = store.Tenant,
                 Customer = customer,
                 Wallet = wallet,
-                IssueDate = DateTime.Today,
+                IssueDate = DateTime.UtcNow.Date,
                 AdditionalInformation = "Additional information.",
                 Author = "user@email.com",
                 Total = 20.00M,

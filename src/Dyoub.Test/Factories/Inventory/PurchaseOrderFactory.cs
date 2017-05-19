@@ -19,7 +19,7 @@ namespace Dyoub.Test.Factories.Inventory
                 Tenant = store.Tenant,
                 Supplier = supplier,
                 Wallet = wallet,
-                IssueDate = DateTime.Today,
+                IssueDate = DateTime.UtcNow.Date,
                 AdditionalInformation = "Additional information.",
                 Author = "user@email.com",
                 Total = 20.00M,

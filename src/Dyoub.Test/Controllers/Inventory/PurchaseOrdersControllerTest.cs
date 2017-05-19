@@ -32,7 +32,7 @@ namespace Dyoub.Test.Controllers.Inventory
 
             CreatePurchaseOrderViewModel viewModel = new CreatePurchaseOrderViewModel();
             viewModel.StoreId = context.Store.Id;
-            viewModel.IssueDate = DateTime.Today;
+            viewModel.IssueDate = DateTime.UtcNow.Date;
 
             await controller.Create(viewModel);
 
@@ -102,7 +102,7 @@ namespace Dyoub.Test.Controllers.Inventory
             UpdatePurchaseOrderViewModel viewModel = new UpdatePurchaseOrderViewModel();
             viewModel.Id = context.PurchaseOrder.Id;
             viewModel.StoreId = context.AnotherStore.Id;
-            viewModel.IssueDate = DateTime.Today.AddDays(1);
+            viewModel.IssueDate = DateTime.UtcNow.Date.AddDays(1);
             viewModel.AdditionalInformation = context.PurchaseOrder.AdditionalInformation + "Updated";
 
             await controller.Update(viewModel);
@@ -119,7 +119,7 @@ namespace Dyoub.Test.Controllers.Inventory
             UpdatePurchaseOrderViewModel viewModel = new UpdatePurchaseOrderViewModel();
             viewModel.Id = context.PurchaseOrder.Id;
             viewModel.StoreId = context.AnotherStore.Id;
-            viewModel.IssueDate = DateTime.Today.AddDays(1);
+            viewModel.IssueDate = DateTime.UtcNow.Date.AddDays(1);
             viewModel.AdditionalInformation = context.PurchaseOrder.AdditionalInformation + "Updated";
 
             ActionResult result = await controller.Update(viewModel);

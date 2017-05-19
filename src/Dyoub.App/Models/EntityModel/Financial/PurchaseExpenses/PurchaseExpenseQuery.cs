@@ -35,7 +35,7 @@ namespace Dyoub.App.Models.EntityModel.Financial.PurchaseExpenses
 
         public static IQueryable<PurchaseExpense> ReceivedToday(this IQueryable<PurchaseExpense> purchaseExpenses)
         {
-            return purchaseExpenses.ReceivedOnDate(DateTime.Today);
+            return purchaseExpenses.ReceivedOnDate(DateTime.UtcNow.Date);
         }
 
         public static IQueryable<PurchaseExpense> WhereReceivedDateStartAt(this IQueryable<PurchaseExpense> purchaseExpenses, DateTime? startDate)

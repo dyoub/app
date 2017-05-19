@@ -23,8 +23,8 @@ namespace Dyoub.Test.Controllers.Financial
 
             DailyCashFlowViewModel viewModel = new DailyCashFlowViewModel();
             viewModel.StoreId = context.Store.Id;
-            viewModel.Month = DateTime.Today.Month;
-            viewModel.Year = DateTime.Today.Year;
+            viewModel.Month = DateTime.UtcNow.Date.Month;
+            viewModel.Year = DateTime.UtcNow.Date.Year;
 
             ActionResult result = await controller.Daily(viewModel);
 
@@ -39,7 +39,7 @@ namespace Dyoub.Test.Controllers.Financial
 
             MonthlyCashFlowViewModel viewModel = new MonthlyCashFlowViewModel();
             viewModel.StoreId = context.Store.Id;
-            viewModel.Year = DateTime.Today.Year;
+            viewModel.Year = DateTime.UtcNow.Date.Year;
 
             ActionResult result = await controller.Monthly(viewModel);
 

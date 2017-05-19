@@ -26,7 +26,7 @@ namespace Dyoub.App.Results.Account.Dashboard
             {
                 counter = new
                 {
-                    cashFlowBalance = CashFlowAnalysis.Balance(DateTime.Today).Amount,
+                    cashFlowBalance = CashFlowAnalysis.Balance(DateTime.UtcNow.Date).Amount,
                     fixedExpenses = CashFlowAnalysis.Debits.TotalFixedExpenses().Amount,
                     otherCashActivities = CashFlowAnalysis.Credits.Others.Count() +
                         CashFlowAnalysis.Debits.Others.Count(),

@@ -15,7 +15,7 @@ namespace Dyoub.App.Extensions
                 Value = null,
                 Path = "/",
                 HttpOnly = true,
-                Expires = DateTime.Today.AddDays(-1)
+                Expires = DateTime.UtcNow.Date.AddDays(-1)
             });
         }
 

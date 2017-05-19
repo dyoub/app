@@ -14,7 +14,7 @@ namespace Dyoub.Test.Factories.Financial
             return new OtherCashActivity
             {
                 Description = "Other Cash Activity Test",
-                Date = DateTime.Today,
+                Date = DateTime.UtcNow.Date,
                 Value = 25.90M,
                 Store = store,
                 Tenant = store.Tenant,

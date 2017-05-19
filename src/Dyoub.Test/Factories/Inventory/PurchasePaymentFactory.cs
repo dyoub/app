@@ -13,7 +13,7 @@ namespace Dyoub.Test.Factories.Inventory
         {
             return new PurchasePayment
             {
-                Date = DateTime.Today,
+                Date = DateTime.UtcNow.Date,
                 PurchaseOrder = purchaseOrder,
                 Tenant = purchaseOrder.Tenant,
                 NumberOfInstallments = 1,

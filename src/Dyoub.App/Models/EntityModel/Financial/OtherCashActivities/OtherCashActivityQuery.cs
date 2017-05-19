@@ -46,8 +46,8 @@ namespace Dyoub.App.Models.EntityModel.Financial.OtherCashActivities
 
         public static IQueryable<OtherCashActivity> ToCurrentMonth(this IQueryable<OtherCashActivity> otherCashActivities)
         {
-            int year = DateTime.Today.Year;
-            int month = DateTime.Today.Month;
+            int year = DateTime.UtcNow.Date.Year;
+            int month = DateTime.UtcNow.Date.Month;
 
             DateTime startDate = new DateTime(year, month, 1);
             DateTime endDate = new DateTime(year, month, DateTime.DaysInMonth(year, month));

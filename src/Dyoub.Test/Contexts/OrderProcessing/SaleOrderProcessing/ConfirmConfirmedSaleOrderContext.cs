@@ -29,7 +29,7 @@ namespace Dyoub.Test.Contexts.OrderProcessing.SaleOrderProcessing
             PaymentMethod paymentMethod = PaymentMethods.Add(PaymentMethodFactory.PaymentMethod(tenant));
 
             SaleOrder = SaleOrders.Add(SaleOrderFactory.ConfirmedSaleOrder(store));
-            SaleOrder.ConfirmationDate = DateTime.Today.AddDays(-1);
+            SaleOrder.ConfirmationDate = DateTime.UtcNow.Date.AddDays(-1);
 
             salePayment = SalePayments.Add(SalePaymentFactory.SalePayment(SaleOrder, paymentMethod));
             salePayment.NumberOfInstallments = 2;

@@ -32,8 +32,8 @@ namespace Dyoub.Test.Controllers.Commercial
 
             CreateRentContractViewModel viewModel = new CreateRentContractViewModel();
             viewModel.StoreId = context.Store.Id;
-            viewModel.StartDate = DateTime.Today;
-            viewModel.EndDate = DateTime.Today.AddDays(1);
+            viewModel.StartDate = DateTime.UtcNow.Date;
+            viewModel.EndDate = DateTime.UtcNow.Date.AddDays(1);
             viewModel.Location = "Brazil";
 
             await controller.Create(viewModel);

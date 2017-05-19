@@ -27,7 +27,7 @@ namespace Dyoub.Test.Contexts.OrderProcessing.PurchaseOrderProcessing
             Store store = Stores.Add(StoreFactory.Store(tenant));
 
             PurchaseOrder = PurchaseOrders.Add(PurchaseOrderFactory.ConfirmedPurchaseOrder(store));
-            PurchaseOrder.ConfirmationDate = DateTime.Today.AddDays(-1);
+            PurchaseOrder.ConfirmationDate = DateTime.UtcNow.Date.AddDays(-1);
 
 
             purchasePayment = PurchasePayments.Add(PurchasePaymentFactory.PurchasePayment(PurchaseOrder));

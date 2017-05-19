@@ -39,8 +39,8 @@ namespace Dyoub.App.Models.ServiceModel.Financial
         
         public void ToCurrentMonth()
         {
-            int year = DateTime.Today.Year;
-            int month = DateTime.Today.Month;
+            int year = DateTime.UtcNow.Date.Year;
+            int month = DateTime.UtcNow.Date.Month;
 
             StartDate = new DateTime(year, month, 1);
             EndDate = new DateTime(year, month, DateTime.DaysInMonth(year, month));

@@ -32,7 +32,7 @@ namespace Dyoub.Test.Controllers.Commercial
 
             CreateSaleOrderViewModel viewModel = new CreateSaleOrderViewModel();
             viewModel.StoreId = context.Store.Id;
-            viewModel.IssueDate = DateTime.Today;
+            viewModel.IssueDate = DateTime.UtcNow.Date;
 
             await controller.Create(viewModel);
 
@@ -102,7 +102,7 @@ namespace Dyoub.Test.Controllers.Commercial
             UpdateSaleOrderViewModel viewModel = new UpdateSaleOrderViewModel();
             viewModel.Id = context.SaleOrder.Id;
             viewModel.StoreId = context.AnotherStore.Id;
-            viewModel.IssueDate = DateTime.Today.AddDays(1);
+            viewModel.IssueDate = DateTime.UtcNow.Date.AddDays(1);
             viewModel.AdditionalInformation = context.SaleOrder.AdditionalInformation + "Updated";
 
             await controller.Update(viewModel);
@@ -119,7 +119,7 @@ namespace Dyoub.Test.Controllers.Commercial
             UpdateSaleOrderViewModel viewModel = new UpdateSaleOrderViewModel();
             viewModel.Id = context.SaleOrder.Id;
             viewModel.StoreId = context.AnotherStore.Id;
-            viewModel.IssueDate = DateTime.Today.AddDays(1);
+            viewModel.IssueDate = DateTime.UtcNow.Date.AddDays(1);
             viewModel.AdditionalInformation = context.SaleOrder.AdditionalInformation + "Updated";
 
             ActionResult result = await controller.Update(viewModel);

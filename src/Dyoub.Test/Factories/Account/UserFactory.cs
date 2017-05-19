@@ -25,7 +25,7 @@ namespace Dyoub.Test.Factories.Account
             User user = User();
             user.Salt = Guid.NewGuid().ToString("N");
             user.Password = new Sha256Hash(user.Password, user.Salt).ToString();
-            user.LastChangePassword = DateTime.Today.AddDays(-1);
+            user.LastChangePassword = DateTime.UtcNow.Date.AddDays(-1);
             user.Tenant = tenant;
 
             return user;

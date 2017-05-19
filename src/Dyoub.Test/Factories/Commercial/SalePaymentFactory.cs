@@ -14,7 +14,7 @@ namespace Dyoub.Test.Factories.Commercial
         {
             return new SalePayment
             {
-                Date = DateTime.Today,
+                Date = DateTime.UtcNow.Date,
                 SaleOrder = saleOrder,
                 Tenant = saleOrder.Tenant,
                 PaymentMethod = paymentMethod,

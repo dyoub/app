@@ -54,16 +54,16 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders
 
         public static IQueryable<PurchaseOrder> IssuedThisMonth(this IQueryable<PurchaseOrder> purchaseOrders)
         {
-            DateTime startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            DateTime endDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month,
-                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+            DateTime startDate = new DateTime(DateTime.UtcNow.Date.Year, DateTime.UtcNow.Date.Month, 1);
+            DateTime endDate = new DateTime(DateTime.UtcNow.Date.Year, DateTime.UtcNow.Date.Month,
+                DateTime.DaysInMonth(DateTime.UtcNow.Date.Year, DateTime.UtcNow.Date.Month));
 
             return purchaseOrders.WhereIssueDateStartAt(startDate).WhereIssueDateEndAt(endDate);
         }
 
         public static IQueryable<PurchaseOrder> IssuedToday(this IQueryable<PurchaseOrder> purchaseOrders)
         {
-            return purchaseOrders.IssuedOnDate(DateTime.Today);
+            return purchaseOrders.IssuedOnDate(DateTime.UtcNow.Date);
         }
 
         public static IQueryable<PurchaseOrder> OrderByMostRecent(this IQueryable<PurchaseOrder> purchaseOrders)

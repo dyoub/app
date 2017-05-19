@@ -15,8 +15,8 @@ namespace Dyoub.Test.Factories.Financial
             return new FixedExpense
             {
                 Description = "FixedExpense Test",
-                StartDate = DateTime.Today,
-                EndDate = DateTime.Today.AddMonths(1),
+                StartDate = DateTime.UtcNow.Date,
+                EndDate = DateTime.UtcNow.Date.AddMonths(1),
                 Value = 25.90M,
                 Store = store,
                 Tenant = store.Tenant,
