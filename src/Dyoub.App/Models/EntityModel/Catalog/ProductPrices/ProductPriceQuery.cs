@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Dyoub.App.Models.EntityModel.Catalog.ProductPrices
@@ -24,6 +25,35 @@ namespace Dyoub.App.Models.EntityModel.Catalog.ProductPrices
                 UnitRentPrice = productPrice.UnitRentPrice,
                 UnitSalePrice = productPrice.UnitSalePrice
             });
+        }
+
+        public static IQueryable<ProductPrice> IncludeProduct(this IQueryable<ProductPrice> productPrices)
+        {
+            return productPrices.Include(productPrice => productPrice.Product);
+        }
+
+        public static IQueryable<ProductPrice> OrderedByProductName(this IQueryable<ProductPrice> productPrices)
+        {
+            return productPrices.OrderBy(productPrice => productPrice.Product.Name);
+        }
+
+        public static IQueryable<ProductPrice> WhereProductNameOrCode(this IQueryable<ProductPrice> productPrices, string[] words)
+        {
+            if (words.Count() == 1)
+            {
+                string word = words.First();
+
+                return productPrices.Where(productPrice =>
+                    productPrice.Product.Code == word ||
+                    productPrice.Product.Name.Contains(word));
+            }
+
+            foreach (string word in words)
+            {
+                productPrices = productPrices.Where(productPrice => productPrice.Product.Name.Contains(word));
+            }
+
+            return productPrices;
         }
 
         public static IQueryable<ProductPrice> WhereProductId(this IQueryable<ProductPrice> productPrices, int productId)

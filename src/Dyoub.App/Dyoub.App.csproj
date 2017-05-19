@@ -198,6 +198,9 @@
     <EmbeddedResource Include="Data\Migrations\201705190011131_CreateRentPrice.resx">
       <DependentUpon>201705190011131_CreateRentPrice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705190019579_CreateRentedProduct.resx">
+      <DependentUpon>201705190019579_CreateRentedProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -228,6 +231,8 @@
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\rented-products\rented-products-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\rented-products\rented-products-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-customer\sale-customer-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-customer\sale-customer-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-items\sale-items-details.controller.js" />
@@ -283,6 +288,7 @@
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
     <Content Include="Scripts\services\commercial\rent-contract-customer.service.js" />
     <Content Include="Scripts\services\commercial\rent-contract.service.js" />
+    <Content Include="Scripts\services\commercial\rented-products.service.js" />
     <Content Include="Scripts\services\commercial\sale-customer.service.js" />
     <Content Include="Scripts\services\commercial\sale-items.service.js" />
     <Content Include="Scripts\services\commercial\sale-order.service.js" />
@@ -317,6 +323,7 @@
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
     <Compile Include="Controllers\Commercial\RentContractCustomerController.cs" />
     <Compile Include="Controllers\Commercial\RentContractsController.cs" />
+    <Compile Include="Controllers\Commercial\RentedProductsController.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerController.cs" />
     <Compile Include="Controllers\Commercial\SaleItemsController.cs" />
     <Compile Include="Controllers\Commercial\SaleOrdersController.cs" />
@@ -450,6 +457,10 @@
     <Compile Include="Data\Migrations\201705190011131_CreateRentPrice.Designer.cs">
       <DependentUpon>201705190011131_CreateRentPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705190019579_CreateRentedProduct.cs" />
+    <Compile Include="Data\Migrations\201705190019579_CreateRentedProduct.Designer.cs">
+      <DependentUpon>201705190019579_CreateRentedProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
@@ -506,6 +517,9 @@
     <Compile Include="Models\EntityModel\Commercial\RentContracts\RentContract.cs" />
     <Compile Include="Models\EntityModel\Commercial\RentContracts\RentContractMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\RentContracts\RentContractQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\RentedProducts\RentedProduct.cs" />
+    <Compile Include="Models\EntityModel\Commercial\RentedProducts\RentedProductMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\RentedProducts\RentedProductQuery.cs" />
     <Compile Include="Models\EntityModel\Commercial\SaleItems\SaleItem.cs" />
     <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrder.cs" />
     <Compile Include="Models\EntityModel\Commercial\SaleOrders\SaleOrderMapping.cs" />
@@ -589,6 +603,7 @@
     <Compile Include="Infrastructure\Security\Sha256Hash.cs" />
     <Compile Include="Infrastructure\Security\UserIdentity.cs" />
     <Compile Include="Models\ServiceModel\Catalog\PricingTable.cs" />
+    <Compile Include="Models\ServiceModel\Commercial\RentShoppingCart.cs" />
     <Compile Include="Models\ServiceModel\Commercial\SalePromisedPayments.cs" />
     <Compile Include="Models\ServiceModel\Commercial\SaleShoppingCart.cs" />
     <Compile Include="Models\ServiceModel\Financial\Billing.cs" />
@@ -613,6 +628,7 @@
     <Compile Include="Models\ViewModel\Catalog\PricingTables\ListItemsForSaleViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\PricingTables\ListItemsViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\PricingTables\ListPricingTablesViewModel.cs" />
+    <Compile Include="Models\ViewModel\Catalog\PricingTables\ListProductsForRentViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\PricingTables\PricingTableIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\PricingTables\UpdatePricesViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Products\CreateProductViewModel.cs" />
@@ -633,6 +649,8 @@
     <Compile Include="Models\ViewModel\Commercial\RentContracts\ListRentContractViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentContracts\RentContractIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentContracts\UpdateRentContractViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\RentedProducts\RentedProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\RentedProducts\UpdateRentedProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleCustomer\SaleCustomerViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleItems\SaleItemViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SaleItems\UpdateSaleItemListViewModel.cs" />
@@ -692,6 +710,7 @@
     <Compile Include="Results\Catalog\PricingTables\ItemPriceListJson.cs" />
     <Compile Include="Results\Catalog\PricingTables\PricingTableJson.cs" />
     <Compile Include="Results\Catalog\PricingTables\PricingTableListJson.cs" />
+    <Compile Include="Results\Catalog\PricingTables\ProductPriceListJson.cs" />
     <Compile Include="Results\Catalog\Products\ProductJson.cs" />
     <Compile Include="Results\Catalog\Products\ProductListJson.cs" />
     <Compile Include="Results\Catalog\Services\ServiceJson.cs" />
@@ -702,6 +721,7 @@
     <Compile Include="Results\Commercial\RentContracts\RentContractIdJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractListJson.cs" />
+    <Compile Include="Results\Commercial\RentedProducts\RentedProductListJson.cs" />
     <Compile Include="Results\Commercial\SaleCustomer\SaleCustomerJson.cs" />
     <Compile Include="Results\Commercial\SaleItems\SaleItemListJson.cs" />
     <Compile Include="Results\Commercial\SaleOrders\SaleOrderIdJson.cs" />
@@ -849,6 +869,9 @@
     <Content Include="Views\Commercial\RentContracts\RentContractList.cshtml" />
     <Content Include="Views\Commercial\RentContractCustomer\RentContractCustomerDetails.cshtml" />
     <Content Include="Views\Commercial\RentContractCustomer\RentContractCustomerEdit.cshtml" />
+    <Content Include="Views\Commercial\RentedProducts\_RemoveProduct.cshtml" />
+    <Content Include="Views\Commercial\RentedProducts\RentedProductsDetails.cshtml" />
+    <Content Include="Views\Commercial\RentedProducts\RentedProductsEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

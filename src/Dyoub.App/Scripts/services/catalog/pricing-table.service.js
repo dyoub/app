@@ -34,6 +34,10 @@
         return this.$http.post('/pricing-tables/items/for-sale', filter);
     };
 
+    Service.prototype.listProductsForRent = function (filter) {
+        return this.$http.post('/pricing-tables/products/for-rent', filter);
+    };
+
     Service.prototype.save = function (storeId, items) {
         return this.$http.post('/pricing-tables/update', {
             storeId: storeId,

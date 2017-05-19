@@ -33,6 +33,10 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
             HasOptional(p => p.Wallet)
                 .WithMany(p => p.RentContracts)
                 .HasForeignKey(p => new { p.WalletId, p.TenantId });
+            
+            HasMany(p => p.RentedProducts)
+                .WithRequired(p => p.RentContract)
+                .HasForeignKey(p => new { p.RentContractId, p.TenantId });
         }
     }
 }

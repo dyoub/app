@@ -3,10 +3,12 @@
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Commercial.Customers;
+using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Financial;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
 {
@@ -46,10 +48,15 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
                     .SubtractPercentage(Discount ?? 0) != TotalPayable);
             }
         }
+        public int TotalDays
+        {
+            get { return (int)EndDate.Subtract(StartDate).TotalDays; }
+        }
 
         public virtual Customer Customer { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual Store Store { get; set; }
         public virtual Wallet Wallet { get; set; }
+        public virtual ICollection<RentedProduct> RentedProducts { get; set; }
     }
 }

@@ -143,6 +143,21 @@ namespace Dyoub.App.Controllers.Catalog
             return new ItemPriceListJson(itemPrices);
         }
 
+        [HttpPost, Route("pricing-tables/products/for-rent"), Authorization(Scope = "pricing-tables.read")]
+        public async Task<ActionResult> ListProductsForRent(ListProductsForRentViewModel viewModel)
+        {
+            ICollection<ProductPrice> productPrices = await Tenant.ProductPrices
+                .IncludeProduct()
+                .WhereStoreId(viewModel.StoreId.Value)
+                .WhereProductNameOrCode(viewModel.NameOrCode.Words())
+                .WhereUnitRentPriceNotNull()
+                .OrderedByProductName()
+                .Take(3)
+                .ToListAsync();
+            
+            return new ProductPriceListJson(productPrices);
+        }
+
         [HttpPost, Route("pricing-tables/update"), Authorization(Scope = "pricing-tables.edit")]
         public async Task<ActionResult> Update(UpdatePricesViewModel viewModel)
         {

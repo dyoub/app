@@ -11,10 +11,10 @@ namespace Dyoub.App.Results.Inventory.PurchasedProducts
         public PurchaseOrder PurchaseOrder { get; private set; }
         public IEnumerable<PurchasedProduct> PurchasedProducts { get; private set; }
 
-        public PurchasedProductListJson(PurchaseOrder purchaseOrder, IEnumerable<PurchasedProduct> puchasedProducts)
+        public PurchasedProductListJson(PurchaseOrder purchaseOrder, IEnumerable<PurchasedProduct> purchasedProducts)
         {
             PurchaseOrder = purchaseOrder;
-            PurchasedProducts = puchasedProducts;
+            PurchasedProducts = purchasedProducts;
         }
 
         public override void ExecuteResult(ControllerContext context)

@@ -97,6 +97,20 @@ namespace Dyoub.Test.Controllers.Catalog
         }
 
         [TestMethod]
+        public async Task ListPricingTableProductsForRent()
+        {
+            ListPricingTableProductsForRent context = new ListPricingTableProductsForRent();
+            PricingTablesController controller = new PricingTablesController(context);
+
+            ListProductsForRentViewModel viewModel = new ListProductsForRentViewModel();
+            viewModel.StoreId = context.Store.Id;
+
+            ActionResult result = await controller.ListProductsForRent(viewModel);
+
+            Assert.IsTrue(result is ProductPriceListJson);
+        }
+
+        [TestMethod]
         public async Task UpdatePricingTable()
         {
             UpdatePricingTableContext context = new UpdatePricingTableContext();

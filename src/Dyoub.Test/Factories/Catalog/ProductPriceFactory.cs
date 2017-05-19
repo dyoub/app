@@ -17,7 +17,8 @@ namespace Dyoub.Test.Factories.Catalog
                 Store = store,
                 Product = product,
                 Tenant = tenant,
-                UnitSalePrice = 20
+                UnitSalePrice = 20,
+                UnitRentPrice = 5
             };
         }
     }

@@ -4,6 +4,7 @@
 using Dyoub.App.Models.EntityModel.Catalog.ItemPrices;
 using Dyoub.App.Models.EntityModel.Inventory.ProductQuantities;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Dyoub.App.Models.EntityModel.Catalog.Products
@@ -49,11 +50,26 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
                 });
         }
 
+        public static IQueryable<Product> IncludePrices(this IQueryable<Product> products)
+        {
+            return products.Include(product => product.ProductPrices);
+        }
+
         public static IQueryable<Product> OrderByName(this IQueryable<Product> products)
         {
             return products.OrderBy(product => product.Name);
         }
         
+        public static IQueryable<Product> WhereId(this IQueryable<Product> products, int id)
+        {
+            return products.Where(product => product.Id == id);
+        }
+
+        public static IQueryable<Product> WhereIdIn(this IQueryable<Product> products, IEnumerable<int> ids)
+        {
+            return products.Where(product => ids.Contains(product.Id));
+        }
+
         public static IQueryable<Product> WhereNameOrCode(this IQueryable<Product> products, params string[] words)
         {
             if (words.Count() == 1)
@@ -70,14 +86,14 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
             return products;
         }
 
-        public static IQueryable<Product> WhereId(this IQueryable<Product> products, int id)
+        public static IQueryable<Product> WhereMarketed(this IQueryable<Product> products, bool? marketed)
         {
-            return products.Where(product => product.Id == id);
-        }
+            if (marketed == null)
+            {
+                return products;
+            }
 
-        public static IQueryable<Product> WhereIdIn(this IQueryable<Product> products, IEnumerable<int> ids)
-        {
-            return products.Where(product => ids.Contains(product.Id));
+            return products.Where(product => product.Marketed == marketed);
         }
         
         public static IQueryable<Product> WhereStockMovement(this IQueryable<Product> products, bool? stockMovement)

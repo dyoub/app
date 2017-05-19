@@ -1,0 +1,106 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="RentedProductsDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header">
+        <div class="page-header">
+            <span data-translate="Rent contract"></span>
+            <strong data-ng-bind="controller.rentContract.id | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.rentContractId">
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Products"></span>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/payments"
+               class="step" data-translate="Payments"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract not found."></p>
+            <a href="/rent-contracts" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            @using (Html.Authorize("rent-contracts.edit"))
+            {
+                <div class="box">
+                    <a href="/rent-contracts/edit/{{controller.rentContract.id}}/products" class="as-button" data-translate="Edit"
+                       data-ng-hide="controller.rentContract.confirmed"></a>
+                </div>
+            }
+
+            <div class="box">
+                <span class="hint success" data-translate="Confirmed" data-ng-show="controller.rentContract.confirmed"></span>
+            </div>
+
+            <div class="card list">
+                <div class="list-item text-primary text-center" data-translate="At least one product must be added."
+                     data-ng-show="controller.rentContract.productList.isEmpty()"></div>
+
+                <div class="list-item" data-ng-repeat="product in controller.rentContract.productList">
+                    <div class="box">
+                        <p data-ng-bind="product.name"></p>
+                        <span class="font-11 text-muted">
+                            <i class="fa fa-barcode"></i>
+                            <span data-ng-bind="product.code"></span>
+                            <span data-ng-hide="product.code" data-translate="No code"></span>
+                        </span>
+                    </div>
+
+                    <div class="grid-row">
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="controller.rentContractProductsForm.cost.$invalid">
+                                        <label data-translate="Unit rent price"></label>
+                                        <strong data-ng-bind="controller.rentContract.totalDays"></strong>
+                                        <strong data-translate="{{ controller.rentContract.totalDays > 1 ? 'days' : 'day'}}"></strong>
+                                        <strong>x</strong>
+                                        <strong data-ng-bind="product.unitPrice | currency"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <label data-translate="Amount"></label>
+                                    <strong data-ng-bind="product.quantity | number:3"></strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column small-6 medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <label data-translate="Discount"></label>
+                                    <strong data-ng-show="product.discount">
+                                        <span data-ng-bind="product.discount | number:2"></span>%
+                                    </strong>
+                                    <strong data-ng-hide="product.discount">-</strong>
+                                </div>
+                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                    <label data-translate="Total payable"></label>
+                                    <strong data-ng-bind="product.totalPayable | currency"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

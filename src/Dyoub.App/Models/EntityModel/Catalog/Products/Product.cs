@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.ProductPrices;
+using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
 using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
@@ -26,6 +27,7 @@ namespace Dyoub.App.Models.EntityModel.Catalog.Products
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual ICollection<ProductStockMovement> ProductStockMovements { get; set; }
         public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }
+        public virtual ICollection<RentedProduct> RentedProducts { get; set; }
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
     }
 }

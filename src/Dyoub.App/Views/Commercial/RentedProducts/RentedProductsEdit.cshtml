@@ -1,0 +1,163 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="RentedProductsEditController as controller" data-ng-init="controller.init()">
+    <div class="step-header ng-cloak">
+        <div class="page-header">
+            <span data-translate="Edit rent contract"></span>
+            <strong data-ng-bind="controller.routeParams.rentContractId | orderNumber"></strong>
+        </div>
+        <div data-ng-show="controller.routeParams.rentContractId">
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Products"></span>
+            <span class="separator"></span>
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/payments"
+               class="step" data-translate="Payments"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searchingSelectedProducts"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchSelectedProductsComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract not found."></p>
+            <a href="/rent-contracts" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div class="error" data-ng-show="controller.rentContract.confirmed">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract already confirmed."></p>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/products"
+               class="as-button primary" data-translate="Go to products details"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound || controller.rentContract.confirmed">
+            <div class="box">
+                <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
+                        data-ng-click="controller.save()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/products"
+                   class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+            </div>
+
+            <div class="card">
+                <div class="box">
+                    <label data-translate="Product name or code"></label>
+                    <div class="suggestion" data-suggestion-open="controller.productSuggestionOpened">
+                        <input type="text" name="productName" data-ng-model="controller.productSearch.nameOrCode" data-ng-maxlength="80"
+                               data-event-key-enter="controller.addFirstProduct()"
+                               data-event-typing="controller.newProductForRentSearch()"
+                               data-event-typing-end="controller.searchProductsForRent()" />
+                        <div class="suggestion-body">
+                            <em class="text-muted" data-ng-show="controller.searchingProductsForRent" data-translate="Searching..."></em>
+                            <div class="text-primary" data-translate="No records found" data-ng-show="controller.noProductsForRent()"></div>
+                            <div class="box" data-ng-repeat="product in controller.productsForRent">
+                                <button type="button" class="primary small" data-translate="Add"
+                                        data-ng-click="controller.addProduct(product)"></button>
+                                <span data-ng-bind="product.name"></span>
+                                <span class="text-muted font-10">
+                                    <i class="fa fa-barcode"></i>
+                                    <span data-ng-bind="product.code" data-ng-show="product.code"></span>
+                                    <em data-translate="No code" data-ng-hide="product.code"></em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="font-11 text-primary" data-translate="Press enter to add the first product."></div>
+                </div>
+            </div>
+
+            <div class="list-header text-left">
+                <span data-translate="Rent total"></span>:
+                <strong class="font-14 text-success" data-ng-bind="controller.calculateTotalPayable() | currency"></strong>
+            </div>
+
+            <div class="list-header text-left">
+                <span data-translate="Rent period"></span>:
+                <strong data-ng-bind="controller.rentContract.startDate | moment:'shortDate'"></strong>
+                <strong data-translate="until"></strong>
+                <strong data-ng-bind="controller.rentContract.endDate | moment:'shortDate'"></strong>
+            </div>
+
+            <div class="card text-center text-primary" data-translate="At least one product must be added."
+                 data-ng-show="controller.noProductsSelected()"></div>
+
+            <form name="controller.rentContractProductsForm">
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="product in controller.rentContract.productList | orderBy:'name'">
+                        <div class="box">
+                            <button type="button" class="danger pull-right" data-translate="Remove"
+                                    data-ng-click="controller.showRemoveProductDialog(product)"></button>
+                            <p data-ng-bind="product.name"></p>
+                            <span class="box font-11 text-muted">
+                                <i class="fa fa-barcode"></i>
+                                <span data-ng-bind="product.code" data-ng-show="product.code"></span>
+                                <em data-translate="No code" data-ng-hide="product.code"></em>
+                            </span>
+                        </div>
+
+                        <div class="grid-row">
+                            <div class="grid-column medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column compact small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.rentContractProductsForm.cost.$invalid">
+                                            <label data-translate="Unit rent price"></label>
+                                            <strong data-ng-bind="controller.rentContract.totalDays"></strong>
+                                            <strong data-translate="{{ controller.rentContract.totalDays > 1 ? 'days' : 'day'}}"></strong>
+                                            <strong>x</strong>
+                                            <strong data-ng-bind="product.unitPrice | currency"></strong>
+                                        </div>
+                                    </div>
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.rentContractProductsForm.quantity.$invalid">
+                                            <label>
+                                                <span data-translate="Amount"></span>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="quantity" data-ng-model="product.quantity" required
+                                                   data-type-number="8,3" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-column medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box" data-has-error="controller.rentContractProductsForm.discount.$invalid">
+                                            <label data-translate="Discount"></label>
+                                            <input type="text" name="discount" data-ng-model="product.discount" data-type-number="8,2" />
+                                        </div>
+                                    </div>
+                                    <div class="grid-column small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label data-translate="Total"></label>
+                                            <strong class="font-16"
+                                                    data-ng-class="{'text-success':product.totalPayable >= 0, 'text-danger':product.totalPayable < 0}"
+                                                    data-ng-bind="controller.calculateProductTotalPayable(product) | currency"></strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @Html.Partial("~/Views/Commercial/RentedProducts/_RemoveProduct.cshtml")
+</div>
