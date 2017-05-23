@@ -21,7 +21,7 @@ namespace Dyoub.App.Models.ServiceModel.Financial
             get
             {
                 return CashActivities.Where(cashFlow =>
-                    cashFlow.Activity == CashActivityType.RentContract);
+                    cashFlow.Activity == CashActivityType.Rental);
             }
         }
 

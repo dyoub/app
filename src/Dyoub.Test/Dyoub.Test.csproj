@@ -176,6 +176,11 @@
     <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\RevertNotConfirmedPurchaseOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\RevertSPurchaseOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\PurchaseOrderProcessing\RevertWithoutStockEnoughContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\RentOrderProcessing\ConfirmConfirmedRentContractContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\RentOrderProcessing\ConfirmRentContractContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\RentOrderProcessing\ConfirmWithoutStockEnoughContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\RentOrderProcessing\RevertNotConfirmedRentContractContext.cs" />
+    <Compile Include="Contexts\OrderProcessing\RentOrderProcessing\RevertRentContractContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\ConfirmConfirmedSaleOrderContext.cs" />
     <Compile Include="Contexts\OrderProcessing\SaleOrderProcessing\ConfirmSaleOrderContext.cs" />
     <Compile Include="Contexts\Commercial\SaleOrders\CreateSaleOrderContext.cs" />
@@ -262,6 +267,7 @@
     <Compile Include="Controllers\Financial\OtherCashActivitiesControllerTest.cs" />
     <Compile Include="Controllers\Inventory\ProductStockControllerTest.cs" />
     <Compile Include="Controllers\OrderProcessing\PurchaseOrderProcessingControllerTest.cs" />
+    <Compile Include="Controllers\OrderProcessing\RentOrderProcessingControllerTest.cs" />
     <Compile Include="Controllers\OrderProcessing\SaleOrderProcessingControllerTest.cs" />
     <Compile Include="Controllers\Financial\WalletsControllerTest.cs" />
     <Compile Include="Controllers\Inventory\PurchasedProductsControllerTest.cs" />
@@ -287,6 +293,7 @@
     <Compile Include="Factories\Commercial\SaleServiceFactory.cs" />
     <Compile Include="Factories\Financial\FixedExpenseFactory.cs" />
     <Compile Include="Factories\Financial\OtherCashActivityFactory.cs" />
+    <Compile Include="Factories\Financial\RentIncomeFactory.cs" />
     <Compile Include="Factories\Financial\SaleIncomeFactory.cs" />
     <Compile Include="Factories\Financial\WalletFactory.cs" />
     <Compile Include="Factories\Inventory\ProductStockMovementFactory.cs" />

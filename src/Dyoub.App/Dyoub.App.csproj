@@ -204,6 +204,9 @@
     <EmbeddedResource Include="Data\Migrations\201705202047492_CreateRentPayment.resx">
       <DependentUpon>201705202047492_CreateRentPayment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705212017212_CreateRentIncome.resx">
+      <DependentUpon>201705212017212_CreateRentIncome.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -338,6 +341,7 @@
     <Compile Include="Controllers\Financial\CashFlowController.cs" />
     <Compile Include="Controllers\Inventory\ProductStockController.cs" />
     <Compile Include="Controllers\OrderProcessing\PurchaseOrderProcessingController.cs" />
+    <Compile Include="Controllers\OrderProcessing\RentOrderProcessingController.cs" />
     <Compile Include="Controllers\OrderProcessing\SaleOrderProcessingController.cs" />
     <Compile Include="Controllers\Financial\FixedExpensesController.cs" />
     <Compile Include="Controllers\Financial\OtherCashActivitiesController.cs" />
@@ -472,6 +476,10 @@
     <Compile Include="Data\Migrations\201705202047492_CreateRentPayment.Designer.cs">
       <DependentUpon>201705202047492_CreateRentPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705212017212_CreateRentIncome.cs" />
+    <Compile Include="Data\Migrations\201705212017212_CreateRentIncome.Designer.cs">
+      <DependentUpon>201705212017212_CreateRentIncome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
@@ -520,6 +528,9 @@
     <Compile Include="Models\EntityModel\Catalog\Services\Service.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceMapping.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\ICommercialDocument.cs" />
+    <Compile Include="Models\EntityModel\Commercial\IMarketedProduct.cs" />
+    <Compile Include="Models\EntityModel\Commercial\IPayment.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethodFees\PaymentMethodFee.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethodFees\PaymentMethodFeeMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethod.cs" />
@@ -552,9 +563,13 @@
     <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpense.cs" />
     <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpenseMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpenseQuery.cs" />
+    <Compile Include="Models\EntityModel\Financial\IIncome.cs" />
     <Compile Include="Models\EntityModel\Financial\PurchaseExpenses\PurchaseExpense.cs" />
     <Compile Include="Models\EntityModel\Financial\PurchaseExpenses\PurchaseExpenseMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\PurchaseExpenses\PurchaseExpenseQuery.cs" />
+    <Compile Include="Models\EntityModel\Financial\RentIncomes\RentIncome.cs" />
+    <Compile Include="Models\EntityModel\Financial\RentIncomes\RentIncomeMapping.cs" />
+    <Compile Include="Models\EntityModel\Financial\RentIncomes\RentIncomeQuery.cs" />
     <Compile Include="Models\EntityModel\Financial\SaleIncomes\SaleIncome.cs" />
     <Compile Include="Models\EntityModel\Financial\SaleIncomes\SaleIncomeMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\SaleIncomes\SaleIncomeQuery.cs" />
@@ -622,6 +637,8 @@
     <Compile Include="Models\ServiceModel\Commercial\SalePromisedPayments.cs" />
     <Compile Include="Models\ServiceModel\Commercial\SaleShoppingCart.cs" />
     <Compile Include="Models\ServiceModel\Financial\Billing.cs" />
+    <Compile Include="Models\ServiceModel\Financial\RentBilling.cs" />
+    <Compile Include="Models\ServiceModel\Financial\SaleBilling.cs" />
     <Compile Include="Models\ServiceModel\Financial\CashFlowAnalysis.cs" />
     <Compile Include="Models\ServiceModel\Financial\CashFlowCredits.cs" />
     <Compile Include="Models\ServiceModel\Financial\CashFlowDebits.cs" />
@@ -631,6 +648,7 @@
     <Compile Include="Models\ServiceModel\Inventory\PurchaseShoppingCart.cs" />
     <Compile Include="Models\ServiceModel\Inventory\ProductReplenishment.cs" />
     <Compile Include="Models\ServiceModel\OrderProcessing\PurchaseOrderProcessing.cs" />
+    <Compile Include="Models\ServiceModel\OrderProcessing\RentContractProcessing.cs" />
     <Compile Include="Models\ServiceModel\OrderProcessing\SaleOrderProcessing.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\CreatePasswordRecoveryViewModel.cs" />
     <Compile Include="Models\ViewModel\Account\PasswordRecoveries\UpdatePasswordRecoveryViewModel.cs" />
@@ -893,6 +911,8 @@
     <Content Include="Views\Commercial\RentPayments\_RemovePayment.cshtml" />
     <Content Include="Views\Commercial\RentPayments\RentPaymentsDetails.cshtml" />
     <Content Include="Views\Commercial\RentPayments\RentPaymentsEdit.cshtml" />
+    <Content Include="Views\Commercial\RentContracts\_ConfirmRentContract.cshtml" />
+    <Content Include="Views\Commercial\RentContracts\_RevertRentContract.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

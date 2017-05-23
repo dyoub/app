@@ -39,6 +39,7 @@ namespace Dyoub.App.Controllers.Commercial
             RentContract rentContract = await Tenant.RentContracts
                 .WhereId(viewModel.Id.Value)
                 .IncludePaymentMethods()
+                .IncludeRentIncomes()
                 .SingleOrDefaultAsync();
 
             return new RentPaymentListJson(rentContract);

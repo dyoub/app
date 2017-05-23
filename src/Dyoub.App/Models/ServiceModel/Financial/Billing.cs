@@ -2,29 +2,27 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel;
+using Dyoub.App.Models.EntityModel.Commercial;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
-using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
-using Dyoub.App.Models.EntityModel.Commercial.SalePayments;
 using Dyoub.App.Models.EntityModel.Financial;
-using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Dyoub.App.Models.ServiceModel.Financial
 {
-    public class Billing
+    public abstract class Billing<TIncome> where TIncome : IIncome
     {
         public TenantContext Tenant { get; private set; }
-        public SaleOrder SaleOrder { get; private set; }
+        public ICommercialDocument Document { get; private set; }
 
-        public Billing(TenantContext tenant, SaleOrder saleOrder)
+        public Billing(TenantContext tenant, ICommercialDocument document)
         {
             Tenant = tenant;
-            SaleOrder = saleOrder;
+            Document = document;
         }
         
-        private void AssignPaymentMethodFee(SalePayment payment)
+        private void AssignPaymentMethodFee(IPayment payment)
         {
             PaymentMethodFee paymentMethodFee = payment.PaymentMethod.PaymentMethodFees
                 .OrderByDescending(fee => fee.MinimumInstallment)
@@ -36,8 +34,8 @@ namespace Dyoub.App.Models.ServiceModel.Financial
                 payment.FeeFixedValue = paymentMethodFee.FeeFixedValue;
             }
         }
-
-        private void CalculateTotals(SalePayment payment, SaleIncome income, int numberOfInstallments)
+        
+        private void CalculateTotals(IPayment payment, IIncome income, int numberOfInstallments)
         {
             payment.BilledAmount = payment.Total;
 
@@ -49,8 +47,8 @@ namespace Dyoub.App.Models.ServiceModel.Financial
 
             income.AmountReceived = payment.InstallmentBilling;
         }
-
-        private void CalculateReceiptTiming(SalePayment payment, SaleIncome income, int installment)
+        
+        private void CalculateReceiptTiming(IPayment payment, IIncome income, int installment)
         {
             income.PaymentDate = payment.Date.AddMonths(installment - 1);
 
@@ -60,10 +58,10 @@ namespace Dyoub.App.Models.ServiceModel.Financial
                 income.ReceivedDate = baseDate.AddDays(payment.PaymentMethod.DaysToReceive.Value);
             }
         }
-
-        private IEnumerable<SaleIncome> CalculateIncomes()
+        
+        private IEnumerable<TIncome> CalculateIncomes()
         {
-            foreach (SalePayment payment in SaleOrder.SalePayments)
+            foreach (IPayment payment in Document.Payments)
             {
                 int installments = payment.PaymentMethod.EarlyReceipt ? 1 : payment.NumberOfInstallments;
 
@@ -71,8 +69,8 @@ namespace Dyoub.App.Models.ServiceModel.Financial
 
                 for (int installment = 1; installment <= installments; installment++)
                 {
-                    SaleIncome income = new SaleIncome();
-                    income.SalePaymentId = payment.Id;
+                    TIncome income = NewIncome();
+                    income.PaymentId = payment.Id;
 
                     CalculateTotals(payment, income, installments);
                     CalculateReceiptTiming(payment, income, installment);
@@ -82,17 +80,23 @@ namespace Dyoub.App.Models.ServiceModel.Financial
             }
         }
 
+        protected abstract void AddIncomes(IEnumerable<TIncome> incomes);
+
+        protected abstract TIncome NewIncome();
+
+        protected abstract void RemoveIncomes();
+
         public void Confirm()
         {
-            Tenant.SaleIncomes.AddRange(CalculateIncomes());
+            AddIncomes(CalculateIncomes());
 
-            SaleOrder.ConfirmationDate = DateTime.UtcNow;
-            SaleOrder.BilledAmount = new Money(SaleOrder.SalePayments.Sum(p => p.BilledAmount));
+            Document.ConfirmationDate = DateTime.UtcNow;
+            Document.BilledAmount = new Money(Document.Payments.Sum(p => p.BilledAmount));
         }
 
         public void Revert()
         {
-            foreach (SalePayment payment in SaleOrder.SalePayments)
+            foreach (IPayment payment in Document.Payments)
             {
                 payment.FeePercentage = null;
                 payment.FeeFixedValue = null;
@@ -100,11 +104,10 @@ namespace Dyoub.App.Models.ServiceModel.Financial
                 payment.BilledAmount = 0;
             }
 
-            SaleOrder.ConfirmationDate = null;
-            SaleOrder.BilledAmount = 0;
+            Document.ConfirmationDate = null;
+            Document.BilledAmount = 0;
 
-            Tenant.SaleIncomes.RemoveRange(SaleOrder.SalePayments
-                .SelectMany(s => s.SaleIncomes));
+            RemoveIncomes();
         }
     }
 }

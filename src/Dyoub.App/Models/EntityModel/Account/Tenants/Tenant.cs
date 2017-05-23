@@ -19,6 +19,7 @@ using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Financial.PurchaseExpenses;
+using Dyoub.App.Models.EntityModel.Financial.RentIncomes;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
 using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
@@ -57,6 +58,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<RentContract> RentContracts { get; set; }
         public virtual ICollection<RentPayment> RentPayments { get; set; }
         public virtual ICollection<RentedProduct> RentedProducts { get; set; }
+        public virtual ICollection<RentIncome> RentIncomes { get; set; }
         public virtual ICollection<SaleIncome> SaleIncomes { get; set; }
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
         public virtual ICollection<SalePayment> SalePayments { get; set; }

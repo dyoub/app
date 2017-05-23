@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
 {
-    public class SaleOrder : ITenantData
+    public class SaleOrder : ITenantData, ICommercialDocument
     {
         public int Id { get; set; }
         public int TenantId { get; set; }
@@ -55,5 +55,20 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
         public virtual ICollection<SalePayment> SalePayments { get; set; }
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
         public virtual ICollection<SaleService> SaleServices { get; set; }
+
+        DateTime ICommercialDocument.Date
+        {
+            get { return IssueDate; }
+        }
+
+        IEnumerable<IMarketedProduct> ICommercialDocument.MarketedProducts
+        {
+            get { return SaleProducts; }
+        }
+
+        IEnumerable<IPayment> ICommercialDocument.Payments
+        {
+            get { return SalePayments; }
+        }
     }
 }

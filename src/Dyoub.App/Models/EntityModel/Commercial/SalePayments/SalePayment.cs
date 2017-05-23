@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.SalePayments
 {
-    public class SalePayment : ITenantData
+    public class SalePayment : ITenantData, IPayment
     {
         public int Id { get; set; }
         public int TenantId { get; set; }

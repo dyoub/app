@@ -4,13 +4,13 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
 using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
-using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
+using Dyoub.App.Models.EntityModel.Financial.RentIncomes;
 using System;
 using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.RentPayments
 {
-    public class RentPayment : ITenantData
+    public class RentPayment : ITenantData, IPayment
     {
         public int Id { get; set; }
         public int TenantId { get; set; }
@@ -28,6 +28,6 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentPayments
         public virtual Tenant Tenant { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }
         public virtual RentContract RentContract { get; set; }
-        public virtual ICollection<SaleIncome> SaleIncomes { get; set; }
+        public virtual ICollection<RentIncome> RentIncomes { get; set; }
     }
 }

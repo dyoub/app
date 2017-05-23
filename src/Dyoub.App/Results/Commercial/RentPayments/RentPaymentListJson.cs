@@ -42,7 +42,14 @@ namespace Dyoub.App.Results.Commercial.RentPayments
                     feeFixedValue = payment.FeeFixedValue,
                     total = payment.Total,
                     billedAmount = payment.BilledAmount,
-                    date = payment.Date.ToJson()
+                    date = payment.Date.ToJson(),
+                    incomes = payment.RentIncomes
+                        .OrderBy(income => income.ReceivedDate)
+                        .Select(income => new
+                        {
+                            receivedDate = income.ReceivedDate.ToJson(),
+                            amountReceived = income.AmountReceived
+                        })
                 })
             };
 

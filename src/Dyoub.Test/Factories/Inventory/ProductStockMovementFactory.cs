@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
 using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
@@ -22,6 +23,21 @@ namespace Dyoub.Test.Factories.Inventory
                 Product = purchasedProduct.Product,
                 Tenant = purchasedProduct.Tenant,
                 Quantity = purchasedProduct.Quantity
+            };
+        }
+
+        public static ProductStockMovement ProductStockMovement(RentedProduct rentedProduct)
+        {
+            rentedProduct.StockTransactionId = Guid.NewGuid();
+
+            return new ProductStockMovement
+            {
+                TransactionId = rentedProduct.StockTransactionId.Value,
+                Date = rentedProduct.RentContract.StartDate,
+                Store = rentedProduct.RentContract.Store,
+                Product = rentedProduct.Product,
+                Tenant = rentedProduct.Tenant,
+                Quantity = rentedProduct.Quantity * (-1)
             };
         }
 

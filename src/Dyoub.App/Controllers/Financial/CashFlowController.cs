@@ -8,6 +8,7 @@ using Dyoub.App.Models.EntityModel.Financial.CashActivities;
 using Dyoub.App.Models.EntityModel.Financial.FixedExpenses;
 using Dyoub.App.Models.EntityModel.Financial.OtherCashActivities;
 using Dyoub.App.Models.EntityModel.Financial.PurchaseExpenses;
+using Dyoub.App.Models.EntityModel.Financial.RentIncomes;
 using Dyoub.App.Models.EntityModel.Financial.SaleIncomes;
 using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Models.ViewModel.Financial.CashFlow;
@@ -29,6 +30,12 @@ namespace Dyoub.App.Controllers.Financial
 
         private IQueryable<CashActivity> CashActivities(int? storeId, DateTime fromDate, DateTime toDate)
         {
+            IQueryable<CashActivity> rentIncomes = Tenant.RentIncomes
+                .WhereStoreId(storeId)
+                .WhereReceivedDateStartAt(fromDate)
+                .WhereReceivedDateEndAt(toDate)
+                .AsCashActivity();
+
             IQueryable<CashActivity> saleIncomes = Tenant.SaleIncomes
                 .WhereStoreId(storeId)
                 .WhereReceivedDateStartAt(fromDate)
@@ -54,6 +61,7 @@ namespace Dyoub.App.Controllers.Financial
                 .AsCashActivity();
 
             return saleIncomes
+                .Concat(rentIncomes)
                 .Concat(purchaseExpenses)
                 .Concat(fixedExpenses)
                 .Concat(others);

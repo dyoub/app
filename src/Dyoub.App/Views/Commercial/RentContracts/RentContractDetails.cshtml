@@ -130,6 +130,8 @@
 
     @using (Html.Authorize("rent-contracts.edit"))
     {
+        @Html.Partial("~/Views/Commercial/RentContracts/_ConfirmRentContract.cshtml")
         @Html.Partial("~/Views/Commercial/RentContracts/_RemoveRentContract.cshtml")
+        @Html.Partial("~/Views/Commercial/RentContracts/_RevertRentContract.cshtml")
     }
 </div>

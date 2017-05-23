@@ -5,7 +5,7 @@ namespace Dyoub.App.Models.EntityModel.Financial.CashActivities
 {
     public enum CashActivityType
     {
-        RentContract,
+        Rental,
         Sale,
         Purchase,
         FixedExpense,

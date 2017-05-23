@@ -2,7 +2,7 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel;
-using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.ServiceModel.Financial;
 using Dyoub.App.Models.ServiceModel.Inventory;
 using System;
@@ -12,76 +12,76 @@ using System.Threading.Tasks;
 
 namespace Dyoub.App.Models.ServiceModel.OrderProcessing
 {
-    public class SaleOrderProcessing
+    public class RentContractProcessing
     {
         public TenantContext Tenant { get; private set; }
-        public SaleOrder SaleOrder { get; private set; }
+        public RentContract RentContract { get; private set; }
         public ProductConsumption ProductConsumption { get; private set; }
-        public SaleBilling Billing { get; private set; }
+        public RentBilling Billing { get; private set; }
         public bool HasNoItems { get; private set; }
         public bool HasPendingPayment { get; private set; }
 
-        public SaleOrderProcessing(TenantContext tenant)
+        public RentContractProcessing(TenantContext tenant)
         {
             Tenant = tenant;
         }
 
-        private bool SaleOrderIsPending()
+        private bool RentContractIsPending()
         {
-            HasNoItems = SaleOrder.TotalPayable == 0;
-            HasPendingPayment = SaleOrder.TotalPayable != SaleOrder.SalePayments.Sum(p => p.Total);
+            HasNoItems = RentContract.TotalPayable == 0;
+            HasPendingPayment = RentContract.TotalPayable != RentContract.RentPayments.Sum(p => p.Total);
 
             return HasNoItems || HasPendingPayment;
         }
 
-        public async Task<bool> Confirm(int saleOrderId)
+        public async Task<bool> Confirm(int rentContractId)
         {
-            SaleOrder = await Tenant.SaleOrders
-                .WhereId(saleOrderId)
+            RentContract = await Tenant.RentContracts
+                .WhereId(rentContractId)
                 .IncludeStore()
-                .IncludeSaleProducts()
+                .IncludeRentedProducts()
                 .IncludePaymentMethodsAndFees()
                 .SingleOrDefaultAsync();
 
-            if (SaleOrder == null || SaleOrder.Confirmed || SaleOrderIsPending())
+            if (RentContract == null || RentContract.Confirmed || RentContractIsPending())
             {
                 return false;
             }
 
-            ProductConsumption = new ProductConsumption(Tenant, SaleOrder);
+            ProductConsumption = new ProductConsumption(Tenant, RentContract);
             if (!await ProductConsumption.Confirm()) return false;
 
-            Billing = new SaleBilling(Tenant, SaleOrder);
+            Billing = new RentBilling(Tenant, RentContract);
             Billing.Confirm();
 
-            SaleOrder.ConfirmationDate = DateTime.UtcNow;
+            RentContract.ConfirmationDate = DateTime.UtcNow;
 
             await Tenant.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<bool> Revert(int saleOrderId)
+        public async Task<bool> Revert(int rentContractId)
         {
-            SaleOrder = await Tenant.SaleOrders
-                .WhereId(saleOrderId)
+            RentContract = await Tenant.RentContracts
+                .WhereId(rentContractId)
                 .IncludeStore()
-                .IncludeSaleProducts()
-                .IncludeSaleIncomes()
+                .IncludeRentedProducts()
+                .IncludeRentIncomes()
                 .SingleOrDefaultAsync();
 
-            if (SaleOrder == null || !SaleOrder.Confirmed)
+            if (RentContract == null || !RentContract.Confirmed)
             {
                 return false;
             }
 
-            ProductConsumption = new ProductConsumption(Tenant, SaleOrder);
+            ProductConsumption = new ProductConsumption(Tenant, RentContract);
             await ProductConsumption.Revert();
 
-            Billing = new SaleBilling(Tenant, SaleOrder);
+            Billing = new RentBilling(Tenant, RentContract);
             Billing.Revert();
 
-            SaleOrder.ConfirmationDate = null;
+            RentContract.ConfirmationDate = null;
 
             await Tenant.SaveChangesAsync();
 

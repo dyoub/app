@@ -4,11 +4,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dyoub.App.Models.EntityModel.Commercial.RentPayments
+namespace Dyoub.App.Models.EntityModel.Financial.RentIncomes
 {
-    public class RentPaymentMapping : EntityTypeConfiguration<RentPayment>
+    public class RentIncomeMapping : EntityTypeConfiguration<RentIncome>
     {
-        public RentPaymentMapping()
+        public RentIncomeMapping()
         {
             HasKey(p => new
             {
@@ -19,19 +19,11 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentPayments
             Property(p => p.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             HasRequired(p => p.Tenant)
-                .WithMany(p => p.RentPayments)
+                .WithMany(p => p.RentIncomes)
                 .HasForeignKey(p => p.TenantId);
 
-            HasRequired(p => p.PaymentMethod)
-                .WithMany(p => p.RentPayments)
-                .HasForeignKey(p => new { p.PaymentMethodId, p.TenantId });
-
-            HasRequired(p => p.RentContract)
-                .WithMany(p => p.RentPayments)
-                .HasForeignKey(p => new { p.RentContractId, p.TenantId });
-
-            HasMany(p => p.RentIncomes)
-                .WithRequired(p => p.RentPayment)
+            HasRequired(p => p.RentPayment)
+                .WithMany(p => p.RentIncomes)
                 .HasForeignKey(p => new { p.RentPaymentId, p.TenantId });
         }
     }

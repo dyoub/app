@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
 {
-    public class RentContract : ITenantData
+    public class RentContract : ITenantData, ICommercialDocument
     {
         public int Id { get; set; }
         public int TenantId { get; set; }
@@ -60,5 +60,20 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
         public virtual Wallet Wallet { get; set; }
         public virtual ICollection<RentedProduct> RentedProducts { get; set; }
         public virtual ICollection<RentPayment> RentPayments { get; set; }
+
+        DateTime ICommercialDocument.Date
+        {
+            get { return StartDate; }
+        }
+
+        IEnumerable<IMarketedProduct> ICommercialDocument.MarketedProducts
+        {
+            get { return RentedProducts; }
+        }
+
+        IEnumerable<IPayment> ICommercialDocument.Payments
+        {
+            get { return RentPayments; }
+        }
     }
 }

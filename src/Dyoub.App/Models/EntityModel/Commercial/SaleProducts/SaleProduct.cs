@@ -8,7 +8,7 @@ using System;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.SaleProducts
 {
-    public class SaleProduct : ITenantData
+    public class SaleProduct : ITenantData, IMarketedProduct
     {
         public int SaleOrderId { get; set; }
         public int ProductId { get; set; }

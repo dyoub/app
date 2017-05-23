@@ -1,0 +1,16 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+<div class="modal" data-modal-open="controller.confirmDialogOpened">
+    <div class="modal-content">
+        <div class="box" data-translate="Are you sure you want confirm this rent contract?"></div>
+        <button type="button" class="success" data-ng-click="controller.confirm()" data-ng-disabled="controller.confirming">
+            <span data-ng-show="controller.confirming" data-translate="Saving"></span>
+            <span data-ng-hide="controller.confirming" data-translate="Yes"></span>
+        </button>
+        <button type="button" data-translate="No" data-ng-click="controller.hideConfirmDialog()"
+                data-ng-disabled="controller.confirming"></button>
+    </div>
+</div>
