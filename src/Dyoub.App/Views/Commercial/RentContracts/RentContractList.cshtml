@@ -102,6 +102,14 @@
                             <span data-ng-bind="rentContract.customer"></span>
                             <span data-ng-hide="rentContract.customer" data-translate="Customer not identified"></span>
                         </p>
+                        <p class="font-11 text-muted">
+                            <span data-ng-show="rentContract.location">
+                                <i class="fa fa-map-marker"></i>
+                                <span data-ng-bind="rentContract.location"></span>
+                            </span>
+                            <i class="fa fa-clock-o"></i>
+                            <span data-ng-bind="rentContract.startTime"></span>
+                        </p>
                     </div>
                 </div>
             </div>

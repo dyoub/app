@@ -7,6 +7,11 @@ namespace Dyoub.App.Extensions
 {
     public static class DateTimeExtensions
     {
+        public static string ToJson(this TimeSpan timeSpan)
+        {
+            return string.Format("{0:hh}:{0:mm}", timeSpan);
+        }
+
         public static string ToJson(this DateTime dateTime)
         {
             return string.Format("{0:yyyy}-{0:MM}-{0:dd}T{0:HH}:{0:mm}:{0:ss}.{0:fff}", dateTime);

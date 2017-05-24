@@ -33,7 +33,9 @@ namespace Dyoub.Test.Controllers.Commercial
             CreateRentContractViewModel viewModel = new CreateRentContractViewModel();
             viewModel.StoreId = context.Store.Id;
             viewModel.StartDate = DateTime.UtcNow.Date;
+            viewModel.StartTime = DateTime.UtcNow.TimeOfDay;
             viewModel.EndDate = DateTime.UtcNow.Date.AddDays(1);
+            viewModel.EndTime = DateTime.UtcNow.TimeOfDay;
             viewModel.Location = "Brazil";
 
             await controller.Create(viewModel);
@@ -104,8 +106,10 @@ namespace Dyoub.Test.Controllers.Commercial
             UpdateRentContractViewModel viewModel = new UpdateRentContractViewModel();
             viewModel.Id = context.RentContract.Id;
             viewModel.StoreId = context.AnotherStore.Id;
-            viewModel.StartDate = context.RentContract.StartDate.AddDays(1);
-            viewModel.EndDate = context.RentContract.EndDate.AddDays(1);
+            viewModel.StartDate = DateTime.UtcNow.Date;
+            viewModel.StartTime = DateTime.UtcNow.TimeOfDay;
+            viewModel.EndDate = DateTime.UtcNow.Date.AddDays(1);
+            viewModel.EndTime = DateTime.UtcNow.TimeOfDay;
             viewModel.Location = context.RentContract.Location + "Updated";
             viewModel.AdditionalInformation = context.RentContract.AdditionalInformation + "Updated";
 

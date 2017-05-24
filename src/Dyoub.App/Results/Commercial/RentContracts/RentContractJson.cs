@@ -21,8 +21,10 @@ namespace Dyoub.App.Results.Commercial.RentContracts
             Data = RentContract == null ? null : new
             {
                 id = RentContract.Id,
-                startDate = RentContract.StartDate.ToJson(),
-                endDate = RentContract.EndDate.ToJson(),
+                startDate = RentContract.StartDate.Date.ToJson(),
+                startTime = RentContract.StartDate.TimeOfDay.ToJson(),
+                endDate = RentContract.EndDate.Date.ToJson(),
+                endTime = RentContract.EndDate.TimeOfDay.ToJson(),
                 confirmationDate = RentContract.ConfirmationDate.ToJsonLocalTimeZone(),
                 location = RentContract.Location,
                 additionalInformation = RentContract.AdditionalInformation,

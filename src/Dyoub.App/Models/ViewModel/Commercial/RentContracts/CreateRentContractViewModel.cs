@@ -19,7 +19,13 @@ namespace Dyoub.App.Models.ViewModel.Commercial.RentContracts
         public DateTime? StartDate { get; set; }
 
         [Required]
+        public TimeSpan? StartTime { get; set; }
+
+        [Required]
         public DateTime? EndDate { get; set; }
+
+        [Required]
+        public TimeSpan? EndTime { get; set; }
 
         [ValidIf]
         public bool StartLowerThanEnd
@@ -27,14 +33,15 @@ namespace Dyoub.App.Models.ViewModel.Commercial.RentContracts
             get
             {
                 if (StartDate == null || EndDate == null)
-                {
                     return true;
-                }
 
-                return StartDate.Value < EndDate.Value;
+                if (StartTime == null || EndTime == null)
+                    return true;
+
+                return StartDate.Value.Add(StartTime.Value) < EndDate.Value.Add(EndTime.Value);
             }
         }
-
+        
         [MaxLength(80)]
         public string Location { get; set; }
 
@@ -45,8 +52,8 @@ namespace Dyoub.App.Models.ViewModel.Commercial.RentContracts
         {
             rentContract.StoreId = StoreId.Value;
             rentContract.WalletId = WalletId;
-            rentContract.StartDate = StartDate.Value.Date;
-            rentContract.EndDate = EndDate.Value.Date;
+            rentContract.StartDate = StartDate.Value.Add(StartTime.Value);
+            rentContract.EndDate = EndDate.Value.Add(EndTime.Value);
             rentContract.Location = Location;
             rentContract.AdditionalInformation = AdditionalInformation;
 

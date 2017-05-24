@@ -85,9 +85,9 @@
                     </div>
 
                     <div class="grid-row">
-                        <div class="grid-column small-6 medium-6 large-6">
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
                             <div class="grid-row">
-                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="grid-column small-6 medium-6 large-6">
                                     <div class="box" data-has-error="controller.rentContractForm.startDate.$invalid">
                                         <label>
                                             <span data-translate="Start date"></span>
@@ -97,7 +97,21 @@
                                                data-type-date data-valid-date-before="controller.rentContract.endDate" required />
                                     </div>
                                 </div>
-                                <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                <div class="grid-column small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="controller.rentContractForm.startTime.$invalid">
+                                        <label>
+                                            <span data-translate="Start time"></span>
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="startTime" data-ng-model="controller.rentContract.startTime"
+                                               data-type-time required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column compact-6 small-6 medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column small-6 medium-6 large-6">
                                     <div class="box" data-has-error="controller.rentContractForm.endDate.$invalid">
                                         <label>
                                             <span data-translate="End date"></span>
@@ -107,14 +121,23 @@
                                                data-type-date data-valid-date-after="controller.rentContract.startDate" required />
                                     </div>
                                 </div>
+                                <div class="grid-column small-6 medium-6 large-6">
+                                    <div class="box" data-has-error="controller.rentContractForm.endTime.$invalid">
+                                        <label>
+                                            <span data-translate="End time"></span>
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="endTime" data-ng-model="controller.rentContract.endTime"
+                                               data-type-time required />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="grid-column small-6 medium-6 large-6">
-                            <div class="box" data-has-error="controller.rentContractForm.location.$invalid">
-                                <label data-translate="Location"></label>
-                                <input type="text" name="location" data-ng-model="controller.rentContract.location" />
-                            </div>
-                        </div>
+                    </div>
+
+                    <div class="box" data-has-error="controller.rentContractForm.location.$invalid">
+                        <label data-translate="Location"></label>
+                        <input type="text" name="location" data-ng-model="controller.rentContract.location" />
                     </div>
 
                     <div class="box" data-has-error="controller.rentContractForm.additionalInformation.$invalid">

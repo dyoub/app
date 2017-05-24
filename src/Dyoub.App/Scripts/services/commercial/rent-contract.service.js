@@ -39,7 +39,9 @@
             storeId: rentContract.store.id,
             walletId: rentContract.wallet ? rentContract.wallet.id : null,
             startDate: rentContract.startDate,
+            startTime: rentContract.startTime,
             endDate: rentContract.endDate,
+            endTime: rentContract.endTime,
             location: rentContract.location,
             additionalInformation: rentContract.additionalInformation
         });

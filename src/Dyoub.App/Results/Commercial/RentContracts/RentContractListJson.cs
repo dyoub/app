@@ -35,9 +35,11 @@ namespace Dyoub.App.Results.Commercial.RentContracts
                 rentContractList = history.Select(rentContract => new
                 {
                     id = rentContract.Id,
-                    startDate = rentContract.StartDate.ToJson(),
+                    startTime = rentContract.StartDate.TimeOfDay.ToJson(),
+                    endTime = rentContract.EndDate.TimeOfDay.ToJson(),
                     store = rentContract.Store.Name,
                     customer = rentContract.Customer != null ? rentContract.Customer.Name : null,
+                    location = rentContract.Location,
                     draft = rentContract.Draft,
                     budget = rentContract.Budget
                 })
