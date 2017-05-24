@@ -7,24 +7,24 @@ namespace Dyoub.App.Models.EntityModel.Inventory.Suppliers
 {
     public static class SupplierQuery
     {
-        public static IQueryable<Supplier> OrderedByName(this IQueryable<Supplier> customers)
+        public static IQueryable<Supplier> OrderedByName(this IQueryable<Supplier> suppliers)
         {
-            return customers.OrderBy(customer => customer.Name);
+            return suppliers.OrderBy(supplier => supplier.Name);
         }
 
-        public static IQueryable<Supplier> WhereId(this IQueryable<Supplier> customers, int id)
+        public static IQueryable<Supplier> WhereId(this IQueryable<Supplier> suppliers, int id)
         {
-            return customers.Where(customer => customer.Id == id);
+            return suppliers.Where(supplier => supplier.Id == id);
         }
 
-        public static IQueryable<Supplier> WhereNameContains(this IQueryable<Supplier> customers, params string[] words)
+        public static IQueryable<Supplier> WhereNameContains(this IQueryable<Supplier> suppliers, params string[] words)
         {
             foreach (string word in words)
             {
-                customers = customers.Where(customer => customer.Name.Contains(word));
+                suppliers = suppliers.Where(supplier => supplier.Name.Contains(word));
             }
 
-            return customers;
+            return suppliers;
         }
     }
 }

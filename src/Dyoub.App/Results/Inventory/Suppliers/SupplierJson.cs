@@ -10,9 +10,9 @@ namespace Dyoub.App.Results.Inventory.Suppliers
     {
         public Supplier Supplier { get; private set; }
 
-        public SupplierJson(Supplier customer)
+        public SupplierJson(Supplier supplier)
         {
-            Supplier = customer;
+            Supplier = supplier;
         }
 
         public override void ExecuteResult(ControllerContext context)
