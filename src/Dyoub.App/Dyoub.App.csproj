@@ -207,6 +207,9 @@
     <EmbeddedResource Include="Data\Migrations\201705212017212_CreateRentIncome.resx">
       <DependentUpon>201705212017212_CreateRentIncome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705232232209_CreatePartner.resx">
+      <DependentUpon>201705232232209_CreatePartner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -229,6 +232,9 @@
     <Content Include="Scripts\controllers\catalog\services\service-details.controller.js" />
     <Content Include="Scripts\controllers\catalog\services\service-edit.controller.js" />
     <Content Include="Scripts\controllers\catalog\services\service-list.controller.js" />
+    <Content Include="Scripts\controllers\commercial\partners\partner-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\partners\partner-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\partners\partner-list.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-detail.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
@@ -292,6 +298,7 @@
     <Content Include="Scripts\services\catalog\pricing-table.service.js" />
     <Content Include="Scripts\services\catalog\product.service.js" />
     <Content Include="Scripts\services\commercial\installment.service.js" />
+    <Content Include="Scripts\services\commercial\partners.service.js" />
     <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
     <Content Include="Scripts\services\commercial\rent-contract-customer.service.js" />
@@ -329,6 +336,7 @@
     <Compile Include="Controllers\Catalog\PricingTablesController.cs" />
     <Compile Include="Controllers\Catalog\ProductsController.cs" />
     <Compile Include="Controllers\Catalog\ServicesController.cs" />
+    <Compile Include="Controllers\Commercial\PartnersController.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
     <Compile Include="Controllers\Commercial\RentContractCustomerController.cs" />
     <Compile Include="Controllers\Commercial\RentContractsController.cs" />
@@ -480,6 +488,10 @@
     <Compile Include="Data\Migrations\201705212017212_CreateRentIncome.Designer.cs">
       <DependentUpon>201705212017212_CreateRentIncome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705232232209_CreatePartner.cs" />
+    <Compile Include="Data\Migrations\201705232232209_CreatePartner.Designer.cs">
+      <DependentUpon>201705232232209_CreatePartner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
@@ -531,6 +543,9 @@
     <Compile Include="Models\EntityModel\Commercial\ICommercialDocument.cs" />
     <Compile Include="Models\EntityModel\Commercial\IMarketedProduct.cs" />
     <Compile Include="Models\EntityModel\Commercial\IPayment.cs" />
+    <Compile Include="Models\EntityModel\Commercial\Partners\Partner.cs" />
+    <Compile Include="Models\EntityModel\Commercial\Partners\PartnerMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\Partners\PartnerQuery.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethodFees\PaymentMethodFee.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethodFees\PaymentMethodFeeMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethod.cs" />
@@ -672,6 +687,10 @@
     <Compile Include="Models\ViewModel\Catalog\Services\CreateServiceViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Services\ServiceIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Catalog\Services\UpdateServiceViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Partners\CreatePartnerViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Partners\ListPartnersViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Partners\PartnerIdViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\Partners\UpdatePartnerViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\CreatePaymentMethodViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\ListPaymentMethodsViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\PaymentMethods\PaymentMethodFeeViewModel.cs" />
@@ -750,6 +769,8 @@
     <Compile Include="Results\Catalog\Products\ProductListJson.cs" />
     <Compile Include="Results\Catalog\Services\ServiceJson.cs" />
     <Compile Include="Results\Catalog\Services\ServiceListJson.cs" />
+    <Compile Include="Results\Commercial\Partners\PartnerJson.cs" />
+    <Compile Include="Results\Commercial\Partners\PartnerListJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodListJson.cs" />
     <Compile Include="Results\Commercial\RentContractCustomer\RentContractCustomerJson.cs" />
@@ -913,6 +934,10 @@
     <Content Include="Views\Commercial\RentPayments\RentPaymentsEdit.cshtml" />
     <Content Include="Views\Commercial\RentContracts\_ConfirmRentContract.cshtml" />
     <Content Include="Views\Commercial\RentContracts\_RevertRentContract.cshtml" />
+    <Content Include="Views\Commercial\Partners\_RemovePartner.cshtml" />
+    <Content Include="Views\Commercial\Partners\PartnerDetails.cshtml" />
+    <Content Include="Views\Commercial\Partners\PartnerEdit.cshtml" />
+    <Content Include="Views\Commercial\Partners\PartnerList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

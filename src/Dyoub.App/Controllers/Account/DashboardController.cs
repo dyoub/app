@@ -102,7 +102,8 @@ namespace Dyoub.App.Controllers.Account
                     Customers = tenant.Customers.Count(),
                     PaymentMethods = tenant.PaymentMethods.Count(),
                     SaleOrders = saleOrders.Count(),
-                    RentContracts = rentContracts.Count()
+                    RentContracts = rentContracts.Count(),
+                    Partners = tenant.Partners.Count()
                 })
                 .SingleOrDefaultAsync();
 

@@ -1,0 +1,79 @@
+﻿@*<a href="/dashboard/commercial" class="as-button">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="PartnerListController as controller" data-ng-init="controller.init()">
+    <div class="page-header" data-translate="Partners"></div>
+
+    <div class="box">
+        <a href="/dashboard/commercial" class="as-button">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+
+        @using (Html.Authorize("partners.edit"))
+        {
+            <a href="/partners/new" class="as-button success" data-translate="Add"></a>
+        }
+    </div>
+
+    <form name="partnersFilter" data-ng-submit="controller.newSearch()">
+        <label>
+            <i class="fa fa-search"></i>
+            <span data-translate="Search filter"></span>
+        </label>
+        <div class="card">
+            <div class="box">
+                <label data-translate="Name"></label>
+                <input type="text" data-ng-model="controller.filter.name" data-ng-maxlength="80" />
+            </div>
+        </div>
+
+        <div class="box text-center">
+            <button type="submit" class="primary" data-ng-disabled="controller.searching">
+                <span data-ng-hide="controller.searching" data-translate="Search"></span>
+                <em data-ng-show="controller.searching" data-translate="Searching"></em>
+            </button>
+            <button type="button" data-translate="Clear filter" data-ng-click="controller.clearFilter()"></button>
+        </div>
+    </form>
+
+    <div class="card list">
+        <div class="list-item" data-ng-repeat="partner in controller.partnerList">
+            <p>
+                <a class="font-14" href="/partners/details/{{partner.id}}" data-ng-bind="partner.name"></a>
+            </p>
+            <div class="font-11 text-muted">
+                <p data-ng-show="partner.email">
+                    <i class="fa fa-envelope"></i>
+                    <span data-ng-bind="partner.email"></span>
+                </p>
+                <p data-ng-show="partner.phoneNumber || partner.alternativePhoneNumber">
+                    <i class="fa fa-phone"></i>
+                    <span data-ng-bind="partner.phoneNumber"></span>
+                    <span data-ng-bind="'|'" data-ng-show="partner.phoneNumber && partner.alternativePhoneNumber"></span>
+                    <span data-ng-bind="partner.alternativePhoneNumber"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-center text-primary" data-translate="No records found"
+         data-ng-show="controller.partnerList.isEmpty()"></div>
+
+    <div class="box text-center" data-ng-hide="controller.partnerList.isEmpty()"
+         data-ng-disabled="controller.searching">
+        <button type="button" class="primary" data-ng-click="controller.search()">
+            <span data-ng-hide="controller.searching" data-translate="More results"></span>
+            <em data-ng-show="controller.searching" data-translate="Searching"></em>
+        </button>
+    </div>
+</div>

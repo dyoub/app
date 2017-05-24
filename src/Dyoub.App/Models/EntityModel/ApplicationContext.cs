@@ -11,6 +11,7 @@ using Dyoub.App.Models.EntityModel.Catalog.Products;
 using Dyoub.App.Models.EntityModel.Catalog.ServicePrices;
 using Dyoub.App.Models.EntityModel.Catalog.Services;
 using Dyoub.App.Models.EntityModel.Commercial.Customers;
+using Dyoub.App.Models.EntityModel.Commercial.Partners;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
 using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
@@ -49,6 +50,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<Customer> Customers { get { return Set<Customer>(); } }
         public DbSet<FixedExpense> FixedExpenses { get { return Set<FixedExpense>(); } }
         public DbSet<OtherCashActivity> OtherCashActivities { get { return Set<OtherCashActivity>(); } }
+        public DbSet<Partner> Partners { get { return Set<Partner>(); } }
         public DbSet<PasswordRecovery> PasswordRecoveries { get { return Set<PasswordRecovery>(); } }
         public DbSet<PaymentMethod> PaymentMethods { get { return Set<PaymentMethod>(); } }
         public DbSet<PaymentMethodFee> PaymentMethodFees { get { return Set<PaymentMethodFee>(); } }
@@ -107,6 +109,7 @@ namespace Dyoub.App.Models.EntityModel
 
             modelBuilder.Configurations.Add(new CustomerMapping());
             modelBuilder.Configurations.Add(new ClosureRequestMapping());
+            modelBuilder.Configurations.Add(new PartnerMapping());
             modelBuilder.Configurations.Add(new PaymentMethodMapping());
             modelBuilder.Configurations.Add(new PaymentMethodFeeMapping());
             modelBuilder.Configurations.Add(new PasswordRecoveryMapping());

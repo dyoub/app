@@ -9,5 +9,6 @@ namespace Dyoub.App.Models.EntityModel.Overview
         public int PaymentMethods { get; set; }
         public int SaleOrders { get; set; }
         public int RentContracts { get; set; }
+        public int Partners { get; set; }
     }
 }
