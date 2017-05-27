@@ -1,0 +1,137 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="RentedProductsReturnDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header">
+        <div class="page-header">
+            <span data-translate="Rent contract"></span>
+            <strong data-ng-bind="controller.routeParams.rentContractId | orderNumber"></strong>
+        </div>
+        <div data-ng-hide="controller.notFound">
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/products"
+               class="step" data-translate="Products"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/payments"
+               class="step" data-translate="Payments"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Return"></span>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract not found."></p>
+            <a href="/rent-contracts" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div class="error" data-ng-hide="controller.notFound || controller.rentContract.confirmed">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract not confirmed yet."></p>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}"
+               class="as-button primary" data-translate="Go to rent contract details"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound || !controller.rentContract.confirmed">
+            @using (Html.Authorize("rent-contracts.edit"))
+            {
+                <div class="box">
+                    <a href="/rent-contracts/edit/{{controller.rentContract.id}}/return" class="as-button"
+                       data-translate="Edit"></a>
+                </div>
+            }
+
+            <div class="box">
+                <span class="hint success" data-translate="Billed" data-ng-show="controller.rentContract.confirmed"></span>
+                <span class="hint warning" data-translate="Return pending" data-ng-show="controller.rentContract.returnPending"></span>
+            </div>
+
+            <div class="card">
+                <div class="grid-row">
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label>
+                                <span data-translate="Date of return"></span>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <strong data-ng-bind="controller.rentContract.dateOfReturn | moment: 'shortDate'"></strong>
+                            <strong data-ng-hide="controller.rentContract.dateOfReturn">-</strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label>
+                                <span data-translate="Time of return"></span>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <strong data-ng-bind="controller.rentContract.timeOfReturn"></strong>
+                            <strong data-ng-hide="controller.rentContract.timeOfReturn">-</strong>
+                        </div>
+                    </div>
+                    <div class="grid-column small-4 medium-4 large-4">
+                        <div class="box">
+                            <label data-translate="Other charges"></label>
+                            <strong data-ng-bind="controller.rentContract.otherCharges"></strong>
+                            <strong data-ng-hide="controller.rentContract.otherCharges">-</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-header" data-translate="Products"></div>
+
+            <div class="card list">
+                <div class="list-item" data-ng-repeat="product in controller.rentContract.productList">
+                    <div class="grid-row">
+                        <div class="grid-column medium-6 large-6">
+                            <div class="box">
+                                <p data-ng-bind="product.name"></p>
+                                <span class="box font-11 text-muted">
+                                    <i class="fa fa-barcode"></i>
+                                    <span data-ng-bind="product.code" data-ng-show="product.code"></span>
+                                    <em data-translate="No code" data-ng-hide="product.code"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="grid-column medium-6 large-6">
+                            <div class="grid-row">
+                                <div class="grid-column small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label data-translate="Rented quantity"></label>
+                                        <strong data-ng-bind="product.quantity | number: 3"></strong>
+                                    </div>
+                                </div>
+                                <div class="grid-column small-6 medium-6 large-6">
+                                    <div class="box">
+                                        <label>
+                                            <span data-translate="Returned quantity"></span>
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <strong data-ng-bind="controller.rentContract.returnedQuantity | number: 3"></strong>
+                                        <strong data-ng-hide="controller.rentContract.returnedQuantity">-</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

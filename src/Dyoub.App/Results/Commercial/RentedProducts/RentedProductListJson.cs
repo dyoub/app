@@ -28,8 +28,15 @@ namespace Dyoub.App.Results.Commercial.RentedProducts
                 id = RentContract.Id,
                 storeId = RentContract.StoreId,
                 confirmed = RentContract.Confirmed,
-                startDate = RentContract.StartDate.ToJson(),
-                endDate = RentContract.EndDate.ToJson(),
+                returnPending = RentContract.ReturnPending,
+                startDate = RentContract.StartDate.Date.ToJson(),
+                startTime = RentContract.StartDate.TimeOfDay.ToJson(),
+                endDate = RentContract.EndDate.Date.ToJson(),
+                endTime = RentContract.EndDate.TimeOfDay.ToJson(),
+                dateOfReturn = RentContract.DateOfReturn == null ? null :
+                    RentContract.DateOfReturn.Value.Date.ToJson(),
+                timeOfReturn = RentContract.DateOfReturn == null ? null :
+                    RentContract.DateOfReturn.Value.TimeOfDay.ToJson(),
                 totalDays = RentContract.TotalDays,
                 productList = RentedProducts.Select(rentedProduct => new
                 {
@@ -37,6 +44,7 @@ namespace Dyoub.App.Results.Commercial.RentedProducts
                     name = rentedProduct.Product.Name,
                     code = rentedProduct.Product.Code,
                     quantity = rentedProduct.Quantity,
+                    returnedQuantity = rentedProduct.ReturnedQuantity,
                     unitPrice = rentedProduct.UnitPrice,
                     total = rentedProduct.Total,
                     discount = rentedProduct.Discount,

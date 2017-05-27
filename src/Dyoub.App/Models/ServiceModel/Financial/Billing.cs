@@ -14,12 +14,12 @@ namespace Dyoub.App.Models.ServiceModel.Financial
     public abstract class Billing<TIncome> where TIncome : IIncome
     {
         public TenantContext Tenant { get; private set; }
-        public ICommercialDocument Document { get; private set; }
+        public IInvoice Invoice { get; private set; }
 
-        public Billing(TenantContext tenant, ICommercialDocument document)
+        public Billing(TenantContext tenant, IInvoice invoice)
         {
             Tenant = tenant;
-            Document = document;
+            Invoice = invoice;
         }
         
         private void AssignPaymentMethodFee(IPayment payment)
@@ -61,7 +61,7 @@ namespace Dyoub.App.Models.ServiceModel.Financial
         
         private IEnumerable<TIncome> CalculateIncomes()
         {
-            foreach (IPayment payment in Document.Payments)
+            foreach (IPayment payment in Invoice.Payments)
             {
                 int installments = payment.PaymentMethod.EarlyReceipt ? 1 : payment.NumberOfInstallments;
 
@@ -90,13 +90,13 @@ namespace Dyoub.App.Models.ServiceModel.Financial
         {
             AddIncomes(CalculateIncomes());
 
-            Document.ConfirmationDate = DateTime.UtcNow;
-            Document.BilledAmount = new Money(Document.Payments.Sum(p => p.BilledAmount));
+            Invoice.ConfirmationDate = DateTime.UtcNow;
+            Invoice.Total = new Money(Invoice.Payments.Sum(p => p.BilledAmount));
         }
 
         public void Revert()
         {
-            foreach (IPayment payment in Document.Payments)
+            foreach (IPayment payment in Invoice.Payments)
             {
                 payment.FeePercentage = null;
                 payment.FeeFixedValue = null;
@@ -104,8 +104,8 @@ namespace Dyoub.App.Models.ServiceModel.Financial
                 payment.BilledAmount = 0;
             }
 
-            Document.ConfirmationDate = null;
-            Document.BilledAmount = 0;
+            Invoice.ConfirmationDate = null;
+            Invoice.Total = 0;
 
             RemoveIncomes();
         }

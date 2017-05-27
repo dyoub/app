@@ -15,13 +15,39 @@ namespace Dyoub.App.Data
                 ProductId = t.Int(nullable: false),
                 TenantId = t.Int(nullable: false),
                 Quantity = t.Decimal(nullable: false, precision: 9, scale: 3),
+                ReturnedQuantity = t.Decimal(nullable: true, precision: 9, scale: 3),
                 UnitPrice = t.Decimal(nullable: false, precision: 8, scale: 2),
                 Total = t.Decimal(nullable: false, precision: 10, scale: 2),
                 Discount = t.Decimal(nullable: true, precision: 10, scale: 2),
                 TotalPayable = t.Decimal(nullable: false, precision: 10, scale: 2),
-                StockTransactionId = t.String(nullable: true, maxLength: 36)
+                StockTransactionIdIn = t.String(nullable: true, maxLength: 36),
+                StockTransactionIdOut = t.String(nullable: true, maxLength: 36)
             })
             .PrimaryKey(t => new { t.RentContractId, t.ProductId, t.TenantId });
+
+            AddForeignKey(
+                dependentTable: "RentedProduct",
+                dependentColumn: "TenantId",
+                principalTable: "Tenant",
+                principalColumn: "Id",
+                cascadeDelete: false
+            );
+
+            AddForeignKey(
+                dependentTable: "RentedProduct",
+                dependentColumns: new string[] { "RentContractId", "TenantId" },
+                principalTable: "RentContract",
+                principalColumns: new string[] { "Id", "TenantId" },
+                cascadeDelete: true
+            );
+
+            AddForeignKey(
+                dependentTable: "RentedProduct",
+                dependentColumns: new string[] { "ProductId", "TenantId" },
+                principalTable: "Product",
+                principalColumns: new string[] { "Id", "TenantId" },
+                cascadeDelete: true
+            );
         }
         
         public override void Down()

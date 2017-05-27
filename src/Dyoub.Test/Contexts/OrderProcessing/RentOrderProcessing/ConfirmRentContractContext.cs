@@ -78,7 +78,7 @@ namespace Dyoub.Test.Contexts.OrderProcessing.RentContractProcessing
             Entry(rentedProduct).Reload();
 
             return ProductStockMovements
-                .Where(movement => movement.TransactionId == rentedProduct.StockTransactionId.Value)
+                .Where(movement => movement.TransactionId == rentedProduct.StockTransactionIdOut.Value)
                 .Any();
         }
     }

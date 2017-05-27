@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders
 {
-    public class PurchaseOrder : ITenantData
+    public class PurchaseOrder : ITenantData, IIncomingOrder
     {
         public int Id { get; set; }
         public int TenantId { get; set; }
@@ -56,5 +56,15 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders
         public virtual Wallet Wallet { get; set; }
         public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }
         public virtual ICollection<PurchasePayment> PurchasePayments { get; set; }
+
+        DateTime IIncomingOrder.Date
+        {
+            get { return IssueDate; }
+        }
+
+        IEnumerable<IIncomingProduct> IIncomingOrder.IncomingList
+        {
+            get { return PurchasedProducts; }
+        }
     }
 }

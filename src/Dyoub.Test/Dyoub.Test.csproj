@@ -160,6 +160,8 @@
     <Compile Include="Contexts\Commercial\RentContracts\ListRentContractsContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\UpdateConfirmedRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\UpdateRentContractContext.cs" />
+    <Compile Include="Contexts\Commercial\RentedProductsReturn\UpdateReturnedProductsContext.cs" />
+    <Compile Include="Contexts\Commercial\RentedProductsReturn\UpdateReturnOfNotConfirmedRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentedProducts\ListRentedProductsContext.cs" />
     <Compile Include="Contexts\Commercial\RentedProducts\UpdateProductsOfConfirmedRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentedProducts\UpdateRentedProductsContext.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="Controllers\Commercial\RentContractCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentContractsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentedProductsControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\RentedProductsReturnControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentPaymentsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerControllerTest.cs" />
     <Compile Include="Controllers\Commercial\SaleItemsControllerTest.cs" />

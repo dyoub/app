@@ -21,6 +21,7 @@ namespace Dyoub.App.Results.Commercial.RentContractCustomer
             {
                 id = RentContract.Id,
                 confirmed = RentContract.Confirmed,
+                returnPending = RentContract.ReturnPending,
                 customer = RentContract.Customer == null ? null : new
                 {
                     id = RentContract.Customer.Id,

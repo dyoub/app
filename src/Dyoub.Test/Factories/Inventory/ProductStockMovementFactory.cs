@@ -1,16 +1,31 @@
 ﻿// Copyright (c) Dyoub Applications. All rights reserved.
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
+using Dyoub.App.Models.EntityModel.Catalog.Products;
 using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
 using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
+using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
 
 namespace Dyoub.Test.Factories.Inventory
 {
     public class ProductStockMovementFactory
     {
+        public static ProductStockMovement ProductStockMovement(Store store, Product product, decimal quantity)
+        {
+            return new ProductStockMovement
+            {
+                TransactionId = Guid.NewGuid(),
+                Date = DateTime.UtcNow.Date,
+                Store = store,
+                Product = product,
+                Tenant = product.Tenant,
+                Quantity = quantity
+            };
+        }
+
         public static ProductStockMovement ProductStockMovement(PurchasedProduct purchasedProduct)
         {
             purchasedProduct.StockTransactionId = Guid.NewGuid();
@@ -28,11 +43,11 @@ namespace Dyoub.Test.Factories.Inventory
 
         public static ProductStockMovement ProductStockMovement(RentedProduct rentedProduct)
         {
-            rentedProduct.StockTransactionId = Guid.NewGuid();
+            rentedProduct.StockTransactionIdOut = Guid.NewGuid();
 
             return new ProductStockMovement
             {
-                TransactionId = rentedProduct.StockTransactionId.Value,
+                TransactionId = rentedProduct.StockTransactionIdOut.Value,
                 Date = rentedProduct.RentContract.StartDate,
                 Store = rentedProduct.RentContract.Store,
                 Product = rentedProduct.Product,

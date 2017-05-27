@@ -31,6 +31,7 @@ namespace Dyoub.App.Results.Commercial.RentContracts
                 total = RentContract.Total,
                 billedAmount = RentContract.BilledAmount,
                 confirmed = RentContract.Confirmed,
+                returnPending = RentContract.ReturnPending,
                 store = new
                 {
                     id = RentContract.Store.Id,

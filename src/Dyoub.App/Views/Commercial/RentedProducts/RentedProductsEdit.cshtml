@@ -24,6 +24,9 @@
             <span class="separator"></span>
             <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/payments"
                class="step" data-translate="Payments"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/return"
+               class="step" data-translate="Return"></a>
         </div>
     </div>
 
@@ -114,7 +117,7 @@
                             <div class="grid-column medium-6 large-6">
                                 <div class="grid-row">
                                     <div class="grid-column compact small-6 medium-6 large-6">
-                                        <div class="box" data-has-error="controller.rentedProductsForm.cost.$invalid">
+                                        <div class="box">
                                             <label data-translate="Unit rent price"></label>
                                             <strong data-ng-bind="controller.rentContract.totalDays"></strong>
                                             <strong data-translate="{{ controller.rentContract.totalDays > 1 ? 'days' : 'day'}}"></strong>

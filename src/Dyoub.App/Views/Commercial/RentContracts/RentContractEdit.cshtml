@@ -24,6 +24,9 @@
             <span class="separator"></span>
             <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/payments"
                class="step" data-translate="Payments"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/return"
+               class="step" data-translate="Return"></a>
         </div>
     </div>
 
@@ -94,7 +97,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="startDate" data-ng-model="controller.rentContract.startDate"
-                                               data-type-date data-valid-date-before="controller.rentContract.endDate" required />
+                                               data-type-date data-valid-date-same-or-before="controller.rentContract.endDate" required />
                                     </div>
                                 </div>
                                 <div class="grid-column small-6 medium-6 large-6">
@@ -118,7 +121,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="endDate" data-ng-model="controller.rentContract.endDate"
-                                               data-type-date data-valid-date-after="controller.rentContract.startDate" required />
+                                               data-type-date data-valid-date-same-or-after="controller.rentContract.startDate" required />
                                     </div>
                                 </div>
                                 <div class="grid-column small-6 medium-6 large-6">

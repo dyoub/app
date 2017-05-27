@@ -9,13 +9,13 @@ namespace Dyoub.Test.Factories.Commercial
 {
     public class RentedProductFactory
     {
-        public static RentedProduct RentedProduct(RentContract purchaseOrder, Product product)
+        public static RentedProduct RentedProduct(RentContract rentContract, Product product)
         {
             return new RentedProduct
             {
-                RentContract = purchaseOrder,
+                RentContract = rentContract,
                 Product = product,
-                Tenant = purchaseOrder.Tenant,
+                Tenant = rentContract.Tenant,
                 Quantity = 1,
                 UnitPrice = 100.00M,
                 Total = 100.00M,

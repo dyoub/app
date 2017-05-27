@@ -16,11 +16,13 @@ using Dyoub.Test.Factories.Inventory;
 using Dyoub.Test.Factories.Manage;
 using Effort;
 using System.Linq;
+using System;
 
 namespace Dyoub.Test.Contexts.OrderProcessing.RentContractProcessing
 {
     public class RevertRentContractContext : TenantContext
     {
+        private Guid stockTransactionId;
         private RentPayment rentPayment;
         private RentedProduct rentedProduct;
 
@@ -36,7 +38,11 @@ namespace Dyoub.Test.Contexts.OrderProcessing.RentContractProcessing
             RentContract = RentContracts.Add(RentContractFactory.ConfirmedRentContract(store));
 
             rentedProduct = RentedProducts.Add(RentedProductFactory.RentedProduct(RentContract, product));
+
+            ProductStockMovements.Add(ProductStockMovementFactory.ProductStockMovement(store, product, 10));
             ProductStockMovements.Add(ProductStockMovementFactory.ProductStockMovement(rentedProduct));
+
+            stockTransactionId = rentedProduct.StockTransactionIdOut.Value;
 
             rentPayment = RentPayments.Add(RentPaymentFactory.RentPayment(RentContract, paymentMethod));
             rentPayment.NumberOfInstallments = 2;
@@ -47,7 +53,6 @@ namespace Dyoub.Test.Contexts.OrderProcessing.RentContractProcessing
         public bool RentContractHasBeenReverted()
         {
             Entry(RentContract).Reload();
-
             return !RentContract.Confirmed;
         }
 
@@ -69,8 +74,9 @@ namespace Dyoub.Test.Contexts.OrderProcessing.RentContractProcessing
         {
             Entry(rentedProduct).Reload();
 
-            return rentedProduct.StockTransactionId == null &&
-                   !ProductStockMovements.Any();
+            return rentedProduct.StockTransactionIdOut == null &&
+                !ProductStockMovements.Where(movement =>
+                    movement.TransactionId == stockTransactionId).Any();
         }
     }
 }

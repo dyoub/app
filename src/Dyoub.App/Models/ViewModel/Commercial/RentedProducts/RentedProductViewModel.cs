@@ -17,13 +17,13 @@ namespace Dyoub.App.Models.ViewModel.Commercial.RentedProducts
         [Range(0, 999999.99)]
         public decimal? Discount { get; set; }
 
-        public RentedProduct MapTo(RentedProduct purchasedProduct)
+        public RentedProduct MapTo(RentedProduct rentedProduct)
         {
-            purchasedProduct.ProductId = Id.Value;
-            purchasedProduct.Quantity = Quantity.Value;
-            purchasedProduct.Discount = Discount;
+            rentedProduct.ProductId = Id.Value;
+            rentedProduct.Quantity = Quantity.Value;
+            rentedProduct.Discount = Discount;
 
-            return purchasedProduct;
+            return rentedProduct;
         }
     }
 }

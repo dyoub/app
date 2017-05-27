@@ -4,11 +4,12 @@
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
 using Dyoub.App.Models.EntityModel.Commercial.SaleOrders;
+using Dyoub.App.Models.EntityModel.Inventory;
 using System;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.SaleProducts
 {
-    public class SaleProduct : ITenantData, IMarketedProduct
+    public class SaleProduct : ITenantData, IOutgoingProduct
     {
         public int SaleOrderId { get; set; }
         public int ProductId { get; set; }

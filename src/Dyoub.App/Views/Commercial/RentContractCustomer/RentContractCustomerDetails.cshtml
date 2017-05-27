@@ -26,6 +26,9 @@
             <span class="separator"></span>
             <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/payments"
                class="step" data-translate="Payments"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/return"
+               class="step" data-translate="Return"></a>
         </div>
     </div>
 
@@ -49,6 +52,7 @@
 
             <div class="box">
                 <span class="hint success" data-translate="Billed" data-ng-show="controller.rentContract.confirmed"></span>
+                <span class="hint warning" data-translate="Return pending" data-ng-show="controller.rentContract.returnPending"></span>
             </div>
 
             <div class="card">

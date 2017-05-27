@@ -7,13 +7,14 @@ using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.RentPayments;
 using Dyoub.App.Models.EntityModel.Financial;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
+using Dyoub.App.Models.EntityModel.Inventory;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
 using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
 {
-    public class RentContract : ITenantData, ICommercialDocument
+    public class RentContract : ITenantData, IInvoice, IOutgoingOrder, IIncomingOrder
     {
         public int Id { get; set; }
         public int TenantId { get; set; }
@@ -33,6 +34,10 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
         public string Location { get; set; }
         public string AdditionalInformation { get; set; }
         public bool Confirmed { get { return ConfirmationDate != null; } }
+        public bool ReturnPending
+        {
+            get { return Confirmed && DateOfReturn == null; }
+        }
         public bool Budget
         {
             get
@@ -51,7 +56,7 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
         }
         public int TotalDays
         {
-            get { return (int)EndDate.Subtract(StartDate).TotalDays; }
+            get { return (int)EndDate.Subtract(StartDate).TotalDays + 1; }
         }
 
         public virtual Customer Customer { get; set; }
@@ -61,17 +66,33 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
         public virtual ICollection<RentedProduct> RentedProducts { get; set; }
         public virtual ICollection<RentPayment> RentPayments { get; set; }
 
-        DateTime ICommercialDocument.Date
+        DateTime IOutgoingOrder.Date
         {
             get { return StartDate; }
         }
 
-        IEnumerable<IMarketedProduct> ICommercialDocument.MarketedProducts
+        DateTime IIncomingOrder.Date
+        {
+            get { return DateOfReturn ?? EndDate; }
+        }
+
+        IEnumerable<IOutgoingProduct> IOutgoingOrder.OutgoingList
         {
             get { return RentedProducts; }
         }
 
-        IEnumerable<IPayment> ICommercialDocument.Payments
+        IEnumerable<IIncomingProduct> IIncomingOrder.IncomingList
+        {
+            get { return RentedProducts; }
+        }
+
+        decimal IInvoice.Total
+        {
+            get { return BilledAmount; }
+            set { BilledAmount = value; }
+        }
+
+        IEnumerable<IPayment> IInvoice.Payments
         {
             get { return RentPayments; }
         }

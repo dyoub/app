@@ -3,7 +3,7 @@
 
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
-using Dyoub.App.Models.EntityModel.Commercial;
+using Dyoub.App.Models.EntityModel.Inventory;
 using Dyoub.App.Models.EntityModel.Inventory.ProductQuantities;
 using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
 using System;
@@ -17,54 +17,54 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
     public class ProductConsumption
     {
         public TenantContext Tenant { get; private set; }
-        public ICommercialDocument Document { get; private set; }
+        public IOutgoingOrder Order { get; private set; }
         public IEnumerable<Product> Products { get; private set; }
         public IEnumerable<ProductQuantity> ProductQuantities { get; private set; }
         public bool InsufficientBalance { get; set; }
 
-        public ProductConsumption(TenantContext tenant, ICommercialDocument document)
+        public ProductConsumption(TenantContext tenant, IOutgoingOrder order)
         {
             Tenant = tenant;
-            Document = document;
+            Order = order;
         }
 
         private async Task RetrieveProductsAndQuantities()
         {
-            IEnumerable<int> productIds = Document.MarketedProducts.Select(p => p.ProductId);
+            IEnumerable<int> productIds = Order.OutgoingList.Select(p => p.ProductId);
 
             Products = await Tenant.Products
                 .WhereIdIn(productIds)
                 .ToListAsync();
 
             ProductQuantities = await Tenant.ProductStockMovements
-                .WhereStoreId(Document.StoreId)
+                .WhereStoreId(Order.StoreId)
                 .WhereProductIdIn(productIds)
-                .WhereUntilDate(Document.Date)
+                .WhereUntilDate(Order.Date)
                 .AsProductQuantity()
                 .ToListAsync();
         }
 
-        private void CheckQuantityAvailableOf(IMarketedProduct MarketedProduct)
+        private void CheckQuantityAvailableFor(IOutgoingProduct outgoing)
         {
             ProductQuantity productQuantity = ProductQuantities
-                .SingleOrDefault(p => p.Id == MarketedProduct.ProductId);
+                .SingleOrDefault(p => p.Id == outgoing.ProductId);
 
             InsufficientBalance = 
                 productQuantity == null ||
-                productQuantity.TotalAvailable < MarketedProduct.Quantity;
+                productQuantity.TotalAvailable < outgoing.Quantity;
         }
 
-        private void RegisterStockMovementFor(IMarketedProduct marketedProduct)
+        private void RegisterStockMovementFor(IOutgoingProduct outgoing)
         {
-            marketedProduct.StockTransactionId = Guid.NewGuid();
+            outgoing.StockTransactionId = Guid.NewGuid();
 
             Tenant.ProductStockMovements.Add(new ProductStockMovement
             {
-                TransactionId = marketedProduct.StockTransactionId.Value,
-                StoreId = Document.StoreId,
-                ProductId = marketedProduct.ProductId,
-                Date = Document.Date,
-                Quantity = marketedProduct.Quantity * (-1)
+                StoreId = Order.StoreId,
+                Date = Order.Date,
+                TransactionId = outgoing.StockTransactionId.Value,
+                ProductId = outgoing.ProductId,
+                Quantity = outgoing.Quantity * (-1)
             });
         }
 
@@ -76,14 +76,14 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
             {
                 if (product.StockMovement)
                 {
-                    IMarketedProduct marketedProduct = Document.MarketedProducts
+                    IOutgoingProduct outgoing = Order.OutgoingList
                         .Single(p => p.ProductId == product.Id);
 
-                    CheckQuantityAvailableOf(marketedProduct);
+                    CheckQuantityAvailableFor(outgoing);
 
                     if (InsufficientBalance) return false;
 
-                    RegisterStockMovementFor(marketedProduct);
+                    RegisterStockMovementFor(outgoing);
                 }
             }
 
@@ -92,14 +92,14 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
 
         public async Task Revert()
         {
-            IEnumerable<Guid> stockTransactionIds = Document.MarketedProducts
-                .Where(marketedProduct => marketedProduct.StockTransactionId != null)
-                .Select(marketedProduct => marketedProduct.StockTransactionId.Value)
+            IEnumerable<Guid> stockTransactionIds = Order.OutgoingList
+                .Where(outgoing => outgoing.StockTransactionId != null)
+                .Select(outgoing => outgoing.StockTransactionId.Value)
                 .ToList();
 
-            foreach (IMarketedProduct marketedProduct in Document.MarketedProducts)
+            foreach (IOutgoingProduct outgoing in Order.OutgoingList)
             {
-                marketedProduct.StockTransactionId = null;
+                outgoing.StockTransactionId = null;
             }
 
             ICollection<ProductStockMovement> stockMovements = await Tenant.ProductStockMovements

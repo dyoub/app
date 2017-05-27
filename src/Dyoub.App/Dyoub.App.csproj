@@ -245,6 +245,8 @@
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-list.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-payments\rent-payments-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-payments\rent-payments-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\rented-products-return\rented-products-return-details.controller.js" />
+    <Content Include="Scripts\controllers\commercial\rented-products-return\rented-products-return-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\rented-products\rented-products-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\rented-products\rented-products-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\sale-customer\sale-customer-details.controller.js" />
@@ -304,6 +306,7 @@
     <Content Include="Scripts\services\commercial\rent-contract-customer.service.js" />
     <Content Include="Scripts\services\commercial\rent-contract.service.js" />
     <Content Include="Scripts\services\commercial\rent-payments.service.js" />
+    <Content Include="Scripts\services\commercial\rented-products-return.service.js" />
     <Content Include="Scripts\services\commercial\rented-products.service.js" />
     <Content Include="Scripts\services\commercial\sale-customer.service.js" />
     <Content Include="Scripts\services\commercial\sale-items.service.js" />
@@ -340,6 +343,7 @@
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
     <Compile Include="Controllers\Commercial\RentContractCustomerController.cs" />
     <Compile Include="Controllers\Commercial\RentContractsController.cs" />
+    <Compile Include="Controllers\Commercial\RentedProductsReturnController.cs" />
     <Compile Include="Controllers\Commercial\RentedProductsController.cs" />
     <Compile Include="Controllers\Commercial\RentPaymentsController.cs" />
     <Compile Include="Controllers\Commercial\SaleCustomerController.cs" />
@@ -540,8 +544,6 @@
     <Compile Include="Models\EntityModel\Catalog\Services\Service.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceMapping.cs" />
     <Compile Include="Models\EntityModel\Catalog\Services\ServiceQuery.cs" />
-    <Compile Include="Models\EntityModel\Commercial\ICommercialDocument.cs" />
-    <Compile Include="Models\EntityModel\Commercial\IMarketedProduct.cs" />
     <Compile Include="Models\EntityModel\Commercial\IPayment.cs" />
     <Compile Include="Models\EntityModel\Commercial\Partners\Partner.cs" />
     <Compile Include="Models\EntityModel\Commercial\Partners\PartnerMapping.cs" />
@@ -579,6 +581,7 @@
     <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpenseMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\FixedExpenses\FixedExpenseQuery.cs" />
     <Compile Include="Models\EntityModel\Financial\IIncome.cs" />
+    <Compile Include="Models\EntityModel\Financial\IInvoice.cs" />
     <Compile Include="Models\EntityModel\Financial\PurchaseExpenses\PurchaseExpense.cs" />
     <Compile Include="Models\EntityModel\Financial\PurchaseExpenses\PurchaseExpenseMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\PurchaseExpenses\PurchaseExpenseQuery.cs" />
@@ -597,6 +600,10 @@
     <Compile Include="Models\EntityModel\Financial\Wallets\Wallet.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletMapping.cs" />
     <Compile Include="Models\EntityModel\Financial\Wallets\WalletQuery.cs" />
+    <Compile Include="Models\EntityModel\Inventory\IIncomingOrder.cs" />
+    <Compile Include="Models\EntityModel\Inventory\IOutgoingOrder.cs" />
+    <Compile Include="Models\EntityModel\Inventory\IIncomingProduct.cs" />
+    <Compile Include="Models\EntityModel\Inventory\IOutgoingProduct.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductQuantities\ProductQuantityQuery.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovement.cs" />
     <Compile Include="Models\EntityModel\Inventory\ProductStockMovements\ProductStockMovementMapping.cs" />
@@ -701,6 +708,8 @@
     <Compile Include="Models\ViewModel\Commercial\RentContracts\ListRentContractViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentContracts\RentContractIdViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentContracts\UpdateRentContractViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\RentedProductsReturn\ReturnedProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\RentedProductsReturn\UpdateReturnedProductsViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentedProducts\RentedProductViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentedProducts\UpdateRentedProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\RentPayments\RentPaymentViewModel.cs" />
@@ -938,6 +947,8 @@
     <Content Include="Views\Commercial\Partners\PartnerDetails.cshtml" />
     <Content Include="Views\Commercial\Partners\PartnerEdit.cshtml" />
     <Content Include="Views\Commercial\Partners\PartnerList.cshtml" />
+    <Content Include="Views\Commercial\RentedProductsReturn\RentedProductsReturnEdit.cshtml" />
+    <Content Include="Views\Commercial\RentedProductsReturn\RentedProductsReturnDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

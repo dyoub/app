@@ -26,6 +26,9 @@
             <span class="separator"></span>
             <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/payments"
                class="step" data-translate="Payments"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/return"
+               class="step" data-translate="Return"></a>
         </div>
     </div>
 
@@ -45,20 +48,21 @@
                 </a>
 
                 @using (Html.Authorize("rent-contracts.edit"))
-            {
+                {
                     <button type="button" class="success" data-translate="Confirm" data-ng-click="controller.showConfirmDialog()"
                             data-ng-hide="controller.rentContract.confirmed"></button>
-                            <a href="/rent-contracts/edit/{{controller.rentContract.id}}" class="as-button" data-translate="Edit"
-                               data-ng-hide="controller.rentContract.confirmed"></a>
-                            <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"
-                                    data-ng-hide="controller.rentContract.confirmed"></button>
-                                <button type="button" class="danger" data-translate="Revert" data-ng-click="controller.showRevertDialog()"
-                                        data-ng-show="controller.rentContract.confirmed"></button>
+                    <a href="/rent-contracts/edit/{{controller.rentContract.id}}" class="as-button" data-translate="Edit"
+                       data-ng-hide="controller.rentContract.confirmed"></a>
+                    <button type="button" class="danger" data-translate="Remove" data-ng-click="controller.showRemoveDialog()"
+                            data-ng-hide="controller.rentContract.confirmed"></button>
+                    <button type="button" class="danger" data-translate="Revert" data-ng-click="controller.showRevertDialog()"
+                            data-ng-show="controller.rentContract.confirmed"></button>
                 }
             </div>
 
             <div class="box">
-                <span class="hint success" data-ng-show="controller.rentContract.confirmed" data-translate="Billed"></span>
+                <span class="hint success" data-translate="Billed" data-ng-show="controller.rentContract.confirmed"></span>
+                <span class="hint warning" data-translate="Return pending" data-ng-show="controller.rentContract.returnPending"></span>
             </div>
 
             <div class="card">

@@ -75,42 +75,44 @@
             <div class="loading box" data-ng-show="controller.searchingItems"></div>
 
             <div class="ng-cloak" data-ng-hide="controller.searchingItems || controller.error">
-                <div class="card" data-ng-repeat="item in controller.itemList">
-                    <div class="grid-row">
-                        <div class="grid-column small-6 medium-6 large-6">
-                            <label>
-                                <span data-ng-show="item.isProduct" data-translate="Product"></span>
-                                <span data-ng-show="item.isService" data-translate="Service"></span>
-                                <i class="fa fa-exclamation-circle text-warning" data-ng-show="item.priceChanged"></i>
-                            </label>
-                            <p class="font-14" data-ng-bind="item.name"></p>
-                            <p class="text-muted font-11" data-ng-show="item.code">
-                                <i class="fa fa-barcode"></i>
-                                <span data-ng-bind="item.code"></span>
-                            </p>
-                            <p data-ng-hide="item.marketed">
-                                <span class="hint danger" data-translate="NotMarketed"></span>
-                            </p>
-                        </div>
-                        <div class="grid-column small-6 medium-6 large-6">
-                            <div class="grid-row">
-                                <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                    <div class="box">
-                                        <label>
-                                            <span data-translate="Unit sale price"></span>
-                                        </label>
-                                        <input type="text" data-ng-model="item.unitSalePrice" data-type-number="8,2"
-                                               data-ng-change="controller.addItemToChanges(item)" />
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="item in controller.itemList">
+                        <div class="grid-row">
+                            <div class="grid-column small-6 medium-6 large-6">
+                                <label>
+                                    <span data-ng-show="item.isProduct" data-translate="Product"></span>
+                                    <span data-ng-show="item.isService" data-translate="Service"></span>
+                                    <i class="fa fa-exclamation-circle text-warning" data-ng-show="item.priceChanged"></i>
+                                </label>
+                                <p class="font-14" data-ng-bind="item.name"></p>
+                                <p class="text-muted font-11" data-ng-show="item.code">
+                                    <i class="fa fa-barcode"></i>
+                                    <span data-ng-bind="item.code"></span>
+                                </p>
+                                <p data-ng-hide="item.marketed">
+                                    <span class="hint danger" data-translate="NotMarketed"></span>
+                                </p>
+                            </div>
+                            <div class="grid-column small-6 medium-6 large-6">
+                                <div class="grid-row">
+                                    <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label>
+                                                <span data-translate="Unit sale price"></span>
+                                            </label>
+                                            <input type="text" data-ng-model="item.unitSalePrice" data-type-number="8,2"
+                                                   data-ng-change="controller.addItemToChanges(item)" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="grid-column compact-6 small-6 medium-6 large-6">
-                                    <div class="box">
-                                        <label>
-                                            <span data-translate="Unit rent price"></span>
-                                        </label>
-                                        <input type="text" data-ng-model="item.unitRentPrice" data-type-number="8,2"
-                                               data-ng-change="controller.addItemToChanges(item)" data-ng-show="item.isProduct" />
-                                        <strong data-ng-show="item.isService" data-translate="Not applicable"></strong>
+                                    <div class="grid-column compact-6 small-6 medium-6 large-6">
+                                        <div class="box">
+                                            <label>
+                                                <span data-translate="Unit rent price"></span>
+                                            </label>
+                                            <input type="text" data-ng-model="item.unitRentPrice" data-type-number="8,2"
+                                                   data-ng-change="controller.addItemToChanges(item)" data-ng-show="item.isProduct" />
+                                            <strong data-ng-show="item.isService" data-translate="Not applicable"></strong>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

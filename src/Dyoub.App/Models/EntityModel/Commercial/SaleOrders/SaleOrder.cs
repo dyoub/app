@@ -8,13 +8,14 @@ using Dyoub.App.Models.EntityModel.Commercial.SaleProducts;
 using Dyoub.App.Models.EntityModel.Commercial.SaleServices;
 using Dyoub.App.Models.EntityModel.Financial;
 using Dyoub.App.Models.EntityModel.Financial.Wallets;
+using Dyoub.App.Models.EntityModel.Inventory;
 using Dyoub.App.Models.EntityModel.Manage.Stores;
 using System;
 using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
 {
-    public class SaleOrder : ITenantData, ICommercialDocument
+    public class SaleOrder : ITenantData, IInvoice, IOutgoingOrder
     {
         public int Id { get; set; }
         public int TenantId { get; set; }
@@ -56,17 +57,23 @@ namespace Dyoub.App.Models.EntityModel.Commercial.SaleOrders
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
         public virtual ICollection<SaleService> SaleServices { get; set; }
 
-        DateTime ICommercialDocument.Date
+        DateTime IOutgoingOrder.Date
         {
             get { return IssueDate; }
         }
 
-        IEnumerable<IMarketedProduct> ICommercialDocument.MarketedProducts
+        IEnumerable<IOutgoingProduct> IOutgoingOrder.OutgoingList
         {
             get { return SaleProducts; }
         }
 
-        IEnumerable<IPayment> ICommercialDocument.Payments
+        decimal IInvoice.Total
+        {
+            get { return BilledAmount; }
+            set { BilledAmount = value; }
+        }
+
+        IEnumerable<IPayment> IInvoice.Payments
         {
             get { return SalePayments; }
         }

@@ -3,10 +3,9 @@
 
 using Dyoub.App.Models.EntityModel;
 using Dyoub.App.Models.EntityModel.Catalog.Products;
+using Dyoub.App.Models.EntityModel.Inventory;
 using Dyoub.App.Models.EntityModel.Inventory.ProductQuantities;
 using Dyoub.App.Models.EntityModel.Inventory.ProductStockMovements;
-using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
-using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,66 +17,66 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
     public class ProductReplenishment
     {
         public TenantContext Tenant { get; private set; }
-        public PurchaseOrder PurchaseOrder { get; private set; }
+        public IIncomingOrder Order { get; private set; }
         public IEnumerable<Product> Products { get; private set; }
         public IEnumerable<ProductQuantity> ProductQuantities { get; private set; }
         public bool HasProductThatNotMovementStock { get; private set; }
         public bool InsufficientBalance { get; set; }
 
-        public ProductReplenishment(TenantContext tenant, PurchaseOrder purchaseOrder)
+        public ProductReplenishment(TenantContext tenant, IIncomingOrder order)
         {
             Tenant = tenant;
-            PurchaseOrder = purchaseOrder;
+            Order = order;
         }
 
         private async Task RetrieveProductsAndQuantities()
         {
-            IEnumerable<int> productIds = PurchaseOrder.PurchasedProducts.Select(p => p.ProductId);
+            IEnumerable<int> productIds = Order.IncomingList.Select(p => p.ProductId);
 
             Products = await Tenant.Products
                 .WhereIdIn(productIds)
                 .ToListAsync();
 
             ProductQuantities = await Tenant.ProductStockMovements
-                .WhereStoreId(PurchaseOrder.StoreId)
+                .WhereStoreId(Order.StoreId)
                 .WhereProductIdIn(productIds)
-                .WhereUntilDate(PurchaseOrder.IssueDate)
+                .WhereUntilDate(Order.Date)
                 .AsProductQuantity()
                 .ToListAsync();
         }
 
-        private void CheckQuantityAvailableOf(PurchasedProduct purchasedProduct)
+        private void CheckQuantityAvailableForRevert(IIncomingProduct incoming)
         {
             ProductQuantity productQuantity = ProductQuantities
-                .SingleOrDefault(p => p.Id == purchasedProduct.ProductId);
+                .SingleOrDefault(p => p.Id == incoming.ProductId);
 
             InsufficientBalance =
                 productQuantity == null ||
-                productQuantity.TotalAvailable < purchasedProduct.Quantity;
+                productQuantity.TotalAvailable < incoming.Quantity;
         }
 
         public async Task<bool> Confirm()
         {
             Products = await Tenant.Products
-                .WhereIdIn(PurchaseOrder.PurchasedProducts.Select(p => p.ProductId))
+                .WhereIdIn(Order.IncomingList.Select(p => p.ProductId))
                 .ToListAsync();
 
             foreach (Product product in Products)
             {
                 if (HasProductThatNotMovementStock = !product.StockMovement) return false;
 
-                PurchasedProduct purchasedProduct = PurchaseOrder.PurchasedProducts
+                IIncomingProduct incoming = Order.IncomingList
                     .Single(p => p.ProductId == product.Id);
 
-                purchasedProduct.StockTransactionId = Guid.NewGuid();
+                incoming.StockTransactionId = Guid.NewGuid();
 
                 Tenant.ProductStockMovements.Add(new ProductStockMovement
                 {
-                    TransactionId = purchasedProduct.StockTransactionId.Value,
-                    StoreId = PurchaseOrder.StoreId,
-                    ProductId = purchasedProduct.ProductId,
-                    Date = PurchaseOrder.IssueDate,
-                    Quantity = purchasedProduct.Quantity
+                    StoreId = Order.StoreId,
+                    Date = Order.Date,
+                    TransactionId = incoming.StockTransactionId.Value,
+                    ProductId = incoming.ProductId,
+                    Quantity = incoming.Quantity
                 });
             }
 
@@ -88,16 +87,16 @@ namespace Dyoub.App.Models.ServiceModel.Inventory
         {
             await RetrieveProductsAndQuantities();
 
-            IEnumerable<Guid> stockTransactionIds = PurchaseOrder.PurchasedProducts
-                .Where(purchasedProduct => purchasedProduct.StockTransactionId != null)
-                .Select(purchasedProduct => purchasedProduct.StockTransactionId.Value)
+            IEnumerable<Guid> stockTransactionIds = Order.IncomingList
+                .Where(incoming => incoming.StockTransactionId != null)
+                .Select(incoming => incoming.StockTransactionId.Value)
                 .ToList();
 
-            foreach (PurchasedProduct purchasedProduct in PurchaseOrder.PurchasedProducts)
+            foreach (IIncomingProduct incoming in Order.IncomingList)
             {
-                purchasedProduct.StockTransactionId = null;
+                incoming.StockTransactionId = null;
 
-                CheckQuantityAvailableOf(purchasedProduct);
+                CheckQuantityAvailableForRevert(incoming);
 
                 if (InsufficientBalance) return false;
             }

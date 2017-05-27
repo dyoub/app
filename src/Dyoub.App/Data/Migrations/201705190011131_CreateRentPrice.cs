@@ -9,16 +9,25 @@ namespace Dyoub.App.Data
     {
         public override void Up()
         {
-            AddColumn("ProductPrice", "UnitRentPrice", t => t.Decimal(nullable: true, precision: 8, scale: 2));
-            AlterColumn("ProductPrice", "UnitPrice", t => t.Decimal(nullable: true, precision: 8, scale: 2));
+            AddColumn("ProductPrice", "UnitRentPrice", t => t.Decimal(
+                nullable: true,
+                precision: 8,
+                scale: 2
+            ));
+
+            AlterColumn("ProductPrice", "UnitPrice", t => t.Decimal(
+                nullable: true,
+                precision: 8,
+                scale: 2
+            ));
+
             RenameColumn("ProductPrice", "UnitPrice", "UnitSalePrice");
         }
 
         public override void Down()
         {
-            RenameColumn("ProductPrice", "UnitSalePrice", "UnitPrice");
-            AlterColumn("ProductPrice", "UnitPrice", t => t.Decimal(nullable: false, precision: 8, scale: 2));
             DropColumn("ProductPrice", "UnitRentPrice");
+            RenameColumn("ProductPrice", "UnitSalePrice", "UnitPrice");
         }
     }
 }

@@ -3,9 +3,9 @@
 
 using System;
 
-namespace Dyoub.App.Models.EntityModel.Commercial
+namespace Dyoub.App.Models.EntityModel.Inventory
 {
-    public interface IMarketedProduct
+    public interface IIncomingProduct
     {
         int ProductId { get; }
         decimal Quantity { get; }

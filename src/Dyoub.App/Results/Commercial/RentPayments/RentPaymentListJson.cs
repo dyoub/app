@@ -26,6 +26,7 @@ namespace Dyoub.App.Results.Commercial.RentPayments
                 discount = RentContract.Discount,
                 totalPayable = RentContract.TotalPayable,
                 confirmed = RentContract.Confirmed,
+                returnPending = RentContract.ReturnPending,
                 billedAmount = RentContract.BilledAmount,
                 paymentList = RentContract.RentPayments.Select(payment => new
                 {

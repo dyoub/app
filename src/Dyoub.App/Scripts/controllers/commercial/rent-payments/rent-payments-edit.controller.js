@@ -80,7 +80,7 @@
         var controller = this;
 
         controller.routeParams = controller.path
-            .map('/rent-contracts/edit/:rentContractId/items');
+            .map('/rent-contracts/edit/:rentContractId/payments');
 
         controller.searchPayments();
         controller.searchPaymentMethods();

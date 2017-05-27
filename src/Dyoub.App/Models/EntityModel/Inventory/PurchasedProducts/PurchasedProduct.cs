@@ -8,7 +8,7 @@ using System;
 
 namespace Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts
 {
-    public class PurchasedProduct : ITenantData
+    public class PurchasedProduct : ITenantData, IIncomingProduct
     {
         public int PurchaseOrderId { get; set; }
         public int ProductId { get; set; }
