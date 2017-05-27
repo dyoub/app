@@ -9,12 +9,10 @@ namespace Dyoub.App.Results.Inventory.PurchasedProducts
     public class PurchasedProductListJson : JsonResult
     {
         public PurchaseOrder PurchaseOrder { get; private set; }
-        public IEnumerable<PurchasedProduct> PurchasedProducts { get; private set; }
 
-        public PurchasedProductListJson(PurchaseOrder purchaseOrder, IEnumerable<PurchasedProduct> purchasedProducts)
+        public PurchasedProductListJson(PurchaseOrder purchaseOrder)
         {
             PurchaseOrder = purchaseOrder;
-            PurchasedProducts = purchasedProducts;
         }
 
         public override void ExecuteResult(ControllerContext context)
@@ -24,7 +22,7 @@ namespace Dyoub.App.Results.Inventory.PurchasedProducts
                 id = PurchaseOrder.Id,
                 storeId = PurchaseOrder.StoreId,
                 confirmed = PurchaseOrder.Confirmed,
-                productList = PurchasedProducts.Select(purchasedProduct => new
+                productList = PurchaseOrder.PurchasedProducts.Select(purchasedProduct => new
                 {
                     id = purchasedProduct.Product.Id,
                     name = purchasedProduct.Product.Name,

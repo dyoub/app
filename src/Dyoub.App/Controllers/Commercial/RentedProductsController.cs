@@ -4,15 +4,12 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
-using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.ServiceModel.Commercial;
-using Dyoub.App.Models.ViewModel.Commercial.RentedProducts;
 using Dyoub.App.Models.ViewModel.Commercial.RentContracts;
+using Dyoub.App.Models.ViewModel.Commercial.RentedProducts;
 using Dyoub.App.Results.Commercial.RentedProducts;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -41,19 +38,10 @@ namespace Dyoub.App.Controllers.Commercial
         {
             RentContract rentContract = await Tenant.RentContracts
                 .WhereId(viewModel.Id.Value)
+                .IncludeRentedProducts()
                 .SingleOrDefaultAsync();
-
-            ICollection<RentedProduct> rentedProducts = null;
-
-            if (rentContract != null)
-            {
-                rentedProducts = await Tenant.RentedProducts
-                    .IncludeProduct()
-                    .WhereRentContractId(rentContract.Id)
-                    .ToListAsync();
-            }
-
-            return new RentedProductListJson(rentContract, rentedProducts);
+            
+            return new RentedProductListJson(rentContract);
         }
 
         [HttpPost, Route("rent-contracts/products/update"), Authorization(Scope = "rent-contracts.edit")]

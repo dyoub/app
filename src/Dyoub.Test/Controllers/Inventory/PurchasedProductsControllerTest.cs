@@ -28,7 +28,7 @@ namespace Dyoub.Test.Controllers.Inventory
 
             PurchasedProductListJson result = (PurchasedProductListJson)await controller.List(viewModel);
 
-            Assert.IsTrue(result.PurchasedProducts.Count() == context.PurchasedProducts.Count());
+            Assert.IsTrue(result.PurchaseOrder.PurchasedProducts.Count() == context.PurchasedProducts.Count());
         }
 
         [TestMethod]

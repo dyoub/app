@@ -28,7 +28,7 @@ namespace Dyoub.Test.Controllers.Commercial
 
             RentedProductListJson result = (RentedProductListJson)await controller.List(viewModel);
 
-            Assert.IsTrue(result.RentedProducts.Count() == context.RentedProducts.Count());
+            Assert.IsTrue(result.RentContract.RentedProducts.Count() == context.RentedProducts.Count());
         }
 
         [TestMethod]

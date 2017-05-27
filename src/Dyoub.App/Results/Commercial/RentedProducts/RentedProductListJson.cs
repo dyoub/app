@@ -13,12 +13,10 @@ namespace Dyoub.App.Results.Commercial.RentedProducts
     public class RentedProductListJson : JsonResult
     {
         public RentContract RentContract { get; private set; }
-        public IEnumerable<RentedProduct> RentedProducts { get; private set; }
 
-        public RentedProductListJson(RentContract rentContract, IEnumerable<RentedProduct> rentedProducts)
+        public RentedProductListJson(RentContract rentContract)
         {
             RentContract = rentContract;
-            RentedProducts = rentedProducts;
         }
 
         public override void ExecuteResult(ControllerContext context)
@@ -38,7 +36,7 @@ namespace Dyoub.App.Results.Commercial.RentedProducts
                 timeOfReturn = RentContract.DateOfReturn == null ? null :
                     RentContract.DateOfReturn.Value.TimeOfDay.ToJson(),
                 totalDays = RentContract.TotalDays,
-                productList = RentedProducts.Select(rentedProduct => new
+                productList = RentContract.RentedProducts.Select(rentedProduct => new
                 {
                     id = rentedProduct.Product.Id,
                     name = rentedProduct.Product.Name,

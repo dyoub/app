@@ -4,15 +4,12 @@
 using Dyoub.App.Extensions;
 using Dyoub.App.Filters;
 using Dyoub.App.Models.EntityModel;
-using Dyoub.App.Models.EntityModel.Inventory.PurchasedProducts;
 using Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders;
 using Dyoub.App.Models.ServiceModel.Inventory;
 using Dyoub.App.Models.ViewModel.Inventory.PurchasedProducts;
 using Dyoub.App.Models.ViewModel.Inventory.PurchaseOrders;
 using Dyoub.App.Results.Inventory.PurchasedProducts;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -41,19 +38,10 @@ namespace Dyoub.App.Controllers.Inventory
         {
             PurchaseOrder purchaseOrder = await Tenant.PurchaseOrders
                 .WhereId(viewModel.Id.Value)
+                .IncludePurchasedProducts()
                 .SingleOrDefaultAsync();
-
-            ICollection<PurchasedProduct> purchasedProducts = null;
-
-            if (purchaseOrder != null)
-            {
-                purchasedProducts = await Tenant.PurchasedProducts
-                    .IncludeProduct()
-                    .WherePurchaseOrderId(purchaseOrder.Id)
-                    .ToListAsync();
-            }
             
-            return new PurchasedProductListJson(purchaseOrder, purchasedProducts);
+            return new PurchasedProductListJson(purchaseOrder);
         }
 
         [HttpPost, Route("purchase-orders/products/update"), Authorization(Scope = "purchase-orders.edit")]

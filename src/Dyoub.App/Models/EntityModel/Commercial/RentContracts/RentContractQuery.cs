@@ -28,7 +28,8 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
 
         public static IQueryable<RentContract> IncludeRentedProducts(this IQueryable<RentContract> rentContracts)
         {
-            return rentContracts.Include(rentContract => rentContract.RentedProducts);
+            return rentContracts.Include(rentContract => rentContract.RentedProducts)
+                .Include(rentContract => rentContract.RentedProducts.Select(rentedProduct => rentedProduct.Product));
         }
 
         public static IQueryable<RentContract> IncludeRentIncomes(this IQueryable<RentContract> rentContracts)

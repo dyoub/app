@@ -22,7 +22,9 @@ namespace Dyoub.App.Models.EntityModel.Inventory.PurchaseOrders
 
         public static IQueryable<PurchaseOrder> IncludePurchasedProducts(this IQueryable<PurchaseOrder> purchaseOrders)
         {
-            return purchaseOrders.Include(purchaseOrder => purchaseOrder.PurchasedProducts);
+            return purchaseOrders.Include(purchaseOrder => purchaseOrder.PurchasedProducts)
+                .Include(purchaseOrder => purchaseOrder.PurchasedProducts
+                    .Select(purchasedProduct => purchasedProduct.Product));
         }
 
         public static IQueryable<PurchaseOrder> IncludeStore(this IQueryable<PurchaseOrder> purchaseOrders)
