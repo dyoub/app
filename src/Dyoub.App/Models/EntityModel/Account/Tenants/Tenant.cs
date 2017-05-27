@@ -10,6 +10,7 @@ using Dyoub.App.Models.EntityModel.Commercial.Customers;
 using Dyoub.App.Models.EntityModel.Commercial.Partners;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
+using Dyoub.App.Models.EntityModel.Commercial.RentContractPartners;
 using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.RentPayments;
@@ -58,6 +59,7 @@ namespace Dyoub.App.Models.EntityModel.Account.Tenants
         public virtual ICollection<PurchasePayment> PurchasePayments { get; set; }
         public virtual ICollection<PurchasedProduct> PurchasedProducts { get; set; }
         public virtual ICollection<RentContract> RentContracts { get; set; }
+        public virtual ICollection<RentContractPartner> RentContractPartners { get; set; }
         public virtual ICollection<RentPayment> RentPayments { get; set; }
         public virtual ICollection<RentedProduct> RentedProducts { get; set; }
         public virtual ICollection<RentIncome> RentIncomes { get; set; }

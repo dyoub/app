@@ -153,6 +153,8 @@
     <Compile Include="Contexts\Commercial\RentContractCustomer\FindRentContractCustomerContext.cs" />
     <Compile Include="Contexts\Commercial\RentContractCustomer\UpdateCustomerToConfirmedRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentContractCustomer\UpdateRentContractCustomerContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContractPartners\ListRentContractPartnersContext.cs" />
+    <Compile Include="Contexts\Commercial\RentContractPartners\UpdateRentContractPartnersContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\CreateRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\DeleteConfirmedRentContractContext.cs" />
     <Compile Include="Contexts\Commercial\RentContracts\DeleteRentContractContext.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="Controllers\Commercial\PartnersControllerTest.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentContractCustomerControllerTest.cs" />
+    <Compile Include="Controllers\Commercial\RentContractPartnersControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentContractsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentedProductsControllerTest.cs" />
     <Compile Include="Controllers\Commercial\RentedProductsReturnControllerTest.cs" />
@@ -295,6 +298,7 @@
     <Compile Include="Factories\Commercial\PartnerFactory.cs" />
     <Compile Include="Factories\Commercial\PaymentMethodFactory.cs" />
     <Compile Include="Factories\Commercial\RentContractFactory.cs" />
+    <Compile Include="Factories\Commercial\RentContractPartnerFactory.cs" />
     <Compile Include="Factories\Commercial\RentedProductFactory.cs" />
     <Compile Include="Factories\Commercial\RentPaymentFactory.cs" />
     <Compile Include="Factories\Commercial\SaleOrderFactory.cs" />

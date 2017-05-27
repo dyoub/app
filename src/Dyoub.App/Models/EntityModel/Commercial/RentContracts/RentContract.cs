@@ -3,6 +3,7 @@
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
 using Dyoub.App.Models.EntityModel.Commercial.Customers;
+using Dyoub.App.Models.EntityModel.Commercial.RentContractPartners;
 using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.RentPayments;
 using Dyoub.App.Models.EntityModel.Financial;
@@ -63,6 +64,7 @@ namespace Dyoub.App.Models.EntityModel.Commercial.RentContracts
         public virtual Tenant Tenant { get; set; }
         public virtual Store Store { get; set; }
         public virtual Wallet Wallet { get; set; }
+        public virtual ICollection<RentContractPartner> RentContractPartners { get; set; }
         public virtual ICollection<RentedProduct> RentedProducts { get; set; }
         public virtual ICollection<RentPayment> RentPayments { get; set; }
 

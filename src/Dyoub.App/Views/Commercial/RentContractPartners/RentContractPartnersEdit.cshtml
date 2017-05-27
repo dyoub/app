@@ -1,0 +1,110 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="RentContractPartnersEditController as controller" data-ng-init="controller.init()">
+    <div class="step-header">
+        <div class="page-header">
+            <span data-translate="Edit rent contract"></span>
+            <strong data-ng-bind="controller.routeParams.rentContractId | orderNumber"></strong>
+        </div>
+        <div class="ng-cloak" data-ng-hide="controller.searching || controller.notFound">
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Partners"></span>
+            <span class="separator"></span>
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/products"
+               class="step" data-translate="Products"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}/payments"
+               class="step" data-translate="Payments"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/return"
+               class="step" data-translate="Return"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searchingSelectedPartners"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchSelectedPartnersComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract not found."></p>
+            <a href="/rent-contracts" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            <div class="box">
+                <button type="button" class="success" data-ng-disabled="controller.saveBlocked()"
+                        data-ng-click="controller.save()">
+                    <span data-ng-hide="controller.saving" data-translate="Save"></span>
+                    <span data-ng-show="controller.saving" data-translate="Saving"></span>
+                </button>
+                <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/partners"
+                   class="as-button" data-ng-disabled="controller.saving" data-translate="Cancel"></a>
+            </div>
+
+            <div class="card">
+                <div class="box">
+                    <label data-translate="Partner name"></label>
+                    <div class="suggestion" data-suggestion-open="controller.partnerSuggestionOpened">
+                        <input type="text" name="partnerName" data-ng-model="controller.partnerSearch.name" data-ng-maxlength="80"
+                               data-event-key-enter="controller.addFirstPartner()"
+                               data-event-typing="controller.newPartnerSearch()"
+                               data-event-typing-end="controller.searchPartners()" />
+                        <div class="suggestion-body">
+                            <em class="text-muted" data-ng-show="controller.searchingPartners" data-translate="Searching..."></em>
+                            <div class="text-primary" data-translate="No records found" data-ng-show="controller.noPartners()"></div>
+                            <div class="box" data-ng-repeat="partner in controller.partners">
+                                <button type="button" class="primary small" data-translate="Add"
+                                        data-ng-click="controller.addPartner(partner)"></button>
+                                <span data-ng-bind="partner.name"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="font-11 text-primary" data-translate="Press enter to add the first partner."></div>
+                </div>
+            </div>
+
+            <div class="list-header" data-translate="Partners"></div>
+
+            <div class="card text-center text-primary" data-translate="No partner added."
+                 data-ng-show="controller.noPartnersSelected()"></div>
+
+            <form name="controller.rentContractPartnersForm">
+                <div class="card list">
+                    <div class="list-item" data-ng-repeat="partner in controller.rentContract.partnerList | orderBy:'name'">
+                        <div class="box">
+                            <button type="button" class="danger pull-right" data-translate="Remove"
+                                    data-ng-click="controller.showRemovePartnerDialog(partner)"></button>
+                            <p data-ng-bind="partner.name"></p>
+                            <div class="font-11 text-muted">
+                                <p data-ng-show="partner.email">
+                                    <i class="fa fa-envelope"></i>
+                                    <span data-ng-bind="partner.email"></span>
+                                </p>
+                                <p data-ng-show="partner.phoneNumber || partner.alternativePhoneNumber">
+                                    <i class="fa fa-phone"></i>
+                                    <span data-ng-bind="partner.phoneNumber"></span>
+                                    <span data-ng-bind="'|'" data-ng-show="partner.phoneNumber && partner.alternativePhoneNumber"></span>
+                                    <span data-ng-bind="partner.alternativePhoneNumber"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @Html.Partial("~/Views/Commercial/RentContractPartners/_RemovePartner.cshtml")
+</div>

@@ -14,6 +14,7 @@ using Dyoub.App.Models.EntityModel.Commercial.Customers;
 using Dyoub.App.Models.EntityModel.Commercial.Partners;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethodFees;
 using Dyoub.App.Models.EntityModel.Commercial.PaymentMethods;
+using Dyoub.App.Models.EntityModel.Commercial.RentContractPartners;
 using Dyoub.App.Models.EntityModel.Commercial.RentContracts;
 using Dyoub.App.Models.EntityModel.Commercial.RentedProducts;
 using Dyoub.App.Models.EntityModel.Commercial.RentPayments;
@@ -62,6 +63,7 @@ namespace Dyoub.App.Models.EntityModel
         public DbSet<PurchaseOrder> PurchaseOrders { get { return Set<PurchaseOrder>(); } }
         public DbSet<PurchasePayment> PurchasePayments { get { return Set<PurchasePayment>(); } }
         public DbSet<RentContract> RentContracts { get { return Set<RentContract>(); } }
+        public DbSet<RentContractPartner> RentContractPartners { get { return Set<RentContractPartner>(); } }
         public DbSet<RentIncome> RentIncomes { get { return Set<RentIncome>(); } }
         public DbSet<RentedProduct> RentedProducts { get { return Set<RentedProduct>(); } }
         public DbSet<RentPayment> RentPayments { get { return Set<RentPayment>(); } }
@@ -121,6 +123,7 @@ namespace Dyoub.App.Models.EntityModel
             modelBuilder.Configurations.Add(new PurchaseOrderMapping());
             modelBuilder.Configurations.Add(new PurchasePaymentMapping());
             modelBuilder.Configurations.Add(new RentContractMapping());
+            modelBuilder.Configurations.Add(new RentContractPartnerMapping());
             modelBuilder.Configurations.Add(new RentIncomeMapping());
             modelBuilder.Configurations.Add(new RentedProductMapping());
             modelBuilder.Configurations.Add(new RentPaymentMapping());

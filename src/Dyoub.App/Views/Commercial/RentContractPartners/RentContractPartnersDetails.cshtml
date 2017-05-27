@@ -1,0 +1,86 @@
+﻿@*
+    Copyright (c) Dyoub Applications. All rights reserved.
+    Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
+*@
+
+@using Dyoub.App.Helpers;
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<div class="container" data-ng-controller="RentContractPartnersDetailsController as controller" data-ng-init="controller.init()">
+    <div class="step-header">
+        <div class="page-header">
+            <span data-translate="Rent contract"></span>
+            <strong data-ng-bind="controller.routeParams.rentContractId | orderNumber"></strong>
+        </div>
+        <div class="ng-cloak" data-ng-hide="controller.searching || controller.notFound">
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}"
+               class="step" data-translate="General"></a>
+            <span class="separator"></span>
+            <span class="step active" data-translate="Partners"></span>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/customer"
+               class="step" data-translate="Customer"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/products"
+               class="step" data-translate="Products"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/payments"
+               class="step" data-translate="Payments"></a>
+            <span class="separator"></span>
+            <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/return"
+               class="step" data-translate="Return"></a>
+        </div>
+    </div>
+
+    <div class="loading box" data-ng-show="controller.searching"></div>
+
+    <div class="ng-cloak" data-ng-show="controller.searchComplete()">
+        <div class="error" data-ng-show="controller.notFound">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p data-translate="Rent contract not found."></p>
+            <a href="/rent-contracts" class="as-button" data-translate="Go back"></a>
+        </div>
+
+        <div data-ng-hide="controller.notFound">
+            @using (Html.Authorize("rent-contracts.edit"))
+            {
+                <div class="box">
+                    <a href="/rent-contracts/edit/{{controller.rentContract.id}}/partners" class="as-button" data-translate="Edit"></a>
+                </div>
+            }
+
+            <div class="box">
+                <span class="hint success" data-translate="Billed" data-ng-show="controller.rentContract.confirmed"></span>
+                <span class="hint warning" data-translate="Return pending" data-ng-show="controller.rentContract.returnPending"></span>
+            </div>
+
+            <div class="list-header" data-translate="Partners"></div>
+
+            <div class="card list">
+                <div class="list-item text-primary text-center" data-translate="No partner added."
+                     data-ng-show="controller.rentContract.partnerList.isEmpty()"></div>
+
+                <div class="list-item" data-ng-repeat="partner in controller.rentContract.partnerList">
+                    <div class="box">
+                        <p data-ng-bind="partner.name"></p>
+                        <div class="font-11 text-muted">
+                            <p data-ng-show="partner.email">
+                                <i class="fa fa-envelope"></i>
+                                <span data-ng-bind="partner.email"></span>
+                            </p>
+                            <p data-ng-show="partner.phoneNumber || partner.alternativePhoneNumber">
+                                <i class="fa fa-phone"></i>
+                                <span data-ng-bind="partner.phoneNumber"></span>
+                                <span data-ng-bind="'|'" data-ng-show="partner.phoneNumber && partner.alternativePhoneNumber"></span>
+                                <span data-ng-bind="partner.alternativePhoneNumber"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

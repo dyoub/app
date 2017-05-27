@@ -210,6 +210,9 @@
     <EmbeddedResource Include="Data\Migrations\201705232232209_CreatePartner.resx">
       <DependentUpon>201705232232209_CreatePartner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201705271927262_CreateRentContractPartner.resx">
+      <DependentUpon>201705271927262_CreateRentContractPartner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Mail\LocalMail.html" />
     <EmbeddedResource Include="Infrastructure\Logging\LocalLog.html" />
     <Content Include="Scripts\controllers\account\dashboard\account-overview.controller.js" />
@@ -240,6 +243,7 @@
     <Content Include="Scripts\controllers\commercial\payment-methods\payment-method-list.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contract-customer\rent-contract-customer-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contract-customer\rent-contract-customer-edit.controller.js" />
+    <Content Include="Scripts\controllers\commercial\rent-contract-partners\rent-contract-partners-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-details.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-edit.controller.js" />
     <Content Include="Scripts\controllers\commercial\rent-contracts\rent-contract-list.controller.js" />
@@ -304,6 +308,7 @@
     <Content Include="Scripts\services\commercial\payment-method-fee.service.js" />
     <Content Include="Scripts\services\commercial\payment-method.service.js" />
     <Content Include="Scripts\services\commercial\rent-contract-customer.service.js" />
+    <Content Include="Scripts\services\commercial\rent-contract-partners.service.js" />
     <Content Include="Scripts\services\commercial\rent-contract.service.js" />
     <Content Include="Scripts\services\commercial\rent-payments.service.js" />
     <Content Include="Scripts\services\commercial\rented-products-return.service.js" />
@@ -342,6 +347,7 @@
     <Compile Include="Controllers\Commercial\PartnersController.cs" />
     <Compile Include="Controllers\Commercial\PaymentMethodsController.cs" />
     <Compile Include="Controllers\Commercial\RentContractCustomerController.cs" />
+    <Compile Include="Controllers\Commercial\RentContractPartnersController.cs" />
     <Compile Include="Controllers\Commercial\RentContractsController.cs" />
     <Compile Include="Controllers\Commercial\RentedProductsReturnController.cs" />
     <Compile Include="Controllers\Commercial\RentedProductsController.cs" />
@@ -496,6 +502,10 @@
     <Compile Include="Data\Migrations\201705232232209_CreatePartner.Designer.cs">
       <DependentUpon>201705232232209_CreatePartner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\201705271927262_CreateRentContractPartner.cs" />
+    <Compile Include="Data\Migrations\201705271927262_CreateRentContractPartner.Designer.cs">
+      <DependentUpon>201705271927262_CreateRentContractPartner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumarableExtensions.cs" />
@@ -553,6 +563,9 @@
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethod.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\PaymentMethods\PaymentMethodQuery.cs" />
+    <Compile Include="Models\EntityModel\Commercial\RentContractPartners\RentContractPartner.cs" />
+    <Compile Include="Models\EntityModel\Commercial\RentContractPartners\RentContractPartnerMapping.cs" />
+    <Compile Include="Models\EntityModel\Commercial\RentContractPartners\RentContractPartnerQuery.cs" />
     <Compile Include="Models\EntityModel\Commercial\RentContracts\RentContract.cs" />
     <Compile Include="Models\EntityModel\Commercial\RentContracts\RentContractMapping.cs" />
     <Compile Include="Models\EntityModel\Commercial\RentContracts\RentContractQuery.cs" />
@@ -723,6 +736,7 @@
     <Compile Include="Models\ViewModel\Commercial\SaleOrders\UpdateSaleOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SalePayments\SalePaymentViewModel.cs" />
     <Compile Include="Models\ViewModel\Commercial\SalePayments\UpdateSalePaymentsViewModel.cs" />
+    <Compile Include="Models\ViewModel\Commercial\RentContractPartners\UpdateRentContractPartnerListViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\CashFlow\DailyCashFlowViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\CashFlow\MonthlyCashFlowViewModel.cs" />
     <Compile Include="Models\ViewModel\Financial\FixedExpenses\CreateFixedExpenseViewModel.cs" />
@@ -783,6 +797,7 @@
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodJson.cs" />
     <Compile Include="Results\Commercial\PaymentMethods\PaymentMethodListJson.cs" />
     <Compile Include="Results\Commercial\RentContractCustomer\RentContractCustomerJson.cs" />
+    <Compile Include="Results\Commercial\RentContractPartners\RentContractPartnerListJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractIdJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractJson.cs" />
     <Compile Include="Results\Commercial\RentContracts\RentContractListJson.cs" />
@@ -949,6 +964,10 @@
     <Content Include="Views\Commercial\Partners\PartnerList.cshtml" />
     <Content Include="Views\Commercial\RentedProductsReturn\RentedProductsReturnEdit.cshtml" />
     <Content Include="Views\Commercial\RentedProductsReturn\RentedProductsReturnDetails.cshtml" />
+    <Content Include="Scripts\controllers\commercial\rent-contract-partners\rent-contract-partners-edit.controller.js" />
+    <Content Include="Views\Commercial\RentContractPartners\_RemovePartner.cshtml" />
+    <Content Include="Views\Commercial\RentContractPartners\RentContractPartnersDetails.cshtml" />
+    <Content Include="Views\Commercial\RentContractPartners\RentContractPartnersEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

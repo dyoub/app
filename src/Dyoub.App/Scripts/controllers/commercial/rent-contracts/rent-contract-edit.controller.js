@@ -68,7 +68,7 @@
             controller.RentContract
                 .save(controller.rentContract)
                 .then(function (response) {
-                    controller.path.redirectTo('/rent-contracts/edit/:rentContractId/customer',
+                    controller.path.redirectTo('/rent-contracts/edit/:rentContractId/partners',
                         response.data);
                 })
                 ['catch'](function (response) {

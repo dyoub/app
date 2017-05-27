@@ -3,17 +3,17 @@
 
 (function () {
 
-    function Controller(handleError, path, RentedProducts) {
+    function Controller(handleError, path, RentContractPartners) {
         this.path = path;
         this.handleError = handleError;
-        this.RentedProducts = RentedProducts;
+        this.RentContractPartners = RentContractPartners;
     }
 
     Controller.prototype.init = function () {
         var controller = this;
 
         controller.routeParams = controller.path
-            .map('/rent-contracts/details/:rentContractId/products');
+            .map('/rent-contracts/details/:rentContractId/partners');
 
         controller.search();
     };
@@ -22,7 +22,7 @@
         var controller = this;
         controller.searching = true;
 
-        controller.RentedProducts
+        controller.RentContractPartners
             .list(controller.routeParams.rentContractId)
             .then(function (response) {
                 controller.rentContract = response.data;
@@ -42,10 +42,10 @@
         return !(controller.searching || controller.error);
     };
 
-    angular.module('dyoub.app').controller('RentedProductsDetailsController', [
+    angular.module('dyoub.app').controller('RentContractPartnersDetailsController', [
         'HandleError',
         'Path',
-        'RentedProducts',
+        'RentContractPartners',
         Controller
     ]);
 

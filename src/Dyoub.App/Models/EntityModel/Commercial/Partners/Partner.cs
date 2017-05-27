@@ -2,6 +2,8 @@
 // Licensed under MIT (https://github.com/dyoub/app/blob/master/LICENSE).
 
 using Dyoub.App.Models.EntityModel.Account.Tenants;
+using Dyoub.App.Models.EntityModel.Commercial.RentContractPartners;
+using System.Collections.Generic;
 
 namespace Dyoub.App.Models.EntityModel.Commercial.Partners
 {
@@ -17,5 +19,6 @@ namespace Dyoub.App.Models.EntityModel.Commercial.Partners
         public string AdditionalInformation { get; set; }
 
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<RentContractPartner> RentContractPartners { get; set; }
     }
 }
