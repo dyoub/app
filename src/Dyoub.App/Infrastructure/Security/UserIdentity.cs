@@ -18,6 +18,8 @@ namespace Dyoub.App.Infrastructure.Security
 
         public bool HasPermission(string scope)
         {
+            // return true;
+
             if (IsOwner || string.IsNullOrEmpty(scope))
             {
                 return true;

@@ -10,12 +10,12 @@
 }
 
 <div class="container" data-ng-controller="RentContractDetailsController as controller" data-ng-init="controller.init()">
-    <div class="step-header ng-cloak">
+    <div class="step-header">
         <div class="page-header">
             <span data-translate="Rent contract"></span>
-            <strong data-ng-bind="controller.rentContract.id | orderNumber"></strong>
+            <strong data-ng-bind="controller.routeParams.rentContractId | orderNumber"></strong>
         </div>
-        <div data-ng-show="controller.routeParams.rentContractId">
+        <div class="ng-cloak" data-ng-hide="controller.searching || controller.notFound">
             <span class="step active" data-translate="General"></span>
             <span class="separator"></span>
             <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}/customer"

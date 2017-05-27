@@ -15,7 +15,7 @@
             <span data-translate="Rent contract"></span>
             <strong data-ng-bind="controller.routeParams.rentContractId | orderNumber"></strong>
         </div>
-        <div data-ng-hide="controller.notFound">
+        <div class="ng-cloak" data-ng-hide="controller.searching || controller.notFound">
             <a href="/rent-contracts/details/{{controller.routeParams.rentContractId}}"
                class="step" data-translate="General"></a>
             <span class="separator"></span>

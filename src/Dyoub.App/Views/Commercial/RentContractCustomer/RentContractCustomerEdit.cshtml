@@ -8,12 +8,12 @@
 }
 
 <div class="container" data-ng-controller="RentContractCustomerEditController as controller" data-ng-init="controller.init()">
-    <div class="step-header ng-cloak">
+    <div class="step-header">
         <div class="page-header">
             <span data-translate="Edit rent contract"></span>
-            <strong data-ng-bind="controller.rentContract.id | orderNumber"></strong>
+            <strong data-ng-bind="controller.routeParams.rentContractId | orderNumber"></strong>
         </div>
-        <div data-ng-show="controller.routeParams.rentContractId">
+        <div class="ng-cloak" data-ng-hide="controller.searching || controller.notFound">
             <a href="/rent-contracts/edit/{{controller.routeParams.rentContractId}}"
                class="step" data-translate="General"></a>
             <span class="separator"></span>

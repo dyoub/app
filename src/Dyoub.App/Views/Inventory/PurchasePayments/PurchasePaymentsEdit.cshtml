@@ -8,12 +8,12 @@
 }
 
 <div class="container" data-ng-controller="PurchasePaymentsEditController as controller" data-ng-init="controller.init()">
-    <div class="step-header ng-cloak">
+    <div class="step-header">
         <div class="page-header">
             <span data-translate="Edit purchase order"></span>
             <strong data-ng-bind="controller.routeParams.purchaseOrderId | orderNumber"></strong>
         </div>
-        <div data-ng-show="controller.routeParams.purchaseOrderId">
+        <div class="ng-cloak" data-ng-hide="controller.searching || controller.notFound">
             <a href="/purchase-orders/edit/{{controller.routeParams.purchaseOrderId}}"
                class="step" data-translate="General"></a>
             <span class="separator"></span>

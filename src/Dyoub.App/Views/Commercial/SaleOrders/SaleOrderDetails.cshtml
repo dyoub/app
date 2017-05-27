@@ -10,12 +10,12 @@
 }
 
 <div class="container" data-ng-controller="SaleOrderDetailsController as controller" data-ng-init="controller.init()">
-    <div class="step-header ng-cloak">
+    <div class="step-header">
         <div class="page-header">
             <span data-translate="Sale order"></span>
-            <strong data-ng-bind="controller.saleOrder.id | orderNumber"></strong>
+            <strong data-ng-bind="controller.routeParams.saleOrderId | orderNumber"></strong>
         </div>
-        <div data-ng-show="controller.routeParams.saleOrderId">
+        <div class="ng-cloak" data-ng-hide="controller.searching || controller.notFound">
             <span class="step active" data-translate="General"></span>
             <span class="separator"></span>
             <a href="/sale-orders/details/{{controller.routeParams.saleOrderId}}/customer"
